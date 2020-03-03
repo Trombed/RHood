@@ -1,0 +1,27 @@
+.homepage-container-night {
+    background-color: #000000;
+    opacity: 84.7%;
+}
+
+.homepage-container-day {
+    background-color:red;
+    opacity: 84.7%;
+
+}
+
+.homepage-nav-bar {
+    background-color: inherit;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+.Home-SVG-Logo {
+    fill: white;
+}
+
+.Home-SVG-Logo:hover {
+    fill: #21ce99
+}
