@@ -1,0 +1,146 @@
+.new-user-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100vh;
+  
+}
+
+.new-user-grid-1 {
+    background-image: url('/assets/new_user_bg.png');
+    background-size: 100% 100%;
+}
+
+.new-user-grid-2 {
+    display: flex;
+    flex-direction: column;
+    
+    
+    
+}
+
+.new-user-grid-2-format {
+
+    padding: 25vh 0vh 25vh 5vw; 
+}
+
+.new-user-welcome-text {
+    font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: -0.1px;
+    color: rgb(23, 23, 24);
+    text-decoration: unset;
+    padding-bottom: 3vh; 
+}
+
+.new-user-label-text {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    
+
+}
+
+.new-user-button-row {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10vh; 
+}
+
+.new-user-input-div {
+    padding-top: 1vh; 
+}
+
+.new-user-input-field {
+    width: 27vw; 
+    height: 6vh; 
+    padding: 5px 20px;
+    border: 1px solid;
+    border-radius: 4px;
+    line-height: 1.5em;
+    transition: border-color 200ms;
+    box-sizing: border-box;
+    display: block;
+    flex: 1 1 auto;
+    background: #fafafa;
+    border-color: #fafafa;
+   
+}
+
+.new-user-input-field:hover {
+    background-color: #fff;
+    color: #171718;
+    border-color: black; 
+}
+
+.new-user-input-field:focus {
+    outline: none; 
+    background-color: #e8f0fe;
+    color: #171718;
+    border-color: #21ce99; 
+}
+
+.new-user-sign-in-button {
+    background: #21ce99;
+    border-color: #21ce99;
+    color: #fff;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    height: 48px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-width: 120px;
+    padding: 0 48px;
+    white-space: nowrap;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    margin-right: 3vw; 
+}
+
+.new-user-sign-in-button:hover {
+    background: #1ae9aa;
+    border-color: #1ae9aa;
+}
+
+.new-user-label-text-div {
+    padding-top: 3vh; 
+}
+
+.demo-user-sign-in-button {
+    background: #fff;
+    border-color: #fff;
+    color: #black;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    height: 48px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-width: 120px;
+    padding: 0 48px;
+    white-space: nowrap;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.demo-user-sign-in-button:hover {
+    background: #fafafa;
+    border-color: #fafafa;
+}
