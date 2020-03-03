@@ -9,9 +9,11 @@ export const sessionReducer = (state = _nullSession, action) => {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      const mainK = parseInt(Object.keys(action.user)[0])
-      newState["id"] = action.user[mainK].id
-      return newState;
+    //   const mainK = parseInt(Object.keys(action.user)[0])
+    //   debugger
+    //   newState["id"] = action.user[mainK].id
+    return {id: action.user.id}
+    //   return newState;
     
     case LOGOUT_CURRENT_USER:
       return _nullSession

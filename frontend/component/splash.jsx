@@ -1,5 +1,7 @@
 import React from 'react' 
-
+import LoginUser from './session/login_session'
+import NewUserSession from './session/new_user_session'
+import { Route,Link, Switch  } from 'react-router-dom'
 
 
 class Splash extends React.Component {
@@ -22,15 +24,16 @@ class Splash extends React.Component {
                       
                     <ul className="splashNavEnd">   
                         <div className="splashNavSignIn">
-                        Sign In
+                        <Link to="/login">Sign In</Link>
                         </div>
                         <div>
-                            <button id='splashNavSignUp'>
-                                Sign Up
+                            <button className='splashNavSignUp'>
+                        <Link to='/signup'>Sign Up</Link> 
                             </button>
                         </div>
                     </ul>
                 </div>
+                
                 {/* END NAV BAR SECTIOn */}
 
 
@@ -45,7 +48,7 @@ class Splash extends React.Component {
                     
 
                     <div className='splashContent-2-left-row-4'>
-                        <button class='splash-left-button'>Sign Up</button>
+                        <Link to="/signup" ><button className='splash-left-button'>Sign Up</button></Link>
                     </div>
 
                     </div>
