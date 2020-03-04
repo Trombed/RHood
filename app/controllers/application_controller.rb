@@ -9,9 +9,7 @@ class ApplicationController < ActionController::Base
   
     def login(user)
       @current_user = user
-      # debugger
       session[:session_token] = user.reset_session_token!
-      # debugger
     end
   
     def logged_in?
@@ -19,10 +17,9 @@ class ApplicationController < ActionController::Base
     end
   
     def logout
-      # debugger
       current_user.reset_session_token!
       session[:session_token] = nil
-      render plain: "logged out"
+      
     end
   
     def require_login

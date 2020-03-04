@@ -1,4 +1,21 @@
-node_modules
-node_modules/
-bundler.js
+# Ignore bundler config.
+/.bundle
+bundle.js
 bundle.js.map
+package-lock.json
+Gemfile.lock
+config.yml
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+/node_modules
+/yarn-error.log
+/public/assets
+.byebug_history
+# Ignore master key for decrypting credentials and more.
+/config/master.key

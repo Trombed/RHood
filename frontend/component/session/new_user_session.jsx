@@ -11,6 +11,8 @@ class NewUserSession extends React.Component {
         }
       
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderCreateErrors = this.renderCreateErrors.bind(this)
+        this.clearError = this.props.clearError.bind(this)
     }
 
     handleInput(type) {
@@ -23,16 +25,31 @@ class NewUserSession extends React.Component {
 
 
     handleSubmit(e) {
-   console.log(this.state)
-    e.preventDefault();
-    const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+        e.preventDefault();
+        const user = this.state;
+        this.props.processForm(user)
+            .then(() => this.props.history.push('/home'))
+    }
 
-    <Redirect to="/" />
-    // this.props.history.push("/")
+   
+   renderCreateErrors () 
+    { 
+     return(
+      <ul>
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`} className="Create-Error-Text">
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+    
+    }
+
+    componentWillUnmount() {
+        this.clearError()
     }
     
-
     render(){
 
         return(
@@ -68,19 +85,27 @@ class NewUserSession extends React.Component {
                             <input type="text" placeholder='Username'
                             className='login-form-field'
                             onChange={this.handleInput("username")}
+                            required
                             />
                             </div>
                             <div className='login-body-form-rows'>
                             <input type="text" placeholder='Email Address'
                             className='login-form-field'
                             onChange={this.handleInput("email")}
+                            type="email" required
                              />
                             </div>
                             <div className='login-body-form-rows'>
-                            <input type="password" autoComplete="current-user" placeholder='Password (min. 6 characters)'  
+                            <input type="password" 
+                            name="password" autoComplete="current-user" placeholder='Password (min. 6 characters)'  
                             className='login-form-field' 
-                            onChange={this.handleInput("password")}/>
+                            onChange={this.handleInput("password")}
+                            minLength="6" required />
                             </div>
+                            <div>
+                                {this.renderCreateErrors()}
+                            </div>
+
                             <div className='login-body-form-rows'>
                             <button className="login-session-button"
                             onClick={this.handleSubmit}>Continue</button>

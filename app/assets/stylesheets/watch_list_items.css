@@ -1,0 +1,20 @@
+.Watch-List-Items-Container {
+    font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: rgb(255, 255, 255);
+    text-decoration: unset;
+}
+
+.Watch-List-Items-Item {
+    padding-left: 2vw;
+    padding-top: 0.5vw;  
+    padding-bottom: 0.5vw;  
+}
+
+.Watch-List-Items-Item:hover {
+    color: #21ce99;
+}

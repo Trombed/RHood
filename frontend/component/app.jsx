@@ -1,29 +1,32 @@
 import React from 'react' 
-import Splash from './splash'
 import { Route,Link, Switch  } from 'react-router-dom'
 import LoginUserContainer from './session/login_session_container'
 import NewUserSessionContainer from './session/new_user_session_container'
-import Home from './home/home'
+import SplashContainer from './splash/splash_container'
 import { AuthRoute } from "../component/util/route_util"
+import HomeContainer from './home/home_container'
 
 
 const App = () => (
     <div>
+
+
     <Switch>
-    <AuthRoute path="/" component={Home} />
-    <Route path='/' component={Splash} />
+
+    <Route path='/login' component={LoginUserContainer} />
+    <Route path='/signup' component={NewUserSessionContainer} /> 
+    <AuthRoute path="/home" component={HomeContainer} />  
+    <Route path='/' component={SplashContainer} />
     </Switch>
-    {/* <Switch>
-    <Route exact path="/">
-        <Splash /> 
-    </Route>
-    <Route exact path="/login">
+
+    {/* <Route exact path="/login">
         <LoginUserContainer />
-    </Route>
-    <Route exact path="/signup">
+    </Route> */}
+    {/* <Route exact path="/signup">
         <NewUserSessionContainer  />
-    </Route>
-    </Switch> */}
+    </Route> */}
+
+  
     </div>
 )
 

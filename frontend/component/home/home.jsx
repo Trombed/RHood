@@ -1,43 +1,33 @@
 import React from 'react'
-import HomePageLogo from './HomePageLogo'
+
+import WatchList from './watch_list/watch_list'
+import HomeNavBar from './home_nav_bar'
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
+
+        this.logout = this.props.logout.bind(this)
+       
     }
 
-
+    
 
     render(){
-
+       
         return(
             <div className='homepage-container-night'>
-                {/* start nav bar */}
-                <div className="homepage-nav-bar"> 
-                
-                    <div id="homepage-nav-logo">
-                        <HomePageLogo />
-                    </div> 
-                     
-                   <ul className="homepage-nav-list">   
-                       <div className="homepage-nav-item-1">
-                            Sign In
-                       </div>
-                       <div>
-                           <button className='homepage-nav-item-2'>
-                            LogOut
-                           </button>
-                       </div>
-                   </ul>
-               </div>
-               {/* end nav bar */}
 
+                <HomeNavBar logout={this.logout} />
+         
 
-                {/* start body */}
-                <div>
+  
+                <div className='Home-Body-Container'>
 
+                <WatchList />
                 </div>
-                {/* end body */}
+
+               
             </div>
             
         )

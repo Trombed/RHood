@@ -14,9 +14,6 @@
 .new-user-grid-2 {
     display: flex;
     flex-direction: column;
-    
-    
-    
 }
 
 .new-user-grid-2-format {
@@ -146,7 +143,29 @@
     border-color: #fafafa;
 }
 
+.Create-Error-Text {
+    font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: -0.1px;
+    color: rgb(23, 23, 24);
+    text-decoration: unset;
+    color: red;
+}
+
+
+.Create-Error_Text-Box {
+    height: 2vh; 
+}
+
 
 input:not(:placeholder-shown) {
     color: black; 
   }
+
+.error-create-highlight {
+    border: 5px solid red;
+    
+}

@@ -11,17 +11,26 @@ class LoginUser extends React.Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleDemoLogin = this.handleDemoLogin.bind(this)
+        this.renderLoginHighlight = this.renderLoginHighlight.bind(this)
 
      
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const user = Object.assign({}, this.state);
-        this.props.processForm(user);
-        // <Redirect to="/" />
+        this.props.processForm(this.state)
+            .then(() => this.props.history.push('/home'))
+      
+        
+    }
 
-      }
+    handleDemoLogin(e) {
+     
+        e.preventDefault();
+        this.props.demoLogin()
+            .then(() => this.props.history.push('/home'))
+    }
 
     handleInput(type) {
         return (e) => {
@@ -29,9 +38,26 @@ class LoginUser extends React.Component {
         };
       };
 
+    renderLoginErrors() {
+        
+        return(
+        <ul>
+            <li key="error" className="Login-Error-Text">
+                {this.props.errors[0]}
+                {this.renderLoginHighlight()}
+            </li>
+        </ul>
+
+        );
+    }
+
+    renderLoginHighlight() {
+        $(".new-user-input-field").addClass("error-login-highlight")
+    }
+
 
     render() {
-
+        
         return(
             <div className='new-user-grid'>
                 <div className='new-user-grid-1'>
@@ -60,10 +86,14 @@ class LoginUser extends React.Component {
                     </div>
                     <div className='new-user-input-div'>
                     <input type="password" onChange={this.handleInput("password")}  autoComplete="current-password" className='new-user-input-field' ng-hide='true' />
+                        <div className="Login-Error_Text-Box">   
+                         
+                            {this.renderLoginErrors()}
+                        </div>
                     </div>
                     <div className='new-user-button-row'>
                     <button className="new-user-sign-in-button" onClick={this.handleSubmit}>Sign In</button>
-                    <button className='demo-user-sign-in-button'>Demo User</button>
+                    <button className='demo-user-sign-in-button' onClick={this.handleDemoLogin}>Demo User</button>
                     </div>
                     </form>
                     </div>
