@@ -9,7 +9,7 @@
 Stock.destroy_all
 User.destroy_all 
 
-user1 =User.create!(username: "admin", password: "admin1", email: "admin@admin.com")
+user1 = User.create!(username: "admin", password: "admin1", email: "admin@admin.com")
 
 stock2 = Stock.create!(ticker_symbol: "A", name: "Agilent Technologies, Inc.")
 stock3 = Stock.create!(ticker_symbol: "AA", name: "Alcoa Corporation")
