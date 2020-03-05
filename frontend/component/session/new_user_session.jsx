@@ -1,4 +1,4 @@
-import React from 'React' 
+import React from 'react'; 
 
 
 class NewUserSession extends React.Component {

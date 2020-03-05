@@ -1,10 +1,10 @@
-import React from 'react' 
-import { Route,Link, Switch  } from 'react-router-dom'
-import LoginUserContainer from './session/login_session_container'
-import NewUserSessionContainer from './session/new_user_session_container'
-import SplashContainer from './splash/splash_container'
-import { AuthRoute } from "../component/util/route_util"
-import HomeContainer from './home/home_container'
+import React from 'react';
+import { Route,Link, Switch  } from 'react-router-dom';
+import LoginUserContainer from './session/login_session_container';
+import NewUserSessionContainer from './session/new_user_session_container';
+import SplashContainer from './splash/splash_container';
+import { AuthRoute } from "../component/util/route_util";
+import HomeContainer from './home/home_container';
 
 
 const App = () => (
