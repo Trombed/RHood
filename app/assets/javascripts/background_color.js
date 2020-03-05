@@ -2,7 +2,6 @@
 // 	var d = new Date();
 //     var h = d.getHours();
 //     var m = d.getMinutes();
-//     console.log(d)
 // 	if ( (h > 9 && m > 30) && h < 16) {
 	 
 //     //   $(".homepage-container-day").show();

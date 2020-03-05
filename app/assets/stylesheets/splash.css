@@ -59,7 +59,7 @@
     margin: 0px; 
     border-radius: 8px;
     height: 44px; 
-    min-width: 76px;
+    min-width: 85px;
     background: linear-gradient(to right, #18563e 50%,#21ce99 50%);
     background-size: 200% 100%;
     background-position: right bottom;
@@ -175,38 +175,29 @@
 /* 2076 x 1800 */ movie
 
 .splashContent-1-green-right-container {
-    /* display: flex; */
-    width: 30vw;
-    height: 30vw; 
-
-    align-items: center;
-    /* flex: 0 0 auto;  */
-
-    justify-content: center;
-    
     /* flex-grow: 1;  */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 0px;
+    flex: 0 0 auto; 
     position: relative;
-    
-    object-fit: contain
-    
+
 }
 
 .splashPhone {
-
-    width: 100%;
-
+    float: left;
+    width: 25%;
     position: absolute;
-  
+    object-fit: cover;
 }
 
 .splashPhonemp4 {
-
-    width: 100%;
+    float: left;
+    width: 25%;
     user-select: none;
     position: absolute; 
-
-
-  
+    object-fit: cover;
 }
 
 
@@ -218,7 +209,7 @@
     background-color:white;
     justify-content: center;
     align-items: center; 
-    /* padding: 100px 50px; */
+    padding: 100px 50px;
 
 }
 
