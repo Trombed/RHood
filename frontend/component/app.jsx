@@ -19,12 +19,7 @@ const App = () => (
     <Route path='/' component={SplashContainer} />
     </Switch>
 
-    {/* <Route exact path="/login">
-        <LoginUserContainer />
-    </Route> */}
-    {/* <Route exact path="/signup">
-        <NewUserSessionContainer  />
-    </Route> */}
+
 
   
     </div>

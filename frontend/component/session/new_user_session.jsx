@@ -1,5 +1,5 @@
 import React from 'React' 
-import { Link, Redirect } from 'react-router-dom';
+
 
 class NewUserSession extends React.Component {
     constructor(props) {
