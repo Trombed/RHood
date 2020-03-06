@@ -187,14 +187,14 @@
 
 .splashPhone {
     float: left;
-    width: 25%;
+    width: 35%;
     position: absolute;
     object-fit: cover;
 }
 
 .splashPhonemp4 {
     float: left;
-    width: 25%;
+    width: 35%;
     user-select: none;
     position: absolute; 
     object-fit: cover;

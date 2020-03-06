@@ -1,11 +1,13 @@
 .Main-Container {
+    width: 40vw;
 
-    top: 100;
     left: 200;
     display: flex;
     flex-direction: column;
-    padding-left: 10vw; 
-    padding-top: 2vh;
+    padding-left: 20vw; 
+    padding-right: 5vw;
+    /* padding-top: 2vh; */
+  
 }
 
 .Main-Container-Title {
@@ -15,4 +17,10 @@
     letter-spacing: -0.29px;
     line-height: 42px;
     margin: 0;
+    
+}
+
+
+.Main-Container-Chart-Area {
+    object-fit: contain;
 }

@@ -1,0 +1,140 @@
+.Stock-Container {
+    width: 45vw;
+
+    left: 200;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20vw; 
+    padding-right: 5vw;
+    /* padding-top: 2vh; */
+  
+}
+
+.Stock-Container-Title {
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.29px;
+    line-height: 42px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 2vh;
+    
+}
+
+.Stock-Container-Header {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Stock-Container-Company-Name {
+
+    
+}
+.Stock-Container-Company-Price {
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.7px;
+    line-height: 42px;
+}
+
+.Stock-Container-Company-Changes {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+}
+
+
+.Stock-Container-Chart-Area {
+ 
+    border-top: 1px dotted white;
+    object-fit: contain;
+    height: 30vh;
+}
+
+.Stock-Container-Chart-Navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 2vh;
+    border-bottom: 1px solid black;
+
+}
+
+.Stock-Container-Chart-Time {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+
+}
+
+.Stock-Container-Chart-Expand {
+    display: block;
+}
+
+.Stock-Container-About {
+    padding-top: 4vh;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.14px;
+    line-height: 30px;
+    border-bottom: 1px solid black;
+    padding-bottom: 2vh;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.Stock-Container-Description {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 22px;
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.Stock-Container-Company-Info {
+    display: flex;
+    flex-direction: row;
+   
+    justify-content: space-evenly;
+
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.Stock-Container-1D {
+    margin: 12px;
+}
+.Stock-Container-1D:hover {
+    padding-bottom: 12px;
+    border-bottom: 1px solid red;
+}
+.Stock-Container-1W {
+    margin: 12px;
+}
+.Stock-Container-1M {
+    margin: 12px;
+
+}
+.Stock-Container-3M {
+    margin: 12px;
+
+}
+.Stock-Container-1Y {
+    margin: 12px;
+}
+.Stock-Container-5W {
+    margin: 12px;
+
+}

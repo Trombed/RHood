@@ -27,7 +27,7 @@ class User < ApplicationRecord
     foreign_key: :user_id
 
     has_many :stocks,
-    through: :watch_list,
+    through: :watch_lists,
     source: :stock
 
     def self.find_by_credentials(username, password)

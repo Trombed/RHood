@@ -1,0 +1,23 @@
+class Api::StocksController < ApplicationController
+
+    def show
+        @show = Stock.find(params[:id])
+        render @show
+    end
+
+    def index
+      
+        @search = Stock.select(:id,:name,:ticker_symbol).where("name ILIKE(?)", "#{params[:stock]}%").or(Stock.select(:id,:name,:ticker_symbol).where("ticker_symbol ILIKE(?)", "#{params[:stock]}%")).limit(5).as_json
+        
+
+        render json: @search
+    end
+
+    def stock_params
+        params.require(:stock).permit(:name,:ticker_symbol,:stock)
+    end
+end
+
+
+
+

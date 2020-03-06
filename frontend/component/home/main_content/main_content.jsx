@@ -1,7 +1,6 @@
 import React from 'react'
 
 
-
 class MainContent extends React.Component {
     constructor(props) {
         super(props)
@@ -10,7 +9,6 @@ class MainContent extends React.Component {
        
     }
 
-    
 
     render(){
        
@@ -18,6 +16,10 @@ class MainContent extends React.Component {
             <div className='Main-Container'>
                 <div className='Main-Container-Title'>
                 Welcome to RobinHood
+                </div>
+
+                <div className="Main-Container-Chart-Area"> 
+                    <img src="/assets/home-splash.svg" />
                 </div>
             
             </div>
