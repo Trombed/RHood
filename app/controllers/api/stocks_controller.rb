@@ -2,7 +2,7 @@ class Api::StocksController < ApplicationController
 
     def show
         @show = Stock.find(params[:id])
-        render @show
+        render json: @show
     end
 
     def index

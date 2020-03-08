@@ -101,6 +101,10 @@
     color: white;
 }
 
+.homepage-nav-search-bar:focus + div {
+    display: block;
+}
+
 
 .homepage-nav-placeholder input[type="text"]:hover::placeholder {
     color: white;
@@ -127,6 +131,7 @@ i.fas {
 }
 
 .Search-Bar-Result-List {
+    display: none;
     background-color: #1b1b1d;
     position: absolute;
     top: 9vh;
@@ -144,7 +149,12 @@ i.fas {
     transition-timing-function: 0.2 ease-in;
 }
 
+.Search-Bar-Result-List:hover {
+    display: block;
+}
+
 .Search-Bar-Result-List-Items {
+
     width: 30vw;
     display: flex;
     flex-direction: row;
@@ -154,8 +164,6 @@ i.fas {
     padding-top: 1vh;
     padding-bottom: 1vw;
     text-overflow: ellipsis;
-
-
     white-space: nowrap;
     overflow: hidden;
     

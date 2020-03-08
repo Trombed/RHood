@@ -1,6 +1,7 @@
 import React from 'react' 
 import HomePageLogo from './home_page_logo'
 import SearchResult from './home_nav_bar_search'
+import { Link } from "react-router-dom"
 
 
 class HomeNavBar extends React.Component {
@@ -11,7 +12,7 @@ class HomeNavBar extends React.Component {
         
         this.logout = this.props.logout.bind(this)
         this.stock_search = this.props.stock_search.bind(this)
-        console.log(this.props.search)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     autoSearch(field) {
@@ -21,16 +22,22 @@ class HomeNavBar extends React.Component {
       
     }
 
+    handleClick(e) {
+        this.setState({ name: ''})
+        
+    }
+
     
     render() {
         let results;
-        if (this.props.search.length > 1) {
+        if ((this.props.search.length > 1) && (this.state.name != "")) {
         results = this.props.search.map( (result) => {
             return (
-            <li key={result.id} className='Search-Bar-Result-List-Items'>
+            <li key={result.id} className='Search-Bar-Result-List-Items' onClick={this.handleClick} >
+             <Link to={`/show/${result.id}`}>   
                 <div className='Search-Bar-Result-List-Items-Symnbol'>{result.ticker_symbol}</div>
                 <div className='Search-Bar-Result-List-Items-Name'>{result.name}</div>
-                  
+             </Link>      
                 
             </li>
             )
@@ -53,8 +60,8 @@ class HomeNavBar extends React.Component {
                 <input type="text" onChange={this.autoSearch("name")} className='homepage-nav-search-bar' placeholder="Search" 
                 value={this.state.name} />
                 <div className="Search-Bar-Result-List">
-                  {results}
-            </div>
+                   {results}
+                </div>
                 </div>
             
             </div>

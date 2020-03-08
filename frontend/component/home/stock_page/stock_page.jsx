@@ -1,18 +1,188 @@
 import React from 'react'
+import { LineChart, Line, Tooltip, Legend, YAxis, XAxis } from 'recharts';
 
 
 
 class StockPage extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            price: 0,
+            change: 0,
+            percentageChange: 0,
+            chartData: this.props.price,
+            labelDate: ''
+        }
+        this.clickHandler = this.clickHandler.bind(this);
+        // this.customToolTip = this.customToolTip.bind(this);
+        this.handleChartOneDayData = this.handleChartOneDayData.bind(this)
+        this.handleChartOneWeekData = this.handleChartOneWeekData.bind(this)
+        this.handleChartOneMonthData = this.handleChartOneMonthData.bind(this)
+        this.handleChartThreeMonthData = this.handleChartThreeMonthData.bind(this)
+        this.handleChartOneYearData = this.handleChartOneYearData.bind(this)
+        this.handleChartFiveYearData = this.handleChartFiveYearData.bind(this)
+        this.handleResetPrice = this.handleResetPrice.bind(this)
+       
+    }
 
     componentDidMount() {
-        // this.props.companyInfo("AAPL")
-        // this.props.oneDayStockInfo("AAPL")
-    
-      
+     
+        this.props.fetchStockFromDB(this.id)
+          .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
+          .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
+          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          // .then(res => this.props.oneWeekStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.threeMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneYearStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.fiveYearStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.setState({ chartData: this.props.price}))
+          // .then(res => this.setState({ price: this.props.currentPrice}))
+            
+    }
+
+
+    componentDidUpdate(prevProp, prevState) {
+     
+      if (this.props.match.params.id !== prevProp.match.params.id) {
+        this.props.fetchStockFromDB(this.id)
+          .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
+          // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
+          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          // .then(res => this.props.oneWeekStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.threeMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneYearStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.fiveYearStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.setState({ chartData: this.props.price}))
+          // .then(res => this.setState({ price: this.props.currentPrice}))
+      }
+    }
+
+    // customToolTip(e) {
+ 
+    //   return (
+    //   <div>{e.label}</div>
+    //   )
+    // } 
+
+
+    clickHandler(e) {
+      console.log(e.activeLabel)
+      this.setState({ 
+        price: e.activePayload[0].value.toFixed(2),
+        change: (e.activePayload[0].payload.open - e.activePayload[0].payload.close).toFixed(2),
+        percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2),
+        labelDate: e.activeLabel
+      })
+
+    }
+
+
+    handleChartOneDayData() {
+      this.setState({ 
+        chartData: this.props.price
+      })
+    }
+   
+    handleChartOneWeekData() {
+      this.setState({ 
+        chartData: this.props.oneWeekPrice
+      })
+    }
+
+    handleChartOneMonthData() {
+      this.setState({ 
+        chartData: this.props.oneMonthPrice
+      })
+    }
+
+    handleChartThreeMonthData() {
+      this.setState({ 
+        chartData: this.props.threeMonthPrice
+      })
+    }
+
+    handleChartOneYearData() {
+      this.setState({ 
+        chartData: this.props.oneYearPrice
+      })
+    }
+
+    handleChartFiveYearData() {
+      this.setState({ 
+        chartData: this.props.fiveYearPrice
+      })
+    }
+
+   
+    handleResetPrice() {
+      this.setState({
+        price: this.props.currentPrice
+      })
     }
 
     render(){
-     let data =  [ {
+          let data = [ {
+            "date" : "2020-03-06 16:00:00",
+            "open" : 289.560000000000,
+            "low" : 288.660000000000,
+            "high" : 290.680000000000,
+            "close" : 288.707500000000,
+            "volume" : 51864654
+          }, {
+            "date" : "2020-03-06 15:00:00",
+            "open" : 284.695000000000,
+            "low" : 282.000000000000,
+            "high" : 285.450000000000,
+            "close" : 282.480000000000,
+            "volume" : 40308544
+          }, {
+            "date" : "2020-03-06 14:00:00",
+            "open" : 286.180000000000,
+            "low" : 284.470000000000,
+            "high" : 286.255000000000,
+            "close" : 284.695000000000,
+            "volume" : 34761534
+          }, {
+            "date" : "2020-03-06 13:00:00",
+            "open" : 284.517900000000,
+            "low" : 283.645000000000,
+            "high" : 287.340000000000,
+            "close" : 285.280000000000,
+            "volume" : 30299995
+          }, {
+            "date" : "2020-03-06 12:00:00",
+            "open" : 286.466400000000,
+            "low" : 284.180000000000,
+            "high" : 286.520000000000,
+            "close" : 284.517900000000,
+            "volume" : 25290406
+          }, {
+            "date" : "2020-03-06 11:00:00",
+            "open" : 284.399800000000,
+            "low" : 284.399800000000,
+            "high" : 289.950000000000,
+            "close" : 287.980000000000,
+            "volume" : 19224187
+          }, {
+            "date" : "2020-03-06 10:00:00",
+            "open" : 284.588000000000,
+            "low" : 282.670000000000,
+            "high" : 285.470000000000,
+            "close" : 284.399800000000,
+            "volume" : 9422371
+          }, {
             "date" : "2020-03-05 16:00:00",
             "open" : 294.480000000000,
             "low" : 291.500000000000,
@@ -195,45 +365,27 @@ class StockPage extends React.Component {
             "close" : 281.615000000000,
             "volume" : 13793879
           } ]
+          this.id = Number(this.props.match.params.id)
 
-        
-          var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+      
+          const renderLineChart = ( //this.state.chartData
+            <LineChart width={500} height={300} data={data}  onMouseLeave={this.handleResetPrice} onMouseMove={this.clickHandler}>
+              <Line type="monotone" dataKey="open" stroke="red" strokeWidth={2} dot={false} />
+              <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
+              <Tooltip  
+              // position={{ y: 0 }} 
+              // offset={0}
+              isAnimationActive={false}
+              
+              />
+              <XAxis dataKey='date' hide={true} />
+
+            </LineChart>
+            
+          );
+
+            
+
 
         return(
             <div className='Stock-Container'>
@@ -241,34 +393,38 @@ var myChart = new Chart(ctx, {
                     <div className='Stock-Container-Header'>
                         <div className="Stock-Container-Company-Name">
                         {this.props.company.companyName}
+                      
                         </div>
                         <div className="Stock-Container-Company-Price">
-                        ${this.props.company.price}
+                          <br/>
+                        ${this.state.price}
+                        
                         </div>
                         <div className='Stock-Container-Company-Changes'>
-                        {this.props.company.changes}{this.props.company.changesPercentage}
+                        {this.state.change} ({this.state.percentageChange}%)
                         Today
                         </div>
                     </div>
                     <div>
-                      
+                      {this.state.labelDate}
                     </div>
                 </div>
 
                 <div className="Stock-Container-Chart-Area"> 
-                    Chart Area
-
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                  <div className="Chart-Container chart-content">
+                    {renderLineChart}
+                
+                  </div>
                 </div>
 
                 <div className="Stock-Container-Chart-Navigation">
                     <div className="Stock-Container-Chart-Time">
-                        <div className="Stock-Container-1D">1D</div>
-                        <div className="Stock-Container-1W">1W</div>
-                        <div className="Stock-Container-1M">1M</div>
-                        <div className="Stock-Container-3M">3M</div>
-                        <div className="Stock-Container-1Y">1Y</div>
-                        <div className="Stock-Container-5W">5Y</div>
+                        <button className="Button-1D" onClick={this.handleChartOneDayData} > 1D</button>
+                        <button className="Button-1W" onClick={this.handleChartOneWeekData} >1W</button>
+                        <button className="Button-1M" onClick={this.handleChartOneMonthData} >1M</button>
+                        <button className="Button-1M" onClick={this.handleChartThreeMonthData} >3M</button>
+                        <button className="Button-1M" onClick={this.handleChartOneYearData} >1Y</button>
+                        <button className="Button-1M" onClick={this.handleChartFiveYearData} >5Y</button>
                     </div>
                     <div className="Stock-Container-Chart-Expand">
                         Expand []
@@ -288,36 +444,30 @@ var myChart = new Chart(ctx, {
                         </div>
 
                         <div>
-                            Headquarters
+                            Symbol
                             <br/>
-                            {this.props.company.ceo}
+                            {this.props.info.ticker_symbol}
                         </div>
 
                         <div>
-                            
+                            Sector
                             <br/>
-                            {this.props.company.ceo}
+                            {this.props.company.sector}
                         </div>
 
                         <div>
-                            CEO
+                            Industry
                             <br/>
-                            {this.props.company.ceo}
+                            {this.props.company.industry}
                         </div>
                     </div>
-                
-
-
-                
-                
-        
-
-                
+                                
 
             </div>
             
         )
-    }
+        }    
+        
 }
 
 export default StockPage

@@ -113,28 +113,10 @@
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.Stock-Container-1D {
-    margin: 12px;
-}
-.Stock-Container-1D:hover {
-    padding-bottom: 12px;
-    border-bottom: 1px solid red;
-}
-.Stock-Container-1W {
-    margin: 12px;
-}
-.Stock-Container-1M {
-    margin: 12px;
 
-}
-.Stock-Container-3M {
-    margin: 12px;
 
-}
-.Stock-Container-1Y {
-    margin: 12px;
-}
-.Stock-Container-5W {
-    margin: 12px;
 
+.test {
+    background-color: red;
+    opacity: 0.5;
 }
