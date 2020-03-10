@@ -51,7 +51,7 @@ class Splash extends React.Component {
         return(
         
             <div className="splashContainer">
-                {/* START NAV BAR SECTIOn */}
+        
                 <div className="splashNavBar"> 
                 
                  <div id="splashNavLogo">
@@ -66,10 +66,7 @@ class Splash extends React.Component {
                 
                 </div>
                 
-                {/* END NAV BAR SECTIOn */}
-
-
-                {/* SECTION 1 START */}
+               
                 <div className="splashContent-Container">
 
                 <div className="splashContent-1-green">
