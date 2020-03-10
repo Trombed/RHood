@@ -45,7 +45,6 @@
 }
 
 .Search-Bar-Result-List-Items-Symnbol {
- 
     width: 5vw;
     display: flex;
     justify-content: flex-start;
@@ -54,7 +53,7 @@
 }
 
 .Search-Bar-Result-List-Items-Name {
-    display: inline-block; */
+    display: inline-block;
     justify-content: flex-start; 
     padding-left: 2vw;
 }

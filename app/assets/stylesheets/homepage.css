@@ -61,9 +61,7 @@
     flex-direction: row; 
     align-items: center;
     justify-content: flex-start;
-    border-radius: 3px;
-   
-    
+    border-radius: 3px; 
 }
 
 
@@ -83,8 +81,7 @@
     border: 1px solid #0e0d0d;
     height: 35px; 
     outline: 0;
-    width: 20vw;
-   
+    width: 20vw; 
 }
 
 
