@@ -166,15 +166,11 @@
     background-position: left bottom;
     color: white;
 }
-/* 2076 x 1800 */
+
 .splashContent-1-green-right-container {
     display: block;
     height: inherit;
-    /* margin: 0px auto;
-    position: absolute;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start; */
+
     
 }
 
@@ -182,8 +178,6 @@
 
 #splashPhone {
     display: flex;
-    /* justify-content: ;
-    align-items: center; */
     width: 30%;
     height: inherit;
     position: absolute;
