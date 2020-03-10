@@ -1,23 +1,19 @@
 .Main-Container {
     width: 40vw;
-
     left: 200;
     display: flex;
     flex-direction: column;
     padding-left: 20vw; 
     padding-right: 5vw;
-    /* padding-top: 2vh; */
-  
+
 }
 
 .Main-Container-Title {
-    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 36px;
     font-weight: 500;
     letter-spacing: -0.29px;
     line-height: 42px;
-    margin: 0;
-    
+    margin: 0;   
 }
 
 
