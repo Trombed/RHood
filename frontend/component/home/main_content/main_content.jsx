@@ -5,8 +5,6 @@ class MainContent extends React.Component {
     constructor(props) {
         super(props)
 
-       
-       
     }
 
 
@@ -23,7 +21,7 @@ class MainContent extends React.Component {
                 </div>
             
             </div>
-            
+        
         )
     }
 }

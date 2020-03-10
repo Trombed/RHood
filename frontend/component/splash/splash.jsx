@@ -2,16 +2,23 @@ import React from 'react'
 import LoginUser from '../session/login_session'
 import NewUserSession from '../session/new_user_session'
 import { Route,Link, Switch  } from 'react-router-dom'
+import SplashCarousel from './carousel.jsx/carousel'
+import FictionalShares from './fictional_shares'
+import SplashFooter from './splash_footer'
+
 
 
 class Splash extends React.Component {
     constructor(props) {
         super(props)
-        
+      
     }
 
+
+
+    
     render() {
-        
+        // code to check if user is sign in and to display log in or logout
         let content = (this.props.sessionId === null ) ? (
             <ul className="splashNavEnd"> 
             <div className="splashNavSignIn">
@@ -35,6 +42,12 @@ class Splash extends React.Component {
             </ul>
          );
 
+         //end login/logout check 
+        
+
+         
+    
+        
         return(
         
             <div className="splashContainer">
@@ -73,10 +86,11 @@ class Splash extends React.Component {
 
                     <div className="splashContent-1-green-right-container">
 
-                        <video autoPlay loop  muted preload="auto" className='splashPhonemp4'>
+                        <video autoPlay loop  muted preload="auto" id=
+                        'splashPhonemp4'>
                         <source src="assets/splashPhone.mp4"/>
                         </video>
-                        <img src="/assets/splashcontent-1.png" className="splashPhone" />
+                        <img src="/assets/splashcontent-1.png" id="splashPhone" />
                     </div>
                     
                 </div>
@@ -91,15 +105,11 @@ class Splash extends React.Component {
                         </div>
                 </div>
 
-                <div className="splashContent-3-black">
-                    black
-                </div>
-                <div className="splashContent-4-white">
-                    Our Products
-                </div>
-                <div className="splashContent-5-black">
-                    Footer
-                </div>
+                    <SplashCarousel />
+                    <FictionalShares />
+                    <SplashFooter />
+
+               
 
                 </div>
             </div> 

@@ -1,0 +1,124 @@
+.Splash-Carousel-Container {
+   
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5vh 3vw;
+    margin: 0 auto;
+
+    
+}
+
+
+
+.Splash-Carousel-Nav {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+    padding-left: 9vw;
+    padding-right: 2vh;
+    margin: 0 auto;
+    justify-content: center;
+    overflow: visible;
+    
+    
+}
+
+.Splash-Carousel-Content {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.Splash-Slide {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2vw;
+    padding-right: 20vw;
+    justify-content: center;
+    align-items: center;
+	opacity: 1;
+    transition: opacity .2s ease-in;
+}
+
+
+
+
+
+
+.Splash-Carousel-Slide-Text {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5vw;
+    
+}
+
+.carosel-nav-items {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    
+    font-family: "Maison Neue", system-ui, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    letter-spacing: normal;
+    line-height: 36px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    text-align: start;
+   
+    text-transform: none;
+    vertical-align: baseline;
+    white-space: normal;
+    word-spacing: 0px;
+    overflow: visible;
+    justify-content: flex-end;
+}
+
+.Splash-Filler {
+    width: 10vw;
+}
+
+.Splash-Carousel-Nav-Arrow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Splash-Carousel-Image {
+    height: 70vh;
+    
+}
+
+.Splash-Carousel-Slide-Text-Title {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 65px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: -0.72px;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    text-decoration: unset;
+  
+}
+
+.Splash-Carousel-Slide-Text-Description {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 30px;
+    letter-spacing: -0.32px;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    text-decoration: unset;
+
+}
+
+.Splash-Arrow {
+    fill: rgb(255, 255, 255);
+}

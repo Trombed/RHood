@@ -52,6 +52,7 @@ class StockPage extends React.Component {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id)
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
+          .then( res => $(".Stock-Button-1D").css("color","black") )
           // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
           // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           // .then(res => this.props.oneWeekStockInfo
@@ -93,6 +94,7 @@ class StockPage extends React.Component {
       this.setState({ 
         chartData: this.props.price
       })
+      $(".Stock-Button-1").css("border-bottom","1 solid red")
     }
    
     handleChartOneWeekData() {
@@ -123,6 +125,7 @@ class StockPage extends React.Component {
       this.setState({ 
         chartData: this.props.fiveYearPrice
       })
+    
     }
 
    
@@ -132,8 +135,13 @@ class StockPage extends React.Component {
       })
     }
 
+
+
     render(){
-          let data = [ {
+
+
+
+          let data2 = [ {
             "date" : "2020-03-06 16:00:00",
             "open" : 289.560000000000,
             "low" : 288.660000000000,
@@ -362,15 +370,19 @@ class StockPage extends React.Component {
             "open" : 282.800000000000,
             "low" : 277.720000000000,
             "high" : 284.080000000000,
-            "close" : 281.615000000000,
+            "close" : 291.615000000000,
             "volume" : 13793879
           } ]
-          this.id = Number(this.props.match.params.id)
+         
+          let data = data2.reverse()
 
+          this.id = Number(this.props.match.params.id)
+          
+          // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
       
           const renderLineChart = ( //this.state.chartData
-            <LineChart width={500} height={300} data={data}  onMouseLeave={this.handleResetPrice} onMouseMove={this.clickHandler}>
-              <Line type="monotone" dataKey="open" stroke="red" strokeWidth={2} dot={false} />
+            <LineChart width={600} height={250} data={data}  onMouseLeave={this.handleResetPrice} onMouseMove={this.clickHandler}>
+              <Line type="monotone" dataKey="open" stroke={"red"} strokeWidth={2} dot={false} />
               <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
               <Tooltip  
               // position={{ y: 0 }} 
@@ -405,7 +417,7 @@ class StockPage extends React.Component {
                         Today
                         </div>
                     </div>
-                    <div>
+                    <div className="Stock-Label-Date">
                       {this.state.labelDate}
                     </div>
                 </div>
@@ -419,12 +431,12 @@ class StockPage extends React.Component {
 
                 <div className="Stock-Container-Chart-Navigation">
                     <div className="Stock-Container-Chart-Time">
-                        <button className="Button-1D" onClick={this.handleChartOneDayData} > 1D</button>
-                        <button className="Button-1W" onClick={this.handleChartOneWeekData} >1W</button>
-                        <button className="Button-1M" onClick={this.handleChartOneMonthData} >1M</button>
-                        <button className="Button-1M" onClick={this.handleChartThreeMonthData} >3M</button>
-                        <button className="Button-1M" onClick={this.handleChartOneYearData} >1Y</button>
-                        <button className="Button-1M" onClick={this.handleChartFiveYearData} >5Y</button>
+                        <button className="Stock-Button-1D" onClick={this.handleChartOneDayData} >1D</button>
+                        <button className="Stock-Button-1W" onClick={this.handleChartOneWeekData} >1W</button>
+                        <button className="Stock-Button-1M" onClick={this.handleChartOneMonthData} >1M</button>
+                        <button className="Stock-Button-1M" onClick={this.handleChartThreeMonthData} >3M</button>
+                        <button className="Stock-Button-1M" onClick={this.handleChartOneYearData} >1Y</button>
+                        <button className="Stock-Button-1M" onClick={this.handleChartFiveYearData} >5Y</button>
                     </div>
                     <div className="Stock-Container-Chart-Expand">
                         Expand []

@@ -14,8 +14,8 @@ class Stock < ApplicationRecord
     validates :name, presence: true 
     
     has_many :watch_lists,
-    primary_key: :id,
-    foreign_key: :stock_id
+    foreign_key: :stock_id,
+    class_name: :Watchlist
 
     has_many :users,
     through: :watch_lists,

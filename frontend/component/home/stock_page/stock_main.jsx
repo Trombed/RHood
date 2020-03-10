@@ -4,13 +4,14 @@ import React from 'react'
 import HomeNavBarContainer from "../home_nav_bar_container"
 import StockPageContainer from './stock_page_container';
 import { Route } from 'react-router-dom'
+import StockInfoBox from './stock_info_box/stock_info_box';
+import WatchListButton from '../watch_list_button/watch_list_button';
 
 
 
 class StockMain extends React.Component {
     constructor(props) {
         super(props)
-        console.log(this.props)
     
     }
 
@@ -24,8 +25,9 @@ class StockMain extends React.Component {
 
                 <div className='Home-Body-Container'>
                 <Route path='/show/:id' component={StockPageContainer}>
-
                 </Route>
+                <StockInfoBox />
+                <WatchListButton/>
                 </div>  
             </div>
             
@@ -34,5 +36,5 @@ class StockMain extends React.Component {
     }
     
     export default StockMain
-    // {/* <StockPageContainer id={this.props.match.params.id} /> */}
+   
     

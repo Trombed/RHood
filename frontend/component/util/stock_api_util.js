@@ -92,3 +92,11 @@ export const threeMonthStockInfoUtil = (symbol) => {
          url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
      })
  )
+
+
+ export const fetchWatchList = () => (
+     $.ajax({
+         method: "GET",
+         url: `/api/watch_lists`
+     })
+ )

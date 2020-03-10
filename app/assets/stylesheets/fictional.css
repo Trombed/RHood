@@ -1,0 +1,97 @@
+.Fictional-Container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    background-color: #f5f8fa;
+}
+
+.Fictional-Grid-1 {
+    display: flex;
+    flex-direction: column;
+    padding: 10vh 5vw 10vh 16vw;
+}
+
+.Fictional-Grid-1-Title {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: -0.72px;
+    color: rgb(4, 13, 20);
+    margin: 0px;
+    text-decoration: unset;
+    padding-bottom: 2vh
+}
+
+.Fictional-Grid-1-Slogan {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 19px;
+    letter-spacing: -0.32px;
+    color: rgb(111, 120, 126);
+    margin: 0px;
+    text-decoration: unset;
+    padding-bottom: 5vh;
+}
+
+.Fictional-Grid-1-Description {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.Fictional-Grid-1-Description-Container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2vw;
+    padding-bottom: 5vh;
+}
+
+.Fictional-Grid-Description-Title {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: normal;
+    color: rgb(4, 13, 20);
+    margin: 0px;
+    text-decoration: unset;  
+    padding-bottom: 2vh; 
+}
+
+.Fictional-Grid-Description-Description {
+    font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 30px;
+    letter-spacing: -0.32px;
+    color: rgb(4, 13, 20);
+    margin: 0px;
+    text-decoration: unset;
+}
+
+.Fictional-Grid-2 {
+   padding: 2vw;
+}
+
+.Fictional-Image {
+    height: 90%;
+    width: 90%;
+}
+
+.Fictional-Sign-In-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Fictional-Sign-In {
+    display: flex;
+    justify-content: center;
+
+}

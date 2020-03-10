@@ -1,6 +1,6 @@
 import React from 'react' 
 import HomePageLogo from './home_page_logo'
-import SearchResult from './home_nav_bar_search'
+// import SearchResult from './home_nav_bar_search'
 import { Link } from "react-router-dom"
 
 
@@ -34,6 +34,7 @@ class HomeNavBar extends React.Component {
         results = this.props.search.map( (result) => {
             return (
             <li key={result.id} className='Search-Bar-Result-List-Items' onClick={this.handleClick} >
+
              <Link to={`/show/${result.id}`}>   
                 <div className='Search-Bar-Result-List-Items-Symnbol'>{result.ticker_symbol}</div>
                 <div className='Search-Bar-Result-List-Items-Name'>{result.name}</div>
@@ -42,30 +43,37 @@ class HomeNavBar extends React.Component {
             </li>
             )
         })}
+
+        
             
         return (
 
         <div className="homepage-nav-bar"> 
                 
             <div id="homepage-nav-logo">
-                <HomePageLogo />
+              <Link to="/home"> 
+                    <HomePageLogo />
+              </Link>
             </div> 
-
+        
             <div className='homepage-nav-search-bar-block'>
                 <div className='homepage-nav-search-icon'>
                 <i className="fas fa-search"></i>
 
                 </div>
-                <div className="homepage-nav-placeholder">
-                <input type="text" onChange={this.autoSearch("name")} className='homepage-nav-search-bar' placeholder="Search" 
-                value={this.state.name} />
-                <div className="Search-Bar-Result-List">
-                   {results}
-                </div>
+
+                <div className="Search-Bar-Container ">
+                    <div className="homepage-nav-placeholder">
+                    <input type="text" onChange={this.autoSearch("name")} className='homepage-nav-search-bar' placeholder="Search" 
+                    value={this.state.name} />
+                        <div className="Search-Bar-Result-List">
+                        {results}
+                        </div>
+                    </div>
                 </div>
             
             </div>
-            
+            <div className="Nav-Bar-Filler"></div>
             <ul className="homepage-nav-list">   
                 <div className="homepage-nav-item-1">
                     Portfolio

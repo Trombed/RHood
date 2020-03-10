@@ -1,0 +1,74 @@
+.New-User-Carousel-Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.New-User-Carousel-Nav-Arrow-Left {
+    padding: 0 2vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.New-User-Carousel-Nav-Arrow-Right {
+    padding: 0 2vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+}
+
+iframe[seamless] {
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+}
+
+
+
+.New-User-Video-Container {
+  
+    height:200px;
+    width: 200px; 
+ 
+}
+
+
+[class^="new-user-video"] {
+    user-select: none;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    z-index: 0;
+}
+
+
+.New-User-Slide-0 {
+    display: block;
+}
+
+
+.New-User-Slide-2 {
+    display: none;
+}
+
+.New-User-Slide-1 {
+    display: none;
+}
+
+.New-User-Video-Text-row-1 {
+    font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+    text-align: center;
+    color: #040d14;
+    font-size: 18px;
+    font-weight: 400;
+    
+}
+.New-User-Video-Text-row-2 {
+    font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+    padding-top: 2vh;
+    text-align: center;
+    color: #b1bfc4;
+    font-size: 18px;
+    font-weight: 400;

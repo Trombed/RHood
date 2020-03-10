@@ -10,22 +10,18 @@ class Home extends React.Component {
         super(props)
     }
 
-
+    componentDidMount() {
+        this.props.watchListInfo()
+    }
     render(){
-        let timeNow = moment()
-        timeNow.subtract(1, 'year')
 
-        let today = moment()
         return(
                  <div className='homepage-container-night'>
-                <div className='Home-Body-Container'>
                 <HomeNavBarContainer />
-              {timeNow.format("YYYY-MM-DD")}
-             {today.format("YYYY-MM-DD")}
-            
-  
+                <div className='Home-Body-Container'>
+
                 <MainContent />
-                <WatchList />
+                <WatchList watchList={this.props.watchList}/>
                 </div>  
             </div>
             

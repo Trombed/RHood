@@ -173,7 +173,7 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_SEARCH, stock_search, RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_ONE_MONTH, RECEIVE_STOCK_THREE_MONTH, RECEIVE_STOCK_ONE_YEAR, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, receiveThreeMonthStock, receiveOneYearStock, receiveFiveYearStock, currentPriceInfo, threeMonthStockInfo, oneYearStockInfo, fiveYearStockInfo, oneMonthStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo */
+/*! exports provided: RECEIVE_SEARCH, stock_search, RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_ONE_MONTH, RECEIVE_STOCK_THREE_MONTH, RECEIVE_STOCK_ONE_YEAR, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_WATCH_LIST, receiveThreeMonthStock, receiveOneYearStock, receiveFiveYearStock, currentPriceInfo, threeMonthStockInfo, oneYearStockInfo, fiveYearStockInfo, oneMonthStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, watchListInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -189,6 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_YEAR", function() { return RECEIVE_STOCK_ONE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_FIVE_YEAR", function() { return RECEIVE_STOCK_FIVE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PRICE", function() { return RECEIVE_CURRENT_PRICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCH_LIST", function() { return RECEIVE_WATCH_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveThreeMonthStock", function() { return receiveThreeMonthStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveOneYearStock", function() { return receiveOneYearStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFiveYearStock", function() { return receiveFiveYearStock; });
@@ -201,6 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfo", function() { return oneDayStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockFromDB", function() { return fetchStockFromDB; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfo", function() { return oneWeekStockInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchListInfo", function() { return watchListInfo; });
 /* harmony import */ var _util_search_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/search_util */ "./frontend/component/util/search_util.js");
 /* harmony import */ var _util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stock_api_util */ "./frontend/component/util/stock_api_util.js");
 
@@ -231,6 +233,14 @@ var RECEIVE_STOCK_THREE_MONTH = 'RECEIVE_STOCK_THREE_MONTH';
 var RECEIVE_STOCK_ONE_YEAR = 'RECEIVE_STOCK_ONE_YEAR';
 var RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR';
 var RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE';
+var RECEIVE_WATCH_LIST = 'RECEIVE_WATCH_LIST';
+
+var receiveWatchList = function receiveWatchList(watchList) {
+  return {
+    type: RECEIVE_WATCH_LIST,
+    watchList: watchList
+  };
+};
 
 var receiveStockProfile = function receiveStockProfile(profile) {
   return {
@@ -355,6 +365,13 @@ var oneWeekStockInfo = function oneWeekStockInfo(prices) {
     });
   };
 };
+var watchListInfo = function watchListInfo(watchList) {
+  return function (dispatch) {
+    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["fetchWatchList"])(watchList).then(function (res) {
+      return dispatch(receiveWatchList(res));
+    });
+  };
+};
 
 /***/ }),
 
@@ -463,16 +480,20 @@ function (_React$Component) {
   }
 
   _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.watchListInfo();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var timeNow = moment__WEBPACK_IMPORTED_MODULE_4___default()();
-      timeNow.subtract(1, 'year');
-      var today = moment__WEBPACK_IMPORTED_MODULE_4___default()();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-container-night"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), timeNow.format("YYYY-MM-DD"), today.format("YYYY-MM-DD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        watchList: this.props.watchList
+      })));
     }
   }]);
 
@@ -495,13 +516,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ "./frontend/component/home/home.jsx");
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+
 
 
 
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    watchList: Object.values(state.watchList)
   };
 };
 
@@ -509,6 +533,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     logout: function logout() {
       return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_1__["logout"])());
+    },
+    watchListInfo: function watchListInfo() {
+      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_3__["watchListInfo"])());
     }
   };
 };
@@ -529,8 +556,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _home_page_logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home_page_logo */ "./frontend/component/home/home_page_logo.jsx");
-/* harmony import */ var _home_nav_bar_search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_nav_bar_search */ "./frontend/component/home/home_nav_bar_search.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -552,7 +578,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
+ // import SearchResult from './home_nav_bar_search'
 
 
 
@@ -605,7 +631,7 @@ function (_React$Component) {
             key: result.id,
             className: "Search-Bar-Result-List-Items",
             onClick: _this3.handleClick
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/show/".concat(result.id)
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "Search-Bar-Result-List-Items-Symnbol"
@@ -619,13 +645,17 @@ function (_React$Component) {
         className: "homepage-nav-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "homepage-nav-logo"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_logo__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/home"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_logo__WEBPACK_IMPORTED_MODULE_1__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-search-bar-block"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-search-icon"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Search-Bar-Container "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-placeholder"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -635,7 +665,9 @@ function (_React$Component) {
         value: this.state.name
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Search-Bar-Result-List"
-      }, results))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, results)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Nav-Bar-Filler"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "homepage-nav-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"
@@ -691,32 +723,6 @@ var mDTP = function mDTP(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_home_nav_bar__WEBPACK_IMPORTED_MODULE_1__["default"]));
-
-/***/ }),
-
-/***/ "./frontend/component/home/home_nav_bar_search.jsx":
-/*!*********************************************************!*\
-  !*** ./frontend/component/home/home_nav_bar_search.jsx ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-var SearchResult = function SearchResult(props) {
-  debugger;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/".concat(props.result.id)
-  }, props.result.name));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (SearchResult);
 
 /***/ }),
 
@@ -818,6 +824,64 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx":
+/*!******************************************************************************!*\
+  !*** ./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var StockInfoBox =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(StockInfoBox, _React$Component);
+
+  function StockInfoBox(props) {
+    _classCallCheck(this, StockInfoBox);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(StockInfoBox).call(this, props));
+  }
+
+  _createClass(StockInfoBox, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Stock-Info-Box-Container"
+      }, "Stock Info", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "BUY SELL");
+    }
+  }]);
+
+  return StockInfoBox;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (StockInfoBox);
+
+/***/ }),
+
 /***/ "./frontend/component/home/stock_page/stock_main.jsx":
 /*!***********************************************************!*\
   !*** ./frontend/component/home/stock_page/stock_main.jsx ***!
@@ -832,6 +896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../home_nav_bar_container */ "./frontend/component/home/home_nav_bar_container.js");
 /* harmony import */ var _stock_page_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock_page_container */ "./frontend/component/home/stock_page/stock_page_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _stock_info_box_stock_info_box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stock_info_box/stock_info_box */ "./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx");
+/* harmony import */ var _watch_list_button_watch_list_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../watch_list_button/watch_list_button */ "./frontend/component/home/watch_list_button/watch_list_button.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -856,19 +922,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var StockMain =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(StockMain, _React$Component);
 
   function StockMain(props) {
-    var _this;
-
     _classCallCheck(this, StockMain);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(StockMain).call(this, props));
-    console.log(_this.props);
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(StockMain).call(this, props));
   }
 
   _createClass(StockMain, [{
@@ -881,14 +945,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/show/:id",
         component: _stock_page_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-      })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_info_box_stock_info_box__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
     }
   }]);
 
   return StockMain;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (StockMain); // {/* <StockPageContainer id={this.props.match.params.id} /> */}
+/* harmony default export */ __webpack_exports__["default"] = (StockMain);
 
 /***/ }),
 
@@ -1022,6 +1086,8 @@ function (_React$Component) {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return $(".Stock-Button-1D").css("color", "black");
         }); // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
         // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.oneWeekStockInfo
@@ -1060,6 +1126,7 @@ function (_React$Component) {
       this.setState({
         chartData: this.props.price
       });
+      $(".Stock-Button-1").css("border-bottom", "1 solid red");
     }
   }, {
     key: "handleChartOneWeekData",
@@ -1106,7 +1173,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var data = [{
+      var data2 = [{
         "date": "2020-03-06 16:00:00",
         "open": 289.560000000000,
         "low": 288.660000000000,
@@ -1335,14 +1402,16 @@ function (_React$Component) {
         "open": 282.800000000000,
         "low": 277.720000000000,
         "high": 284.080000000000,
-        "close": 281.615000000000,
+        "close": 291.615000000000,
         "volume": 13793879
       }];
-      this.id = Number(this.props.match.params.id);
+      var data = data2.reverse();
+      this.id = Number(this.props.match.params.id); // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
+
       var renderLineChart = //this.state.chartData
       react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 500,
-        height: 300,
+        width: 600,
+        height: 250,
         data: data,
         onMouseLeave: this.handleResetPrice,
         onMouseMove: this.clickHandler
@@ -1377,7 +1446,9 @@ function (_React$Component) {
         className: "Stock-Container-Company-Price"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "$", this.state.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
-      }, this.state.change, " (", this.state.percentageChange, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.labelDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.change, " (", this.state.percentageChange, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Stock-Label-Date"
+      }, this.state.labelDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Chart-Container chart-content"
@@ -1386,22 +1457,22 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Time"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1D",
+        className: "Stock-Button-1D",
         onClick: this.handleChartOneDayData
-      }, " 1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1W",
+      }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "Stock-Button-1W",
         onClick: this.handleChartOneWeekData
       }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1M",
+        className: "Stock-Button-1M",
         onClick: this.handleChartOneMonthData
       }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1M",
+        className: "Stock-Button-1M",
         onClick: this.handleChartThreeMonthData
       }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1M",
+        className: "Stock-Button-1M",
         onClick: this.handleChartOneYearData
       }, "1Y"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Button-1M",
+        className: "Stock-Button-1M",
         onClick: this.handleChartFiveYearData
       }, "5Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Expand"
@@ -1527,21 +1598,32 @@ function (_React$Component) {
   _inherits(WatchList, _React$Component);
 
   function WatchList(props) {
+    var _this;
+
     _classCallCheck(this, WatchList);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(WatchList).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchList).call(this, props));
+    _this.watchList = _this.props.watchList;
+    return _this;
   }
 
   _createClass(WatchList, [{
     key: "render",
     value: function render() {
+      debugger;
+      var stockList = this.watchList.map(function (stock) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          stock: stock,
+          key: stock.id
+        }));
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Title"
       }, "Watch list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Separator"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), stockList, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-End"
       }));
     }
@@ -1603,153 +1685,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Items-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/api/stocks/3"
-      }, "Apple")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Amazon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "Watch-List-Items-Item"
-      }, "Google"));
+      }, this.props.stock.name);
     }
   }]);
 
@@ -1757,6 +1693,66 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (WatchListItems);
+
+/***/ }),
+
+/***/ "./frontend/component/home/watch_list_button/watch_list_button.jsx":
+/*!*************************************************************************!*\
+  !*** ./frontend/component/home/watch_list_button/watch_list_button.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var WatchListButton =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WatchListButton, _React$Component);
+
+  function WatchListButton(props) {
+    _classCallCheck(this, WatchListButton);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(WatchListButton).call(this, props));
+  }
+
+  _createClass(WatchListButton, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Watch-List-Button-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "Watch-List-Button"
+      }, "Add to Watch List"));
+    }
+  }]);
+
+  return WatchListButton;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WatchListButton);
 
 /***/ }),
 
@@ -1822,6 +1818,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_three_month_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./stock_three_month_reducer */ "./frontend/component/reducers/stock_three_month_reducer.jsx");
 /* harmony import */ var _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./stock_five_year_reducer */ "./frontend/component/reducers/stock_five_year_reducer.jsx");
 /* harmony import */ var _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./stock_current_price_reducer */ "./frontend/component/reducers/stock_current_price_reducer.jsx");
+/* harmony import */ var _watch_list_reducer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./watch_list_reducer */ "./frontend/component/reducers/watch_list_reducer.js");
+
 
 
 
@@ -1849,7 +1847,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   stockThreeMonthPrice: _stock_three_month_reducer__WEBPACK_IMPORTED_MODULE_10__["default"],
   stockOneYearPrice: _stock_price_reducer__WEBPACK_IMPORTED_MODULE_6__["default"],
   stockFiveYearPrice: _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
-  stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_12__["default"]
+  stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
+  watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_13__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -2227,6 +2226,36 @@ var usersReducer = function usersReducer() {
 
 /***/ }),
 
+/***/ "./frontend/component/reducers/watch_list_reducer.js":
+/*!***********************************************************!*\
+  !*** ./frontend/component/reducers/watch_list_reducer.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+
+
+var watchListReducer = function watchListReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCH_LIST"]:
+      return action.watchList;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (watchListReducer);
+
+/***/ }),
+
 /***/ "./frontend/component/root.jsx":
 /*!*************************************!*\
   !*** ./frontend/component/root.jsx ***!
@@ -2449,6 +2478,205 @@ var mDTP = function mDTP(dispatch, ownProps) {
 
 /***/ }),
 
+/***/ "./frontend/component/session/new_user_carousel.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/component/session/new_user_carousel.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var NewUserCarousel =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NewUserCarousel, _React$Component);
+
+  function NewUserCarousel(props) {
+    var _this;
+
+    _classCallCheck(this, NewUserCarousel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NewUserCarousel).call(this, props));
+    _this.state = {
+      slideIndex: 0
+    };
+    _this.showSlide = _this.showSlide.bind(_assertThisInitialized(_this));
+    _this.prevSlide = _this.prevSlide.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NewUserCarousel, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var video = document.getElementsByClassName("new-user-video-".concat(this.state.slideIndex))[0];
+      video.load();
+      video.play();
+      this.timer = setInterval(function () {
+        return _this2.nextSlide(_this2.state.slideIndex + 1);
+      }, 5000);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.timer);
+    }
+  }, {
+    key: "prevSlide",
+    value: function prevSlide(i) {
+      var x = i - 1;
+
+      if (x < 0) {
+        x = 2;
+      }
+
+      if (x > 2) {
+        x = 0;
+      }
+
+      this.showSlide(x % 3);
+    }
+  }, {
+    key: "nextSlide",
+    value: function nextSlide(i) {
+      var x = i + 1;
+
+      if (x < 0) {
+        x = 2;
+      }
+
+      if (x > 2) {
+        x = 0;
+      }
+
+      this.showSlide(x % 3);
+    }
+  }, {
+    key: "showSlide",
+    value: function showSlide(n) {
+      for (var x = 0; x < 3; x++) {
+        $(".New-User-Slide-".concat(x)).css("display", "none");
+        $(".new-user-video-".concat(x)).css("display", "none");
+      }
+
+      this.setState({
+        slideIndex: n
+      });
+      $(".New-User-Slide-".concat(this.state.slideIndex)).css("display", "block");
+      $(".new-user-video-".concat(this.state.slideIndex)).show();
+      var video = document.getElementsByClassName("new-user-video-".concat(this.state.slideIndex))[0];
+      video.load();
+      video.play();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var content = [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Slide-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        className: "new-user-video-0",
+        muted: true,
+        type: "video/mp4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+        src: "/assets/FirstExperienceLockMovie.mp4"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-1"
+      }, "Commission-free stock trading."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-2"
+      }, "We've cut the fat that makes other brokerages costly, like manual account management and hundreds of storefront locations, so we can offer zero commission trading.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Slide-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        className: "new-user-video-1",
+        muted: true,
+        type: "video/mp4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+        src: "/assets/FirstExperienceStopwatchMovie.mp4"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-1"
+      }, "Keep tabs on your money."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-2"
+      }, "WSet up customized news and notifications to stay on top of your assets as casually or as relentlessly as you like. Controlling the flow of info is up to you.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Slide-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        className: "new-user-video-2",
+        muted: true,
+        type: "video/mp4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+        src: "/assets/FirstExperienceMoneyMovie.mp4"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-1"
+      }, "Account Protection."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Video-Text-row-2"
+      }, "Robinhood Financial is a member of SIPC. Securities in your account are protected up to $500,000. For details, please see www.sipc.org."))))];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Carousel-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.prevSlide(_this3.state.slideIndex);
+        },
+        className: "New-User-Carousel-Nav-Arrow-Left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/left_arrow.svg",
+        className: "Splash-Arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "New-User-Carousel-Content"
+      }, content[this.state.slideIndex]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.nextSlide(_this3.state.slideIndex);
+        },
+        className: "New-User-Carousel-Nav-Arrow-Right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/right_arrow.svg",
+        className: "Splash-Arrow"
+      })));
+    }
+  }]);
+
+  return NewUserCarousel;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (NewUserCarousel);
+
+/***/ }),
+
 /***/ "./frontend/component/session/new_user_session.jsx":
 /*!*********************************************************!*\
   !*** ./frontend/component/session/new_user_session.jsx ***!
@@ -2460,6 +2688,7 @@ var mDTP = function mDTP(dispatch, ownProps) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _new_user_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./new_user_carousel */ "./frontend/component/session/new_user_carousel.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2479,6 +2708,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2601,26 +2831,7 @@ function (_React$Component) {
         onClick: this.handleSubmit
       }, "Continue"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-body-form-existing-user"
-      }, "Already started? Log in to complete your application.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-body-image"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-body-image-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-        autoPlay: true,
-        loop: true,
-        preload: "auto",
-        className: "login-video",
-        muted: true,
-        type: "video/mp4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: "/assets/FirstExperienceLockMovie.mp4"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-video-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-video-text-row-1"
-      }, "Commission-free stock trading."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-video-text-row-2"
-      }, "We've cut the fat that makes other brokerages costly, like manual account management and hundreds of storefront locations, so we can offer zero commission trading."))))));
+      }, "Already started? Log in to complete your application.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new_user_carousel__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
     }
   }]);
 
@@ -2670,6 +2881,273 @@ var mDTP = function mDTP(dispatch, ownProps) {
 
 /***/ }),
 
+/***/ "./frontend/component/splash/carousel.jsx/carousel.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/component/splash/carousel.jsx/carousel.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var SplashCarousel =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SplashCarousel, _React$Component);
+
+  function SplashCarousel(props) {
+    var _this;
+
+    _classCallCheck(this, SplashCarousel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SplashCarousel).call(this, props));
+    _this.state = {
+      slideIndex: 0
+    };
+    _this.showSlide = _this.showSlide.bind(_assertThisInitialized(_this));
+    _this.prevSlide = _this.prevSlide.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(SplashCarousel, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.timer = setInterval(function () {
+        return _this2.nextSlide(_this2.state.slideIndex + 1);
+      }, 5000);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.timer);
+    }
+  }, {
+    key: "prevSlide",
+    value: function prevSlide(i) {
+      var x = i - 1;
+
+      if (x < 0) {
+        x = 2;
+      }
+
+      if (x > 2) {
+        x = 0;
+      }
+
+      this.showSlide(x % 3);
+    }
+  }, {
+    key: "nextSlide",
+    value: function nextSlide(i) {
+      var x = i + 1;
+
+      if (x < 0) {
+        x = 2;
+      }
+
+      if (x > 2) {
+        x = 0;
+      }
+
+      this.showSlide(x % 3);
+    }
+  }, {
+    key: "showSlide",
+    value: function showSlide(n) {
+      for (var i = 0; i < 3; i++) {
+        $(".slide-".concat(i)).css("font-weight", "300");
+      }
+
+      $(".slide-".concat(n)).css("font-weight", "450");
+      this.setState({
+        slideIndex: n
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var content = [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Slide",
+        id: "Slide-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Image"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/splash-trailing.png",
+        className: "Splash-Carousel-Image"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Title"
+      }, "Learn As You Grow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Description"
+      }, "Our goal is to make investing in financial markets more affordable, more intuitive, and more fun, no matter how much experience you have (or don\u2019t have)."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Slide",
+        id: "Slide-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Image"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/splash-meow.png",
+        className: "Splash-Carousel-Image"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Title"
+      }, "Manage Your Portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Description"
+      }, "Keep your portfolio in your pocket. Everything you need to manage your assets is available in a single app."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Slide",
+        id: "Slide-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Image"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/splash-messages.png",
+        className: "Splash-Carousel-Image"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Title"
+      }, "Keep Tabs on Your Money"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Slide-Text-Description"
+      }, "Set up customized news and notifications to stay on top of your assets as casually or as relentlessly as you like. Controlling the flow of info is up to you.")))]; //  let result =    
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.prevSlide(_this3.state.slideIndex);
+        },
+        className: "Splash-Carousel-Nav-Arrow"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/down_arrow.svg",
+        className: "Splash-Arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.showSlide(0);
+        },
+        className: "slide-0 carosel-nav-items"
+      }, "Learn"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.showSlide(1);
+        },
+        className: "slide-1 carosel-nav-items"
+      }, "Manage"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.showSlide(2);
+        },
+        className: "slide-2 carosel-nav-items"
+      }, "Customize"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.nextSlide(_this3.state.slideIndex);
+        },
+        className: "Splash-Carousel-Nav-Arrow"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/arrow.svg",
+        className: "Splash-Arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Filler"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Splash-Carousel-Content"
+      }, content[this.state.slideIndex]));
+    }
+  }]);
+
+  return SplashCarousel;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (SplashCarousel);
+
+/***/ }),
+
+/***/ "./frontend/component/splash/fictional_shares.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/component/splash/fictional_shares.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var FictionalShares = function FictionalShares() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Title"
+  }, "Introducing Fictional Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Slogan"
+  }, "Invest in thousands of stocks with as little as $0."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Description"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Description-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Title"
+  }, "Invest Any Amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Description"
+  }, "Choose how much you want to invest, and we\u2019ll convert from dollars to parts of a whole share.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Description-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Title"
+  }, "Build a Balanced Portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Description"
+  }, "Customize your portfolio with pieces of different companies and funds to help reduce risk."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-1-Description-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Title"
+  }, "Trade in Real Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-Description-Description"
+  }, "Investing in fractional shares is real-time and, as always, commission-free.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Sign-In-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/login"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "splashNavSignUp Fictional-Sign-In "
+  }, "Sign In")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Fictional-Grid-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/assets/splash-fictional.png",
+    className: "Fictional-Image"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FictionalShares);
+
+/***/ }),
+
 /***/ "./frontend/component/splash/splash.jsx":
 /*!**********************************************!*\
   !*** ./frontend/component/splash/splash.jsx ***!
@@ -2684,6 +3162,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_login_session__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../session/login_session */ "./frontend/component/session/login_session.jsx");
 /* harmony import */ var _session_new_user_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../session/new_user_session */ "./frontend/component/session/new_user_session.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _carousel_jsx_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./carousel.jsx/carousel */ "./frontend/component/splash/carousel.jsx/carousel.jsx");
+/* harmony import */ var _fictional_shares__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fictional_shares */ "./frontend/component/splash/fictional_shares.jsx");
+/* harmony import */ var _splash_footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash_footer */ "./frontend/component/splash/splash_footer.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2707,6 +3188,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
 var Splash =
 /*#__PURE__*/
 function (_React$Component) {
@@ -2721,6 +3205,7 @@ function (_React$Component) {
   _createClass(Splash, [{
     key: "render",
     value: function render() {
+      // code to check if user is sign in and to display log in or logout
       var content = this.props.sessionId === null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "splashNavEnd"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2739,7 +3224,8 @@ function (_React$Component) {
         className: "splashNavSignUp"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/home"
-      }, "My Account"))));
+      }, "My Account")))); //end login/logout check 
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContainer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2771,25 +3257,19 @@ function (_React$Component) {
         loop: true,
         muted: true,
         preload: "auto",
-        className: "splashPhonemp4"
+        id: "splashPhonemp4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: "assets/splashPhone.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/assets/splashcontent-1.png",
-        className: "splashPhone"
+        id: "splashPhone"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContent-2-white"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContent-2-white-1"
       }, "Break Free from Commission Fees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContent-2-white-2"
-      }, "Make unlimited commission-free trades in stocks, funds, and options with Robinhood Financial. The same goes for buying and selling cryptocurrencies with Robinhood Crypto. Zero commission fees.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splashContent-3-black"
-      }, "black"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splashContent-4-white"
-      }, "Our Products"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splashContent-5-black"
-      }, "Footer")));
+      }, "Make unlimited commission-free trades in stocks, funds, and options with Robinhood Financial. The same goes for buying and selling cryptocurrencies with Robinhood Crypto. Zero commission fees.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_carousel_jsx_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fictional_shares__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
     }
   }]);
 
@@ -2831,6 +3311,51 @@ var mDTP = function mDTP(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_splash__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/component/splash/splash_footer.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/component/splash/splash_footer.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var SplashFooter = function SplashFooter() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Footer-Container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Footer-Items"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/assets/indeed-logo.svg",
+    className: "Footer-Logos"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Footer-Items"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/assets/facebook-logo.svg",
+    className: "Footer-Logos"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Footer-Items"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/assets/instagram-logo.svg",
+    className: "Footer-Logos"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Footer-Items"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/assets/twitter-logo.svg",
+    className: "Footer-Logos"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SplashFooter);
 
 /***/ }),
 
@@ -3003,7 +3528,7 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil */
+/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3017,6 +3542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfoUtil", function() { return oneYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfoUtil", function() { return fiveYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceUtil", function() { return currentPriceUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchList", function() { return fetchWatchList; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -3085,6 +3611,12 @@ var currentPriceUtil = function currentPriceUtil(symbol) {
   return $.ajax({
     method: 'GET',
     url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(symbol)
+  });
+};
+var fetchWatchList = function fetchWatchList() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/watch_lists"
   });
 };
 

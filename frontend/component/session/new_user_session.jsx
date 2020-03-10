@@ -1,4 +1,5 @@
 import React from 'react'; 
+import NewUserCarousel from './new_user_carousel';
 
 
 class NewUserSession extends React.Component {
@@ -116,7 +117,9 @@ class NewUserSession extends React.Component {
                             </div>
                         </div>
 
-                        <div className='login-body-image'>
+
+                        <NewUserCarousel />
+                        {/* <div className='login-body-image'>
                             <div className='login-body-image-container'>   
                                 <video autoPlay loop preload="auto" className='login-video' muted type='video/mp4'>
                                      <source src="/assets/FirstExperienceLockMovie.mp4"  />
@@ -130,11 +133,7 @@ class NewUserSession extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
-              
-                          
-
-                        </div>      
+                        </div>       */}
                     </div>
 
 

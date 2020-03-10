@@ -23,8 +23,8 @@ class User < ApplicationRecord
     attr_reader :password 
 
     has_many :watch_lists,
-    primary_key: :id,
-    foreign_key: :user_id
+    foreign_key: :user_id,
+    class_name: :Watchlist
 
     has_many :stocks,
     through: :watch_lists,

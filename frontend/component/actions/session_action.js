@@ -44,5 +44,3 @@ export const logout = () => (dispatch) => (
 export const clearError = () => dispatch => dispatch(receiveErrors([]))
 
 
-
-

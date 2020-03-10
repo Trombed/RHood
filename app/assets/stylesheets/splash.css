@@ -92,17 +92,20 @@
 .splashContent-Container {
     top: 7vh;    
     width: 100%;
-    position: absolute;     
+    position: absolute;    
+    display: flex;
+    flex-direction: column; 
 }
 
 
 .splashContent-1-green {
     display: flex; 
     flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     background-color: #21ce99;
-    overflow:hidden;
+    /* overflow:hidden; */
     padding: 2vw 0vw 0vw 20vw; 
+
 
 }
 
@@ -172,32 +175,48 @@
     background-position: left bottom;
     color: white;
 }
-/* 2076 x 1800 */ movie
-
+/* 2076 x 1800 */
 .splashContent-1-green-right-container {
-    /* flex-grow: 1;  */
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    margin-top: 0px;
-    flex: 0 0 auto; 
-    position: relative;
-
-}
-
-.splashPhone {
-    float: left;
-    width: 35%;
+    display: block;
+    height: inherit;
+    /* margin: 0px auto;
     position: absolute;
-    object-fit: cover;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start; */
+    
 }
 
-.splashPhonemp4 {
-    float: left;
-    width: 35%;
+
+
+#splashPhone {
+    display: flex;
+    /* justify-content: ;
+    align-items: center; */
+    width: 30%;
+    height: inherit;
+    position: absolute;
+    object-fit: contain;
+    border: 1px solid transparent;
+    overflow: hidden;
+    margin: 0 auto;
+    vertical-align: 0;
+}
+
+#splashPhonemp4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: inherit;
+    overflow: hidden;
     user-select: none;
     position: absolute; 
-    object-fit: cover;
+    object-fit: contain;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    overflow: hidden;
+    vertical-align: 0;
 }
 
 
@@ -209,7 +228,8 @@
     background-color:white;
     justify-content: center;
     align-items: center; 
-    padding: 100px 50px;
+    padding: 20vh 50px;
+   
 
 }
 
@@ -264,7 +284,4 @@
     margin: 0px;
     text-decoration: unset;
 }
-
-
-
 

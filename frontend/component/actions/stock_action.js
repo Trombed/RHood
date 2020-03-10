@@ -1,5 +1,5 @@
 import APISearchUtil from "../util/search_util";
-import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, receiveStockOneYear, fiveYearStockInfoUtil, oneYearStockInfoUtil, currentPriceUtil} from  '../util/stock_api_util'
+import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, receiveStockOneYear, fiveYearStockInfoUtil, oneYearStockInfoUtil, currentPriceUtil, fetchWatchList} from  '../util/stock_api_util'
 
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 
@@ -27,7 +27,12 @@ export const RECEIVE_STOCK_THREE_MONTH = 'RECEIVE_STOCK_THREE_MONTH'
 export const RECEIVE_STOCK_ONE_YEAR = 'RECEIVE_STOCK_ONE_YEAR'
 export const RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR'
 export const RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE'
+export const RECEIVE_WATCH_LIST = 'RECEIVE_WATCH_LIST'
 
+const receiveWatchList = (watchList) => ({
+    type: RECEIVE_WATCH_LIST,
+    watchList
+})
 
 const receiveStockProfile = (profile) => ({
     type: RECEIVE_STOCK_PROFILE,
@@ -58,6 +63,8 @@ const receiveCurrentPrice = (currentPrice) => ({
     type: RECEIVE_CURRENT_PRICE,
     currentPrice
 })
+
+
 
 export const receiveThreeMonthStock = (threeMonthPrice) => ({
     type: RECEIVE_STOCK_THREE_MONTH,
@@ -116,5 +123,10 @@ export const fetchStockFromDB = id => dispatch => (
 export const oneWeekStockInfo = prices => dispatch => (
     oneWeekStockInfoUtil(prices)
         .then( (res) => dispatch(receiveStockOneWeek(res)))
+)
+
+export const watchListInfo = watchList => dispatch => (
+    fetchWatchList(watchList)
+        .then( (res) => dispatch(receiveWatchList(res)))
 )
 

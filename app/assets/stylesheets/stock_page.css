@@ -1,5 +1,5 @@
 .Stock-Container {
-    width: 45vw;
+    width: 600px;
 
     left: 200;
     display: flex;
@@ -30,10 +30,7 @@
 
 }
 
-.Stock-Container-Company-Name {
 
-    
-}
 .Stock-Container-Company-Price {
     font-size: 36px;
     font-weight: 400;
@@ -51,9 +48,10 @@
 
 .Stock-Container-Chart-Area {
  
-    border-top: 1px dotted white;
-    object-fit: contain;
-    height: 30vh;
+    border-top: 2px dotted grey;
+    
+    max-height: 250px;
+    max-width:  600px;
 }
 
 .Stock-Container-Chart-Navigation {
@@ -108,7 +106,7 @@
     display: flex;
     flex-direction: row;
    
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -116,7 +114,42 @@
 
 
 
-.test {
-    background-color: red;
-    opacity: 0.5;
+[class^="Stock-Button"]  {
+    background-color: #1b1b1b;
+    border: none;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    outline: none;
+}
+
+[class^="Stock-Button"]  {
+    background-color: #1b1b1b;
+    border: none;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    outline: none;
+}
+
+[class^="Stock-Button"]:hover {
+    color: #f45531;
+}
+
+.Stock-Label-Date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    outline: none;
 }

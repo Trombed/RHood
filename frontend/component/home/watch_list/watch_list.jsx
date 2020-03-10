@@ -4,12 +4,19 @@ import WatchListItems from './watch_list_items'
 class WatchList extends React.Component {
     constructor(props) {
         super(props)
+        this.watchList = this.props.watchList
     }
 
 
 
     render(){
-        
+        debugger
+        let stockList = this.watchList.map( stock => (
+            <li>
+             
+                <WatchListItems stock={stock} key={stock.id} />
+            </li>
+        ))
 
         return (
             <div className='Watch-List-Container'>
@@ -18,8 +25,8 @@ class WatchList extends React.Component {
                 </div>
                 <div className="Watch-List-Separator">
                 </div>
-              
-                <WatchListItems />
+                {stockList}
+                {/* <WatchListItems /> */}
                 
                 <div className='Watch-List-End'>
                 </div>

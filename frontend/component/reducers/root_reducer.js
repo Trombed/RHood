@@ -12,6 +12,7 @@ import StockThreeMonthReducer from "./stock_three_month_reducer";
 import stockOneYearReducer from "./stock_price_reducer";
 import stockFiveYearReducer from "./stock_five_year_reducer";
 import stockCurrentPriceReducer from "./stock_current_price_reducer";
+import watchListReducer from './watch_list_reducer'
 
 
 const rootReducer = combineReducers({
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   stockThreeMonthPrice: StockThreeMonthReducer,
   stockOneYearPrice: stockOneYearReducer,
   stockFiveYearPrice: stockFiveYearReducer,
-  stockCurrentPrice: stockCurrentPriceReducer
+  stockCurrentPrice: stockCurrentPriceReducer,
+  watchList: watchListReducer
 });
 
 export default rootReducer;
