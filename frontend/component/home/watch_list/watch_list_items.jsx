@@ -12,22 +12,11 @@ class WatchListItems extends React.Component {
 
     render(){
         
-
+        
         return (
-        <div className='Watch-List-Items-Container'>
-            {this.props.stock.name}
-            {/* <ul className='Watch-List-Items-Item'>
-            <Link to='/show/12' >Apple</Link> 
-            </ul>
-
-            <ul className='Watch-List-Items-Item'>
-            <Link to='/show/365' >Amazon</Link> 
-            </ul>
-
-            <ul className='Watch-List-Items-Item'>
-            <Link to='/show/2828' >Google</Link> 
-            </ul> */}
-        </div>    
+            <li key={this.props.stock.id} className="Watch-List-Items-Item">
+            <Link to={`/show/${this.props.stock.id}`}>{this.props.stock.name}</Link>
+            </li>
         )
 
     }

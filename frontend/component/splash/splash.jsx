@@ -55,7 +55,8 @@ class Splash extends React.Component {
                 <div className="splashNavBar"> 
                 
                  <div id="splashNavLogo">
-                     <img src="/assets/robinHoodLogo.svg" />
+                     <img src="/robinHoodLogo.svg" />
+                     
                 </div> 
                       
          
@@ -90,7 +91,7 @@ class Splash extends React.Component {
                         'splashPhonemp4'>
                         <source src="assets/splashPhone.mp4"/>
                         </video>
-                        <img src="/assets/splashcontent-1.png" id="splashPhone" />
+                        <img src="/splashcontent-1.png" id="splashPhone" />
                     </div>
                     
                 </div>

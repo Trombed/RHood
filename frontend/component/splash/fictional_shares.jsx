@@ -55,7 +55,7 @@ const FictionalShares = () => {
             </div>
 
             <div className="Fictional-Grid-2">
-                <img src="/assets/splash-fictional.png" className="Fictional-Image" />
+                <img src="/splash-fictional.png" className="Fictional-Image" />
             </div>
 
         </div>

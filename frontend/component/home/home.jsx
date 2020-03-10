@@ -1,8 +1,7 @@
 import React from 'react'
-import WatchList from './watch_list/watch_list'
 import MainContent from "./main_content/main_content";
 import HomeNavBarContainer from "./home_nav_bar_container"
-import moment from 'moment';
+import WatchListContainer from './watch_list/watch_list_container';
 
 
 class Home extends React.Component {
@@ -11,17 +10,17 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.watchListInfo()
+   
     }
     render(){
-
+        
         return(
                  <div className='homepage-container-night'>
                 <HomeNavBarContainer />
                 <div className='Home-Body-Container'>
 
                 <MainContent />
-                <WatchList watchList={this.props.watchList}/>
+                <WatchListContainer />
                 </div>  
             </div>
             

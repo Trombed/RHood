@@ -26,7 +26,7 @@ class StockMain extends React.Component {
                 <div className='Home-Body-Container'>
                 <Route path='/show/:id' component={StockPageContainer}>
                 </Route>
-                <StockInfoBox />
+                {/* <StockInfoBox /> */}
                 <WatchListButton/>
                 </div>  
             </div>

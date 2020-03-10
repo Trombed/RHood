@@ -439,11 +439,9 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _watch_list_watch_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watch_list/watch_list */ "./frontend/component/home/watch_list/watch_list.jsx");
-/* harmony import */ var _main_content_main_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main_content/main_content */ "./frontend/component/home/main_content/main_content.jsx");
-/* harmony import */ var _home_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_nav_bar_container */ "./frontend/component/home/home_nav_bar_container.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _main_content_main_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main_content/main_content */ "./frontend/component/home/main_content/main_content.jsx");
+/* harmony import */ var _home_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_nav_bar_container */ "./frontend/component/home/home_nav_bar_container.js");
+/* harmony import */ var _watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./watch_list/watch_list_container */ "./frontend/component/home/watch_list/watch_list_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -467,7 +465,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Home =
 /*#__PURE__*/
 function (_React$Component) {
@@ -481,19 +478,15 @@ function (_React$Component) {
 
   _createClass(Home, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.watchListInfo();
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-container-night"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        watchList: this.props.watchList
-      })));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 
@@ -516,16 +509,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ "./frontend/component/home/home.jsx");
-/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
-
 
 
 
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.id],
-    watchList: Object.values(state.watchList)
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -533,9 +523,6 @@ var mDTP = function mDTP(dispatch) {
   return {
     logout: function logout() {
       return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_1__["logout"])());
-    },
-    watchListInfo: function watchListInfo() {
-      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_3__["watchListInfo"])());
     }
   };
 };
@@ -812,7 +799,7 @@ function (_React$Component) {
       }, "Welcome to RobinHood"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/home-splash.svg"
+        src: "/home-splash.svg"
       })));
     }
   }]);
@@ -945,7 +932,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/show/:id",
         component: _stock_page_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_info_box_stock_info_box__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
     }
   }]);
 
@@ -1042,8 +1029,7 @@ function (_React$Component) {
       chartData: _this.props.price,
       labelDate: ''
     };
-    _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this)); // this.customToolTip = this.customToolTip.bind(this);
-
+    _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this));
     _this.handleChartOneDayData = _this.handleChartOneDayData.bind(_assertThisInitialized(_this));
     _this.handleChartOneWeekData = _this.handleChartOneWeekData.bind(_assertThisInitialized(_this));
     _this.handleChartOneMonthData = _this.handleChartOneMonthData.bind(_assertThisInitialized(_this));
@@ -1065,18 +1051,25 @@ function (_React$Component) {
         return _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
       }).then(function (res) {
         return _this2.props.currentPriceInfo(_this2.props.info.ticker_symbol);
-      }); // .then(res => this.props.oneWeekStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.threeMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneYearStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.fiveYearStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.setState({ chartData: this.props.price}))
-      // .then(res => this.setState({ price: this.props.currentPrice}))
+      }).then(function (res) {
+        return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.threeMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.setState({
+          chartData: _this2.props.price
+        });
+      }).then(function (res) {
+        return _this2.setState({
+          price: _this2.props.currentPrice
+        });
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -1087,32 +1080,33 @@ function (_React$Component) {
         this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
-          return $(".Stock-Button-1D").css("color", "black");
-        }); // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-        // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-        // .then(res => this.props.oneWeekStockInfo
-        // (this.props.info.ticker_symbol))
-        // .then(res => this.props.oneMonthStockInfo
-        // (this.props.info.ticker_symbol))
-        // .then(res => this.props.threeMonthStockInfo
-        // (this.props.info.ticker_symbol))
-        // .then(res => this.props.oneYearStockInfo
-        // (this.props.info.ticker_symbol))
-        // .then(res => this.props.fiveYearStockInfo
-        // (this.props.info.ticker_symbol))
-        // .then(res => this.setState({ chartData: this.props.price}))
-        // .then(res => this.setState({ price: this.props.currentPrice}))
+          return _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.currentPriceInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.oneWeekStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.oneMonthStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.threeMonthStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.oneYearStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.fiveYearStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.setState({
+            chartData: _this3.props.price
+          });
+        }).then(function (res) {
+          return _this3.setState({
+            price: _this3.props.currentPrice
+          });
+        });
       }
-    } // customToolTip(e) {
-    //   return (
-    //   <div>{e.label}</div>
-    //   )
-    // } 
-
+    }
   }, {
     key: "clickHandler",
     value: function clickHandler(e) {
-      console.log(e.activeLabel);
       this.setState({
         price: e.activePayload[0].value.toFixed(2),
         change: (e.activePayload[0].payload.open - e.activePayload[0].payload.close).toFixed(2),
@@ -1124,7 +1118,7 @@ function (_React$Component) {
     key: "handleChartOneDayData",
     value: function handleChartOneDayData() {
       this.setState({
-        chartData: this.props.price
+        chartData: this.props.price.reverse
       });
       $(".Stock-Button-1").css("border-bottom", "1 solid red");
     }
@@ -1406,19 +1400,19 @@ function (_React$Component) {
         "volume": 13793879
       }];
       var data = data2.reverse();
-      this.id = Number(this.props.match.params.id); // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
-
+      this.id = Number(this.props.match.params.id);
+      var dataColor = data[data.length - 1].close - data[0].close >= 0 ? "#21ce99" : "#f45531";
       var renderLineChart = //this.state.chartData
       react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 600,
         height: 250,
-        data: data,
+        data: this.state.chartData,
         onMouseLeave: this.handleResetPrice,
         onMouseMove: this.clickHandler
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "monotone",
         dataKey: "open",
-        stroke: "red",
+        stroke: dataColor,
         strokeWidth: 2,
         dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
@@ -1598,34 +1592,62 @@ function (_React$Component) {
   _inherits(WatchList, _React$Component);
 
   function WatchList(props) {
-    var _this;
-
     _classCallCheck(this, WatchList);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchList).call(this, props));
-    _this.watchList = _this.props.watchList;
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(WatchList).call(this, props));
   }
 
   _createClass(WatchList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.watchListInfo();
+    }
+  }, {
+    key: "handleCollapse",
+    value: function handleCollapse() {
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      debugger;
-      var stockList = this.watchList.map(function (stock) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          stock: stock,
-          key: stock.id
-        }));
+      var stockList = this.props.watchList.map(function (stock) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          stock: stock
+        });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.handleCollapse,
         className: "Watch-List-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "collapsible"
+      }, "Open Collapsible"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, "text"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Title"
       }, "Watch list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Separator"
-      }), stockList, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Watch-List-Items-Container"
+      }, stockList), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-End"
-      }));
+      })));
     }
   }]);
 
@@ -1633,6 +1655,40 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (WatchList);
+
+/***/ }),
+
+/***/ "./frontend/component/home/watch_list/watch_list_container.jsx":
+/*!*********************************************************************!*\
+  !*** ./frontend/component/home/watch_list/watch_list_container.jsx ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+/* harmony import */ var _watch_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./watch_list */ "./frontend/component/home/watch_list/watch_list.jsx");
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  return {
+    watchList: Object.values(state.watchList)
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    watchListInfo: function watchListInfo() {
+      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["watchListInfo"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_watch_list__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -1683,9 +1739,12 @@ function (_React$Component) {
   _createClass(WatchListItems, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Watch-List-Items-Container"
-      }, this.props.stock.name);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: this.props.stock.id,
+        className: "Watch-List-Items-Item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/show/".concat(this.props.stock.id)
+      }, this.props.stock.name));
     }
   }]);
 
@@ -2606,7 +2665,7 @@ function (_React$Component) {
         muted: true,
         type: "video/mp4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: "/assets/FirstExperienceLockMovie.mp4"
+        src: "/FirstExperienceLockMovie.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "New-User-Video-Text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2622,7 +2681,7 @@ function (_React$Component) {
         muted: true,
         type: "video/mp4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: "/assets/FirstExperienceStopwatchMovie.mp4"
+        src: "/FirstExperienceStopwatchMovie.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "New-User-Video-Text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2638,7 +2697,7 @@ function (_React$Component) {
         muted: true,
         type: "video/mp4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: "/assets/FirstExperienceMoneyMovie.mp4"
+        src: "/FirstExperienceMoneyMovie.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "New-User-Video-Text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2654,7 +2713,7 @@ function (_React$Component) {
         },
         className: "New-User-Carousel-Nav-Arrow-Left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/left_arrow.svg",
+        src: "/left_arrow.svg",
         className: "Splash-Arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "New-User-Carousel-Content"
@@ -2664,7 +2723,7 @@ function (_React$Component) {
         },
         className: "New-User-Carousel-Nav-Arrow-Right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/right_arrow.svg",
+        src: "/right_arrow.svg",
         className: "Splash-Arrow"
       })));
     }
@@ -2781,7 +2840,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-top-logo"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/new_account_logo.png"
+        src: "/new_account_logo.png"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "login-top-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -2998,7 +3057,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Image"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/splash-trailing.png",
+        src: "/splash-trailing.png",
         className: "Splash-Carousel-Image"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Text"
@@ -3012,7 +3071,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Image"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/splash-meow.png",
+        src: "/splash-meow.png",
         className: "Splash-Carousel-Image"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Text"
@@ -3026,7 +3085,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Image"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/splash-messages.png",
+        src: "/splash-messages.png",
         className: "Splash-Carousel-Image"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Carousel-Slide-Text"
@@ -3046,7 +3105,7 @@ function (_React$Component) {
         },
         className: "Splash-Carousel-Nav-Arrow"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/down_arrow.svg",
+        src: "/down_arrow.svg",
         className: "Splash-Arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
@@ -3069,7 +3128,7 @@ function (_React$Component) {
         },
         className: "Splash-Carousel-Nav-Arrow"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/arrow.svg",
+        src: "/arrow.svg",
         className: "Splash-Arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Splash-Filler"
@@ -3139,7 +3198,7 @@ var FictionalShares = function FictionalShares() {
   }, "Sign In")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Fictional-Grid-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "/assets/splash-fictional.png",
+    src: "/splash-fictional.png",
     className: "Fictional-Image"
   })));
 };
@@ -3233,7 +3292,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "splashNavLogo"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/robinHoodLogo.svg"
+        src: "/robinHoodLogo.svg"
       })), content), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContent-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3261,7 +3320,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: "assets/splashPhone.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/assets/splashcontent-1.png",
+        src: "/splashcontent-1.png",
         id: "splashPhone"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashContent-2-white"
@@ -3335,22 +3394,22 @@ var SplashFooter = function SplashFooter() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Footer-Items"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "/assets/indeed-logo.svg",
+    src: "/indeed-logo.svg",
     className: "Footer-Logos"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Footer-Items"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "/assets/facebook-logo.svg",
+    src: "/facebook-logo.svg",
     className: "Footer-Logos"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Footer-Items"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "/assets/instagram-logo.svg",
+    src: "/instagram-logo.svg",
     className: "Footer-Logos"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Footer-Items"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "/assets/twitter-logo.svg",
+    src: "/twitter-logo.svg",
     className: "Footer-Logos"
   })));
 };

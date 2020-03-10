@@ -59,7 +59,7 @@ class NewUserSession extends React.Component {
 
                     <div className='login-top'>
                         <div className='login-top-logo'>
-                            <img src="/assets/new_account_logo.png"/>
+                            <img src="/new_account_logo.png"/>
                         </div>
 
                         <div>
@@ -119,21 +119,7 @@ class NewUserSession extends React.Component {
 
 
                         <NewUserCarousel />
-                        {/* <div className='login-body-image'>
-                            <div className='login-body-image-container'>   
-                                <video autoPlay loop preload="auto" className='login-video' muted type='video/mp4'>
-                                     <source src="/assets/FirstExperienceLockMovie.mp4"  />
-                                 </video>
-                                 <div className='login-video-text'>
-                                     <div className='login-video-text-row-1'>
-                                    Commission-free stock trading.
-                                    </div >
-                                    <div className='login-video-text-row-2'>
-                                    We've cut the fat that makes other brokerages costly, like manual account management and hundreds of storefront locations, so we can offer zero commission trading.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>       */}
+                   
                     </div>
 
 

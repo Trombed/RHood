@@ -58,7 +58,7 @@ class SplashCarousel extends React.Component {
     let content =   [<div className="Splash-Slide"  id="Slide-1">
                         <div className="Splash-Carousel-Slide-Image">
 
-                        <img src="/assets/splash-trailing.png" className="Splash-Carousel-Image" />
+                        <img src="/splash-trailing.png" className="Splash-Carousel-Image" />
                         </div>
 
                         <div className="Splash-Carousel-Slide-Text">
@@ -73,7 +73,7 @@ class SplashCarousel extends React.Component {
 
                 <div className="Splash-Slide" id="Slide-2">
                         <div className="Splash-Carousel-Slide-Image">
-                            <img src="/assets/splash-meow.png" className="Splash-Carousel-Image" />
+                            <img src="/splash-meow.png" className="Splash-Carousel-Image" />
 
 
                         </div>
@@ -90,7 +90,7 @@ class SplashCarousel extends React.Component {
 
                 <div className="Splash-Slide" id="Slide-3">
                     <div className="Splash-Carousel-Slide-Image">
-                    <img src="/assets/splash-messages.png" className="Splash-Carousel-Image" />
+                    <img src="/splash-messages.png" className="Splash-Carousel-Image" />
 
 
                     </div>
@@ -118,7 +118,7 @@ class SplashCarousel extends React.Component {
             <div className="Splash-Carousel-Nav">
                 <div onClick={() => this.prevSlide(this.state.slideIndex)}
                 className="Splash-Carousel-Nav-Arrow">
-                    <img src="/assets/down_arrow.svg" className="Splash-Arrow" />
+                    <img src="/down_arrow.svg" className="Splash-Arrow" />
                 </div>
                 <div onClick={() => this.showSlide(0)} className="slide-0 carosel-nav-items">
                     Learn
@@ -133,7 +133,7 @@ class SplashCarousel extends React.Component {
                 </div>
                 <div onClick={() => this.nextSlide(this.state.slideIndex)}
                 className="Splash-Carousel-Nav-Arrow">
-                    <img src="/assets/arrow.svg" className="Splash-Arrow" />
+                    <img src="/arrow.svg" className="Splash-Arrow" />
                 </div>
                 <div className="Splash-Filler">
 

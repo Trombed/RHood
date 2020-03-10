@@ -64,7 +64,7 @@ class NewUserCarousel extends React.Component {
         <div className='New-User-Slide-0'>
             <div className='New-User-Video-Container'>   
                 <video   className='new-user-video-0' muted type='video/mp4'>
-                    <source src="/assets/FirstExperienceLockMovie.mp4"  />
+                    <source src="/FirstExperienceLockMovie.mp4"  />
                 </video>
             <div className='New-User-Video-Text'>
                 <div className='New-User-Video-Text-row-1'>
@@ -80,7 +80,7 @@ class NewUserCarousel extends React.Component {
         <div className='New-User-Slide-1'>
         <div className='New-User-Video-Container'>   
             <video   className='new-user-video-1' muted type='video/mp4'>
-                <source src="/assets/FirstExperienceStopwatchMovie.mp4"  />
+                <source src="/FirstExperienceStopwatchMovie.mp4"  />
             </video>
         <div className='New-User-Video-Text'>
             <div className='New-User-Video-Text-row-1'>
@@ -97,7 +97,7 @@ class NewUserCarousel extends React.Component {
         <div className='New-User-Slide-2'>
         <div className='New-User-Video-Container'>   
             <video  className='new-user-video-2' muted type='video/mp4'>
-                <source src="/assets/FirstExperienceMoneyMovie.mp4"  />
+                <source src="/FirstExperienceMoneyMovie.mp4"  />
             </video>
         <div className='New-User-Video-Text'>
             <div className='New-User-Video-Text-row-1'>
@@ -122,7 +122,7 @@ class NewUserCarousel extends React.Component {
             
                 <div onClick={() => this.prevSlide(this.state.slideIndex)}
                 className="New-User-Carousel-Nav-Arrow-Left">
-                    <img src="/assets/left_arrow.svg" className="Splash-Arrow" />
+                    <img src="/left_arrow.svg" className="Splash-Arrow" />
                 </div>
                 
                 
@@ -133,7 +133,7 @@ class NewUserCarousel extends React.Component {
                 
                 <div onClick={() => this.nextSlide(this.state.slideIndex)}
                 className="New-User-Carousel-Nav-Arrow-Right">
-                    <img src="/assets/right_arrow.svg" className="Splash-Arrow" />
+                    <img src="/right_arrow.svg" className="Splash-Arrow" />
                 </div>
                 
             
