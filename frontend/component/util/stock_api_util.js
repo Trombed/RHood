@@ -100,3 +100,18 @@ export const threeMonthStockInfoUtil = (symbol) => {
          url: `/api/watch_lists`
      })
  )
+
+ export const addToWatchList = (stock) => (
+     $.ajax({
+        method: "POST",
+        url: `/api/watch_lists`,
+        data: { stock }
+     })
+ )
+
+ export const deleteFromWatchList = (watchListId) => (
+    $.ajax({
+       method: "DELETE",
+       url: `api/watch_lists/${watchListId}`,
+    })
+)

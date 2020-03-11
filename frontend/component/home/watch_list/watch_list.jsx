@@ -31,7 +31,6 @@ class WatchList extends React.Component {
 
         let stockList = this.props.watchList.map( stock => (
                 <WatchListItems stock={stock} />
-           
         ))
 
         return (

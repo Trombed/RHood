@@ -7,7 +7,8 @@ const StockOneWeekPriceReducer = (state = {}, action) => {
  
     switch (action.type) {
     case RECEIVE_STOCK_ONE_WEEK:
-        return action.oneWeekPrice
+        const reverseArr = action.oneWeekPrice.reverse()
+        return reverseArr
     default:
       return state 
   }

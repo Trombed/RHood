@@ -6,7 +6,7 @@ const StockThreeMonthReducer = (state = {}, action) => {
     Object.freeze(state) 
  
     switch (action.type) {
-    case RECEIVE_STOCK_THREE_MONTH:
+    case RECEIVE_STOCK_ONE_YEAR:
         return action.oneYearPrice.historical
     default:
       return state 

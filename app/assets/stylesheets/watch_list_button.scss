@@ -1,21 +1,29 @@
 .Watch-List-Button-Container {
+    top: -100;
+    left: 0;
     display: flex;
     flex-direction: column;
-}
-
-.Watch-List-Button {
-    background-color: #1f1f1f;
-    color: #21ce99;
     font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
     line-height: 18px;
     letter-spacing: 0.25px;
-
+    
     text-decoration: unset;
-    border: 2px solid #21ce99;
+    color: white;
     height: 10vh;
     width: 15vw;
     border-radius: 8px;
+}
+
+.Watch-List-Add-Button {
+    border: 2px solid #21ce99;
+    background-color: #21ce99;
+}
+
+.Watch-List-Delete-Button {
+    background-color: #a38c8c;
+    border: 2px solid #a38c8c;
+
 }

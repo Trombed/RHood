@@ -5,19 +5,22 @@ import HomeNavBarContainer from "../home_nav_bar_container"
 import StockPageContainer from './stock_page_container';
 import { Route } from 'react-router-dom'
 import StockInfoBox from './stock_info_box/stock_info_box';
-import WatchListButton from '../watch_list_button/watch_list_button';
+import WatchListButtonContainer from '../watch_list_button/watch_list_button_container';
+import WatchListContainer from '../watch_list/watch_list_container';
+
 
 
 
 class StockMain extends React.Component {
     constructor(props) {
         super(props)
-    
+     
     }
 
 
     render(){
-        
+        console.log(this.props)
+        this.stockId = this.props.match.params.id
         return(
             <div className='homepage-container-night'>
 
@@ -27,7 +30,8 @@ class StockMain extends React.Component {
                 <Route path='/show/:id' component={StockPageContainer}>
                 </Route>
                 
-                <WatchListButton/>
+                <WatchListButtonContainer stockId={this.stockId} />
+                <WatchListContainer />
                 </div>  
             </div>
             
