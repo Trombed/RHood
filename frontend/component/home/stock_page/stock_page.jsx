@@ -21,6 +21,7 @@ class StockPage extends React.Component {
         this.handleChartOneYearData = this.handleChartOneYearData.bind(this)
         this.handleChartFiveYearData = this.handleChartFiveYearData.bind(this)
         this.handleResetPrice = this.handleResetPrice.bind(this)
+        this.customToolTip = this.customToolTip.bind(this)
        
     }
 
@@ -28,21 +29,21 @@ class StockPage extends React.Component {
      
         this.props.fetchStockFromDB(this.id)
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
-          .then( res => this.props.watchListInfo())
-          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-          .then(res => this.setState({ price: this.props.currentPrice}))
-          .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          .then(res => this.setState({ chartData: this.props.price}))
-          .then(res => this.props.oneWeekStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.oneMonthStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.threeMonthStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.oneYearStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.fiveYearStockInfo
-          (this.props.info.ticker_symbol))      
+          // .then( res => this.props.watchListInfo())
+          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          // .then(res => this.setState({ price: this.props.currentPrice}))
+          // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
+          // .then(res => this.setState({ chartData: this.props.price}))
+          // .then(res => this.props.oneWeekStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.threeMonthStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.oneYearStockInfo
+          // (this.props.info.ticker_symbol))
+          // .then(res => this.props.fiveYearStockInfo
+          // (this.props.info.ticker_symbol))      
     }
 
 
@@ -52,7 +53,7 @@ class StockPage extends React.Component {
         this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo
           (this.props.info.ticker_symbol))
-          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
 
       }
     }
@@ -116,6 +117,12 @@ class StockPage extends React.Component {
         price: this.props.currentPrice
       })
     }
+    customToolTip(e) {
+    
+      return (
+        <div>{e.label}</div>
+      )
+    }
 
 
 
@@ -142,16 +149,16 @@ class StockPage extends React.Component {
           // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
       
           const renderLineChart = ( 
-            <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
+            <LineChart width={600} height={250} data={data}  onMouseLeave={this.handleResetPrice}
             //this.state.chartData
              onMouseMove={this.clickHandler}>
               <Line type="monotone" dataKey="open" stroke={'red'} strokeWidth={2} dot={false} />
               <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
               <Tooltip  
               position={{ y: 0 }} 
-              offset={0}
+              offset={-50}
               isAnimationActive={false}
-              
+              content={this.customToolTip}
               />
               <XAxis dataKey='date' hide={true} />
 

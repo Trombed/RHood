@@ -1119,6 +1119,7 @@ function (_React$Component) {
     _this.handleChartOneYearData = _this.handleChartOneYearData.bind(_assertThisInitialized(_this));
     _this.handleChartFiveYearData = _this.handleChartFiveYearData.bind(_assertThisInitialized(_this));
     _this.handleResetPrice = _this.handleResetPrice.bind(_assertThisInitialized(_this));
+    _this.customToolTip = _this.customToolTip.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1129,31 +1130,21 @@ function (_React$Component) {
 
       this.props.fetchStockFromDB(this.id).then(function (res) {
         return _this2.props.companyInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.watchListInfo();
-      }).then(function (res) {
-        return _this2.props.currentPriceInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.setState({
-          price: _this2.props.currentPrice
-        });
-      }).then(function (res) {
-        return _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.setState({
-          chartData: _this2.props.price
-        });
-      }).then(function (res) {
-        return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.oneMonthStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.threeMonthStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
-      });
+      }); // .then( res => this.props.watchListInfo())
+      // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+      // .then(res => this.setState({ price: this.props.currentPrice}))
+      // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
+      // .then(res => this.setState({ chartData: this.props.price}))
+      // .then(res => this.props.oneWeekStockInfo
+      // (this.props.info.ticker_symbol))
+      // .then(res => this.props.oneMonthStockInfo
+      // (this.props.info.ticker_symbol))
+      // .then(res => this.props.threeMonthStockInfo
+      // (this.props.info.ticker_symbol))
+      // .then(res => this.props.oneYearStockInfo
+      // (this.props.info.ticker_symbol))
+      // .then(res => this.props.fiveYearStockInfo
+      // (this.props.info.ticker_symbol))      
     }
   }, {
     key: "componentDidUpdate",
@@ -1163,9 +1154,7 @@ function (_React$Component) {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
-        }).then(function (res) {
-          return _this3.props.currentPriceInfo(_this3.props.info.ticker_symbol);
-        });
+        }); // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
       }
     }
   }, {
@@ -1228,6 +1217,11 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "customToolTip",
+    value: function customToolTip(e) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, e.label);
+    }
+  }, {
     key: "render",
     value: function render() {
       var data = [{
@@ -1250,7 +1244,7 @@ function (_React$Component) {
       var renderLineChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 600,
         height: 250,
-        data: this.state.chartData,
+        data: data,
         onMouseLeave: this.handleResetPrice //this.state.chartData
         ,
         onMouseMove: this.clickHandler
@@ -1269,8 +1263,9 @@ function (_React$Component) {
         position: {
           y: 0
         },
-        offset: 0,
-        isAnimationActive: false
+        offset: -50,
+        isAnimationActive: false,
+        content: this.customToolTip
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
         dataKey: "date",
         hide: true
