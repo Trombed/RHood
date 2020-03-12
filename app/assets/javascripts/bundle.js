@@ -1130,21 +1130,31 @@ function (_React$Component) {
 
       this.props.fetchStockFromDB(this.id).then(function (res) {
         return _this2.props.companyInfo(_this2.props.info.ticker_symbol);
-      }); // .then( res => this.props.watchListInfo())
-      // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-      // .then(res => this.setState({ price: this.props.currentPrice}))
-      // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-      // .then(res => this.setState({ chartData: this.props.price}))
-      // .then(res => this.props.oneWeekStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.threeMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneYearStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.fiveYearStockInfo
-      // (this.props.info.ticker_symbol))      
+      }).then(function (res) {
+        return _this2.props.watchListInfo();
+      }).then(function (res) {
+        return _this2.props.currentPriceInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.setState({
+          price: _this2.props.currentPrice
+        });
+      }).then(function (res) {
+        return _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.setState({
+          chartData: _this2.props.price
+        });
+      }).then(function (res) {
+        return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.threeMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -1244,7 +1254,7 @@ function (_React$Component) {
       var renderLineChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 600,
         height: 250,
-        data: data,
+        data: this.state.chartData,
         onMouseLeave: this.handleResetPrice //this.state.chartData
         ,
         onMouseMove: this.clickHandler
