@@ -31,18 +31,18 @@ class StockPage extends React.Component {
           .then( res => this.props.watchListInfo())
           .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
-          // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.setState({ chartData: this.props.price}))
-          // .then(res => this.props.oneWeekStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.oneMonthStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.threeMonthStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.oneYearStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.fiveYearStockInfo
-          // (this.props.info.ticker_symbol))      
+          .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
+          .then(res => this.setState({ chartData: this.props.price}))
+          .then(res => this.props.oneWeekStockInfo
+          (this.props.info.ticker_symbol))
+          .then(res => this.props.oneMonthStockInfo
+          (this.props.info.ticker_symbol))
+          .then(res => this.props.threeMonthStockInfo
+          (this.props.info.ticker_symbol))
+          .then(res => this.props.oneYearStockInfo
+          (this.props.info.ticker_symbol))
+          .then(res => this.props.fiveYearStockInfo
+          (this.props.info.ticker_symbol))      
     }
 
 
@@ -113,7 +113,7 @@ class StockPage extends React.Component {
    
     handleResetPrice() {
       this.setState({
-        price: 0//this.props.currentPrice
+        price: this.props.currentPrice
       })
     }
 
@@ -142,17 +142,17 @@ class StockPage extends React.Component {
           // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
       
           const renderLineChart = ( 
-            <LineChart width={600} height={250} data={data}  onMouseLeave={this.handleResetPrice}
+            <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
             //this.state.chartData
              onMouseMove={this.clickHandler}>
               <Line type="monotone" dataKey="open" stroke={'red'} strokeWidth={2} dot={false} />
               <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
-              {/* <Tooltip  
-              // position={{ y: 0 }} 
-              // offset={0}
+              <Tooltip  
+              position={{ y: 0 }} 
+              offset={0}
               isAnimationActive={false}
               
-              /> */}
+              />
               <XAxis dataKey='date' hide={true} />
 
             </LineChart>
@@ -176,7 +176,7 @@ class StockPage extends React.Component {
                         
                         </div>
                         <div className='Stock-Container-Company-Changes'>
-                        {/* {this.state.change} ({this.state.percentageChange}%) */}
+                        {this.state.change} ({this.state.percentageChange}%)
                         Today
                         </div>
                     </div>

@@ -20,7 +20,7 @@ class WatchList extends React.Component {
     }
 
     handleCollapse() {
-        debugger
+
         var collapse = document.getElementsByClassName("collapse");
 
         for (let i = 0; i < collapse.length; i++) {

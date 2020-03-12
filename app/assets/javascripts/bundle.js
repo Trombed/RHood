@@ -1137,18 +1137,23 @@ function (_React$Component) {
         return _this2.setState({
           price: _this2.props.currentPrice
         });
-      }); // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-      // .then(res => this.setState({ chartData: this.props.price}))
-      // .then(res => this.props.oneWeekStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.threeMonthStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.oneYearStockInfo
-      // (this.props.info.ticker_symbol))
-      // .then(res => this.props.fiveYearStockInfo
-      // (this.props.info.ticker_symbol))      
+      }).then(function (res) {
+        return _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.setState({
+          chartData: _this2.props.price
+        });
+      }).then(function (res) {
+        return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.threeMonthStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -1219,8 +1224,7 @@ function (_React$Component) {
     key: "handleResetPrice",
     value: function handleResetPrice() {
       this.setState({
-        price: 0 //this.props.currentPrice
-
+        price: this.props.currentPrice
       });
     }
   }, {
@@ -1246,7 +1250,7 @@ function (_React$Component) {
       var renderLineChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 600,
         height: 250,
-        data: data,
+        data: this.state.chartData,
         onMouseLeave: this.handleResetPrice //this.state.chartData
         ,
         onMouseMove: this.clickHandler
@@ -1261,6 +1265,12 @@ function (_React$Component) {
         domain: ['dataMin', 'dataMax'],
         axisLine: false,
         hide: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+        position: {
+          y: 0
+        },
+        offset: 0,
+        isAnimationActive: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
         dataKey: "date",
         hide: true
@@ -1277,7 +1287,7 @@ function (_React$Component) {
         className: "Stock-Container-Company-Price"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "$", this.state.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
-      }, "Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.change, " (", this.state.percentageChange, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"
       }, this.state.labelDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
@@ -1456,8 +1466,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
-      console.log(this.state.sharesToBuy);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1595,7 +1603,6 @@ function (_React$Component) {
   }, {
     key: "handleCollapse",
     value: function handleCollapse() {
-      debugger;
       var collapse = document.getElementsByClassName("collapse");
 
       for (var i = 0; i < collapse.length; i++) {

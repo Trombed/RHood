@@ -26,9 +26,7 @@ class TransactionBox extends React.Component {
         )
     }
     render() {
-    
-         console.log(this.props)
-        console.log(this.state.sharesToBuy)
+
         return (
             <div className="Transaction-Box-Container">          
                    <div className='Transaction-Box-Header'> 
