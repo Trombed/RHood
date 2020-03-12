@@ -173,7 +173,7 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_SEARCH, stock_search, RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_ONE_MONTH, RECEIVE_STOCK_THREE_MONTH, RECEIVE_STOCK_ONE_YEAR, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, receiveThreeMonthStock, receiveOneYearStock, receiveFiveYearStock, currentPriceInfo, threeMonthStockInfo, oneYearStockInfo, fiveYearStockInfo, oneMonthStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo */
+/*! exports provided: RECEIVE_SEARCH, stock_search, RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, receiveFiveYearStock, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -184,19 +184,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_PRICES", function() { return RECEIVE_STOCK_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFO", function() { return RECEIVE_STOCK_INFO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_WEEK", function() { return RECEIVE_STOCK_ONE_WEEK; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_MONTH", function() { return RECEIVE_STOCK_ONE_MONTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_THREE_MONTH", function() { return RECEIVE_STOCK_THREE_MONTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_YEAR", function() { return RECEIVE_STOCK_ONE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_FIVE_YEAR", function() { return RECEIVE_STOCK_FIVE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PRICE", function() { return RECEIVE_CURRENT_PRICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveThreeMonthStock", function() { return receiveThreeMonthStock; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveOneYearStock", function() { return receiveOneYearStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFiveYearStock", function() { return receiveFiveYearStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceInfo", function() { return currentPriceInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threeMonthStockInfo", function() { return threeMonthStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfo", function() { return oneYearStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfo", function() { return fiveYearStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneMonthStockInfo", function() { return oneMonthStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfo", function() { return companyInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfo", function() { return oneDayStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockFromDB", function() { return fetchStockFromDB; });
@@ -226,9 +218,6 @@ var RECEIVE_STOCK_PROFILE = 'RECEIVE_STOCK_PROFILE';
 var RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES';
 var RECEIVE_STOCK_INFO = 'RECEIVE_STOCK_INFO';
 var RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK';
-var RECEIVE_STOCK_ONE_MONTH = 'RECEIVE_STOCK_ONE_MONTH';
-var RECEIVE_STOCK_THREE_MONTH = 'RECEIVE_STOCK_THREE_MONTH';
-var RECEIVE_STOCK_ONE_YEAR = 'RECEIVE_STOCK_ONE_YEAR';
 var RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR';
 var RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE';
 
@@ -260,13 +249,6 @@ var receiveStockOneWeek = function receiveStockOneWeek(oneWeekPrice) {
   };
 };
 
-var receiveStockOneMonth = function receiveStockOneMonth(oneMonthPrice) {
-  return {
-    type: RECEIVE_STOCK_ONE_MONTH,
-    oneMonthPrice: oneMonthPrice
-  };
-};
-
 var receiveCurrentPrice = function receiveCurrentPrice(currentPrice) {
   return {
     type: RECEIVE_CURRENT_PRICE,
@@ -274,18 +256,6 @@ var receiveCurrentPrice = function receiveCurrentPrice(currentPrice) {
   };
 };
 
-var receiveThreeMonthStock = function receiveThreeMonthStock(threeMonthPrice) {
-  return {
-    type: RECEIVE_STOCK_THREE_MONTH,
-    threeMonthPrice: threeMonthPrice
-  };
-};
-var receiveOneYearStock = function receiveOneYearStock(oneYearPrice) {
-  return {
-    type: RECEIVE_STOCK_ONE_YEAR,
-    oneYearPrice: oneYearPrice
-  };
-};
 var receiveFiveYearStock = function receiveFiveYearStock(fiveYearPrice) {
   return {
     type: RECEIVE_STOCK_FIVE_YEAR,
@@ -299,31 +269,10 @@ var currentPriceInfo = function currentPriceInfo(price) {
     });
   };
 };
-var threeMonthStockInfo = function threeMonthStockInfo(prices) {
-  return function (dispatch) {
-    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["threeMonthStockInfoUtil"])(prices).then(function (res) {
-      return dispatch(receiveThreeMonthStock(res));
-    });
-  };
-};
-var oneYearStockInfo = function oneYearStockInfo(prices) {
-  return function (dispatch) {
-    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["oneYearStockInfoUtil"])(prices).then(function (res) {
-      return dispatch(receiveOneYearStock(res));
-    });
-  };
-};
 var fiveYearStockInfo = function fiveYearStockInfo(prices) {
   return function (dispatch) {
     return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["fiveYearStockInfoUtil"])(prices).then(function (res) {
       return dispatch(receiveFiveYearStock(res));
-    });
-  };
-};
-var oneMonthStockInfo = function oneMonthStockInfo(prices) {
-  return function (dispatch) {
-    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["oneMonthStockInfoUtil"])(prices).then(function (res) {
-      return dispatch(receiveStockOneMonth(res));
     });
   };
 };
@@ -678,7 +627,7 @@ function (_React$Component) {
 
       var results;
 
-      if (this.props.search.length > 1 && this.state.name != "") {
+      if (this.props.search.length > 0 && this.state.name != "") {
         results = this.props.search.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: result.id,
@@ -1072,6 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var _util_stock_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/stock_util */ "./frontend/component/util/stock_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1093,6 +1043,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var StockPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1109,7 +1060,7 @@ function (_React$Component) {
       change: 0,
       percentageChange: 0,
       chartData: _this.props.price,
-      labelDate: ''
+      chartType: 1
     };
     _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this));
     _this.handleChartOneDayData = _this.handleChartOneDayData.bind(_assertThisInitialized(_this));
@@ -1147,13 +1098,13 @@ function (_React$Component) {
       }).then(function (res) {
         return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
       }).then(function (res) {
-        return _this2.props.oneMonthStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.threeMonthStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
         return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.oneYearData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneYearStats"])(_this2.props.fiveYearPrice);
+      }).then(function (res) {
+        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.oneYearData);
+      }).then(function (res) {
+        return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
       });
     }
   }, {
@@ -1195,21 +1146,21 @@ function (_React$Component) {
     key: "handleChartOneMonthData",
     value: function handleChartOneMonthData() {
       this.setState({
-        chartData: this.props.oneMonthPrice
+        chartData: this.oneMonthData
       });
     }
   }, {
     key: "handleChartThreeMonthData",
     value: function handleChartThreeMonthData() {
       this.setState({
-        chartData: this.props.threeMonthPrice
+        chartData: this.threeMonthData
       });
     }
   }, {
     key: "handleChartOneYearData",
     value: function handleChartOneYearData() {
       this.setState({
-        chartData: this.props.oneYearPrice
+        chartData: this.oneYearData
       });
     }
   }, {
@@ -1260,7 +1211,7 @@ function (_React$Component) {
         onMouseMove: this.clickHandler
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "monotone",
-        dataKey: "open",
+        dataKey: "close",
         stroke: 'red',
         strokeWidth: 2,
         dot: false
@@ -1294,7 +1245,7 @@ function (_React$Component) {
         className: "Stock-Container-Company-Changes"
       }, this.state.change, " (", this.state.percentageChange, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"
-      }, this.state.labelDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Chart-Container chart-content"
@@ -1363,9 +1314,6 @@ var mSTP = function mSTP(state, ownProps) {
     price: state.stockPrice,
     info: state.stockInfo,
     oneWeekPrice: state.stockOneWeekPrice,
-    oneMonthPrice: state.stockOneMonthPrice,
-    threeMonthPrice: state.stockThreeMonthPrice,
-    oneYearPrice: state.stockOneYearPrice,
     fiveYearPrice: state.stockFiveYearPrice,
     currentPrice: state.stockCurrentPrice,
     watchList: state.watchList
@@ -1385,15 +1333,6 @@ var mDTP = function mDTP(dispatch) {
     },
     oneWeekStockInfo: function oneWeekStockInfo(prices) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["oneWeekStockInfo"])(prices));
-    },
-    oneMonthStockInfo: function oneMonthStockInfo(prices) {
-      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["oneMonthStockInfo"])(prices));
-    },
-    threeMonthStockInfo: function threeMonthStockInfo(prices) {
-      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["threeMonthStockInfo"])(prices));
-    },
-    oneYearStockInfo: function oneYearStockInfo(prices) {
-      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["oneYearStockInfo"])(prices));
     },
     fiveYearStockInfo: function fiveYearStockInfo(prices) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["fiveYearStockInfo"])(prices));
@@ -1958,16 +1897,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_price_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./stock_price_reducer */ "./frontend/component/reducers/stock_price_reducer.jsx");
 /* harmony import */ var _stock_info_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./stock_info_reducer */ "./frontend/component/reducers/stock_info_reducer.js");
 /* harmony import */ var _stock_one_week_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./stock_one_week_reducer */ "./frontend/component/reducers/stock_one_week_reducer.jsx");
-/* harmony import */ var _stock_one_month_reducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./stock_one_month_reducer */ "./frontend/component/reducers/stock_one_month_reducer.jsx");
-/* harmony import */ var _stock_three_month_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./stock_three_month_reducer */ "./frontend/component/reducers/stock_three_month_reducer.jsx");
-/* harmony import */ var _stock_one_year_reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./stock_one_year_reducer */ "./frontend/component/reducers/stock_one_year_reducer.jsx");
-/* harmony import */ var _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./stock_five_year_reducer */ "./frontend/component/reducers/stock_five_year_reducer.jsx");
-/* harmony import */ var _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./stock_current_price_reducer */ "./frontend/component/reducers/stock_current_price_reducer.jsx");
-/* harmony import */ var _watch_list_reducer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./watch_list_reducer */ "./frontend/component/reducers/watch_list_reducer.js");
-/* harmony import */ var _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./watch_list_prices_reducer */ "./frontend/component/reducers/watch_list_prices_reducer.jsx");
-
-
-
+/* harmony import */ var _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./stock_five_year_reducer */ "./frontend/component/reducers/stock_five_year_reducer.jsx");
+/* harmony import */ var _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./stock_current_price_reducer */ "./frontend/component/reducers/stock_current_price_reducer.jsx");
+/* harmony import */ var _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./watch_list_reducer */ "./frontend/component/reducers/watch_list_reducer.js");
+/* harmony import */ var _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./watch_list_prices_reducer */ "./frontend/component/reducers/watch_list_prices_reducer.jsx");
 
 
 
@@ -1990,13 +1923,10 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   stockPrice: _stock_price_reducer__WEBPACK_IMPORTED_MODULE_6__["default"],
   stockInfo: _stock_info_reducer__WEBPACK_IMPORTED_MODULE_7__["default"],
   stockOneWeekPrice: _stock_one_week_reducer__WEBPACK_IMPORTED_MODULE_8__["default"],
-  stockOneMonthPrice: _stock_one_month_reducer__WEBPACK_IMPORTED_MODULE_9__["default"],
-  stockThreeMonthPrice: _stock_three_month_reducer__WEBPACK_IMPORTED_MODULE_10__["default"],
-  stockOneYearPrice: _stock_one_year_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
-  stockFiveYearPrice: _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
-  stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_13__["default"],
-  watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_14__["default"],
-  watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_15__["default"]
+  stockFiveYearPrice: _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_9__["default"],
+  stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_10__["default"],
+  watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
+  watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -2014,11 +1944,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchReducer", function() { return searchReducer; });
 /* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
 
-var _nullResult = {
-  search: null
-};
 var searchReducer = function searchReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullResult;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -2192,36 +2119,6 @@ var stockInfoReducer = function stockInfoReducer() {
 
 /***/ }),
 
-/***/ "./frontend/component/reducers/stock_one_month_reducer.jsx":
-/*!*****************************************************************!*\
-  !*** ./frontend/component/reducers/stock_one_month_reducer.jsx ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
-
-
-var StockOneMonthPriceReducer = function StockOneMonthPriceReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_ONE_MONTH"]:
-      return action.oneMonthPrice.historical;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (StockOneMonthPriceReducer);
-
-/***/ }),
-
 /***/ "./frontend/component/reducers/stock_one_week_reducer.jsx":
 /*!****************************************************************!*\
   !*** ./frontend/component/reducers/stock_one_week_reducer.jsx ***!
@@ -2250,36 +2147,6 @@ var StockOneWeekPriceReducer = function StockOneWeekPriceReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (StockOneWeekPriceReducer);
-
-/***/ }),
-
-/***/ "./frontend/component/reducers/stock_one_year_reducer.jsx":
-/*!****************************************************************!*\
-  !*** ./frontend/component/reducers/stock_one_year_reducer.jsx ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
-
-
-var StockThreeMonthReducer = function StockThreeMonthReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_ONE_YEAR"]:
-      return action.oneYearPrice.historical;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (StockThreeMonthReducer);
 
 /***/ }),
 
@@ -2341,36 +2208,6 @@ var stockProfileReducer = function stockProfileReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (stockProfileReducer);
-
-/***/ }),
-
-/***/ "./frontend/component/reducers/stock_three_month_reducer.jsx":
-/*!*******************************************************************!*\
-  !*** ./frontend/component/reducers/stock_three_month_reducer.jsx ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
-
-
-var StockThreeMonthReducer = function StockThreeMonthReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_THREE_MONTH"]:
-      return action.threeMonthPrice.historical;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (StockThreeMonthReducer);
 
 /***/ }),
 
@@ -3733,7 +3570,7 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice */
+/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3742,9 +3579,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfoUtil", function() { return oneDayStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfoUtil", function() { return oneWeekStockInfoUtil; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneMonthStockInfoUtil", function() { return oneMonthStockInfoUtil; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threeMonthStockInfoUtil", function() { return threeMonthStockInfoUtil; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfoUtil", function() { return oneYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfoUtil", function() { return fiveYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceUtil", function() { return currentPriceUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchList", function() { return fetchWatchList; });
@@ -3777,33 +3611,6 @@ var oneWeekStockInfoUtil = function oneWeekStockInfoUtil(prices) {
   return $.ajax({
     method: "GET",
     url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat(prices)
-  });
-};
-var oneMonthStockInfoUtil = function oneMonthStockInfoUtil(symbol) {
-  var oneMonthPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  var dateNow = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  oneMonthPrior.subtract(1, 'month');
-  return $.ajax({
-    method: 'GET',
-    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat(symbol, "?from=").concat(oneMonthPrior.format("YYYY-MM-DD"), "&to=").concat(dateNow.format("YYYY-MM-DD"))
-  });
-};
-var threeMonthStockInfoUtil = function threeMonthStockInfoUtil(symbol) {
-  var threeMonthPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  var dateNow = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  threeMonthPrior.subtract(3, 'month');
-  return $.ajax({
-    method: 'GET',
-    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat(symbol, "?from=").concat(threeMonthPrior.format("YYYY-MM-DD"), "&to=").concat(dateNow.format("YYYY-MM-DD"))
-  });
-};
-var oneYearStockInfoUtil = function oneYearStockInfoUtil(symbol) {
-  var oneYearPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  var dateNow = moment__WEBPACK_IMPORTED_MODULE_0___default()();
-  oneYearPrior.subtract(1, 'year');
-  return $.ajax({
-    method: 'GET',
-    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat(symbol, "?from=").concat(oneYearPrior.format("YYYY-MM-DD"), "&to=").concat(dateNow.format("YYYY-MM-DD"))
   });
 };
 var fiveYearStockInfoUtil = function fiveYearStockInfoUtil(symbol) {
@@ -3855,18 +3662,48 @@ var watchListCurPrice = function watchListCurPrice(watchListStr) {
 /*!***********************************************!*\
   !*** ./frontend/component/util/stock_util.js ***!
   \***********************************************/
-/*! exports provided: stockSymGetter */
+/*! exports provided: stockSymGetter, oneYearStats, threeMonthStats, oneMonthStats */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stockSymGetter", function() { return stockSymGetter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStats", function() { return oneYearStats; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threeMonthStats", function() { return threeMonthStats; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneMonthStats", function() { return oneMonthStats; });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+
 var stockSymGetter = function stockSymGetter(objArr) {
   var list = [];
   objArr.forEach(function (obj) {
     return list.push(obj.ticker_symbol);
   });
   return list;
+};
+var oneYearStats = function oneYearStats(fiveYearArr) {
+  var oneYearPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  oneYearPrior.subtract(1, "year");
+  oneYearPrior = oneYearPrior.format("YYYY-MM-DD");
+  return fiveYearArr.filter(function (dates) {
+    return dates.date >= oneYearPrior;
+  });
+};
+var threeMonthStats = function threeMonthStats(oneYearData) {
+  var threeMonthsPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  threeMonthsPrior.subtract(3, "month");
+  threeMonthsPrior = threeMonthsPrior.format("YYYY-MM-DD");
+  return oneYearData.filter(function (dates) {
+    return dates.date >= threeMonthsPrior;
+  });
+};
+var oneMonthStats = function oneMonthStats(threeMonthData) {
+  var oneMonthsPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  oneMonthsPrior.subtract(1, "month");
+  oneMonthsPrior = oneMonthsPrior.format("YYYY-MM-DD");
+  return threeMonthData.filter(function (dates) {
+    return dates.date >= oneMonthsPrior;
+  });
 };
 
 /***/ }),

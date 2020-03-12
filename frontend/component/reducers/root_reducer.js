@@ -7,9 +7,6 @@ import stockProfileReducer  from "./stock_profile_reducer"
 import stockPriceReducer from "./stock_price_reducer";
 import stockInfoReducer from "./stock_info_reducer";
 import StockOneWeekPriceReducer from "./stock_one_week_reducer";
-import StockOneMonthPriceReducer from "./stock_one_month_reducer";
-import StockThreeMonthReducer from "./stock_three_month_reducer";
-import stockOneYearReducer from "./stock_one_year_reducer";
 import stockFiveYearReducer from "./stock_five_year_reducer";
 import stockCurrentPriceReducer from "./stock_current_price_reducer";
 import watchListReducer from './watch_list_reducer'
@@ -24,9 +21,6 @@ const rootReducer = combineReducers({
   stockPrice: stockPriceReducer,
   stockInfo: stockInfoReducer,
   stockOneWeekPrice: StockOneWeekPriceReducer,
-  stockOneMonthPrice: StockOneMonthPriceReducer,
-  stockThreeMonthPrice: StockThreeMonthReducer,
-  stockOneYearPrice: stockOneYearReducer,
   stockFiveYearPrice: stockFiveYearReducer,
   stockCurrentPrice: stockCurrentPriceReducer,
   watchList: watchListReducer,

@@ -1,5 +1,6 @@
 import React from 'react'
 import { LineChart, Line, Tooltip, Legend, YAxis, XAxis } from 'recharts';
+import { oneYearStats, threeMonthStats, oneMonthStats } from '../../util/stock_util';
 
 
 
@@ -11,7 +12,7 @@ class StockPage extends React.Component {
             change: 0,
             percentageChange: 0,
             chartData: this.props.price,
-            labelDate: ''
+            chartType: 1,
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.handleChartOneDayData = this.handleChartOneDayData.bind(this)
@@ -36,19 +37,18 @@ class StockPage extends React.Component {
           .then(res => this.setState({ chartData: this.props.price}))
           .then(res => this.props.oneWeekStockInfo
           (this.props.info.ticker_symbol))
-          .then(res => this.props.oneMonthStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.threeMonthStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.oneYearStockInfo
-          (this.props.info.ticker_symbol))
-          .then(res => this.props.fiveYearStockInfo
-          (this.props.info.ticker_symbol))      
+            .then(res => this.props.fiveYearStockInfo
+            (this.props.info.ticker_symbol))
+            .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+            .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
+            .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+  
+     
     }
 
 
     componentDidUpdate(prevProp, prevState) {
-     
+
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo
@@ -88,19 +88,19 @@ class StockPage extends React.Component {
 
     handleChartOneMonthData() {
       this.setState({ 
-        chartData: this.props.oneMonthPrice
+        chartData: this.oneMonthData
       })
     }
 
     handleChartThreeMonthData() {
       this.setState({ 
-        chartData: this.props.threeMonthPrice
+        chartData: this.threeMonthData
       })
     }
 
     handleChartOneYearData() {
       this.setState({ 
-        chartData: this.props.oneYearPrice
+        chartData: this.oneYearData
       })
     }
 
@@ -118,7 +118,7 @@ class StockPage extends React.Component {
       })
     }
     customToolTip(e) {
-    
+      
       return (
         <div>{e.label}</div>
       )
@@ -152,7 +152,7 @@ class StockPage extends React.Component {
             <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
             //this.state.chartData
              onMouseMove={this.clickHandler}>
-              <Line type="monotone" dataKey="open" stroke={'red'} strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="close" stroke={'red'} strokeWidth={2} dot={false} />
               <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
               <Tooltip  
               position={{ y: 0 }} 
@@ -188,7 +188,7 @@ class StockPage extends React.Component {
                         </div>
                     </div>
                     <div className="Stock-Label-Date">
-                      {this.state.labelDate}
+                    
                     </div>
                 </div>
 

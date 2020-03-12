@@ -34,42 +34,12 @@ export const oneWeekStockInfoUtil = (prices) => (
 )
 
 
-export const oneMonthStockInfoUtil = (symbol) => {
-   let oneMonthPrior = moment();
-   let dateNow = moment();
-   oneMonthPrior.subtract(1, 'month');
-   return (
-    $.ajax({
-        method: 'GET',
-        url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${oneMonthPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
-    })
-   )
-}
 
 
-export const threeMonthStockInfoUtil = (symbol) => {
-    let threeMonthPrior = moment();
-    let dateNow = moment();
-    threeMonthPrior.subtract(3, 'month');
-    return (
-     $.ajax({
-         method: 'GET',
-         url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${threeMonthPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
-     })
-    )
- }
 
- export const oneYearStockInfoUtil = (symbol) => {
-    let oneYearPrior = moment();
-    let dateNow = moment();
-    oneYearPrior.subtract(1, 'year');
-    return (
-     $.ajax({
-         method: 'GET',
-         url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${oneYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
-     })
-    )
- }
+
+
+
 
 
 

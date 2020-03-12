@@ -30,7 +30,8 @@ class HomeNavBar extends React.Component {
     
     render() {
         let results;
-        if ((this.props.search.length > 1) && (this.state.name != "")) {
+        if ((this.props.search.length > 0 ) 
+            && (this.state.name != "")) {
         results = this.props.search.map( (result) => {
             return (
             <li key={result.id} className='Search-Bar-Result-List-Items' onClick={this.handleClick} >
