@@ -7,7 +7,8 @@ import { Route } from 'react-router-dom'
 import StockInfoBox from './stock_info_box/stock_info_box';
 import WatchListButtonContainer from '../watch_list_button/watch_list_button_container';
 import WatchListContainer from '../watch_list/watch_list_container';
-
+import TransactionBox from '../transaction_box/transaction_box';
+import TransactionBoxContainer from '../transaction_box/transaction_box_container';
 
 
 
@@ -19,7 +20,8 @@ class StockMain extends React.Component {
 
 
     render(){
-        console.log(this.props)
+        const { id, funds} = this.props.currentUser
+        const price = this.props.stockCurPrice
         this.stockId = this.props.match.params.id
         return(
             <div className='homepage-container-night'>
@@ -29,9 +31,10 @@ class StockMain extends React.Component {
                 <div className='Home-Body-Container'>
                 <Route path='/show/:id' component={StockPageContainer}>
                 </Route>
-                
+                    <div className='Stock-Main-Util'> 
+                <TransactionBoxContainer />
                 <WatchListButtonContainer stockId={this.stockId} />
-                <WatchListContainer />
+                    </div>
                 </div>  
             </div>
             

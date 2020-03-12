@@ -13,7 +13,7 @@ import stockOneYearReducer from "./stock_one_year_reducer";
 import stockFiveYearReducer from "./stock_five_year_reducer";
 import stockCurrentPriceReducer from "./stock_current_price_reducer";
 import watchListReducer from './watch_list_reducer'
-
+import watchListPriceReducer from "./watch_list_prices_reducer";
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -29,7 +29,8 @@ const rootReducer = combineReducers({
   stockOneYearPrice: stockOneYearReducer,
   stockFiveYearPrice: stockFiveYearReducer,
   stockCurrentPrice: stockCurrentPriceReducer,
-  watchList: watchListReducer
+  watchList: watchListReducer,
+  watchListPrice: watchListPriceReducer
 });
 
 export default rootReducer;

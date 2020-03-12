@@ -1,9 +1,15 @@
-import { fetchWatchList, addToWatchList, deleteFromWatchList } from "../util/stock_api_util";
+import { fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice } from "../util/stock_api_util";
 
 
 export const RECEIVE_WATCH_LIST = 'RECEIVE_WATCH_LIST'
 export const RECEIVE_WATCH_ITEM = 'RECEIVE_WATCH_ITEM'
 export const REMOVE_WATCH_ITEM = 'REMOVE_WATCH_ITEM'
+export const RECEIVE_WATCH_PRICES = 'RECEIVE_WATCH_PRICES'
+
+const receiveWatchPrices = (watchList) => ({
+    type: RECEIVE_WATCH_PRICES,
+    watchList
+})
 
 const receiveWatchList = (watchList) => ({
     type: RECEIVE_WATCH_LIST,
@@ -20,6 +26,11 @@ const removeWatchItem = (stockId) => ({
     stockId
 })
 
+export const watchListCurPrices = watchList => dispatch => {
+    watchListCurPrice(watchList)
+        .then( (res) => dispatch(receiveWatchPrices(res)))
+    
+}
 
 export const watchListInfo = watchList => dispatch => (
     fetchWatchList(watchList)

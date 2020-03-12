@@ -1,24 +1,32 @@
 import React from 'react' 
 import WatchListItems from './watch_list_items'
+import WatchListItemsContainer from './watch_list_items_container'
 
 class WatchList extends React.Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            loaded: false
+        }
+
     }
 
     componentDidMount() {
         this.props.watchListInfo()
+        .then( res => this.props.watchListCurPrices(this.props.stockSymGetter(this.props.watchList)))
+        
+    
     }
 
     handleCollapse() {
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-        
-        for (i = 0; i < coll.length; i++) {
-          coll[i].addEventListener("click", function() {
+        debugger
+        var collapse = document.getElementsByClassName("collapse");
+
+        for (let i = 0; i < collapse.length; i++) {
+          collapse[i].addEventListener("click", function() {
             this.classList.toggle("active");
-            var content = this.nextElementSibling;
+            var content = this.children;
             if (content.style.display === "block") {
               content.style.display = "none";
             } else {
@@ -27,20 +35,23 @@ class WatchList extends React.Component {
           });
         }
     }
-    render(){
 
-        let stockList = this.props.watchList.map( stock => (
-                <WatchListItems stock={stock} />
-        ))
+ 
+    render(){
+        let stockList;
+
+        stockList = this.props.watchList.map( (stock, idx) => (
+            
+            <WatchListItemsContainer stock={stock}  idx={idx} otherProps={this.props} />
+            
+           )   )
 
         return (
-            <div onClick={this.handleCollapse} className='Watch-List-Container'>
-                <button type="button" className="collapsible">Open Collapsible</button>
-                <div className="content">text</div>
+            <div onClick={this.handleCollapse} className='Watch-List-Container collapse' onClick={this.handleCollapse}>
 
-                <div className="content">
+                <div className="Watch-List-Content">
                 <div className='Watch-List-Title'>
-                    Watch list
+                    Stocks
                 </div>
                 <div className="Watch-List-Separator">
                 </div>

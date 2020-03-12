@@ -7,7 +7,7 @@ class WatchListButton extends React.Component {
     }
 
     render() {
-        console.log(this.props.watchList)
+    
    
         let watchButton = (this.props.watchList[Number(this.props.stockId)] !== undefined) ?        
                             ( 

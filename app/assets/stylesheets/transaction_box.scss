@@ -1,0 +1,94 @@
+.Transaction-Box-Container {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 35vh;
+    border: 1px solid black;
+
+}
+
+.Transaction-Box-Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1vh;
+    border-bottom: 1px solid black;
+}
+
+.Transaction-Box-Header-Buy {
+    color: #21ce99;
+ 
+    cursor: pointer;
+}
+
+.Transaction-Box-Header-Sell {
+    color: #f45531;
+ 
+    cursor: pointer;
+}
+
+.Transaction-Box-Body {
+    padding: 0 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+[class^="Transaction-Box-Body-Row"] {
+    padding: 2vh 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 13px;
+
+}
+
+.Transaction-Box-Body-Row-3 {
+    border-top: 1px solid black;
+}
+
+.Transaction-Box-Button {
+    padding: 3vh 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.Transaction-Box-Button-Input {
+    display: flex;
+    color: black;
+    font-size: 11px;
+    padding: 1.5vh 3vw;
+    background-color: #21ce99;
+    color: black;
+    border-radius: 4px;
+
+}
+
+.Transaction-Number-Input {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #1b1b1d;
+    color: white;
+    border: none;
+    text-align: right;
+    width: 100px;
+
+
+
+}
+.Transaction-Box-Button-Input:hover {
+    background-color: #1ae9aa;
+}
+
+.Transaction-Box-Buying-Power {
+    padding: 2vh;
+    border-top: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    text-align: center;
+}

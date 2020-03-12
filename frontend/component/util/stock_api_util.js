@@ -115,3 +115,11 @@ export const threeMonthStockInfoUtil = (symbol) => {
        url: `api/watch_lists/${watchListId}`,
     })
 )
+
+export const watchListCurPrice = (watchListStr) => (
+    $.ajax({
+        method: "GET",
+        url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
+    })
+    
+)

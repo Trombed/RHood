@@ -7,14 +7,11 @@ const watchListReducer = (state = {}, action) => {
     let nextState = Object.assign({}, state)
     switch (action.type) {
       case RECEIVE_WATCH_LIST:
-  
         return action.watchList
       case RECEIVE_WATCH_ITEM:
-        debugger
         nextState[action.stock.id] = action.stock
         return nextState
       case REMOVE_WATCH_ITEM:
-        debugger
         delete nextState[action.stockId]
         return nextState
       default:

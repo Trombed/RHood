@@ -1,7 +1,7 @@
 import { RECEIVE_CURRENT_PRICE} from '../actions/stock_action'
 
 
-const stockCurrentPriceReducer = (state = {}, action) => {
+const stockCurrentPriceReducer = (state = 0, action) => {
 
     Object.freeze(state) 
  

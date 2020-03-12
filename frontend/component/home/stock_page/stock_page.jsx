@@ -28,9 +28,10 @@ class StockPage extends React.Component {
      
         this.props.fetchStockFromDB(this.id)
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
-          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          .then( res => this.props.watchListInfo())
+          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          .then(res => this.setState({ price: this.props.currentPrice}))
           // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.setState({ price: this.props.currentPrice}))
           // .then(res => this.setState({ chartData: this.props.price}))
           // .then(res => this.props.oneWeekStockInfo
           // (this.props.info.ticker_symbol))
@@ -51,20 +52,7 @@ class StockPage extends React.Component {
         this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo
           (this.props.info.ticker_symbol))
-          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-          // .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.setState({ price: this.props.currentPrice}))
-          // .then(res => this.setState({ chartData: this.props.price}))
-          // .then(res => this.props.oneWeekStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.oneMonthStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.threeMonthStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.oneYearStockInfo
-          // (this.props.info.ticker_symbol))
-          // .then(res => this.props.fiveYearStockInfo
-          // (this.props.info.ticker_symbol))
+          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
 
       }
     }

@@ -4,7 +4,7 @@
     flex-direction: column;
     position: fixed;
     top: 90;
-    left: 90%;
+    left: 65%;
     width: 10vw;
     box-shadow: 0px 0px 20px 2px black;
     overflow-x: scroll;
@@ -25,7 +25,9 @@
     border-top: 3px solid black;
 }
 
-
+.Watch-List-Content {
+    display: block;
+}
 
 .Watch-List-End {
     border-top: 1px solid black;

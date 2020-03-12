@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import WatchListButton from "./watch_list_button";
-import { addStockToWatchList, removeStockfromWatchList} from "../../actions/watch_list_actions"
+import { addStockToWatchList, removeStockfromWatchList, watchListInfo } from "../../actions/watch_list_actions"
 
 const mSTP = (state, ownProps) => ({
   watchList: state.watchList

@@ -5,7 +5,8 @@ import StockMain from "./stock_main";
 
 const mSTP = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
-  info: ownProps
+  info: ownProps,
+  stockCurPrice: state.stockCurrentPrice
 })
 
 const mDTP = dispatch => ({
