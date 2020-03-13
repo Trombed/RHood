@@ -1,0 +1,8 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/footer.scss */
+.Footer-Container {
+  background-color: black;
+  padding: 5vh 30vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

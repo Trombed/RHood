@@ -89,6 +89,7 @@
 }
 
 .Splash-Carousel-Image {
+    display: flex;
     height: 70vh;
     
 }
@@ -121,4 +122,21 @@
 
 .Splash-Arrow {
     fill: rgb(255, 255, 255);
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 3s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

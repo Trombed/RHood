@@ -1,0 +1,183 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* line 9, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-grid-1 {
+  background-image: url("/new_user_bg.png");
+  background-size: 100% 100%;
+}
+
+/* line 14, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-grid-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 19, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-grid-2-format {
+  padding: 25vh 0vh 25vh 5vw;
+}
+
+/* line 24, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-welcome-text {
+  font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.1px;
+  color: #171718;
+  text-decoration: unset;
+  padding-bottom: 3vh;
+}
+
+/* line 36, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-label-text {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+  font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* line 46, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-button-row {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10vh;
+}
+
+/* line 52, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-input-div {
+  padding-top: 1vh;
+}
+
+/* line 56, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-input-field {
+  width: 27vw;
+  height: 6vh;
+  padding: 5px 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  line-height: 1.5em;
+  transition: border-color 200ms;
+  box-sizing: border-box;
+  display: block;
+  flex: 1 1 auto;
+  background: #fafafa;
+  border-color: #fafafa;
+}
+
+/* line 72, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-input-field:hover {
+  background-color: #fff;
+  color: #171718;
+  border-color: black;
+}
+
+/* line 78, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-input-field:focus {
+  outline: none;
+  background-color: #e8f0fe;
+  color: #171718;
+  border-color: #21ce99;
+}
+
+/* line 85, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-sign-in-button {
+  background: #21ce99;
+  border-color: #21ce99;
+  color: #fff;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 48px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 0 48px;
+  white-space: nowrap;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  margin-right: 3vw;
+}
+
+/* line 109, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-sign-in-button:hover {
+  background: #1ae9aa;
+  border-color: #1ae9aa;
+}
+
+/* line 114, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.new-user-label-text-div {
+  padding-top: 3vh;
+}
+
+/* line 118, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.demo-user-sign-in-button {
+  background: #fff;
+  border-color: #fff;
+  color: black;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 48px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 0 48px;
+  white-space: nowrap;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* line 141, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.demo-user-sign-in-button:hover {
+  background: #fafafa;
+  border-color: #fafafa;
+}
+
+/* line 146, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.Create-Error-Text {
+  font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 12px;
+  letter-spacing: -0.1px;
+  color: #171718;
+  text-decoration: unset;
+  color: red;
+}
+
+/* line 159, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.Create-Error_Text-Box {
+  height: 2vh;
+}
+
+/* line 164, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+input:not(:placeholder-shown) {
+  color: black;
+}
+
+/* line 168, /Users/ericho/Project/RHood/app/assets/stylesheets/newuser.scss */
+.error-create-highlight {
+  border: 5px solid red;
+}

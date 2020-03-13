@@ -1,0 +1,136 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Container {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 5vh 3vw;
+  margin: 0 auto;
+}
+
+/* line 16, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-left: 9vw;
+  padding-right: 2vh;
+  margin: 0 auto;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* line 29, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Content {
+  display: flex;
+  flex-direction: row;
+}
+
+/* line 35, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Slide {
+  display: flex;
+  flex-direction: row;
+  padding-left: 2vw;
+  padding-right: 20vw;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+/* line 51, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Slide-Text {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 5vw;
+}
+
+/* line 58, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.carosel-nav-items {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  font-family: "Maison Neue", system-ui, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 36px;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  text-align: start;
+  text-transform: none;
+  vertical-align: baseline;
+  white-space: normal;
+  word-spacing: 0px;
+  overflow: visible;
+  justify-content: flex-end;
+}
+
+/* line 82, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Filler {
+  width: 10vw;
+}
+
+/* line 86, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Nav-Arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* line 91, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Image {
+  display: flex;
+  height: 70vh;
+}
+
+/* line 97, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Slide-Text-Title {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 70px;
+  letter-spacing: -0.72px;
+  color: white;
+  margin: 0px;
+  text-decoration: unset;
+}
+
+/* line 110, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Carousel-Slide-Text-Description {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 30px;
+  letter-spacing: -0.32px;
+  color: white;
+  margin: 0px;
+  text-decoration: unset;
+}
+
+/* line 123, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.Splash-Arrow {
+  fill: white;
+}
+
+/* line 127, /Users/ericho/Project/RHood/app/assets/stylesheets/carousel.scss */
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 3s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

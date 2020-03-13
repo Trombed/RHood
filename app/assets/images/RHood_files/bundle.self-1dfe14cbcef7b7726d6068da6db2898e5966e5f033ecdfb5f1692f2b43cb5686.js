@@ -1,4 +1,5 @@
-/******/ (function(modules) { // webpackBootstrap
+/******/
+ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -1248,7 +1249,7 @@ function (_React$Component) {
         data: this.state.chartData,
         onMouseLeave: this.handleResetPrice,
         onMouseMove: this.clickHandler
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+      }, console.log(this.state.chartData), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "monotone",
         dataKey: "close",
         stroke: Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? "yellow" : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? "#21ce99" : "#f45531",
@@ -2454,7 +2455,6 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDemoLogin = _this.handleDemoLogin.bind(_assertThisInitialized(_this));
     _this.renderLoginHighlight = _this.renderLoginHighlight.bind(_assertThisInitialized(_this));
-    _this.clearError = _this.props.clearError.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2490,21 +2490,15 @@ function (_React$Component) {
   }, {
     key: "renderLoginErrors",
     value: function renderLoginErrors() {
-      var content = this.props.errors.length > 0 ? this.renderLoginHighlight() : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: "error",
         className: "Login-Error-Text"
-      }, this.props.errors[0], content));
+      }, this.props.errors[0], this.renderLoginHighlight()));
     }
   }, {
     key: "renderLoginHighlight",
     value: function renderLoginHighlight() {
       $(".new-user-input-field").addClass("error-login-highlight");
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.clearError();
     }
   }, {
     key: "render",
@@ -2592,9 +2586,6 @@ var mDTP = function mDTP(dispatch, ownProps) {
     },
     demoLogin: function demoLogin() {
       return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_1__["demoLogin"])());
-    },
-    clearError: function clearError() {
-      return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
     }
   };
 };
@@ -2779,7 +2770,7 @@ function (_React$Component) {
         },
         className: "New-User-Carousel-Nav-Arrow-Left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/left_arrow.svg",
+        src: "/arrow.svg",
         className: "Splash-Arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "New-User-Carousel-Content"
@@ -2814,7 +2805,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _new_user_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./new_user_carousel */ "./frontend/component/session/new_user_carousel.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2834,7 +2824,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2958,9 +2947,7 @@ function (_React$Component) {
         onClick: this.handleSubmit
       }, "Continue"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-body-form-existing-user"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/login"
-      }, "Already started? Log in to complete your application."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new_user_carousel__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, "Already started? Log in to complete your application.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new_user_carousel__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
     }
   }]);
 

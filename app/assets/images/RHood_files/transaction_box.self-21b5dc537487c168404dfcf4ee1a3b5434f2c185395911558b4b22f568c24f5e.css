@@ -1,0 +1,100 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Container {
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  border: 1px solid black;
+  box-shadow: 0px 0px 30px 2px black;
+}
+
+/* line 11, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1vh;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+}
+
+/* line 21, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Header-Buy {
+  color: #21ce99;
+  cursor: pointer;
+}
+
+/* line 27, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Header-Sell {
+  color: #f45531;
+  cursor: pointer;
+}
+
+/* line 33, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Body {
+  padding: 0 1vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 39, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+[class^="Transaction-Box-Body-Row"] {
+  padding: 2vh 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* line 50, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Body-Row-3 {
+  border-top: 1px solid black;
+}
+
+/* line 54, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Button {
+  padding: 3vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 62, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Button-Input {
+  display: flex;
+  color: black;
+  font-size: 11px;
+  padding: 1.5vh 3vw;
+  background-color: #21ce99;
+  color: black;
+  border-radius: 4px;
+}
+
+/* line 73, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Number-Input {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #1b1b1d;
+  color: white !important;
+  border: none;
+  text-align: right;
+  width: 100px;
+  font-size: 20px;
+}
+
+/* line 83, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Button-Input:hover {
+  background-color: #1ae9aa;
+}
+
+/* line 87, /Users/ericho/Project/RHood/app/assets/stylesheets/transaction_box.scss */
+.Transaction-Box-Buying-Power {
+  padding: 2vh;
+  border-top: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+}

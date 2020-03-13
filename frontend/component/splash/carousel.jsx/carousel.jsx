@@ -14,7 +14,7 @@ class SplashCarousel extends React.Component {
     }
 
    componentDidMount() {
-       this.timer = setInterval( () => this.nextSlide(this.state.slideIndex +1), 5000)
+       this.timer = setInterval( () => this.nextSlide(this.state.slideIndex +1), 3000)
    }
 
    componentWillUnmount() {
@@ -39,16 +39,24 @@ class SplashCarousel extends React.Component {
     
 
     showSlide(n) {
-     
-        
+        // let x = document.getElementsByClassName("Splash-Slide")
+  
+        // for (let i = 0; i < x.length; i++) {
+        //     x[i].classList.remove('fade-in')
+        // }
             for(let i = 0; i < 3; i++) {
                 $(`.slide-${i}`).css("font-weight", "300");
-      
       
             }
             $(`.slide-${n}`).css("font-weight","450");
           
             this.setState({ slideIndex: n })
+         
+            
+
+      
+           
+         
     }
 
     render() {

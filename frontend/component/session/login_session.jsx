@@ -13,6 +13,7 @@ class LoginUser extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleDemoLogin = this.handleDemoLogin.bind(this)
         this.renderLoginHighlight = this.renderLoginHighlight.bind(this)
+        this.clearError = this.props.clearError.bind(this)
 
      
     }
@@ -39,12 +40,12 @@ class LoginUser extends React.Component {
       };
 
     renderLoginErrors() {
-        
+       let content = (this.props.errors.length > 0) ? this.renderLoginHighlight() : null
         return(
         <ul>
             <li key="error" className="Login-Error-Text">
                 {this.props.errors[0]}
-                {this.renderLoginHighlight()}
+               {content}
             </li>
         </ul>
 
@@ -53,6 +54,10 @@ class LoginUser extends React.Component {
 
     renderLoginHighlight() {
         $(".new-user-input-field").addClass("error-login-highlight")
+    }
+
+    componentWillUnmount() {
+        this.clearError()
     }
 
 

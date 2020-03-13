@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Carousel-Container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* line 6, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Carousel-Nav-Arrow-Left {
+  padding: 0 2vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* line 13, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Carousel-Nav-Arrow-Right {
+  padding: 0 2vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* line 21, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+iframe[seamless] {
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
+}
+
+/* line 30, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Video-Container {
+  height: 200px;
+  width: 200px;
+}
+
+/* line 38, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+[class^="new-user-video"] {
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  z-index: 0;
+}
+
+/* line 47, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Slide-0 {
+  display: block;
+}
+
+/* line 52, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Slide-2 {
+  display: none;
+}
+
+/* line 56, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Slide-1 {
+  display: none;
+}
+
+/* line 60, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Video-Text-row-1 {
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  text-align: center;
+  color: #040d14;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* line 68, /Users/ericho/Project/RHood/app/assets/stylesheets/new_user_carousel.scss */
+.New-User-Video-Text-row-2 {
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  padding-top: 2vh;
+  text-align: center;
+  color: #b1bfc4;
+  font-size: 18px;
+  font-weight: 400;
+}

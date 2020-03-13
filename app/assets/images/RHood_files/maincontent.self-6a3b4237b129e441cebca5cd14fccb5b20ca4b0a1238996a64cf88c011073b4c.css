@@ -1,0 +1,23 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/maincontent.scss */
+.Main-Container {
+  width: 40vw;
+  left: 200;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20vw;
+  padding-right: 5vw;
+}
+
+/* line 10, /Users/ericho/Project/RHood/app/assets/stylesheets/maincontent.scss */
+.Main-Container-Title {
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.29px;
+  line-height: 42px;
+  margin: 0;
+}
+
+/* line 19, /Users/ericho/Project/RHood/app/assets/stylesheets/maincontent.scss */
+.Main-Container-Chart-Area {
+  object-fit: contain;
+}

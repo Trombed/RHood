@@ -1,0 +1,106 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  background-color: #f5f8fa;
+}
+
+/* line 7, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-1 {
+  display: flex;
+  flex-direction: column;
+  padding: 10vh 5vw 10vh 16vw;
+}
+
+/* line 13, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-1-Title {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.72px;
+  color: #040d14;
+  margin: 0px;
+  text-decoration: unset;
+  padding-bottom: 2vh;
+}
+
+/* line 26, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-1-Slogan {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 19px;
+  letter-spacing: -0.32px;
+  color: #6f787e;
+  margin: 0px;
+  text-decoration: unset;
+  padding-bottom: 5vh;
+}
+
+/* line 39, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-1-Description {
+  display: flex;
+  flex-direction: row;
+}
+
+/* line 46, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-1-Description-Container {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+}
+
+/* line 53, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-Description-Title {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: normal;
+  color: #040d14;
+  margin: 0px;
+  text-decoration: unset;
+  padding-bottom: 2vh;
+}
+
+/* line 66, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-Description-Description {
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 30px;
+  letter-spacing: -0.32px;
+  color: #040d14;
+  margin: 0px;
+  text-decoration: unset;
+}
+
+/* line 78, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Grid-2 {
+  padding: 2vw;
+}
+
+/* line 82, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Image {
+  height: 90%;
+  width: 90%;
+}
+
+/* line 87, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Sign-In-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 93, /Users/ericho/Project/RHood/app/assets/stylesheets/fictional.scss */
+.Fictional-Sign-In {
+  display: flex;
+  justify-content: center;
+}

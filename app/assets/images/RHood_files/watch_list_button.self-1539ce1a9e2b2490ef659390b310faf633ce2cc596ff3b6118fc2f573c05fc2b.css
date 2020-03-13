@@ -1,0 +1,46 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Button-Container > div {
+  display: flex;
+  flex-direction: column;
+  font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.25px;
+  text-decoration: unset;
+  height: 4vh;
+  width: 10vw;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 19, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Button-Container {
+  padding-top: 10vh;
+}
+
+/* line 23, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Add-Button {
+  cursor: pointer;
+  border: 2px solid #21ce99;
+  color: #21ce99;
+}
+
+/* line 30, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Delete-Button {
+  cursor: pointer;
+  border: 2px solid #f45531;
+  color: #f45531;
+}
+
+/* line 36, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Add-Button:hover {
+  box-shadow: 0px 0px 5px 1px #31ce99;
+}
+
+/* line 40, /Users/ericho/Project/RHood/app/assets/stylesheets/watch_list_button.scss */
+.Watch-List-Delete-Button:hover {
+  box-shadow: 0px 0px 5px 1px #f46531;
+}

@@ -1,6 +1,6 @@
 import React from 'react'; 
 import NewUserCarousel from './new_user_carousel';
-
+import { Link } from 'react-router-dom'
 
 class NewUserSession extends React.Component {
     constructor(props) {
@@ -113,7 +113,9 @@ class NewUserSession extends React.Component {
                             </div>
                             </form>
                             <div className='login-body-form-existing-user'>
+                            <Link to='/login'>
                             Already started? Log in to complete your application.
+                            </Link>
                             </div>
                         </div>
 

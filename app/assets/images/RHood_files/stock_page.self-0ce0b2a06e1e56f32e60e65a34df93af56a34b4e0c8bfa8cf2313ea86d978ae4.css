@@ -1,0 +1,171 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container {
+  width: 600px;
+  left: 200;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20vw;
+  padding-right: 5vw;
+}
+
+/* line 12, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Title {
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.29px;
+  line-height: 42px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 2vh;
+}
+
+/* line 26, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Header {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 33, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Company-Price {
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.7px;
+  line-height: 42px;
+}
+
+/* line 40, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Company-Changes {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+}
+
+/* line 48, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Chart-Area {
+  border-top: 2px dotted grey;
+  max-height: 250px;
+  max-width: 600px;
+}
+
+/* line 56, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Chart-Navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin: 24px 0px 12px;
+}
+
+/* line 67, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Chart-Time {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+}
+
+/* line 77, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Chart-Expand {
+  display: block;
+}
+
+/* line 81, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-About {
+  padding-top: 4vh;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  line-height: 30px;
+  border-bottom: 1px solid black;
+  padding-bottom: 2vh;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* line 92, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Description {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 22px;
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* line 106, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Container-Company-Info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* line 118, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+[class^="Stock-Button"] {
+  background-color: #1b1b1b;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  outline: none;
+}
+
+/* line 130, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+[class^="Stock-Button"] {
+  background-color: #1b1b1b;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0px 12px;
+  padding: 0px 0px 12px;
+  outline: none;
+}
+
+/* line 144, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+[class^="Stock-Button"]:hover {
+  color: #21ce99;
+}
+
+/* line 148, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Label-Date {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+  font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  outline: none;
+}
+
+/* line 160, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Main-Util {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* line 166, /Users/ericho/Project/RHood/app/assets/stylesheets/stock_page.scss */
+.Stock-Chart-Active {
+  color: #f45531;
+  border-bottom: 1px solid #f45531;
+  margin-bottom: -1px;
+}

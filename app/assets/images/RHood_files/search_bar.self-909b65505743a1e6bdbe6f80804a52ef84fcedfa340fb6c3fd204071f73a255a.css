@@ -1,0 +1,64 @@
+/* line 1, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Container {
+  overflow: visible;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 9, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List {
+  display: none;
+  background-color: #171718;
+  position: absolute;
+  list-style: none;
+  font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  border: 0px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: white;
+  text-decoration: unset;
+  box-shadow: 0px 1vh 20px 2px black;
+  transition-timing-function: 0.2 ease-in;
+  width: 23vw;
+}
+
+/* line 28, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List:hover {
+  display: block;
+}
+
+/* line 32, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List-Items {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  padding-top: 1vh;
+  padding-bottom: 1vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* line 43, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List-Items:hover {
+  color: #21ce99;
+}
+
+/* line 47, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List-Items-Symnbol {
+  width: 5vw;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2vw;
+  padding-right: 4vw;
+}
+
+/* line 55, /Users/ericho/Project/RHood/app/assets/stylesheets/search_bar.scss */
+.Search-Bar-Result-List-Items-Name {
+  display: inline-block;
+  justify-content: flex-start;
+  padding-left: 2vw;
+}

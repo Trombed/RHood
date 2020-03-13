@@ -172,7 +172,7 @@ class StockPage extends React.Component {
             <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
 
              onMouseMove={this.clickHandler}>
-               {console.log(this.state.chartData)}
+               
               <Line type="monotone" dataKey="close" stroke={
                  ( (Object.values(this.state.chartData).length === 0 ) || (this.state.chartData.length === 0) || (this.state.chartData[0].close === undefined )) ? "yellow" :
                    (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531"

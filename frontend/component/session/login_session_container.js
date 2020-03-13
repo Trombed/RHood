@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { login, demoLogin } from "../actions/session_action";
+import { login, demoLogin, clearError } from "../actions/session_action";
 import LoginUser from './login_session'
 
 const mSTP = (state, ownProps) => ({
@@ -10,7 +10,8 @@ const mSTP = (state, ownProps) => ({
 
 const mDTP = (dispatch, ownProps) => ({
   processForm: (user) => dispatch(login(user)),
-  demoLogin: () => dispatch(demoLogin())
+  demoLogin: () => dispatch(demoLogin()),
+  clearError: () => dispatch(clearError())
 })
 
 export default connect(
