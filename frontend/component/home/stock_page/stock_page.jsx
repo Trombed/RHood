@@ -69,11 +69,12 @@ class StockPage extends React.Component {
     }
 
     clickHandler(e) {  
+      if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
       this.setState({ 
         price: e.activePayload[0].value.toLocaleString('en', {style: 'currency', currency:"USD"}),
-        change: (e.activePayload[0].payload.open - e.activePayload[0].payload.close).toFixed(2),
+        change: (e.activePayload[0].value - e.activePayload[0].payload.close).toFixed(2),
         percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2),
-        labelDate: e.activeLabel
+        
       })
     }
 

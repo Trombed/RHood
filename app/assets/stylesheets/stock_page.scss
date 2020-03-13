@@ -28,13 +28,16 @@
     flex-direction: column;
 
 }
-
+.Stock-Container-Company-Name {
+    padding-top: 2vh;
+    align-items: flex-end;
+}
 
 .Stock-Container-Company-Price {
     font-size: 36px;
     font-weight: 400;
     letter-spacing: -0.7px;
-    line-height: 42px;
+    line-height: 30px;
 }
 
 .Stock-Container-Company-Changes {
