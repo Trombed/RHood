@@ -29,7 +29,7 @@ class WatchListItems extends React.Component {
                 {this.props.stock.ticker_symbol} 
                 </div>
                 <div>
-                {content}
+                ${content}
                 </div>
             </li>
              </Link>

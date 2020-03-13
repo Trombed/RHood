@@ -8,7 +8,6 @@
     line-height: 18px;
     letter-spacing: 0.25px;
     text-decoration: unset;
-    color: white;
     height: 4vh;
     width: 10vw;
     border-radius: 8px;
@@ -24,13 +23,20 @@
 .Watch-List-Add-Button {
     cursor: pointer;
     border: 2px solid #21ce99;
-    background-color: #21ce99;
+    color: #21ce99;
 
 }
 
 .Watch-List-Delete-Button {
     cursor: pointer;
-    background-color: #f45531;
     border: 2px solid #f45531;
+    color: #f45531;
+}
 
+.Watch-List-Add-Button:hover {
+    box-shadow: 0px 0px 5px 1px #31ce99;
+}
+
+.Watch-List-Delete-Button:hover {
+    box-shadow: 0px 0px 5px 1px #f46531;
 }

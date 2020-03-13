@@ -86,7 +86,7 @@ class Splash extends React.Component {
 
                         <video autoPlay loop  muted preload="auto" id=
                         'splashPhonemp4'>
-                        <source src="assets/splashPhone.mp4"/>
+                        <source src="/splashPhone.mp4"/>
                         </video>
                         <img src="/splashcontent-1.png" id="splashPhone" />
                     </div>

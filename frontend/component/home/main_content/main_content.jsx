@@ -18,8 +18,9 @@ class MainContent extends React.Component {
 
                 <div className="Main-Container-Chart-Area"> 
                     <img src="/home-splash.svg" />
+                    
                 </div>
-            
+                
             </div>
         
         )

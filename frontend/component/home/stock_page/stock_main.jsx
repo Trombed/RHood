@@ -31,6 +31,8 @@ class StockMain extends React.Component {
                 <div className='Home-Body-Container'>
                 <Route path='/show/:id' component={StockPageContainer}>
                 </Route>
+            
+
                     <div className='Stock-Main-Util'> 
                 <TransactionBoxContainer />
                 <WatchListButtonContainer stockId={this.stockId} />

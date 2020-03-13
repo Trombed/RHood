@@ -5,7 +5,8 @@ import TransactionBox from "./transaction_box";
 const mSTP = (state, ownProps) => ({
 
     currentUser: state.entities.users[state.session.id],
-    sharesPrice: state.stockCurrentPrice
+    sharesPrice: state.stockCurrentPrice,
+    stockInfo: state.stockInfo
    
 })
 

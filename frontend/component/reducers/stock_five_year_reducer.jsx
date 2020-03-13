@@ -1,7 +1,7 @@
 import { RECEIVE_STOCK_FIVE_YEAR} from '../actions/stock_action'
 
 
-const stockFiveYearReducer = (state = {}, action) => {
+const stockFiveYearReducer = (state = [], action) => {
 
     Object.freeze(state) 
  

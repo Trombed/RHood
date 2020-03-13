@@ -57,8 +57,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 2vh;
+
     border-bottom: 1px solid black;
+    margin: 24px 0px 12px;
+
 
 }
 
@@ -134,11 +136,13 @@
     letter-spacing: 0.25px;
     line-height: 19px;
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0px 12px;
+    padding: 0px 0px 12px;
     outline: none;
 }
 
 [class^="Stock-Button"]:hover {
-    color: #f45531;
+    color: #21ce99;
 }
 
 .Stock-Label-Date {
@@ -157,4 +161,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.Stock-Chart-Active {
+    color: #f45531;
+    border-bottom: 1px solid #f45531;
+    margin-bottom: -1px;
 }

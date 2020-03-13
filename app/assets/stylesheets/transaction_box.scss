@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     width: 15vw;
-    height: 35vh;
+
     border: 1px solid black;
+    box-shadow: 0px 0px 30px 2px black;
 
 }
 
@@ -13,6 +14,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 1vh;
+    font-weight: 700;
     border-bottom: 1px solid black;
 }
 
@@ -72,13 +74,11 @@
     display: flex;
     justify-content: flex-end;
     background-color: #1b1b1d;
-    color: white;
+    color: white !important;
     border: none;
     text-align: right;
     width: 100px;
-
-
-
+    font-size: 20px;
 }
 .Transaction-Box-Button-Input:hover {
     background-color: #1ae9aa;

@@ -9,7 +9,6 @@ class HomeNavBar extends React.Component {
         
         super(props)
         this.state = {name: ""}
-        
         this.logout = this.props.logout.bind(this)
         this.stock_search = this.props.stock_search.bind(this)
         this.handleClick = this.handleClick.bind(this)

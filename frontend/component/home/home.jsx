@@ -18,8 +18,9 @@ class Home extends React.Component {
                  <div className='homepage-container-night'>
                 <HomeNavBarContainer />
                 <div className='Home-Body-Container'>
-
+                
                 <MainContent />
+                
                 <WatchListContainer />
                 </div>  
             </div>

@@ -1059,8 +1059,7 @@ function (_React$Component) {
       price: 0,
       change: 0,
       percentageChange: 0,
-      chartData: _this.props.price,
-      chartType: 1
+      chartData: _this.props.price
     };
     _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this));
     _this.handleChartOneDayData = _this.handleChartOneDayData.bind(_assertThisInitialized(_this));
@@ -1071,6 +1070,8 @@ function (_React$Component) {
     _this.handleChartFiveYearData = _this.handleChartFiveYearData.bind(_assertThisInitialized(_this));
     _this.handleResetPrice = _this.handleResetPrice.bind(_assertThisInitialized(_this));
     _this.customToolTip = _this.customToolTip.bind(_assertThisInitialized(_this));
+    _this.removeHighlight = _this.removeHighlight.bind(_assertThisInitialized(_this));
+    _this.dataColor = _this.dataColor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1115,59 +1116,114 @@ function (_React$Component) {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
-        }); // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+        });
       }
     }
   }, {
     key: "clickHandler",
     value: function clickHandler(e) {
       this.setState({
-        price: e.activePayload[0].value.toFixed(2),
+        price: e.activePayload[0].value.toLocaleString('en', {
+          style: 'currency',
+          currency: "USD"
+        }),
         change: (e.activePayload[0].payload.open - e.activePayload[0].payload.close).toFixed(2),
         percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2),
         labelDate: e.activeLabel
       });
     }
   }, {
+    key: "dataColor",
+    value: function dataColor() {
+      var colorValue = Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? "yellow" : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? "#21ce99" : "#f45531";
+      return colorValue;
+    }
+  }, {
+    key: "removeHighlight",
+    value: function removeHighlight() {
+      var nonActive = document.getElementsByClassName("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "",
+        "border-color": ""
+      });
+      nonActive[0].classList.remove("Stock-Chart-Active");
+    }
+  }, {
     key: "handleChartOneDayData",
     value: function handleChartOneDayData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.props.price
+      });
+      $(".Stock-Button-1D").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
     key: "handleChartOneWeekData",
     value: function handleChartOneWeekData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.props.oneWeekPrice
+      });
+      $(".Stock-Button-1W").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
     key: "handleChartOneMonthData",
     value: function handleChartOneMonthData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.oneMonthData
+      });
+      $(".Stock-Button-1M").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
     key: "handleChartThreeMonthData",
     value: function handleChartThreeMonthData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.threeMonthData
+      });
+      $(".Stock-Button-3M").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
     key: "handleChartOneYearData",
     value: function handleChartOneYearData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.oneYearData
+      });
+      $(".Stock-Button-1Y").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
     key: "handleChartFiveYearData",
     value: function handleChartFiveYearData() {
+      this.removeHighlight();
       this.setState({
         chartData: this.props.fiveYearPrice
+      });
+      $(".Stock-Button-5Y").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.dataColor()),
+        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
@@ -1185,34 +1241,17 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var data = [{
-        "date": "2020-03-10 16:00:00",
-        "open": 283.290000000000,
-        "low": 282.870000000000,
-        "high": 285.000000000000,
-        "close": 284.930000000000,
-        "volume": 65650132
-      }, {
-        "date": "2020-03-10 15:00:00",
-        "open": 274.110000000000,
-        "low": 272.420000000000,
-        "high": 279.100000000000,
-        "close": 278.350000000000,
-        "volume": 53142253
-      }];
-      this.id = Number(this.props.match.params.id); // const dataColor = ((data[data.length-1].close - data[0].close) >= 0) ? "#21ce99" : "#f45531"
-
+      this.id = Number(this.props.match.params.id);
       var renderLineChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 600,
         height: 250,
         data: this.state.chartData,
-        onMouseLeave: this.handleResetPrice //this.state.chartData
-        ,
+        onMouseLeave: this.handleResetPrice,
         onMouseMove: this.clickHandler
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+      }, console.log(this.state.chartData), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "monotone",
         dataKey: "close",
-        stroke: 'red',
+        stroke: Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? "yellow" : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? "#21ce99" : "#f45531",
         strokeWidth: 2,
         dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
@@ -1241,9 +1280,12 @@ function (_React$Component) {
         className: "Stock-Container-Company-Name"
       }, this.props.company.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Price"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "$", this.state.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.state.price.toLocaleString('en', {
+        style: 'currency',
+        currency: "USD"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
-      }, this.state.change, " (", this.state.percentageChange, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.change, " (", this.state.percentageChange, "%)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
@@ -1254,7 +1296,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Time"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1D",
+        className: "Stock-Button-1D Stock-Chart-Active",
         onClick: this.handleChartOneDayData
       }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "Stock-Button-1W",
@@ -1263,13 +1305,13 @@ function (_React$Component) {
         className: "Stock-Button-1M",
         onClick: this.handleChartOneMonthData
       }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1M",
+        className: "Stock-Button-3M",
         onClick: this.handleChartThreeMonthData
       }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1M",
+        className: "Stock-Button-1Y",
         onClick: this.handleChartOneYearData
       }, "1Y"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1M",
+        className: "Stock-Button-5Y",
         onClick: this.handleChartFiveYearData
       }, "5Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Expand"
@@ -1371,9 +1413,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1396,41 +1438,53 @@ function (_React$Component) {
       shareToBuy: 0,
       sharesBuyingPrice: 0
     };
+    _this.changeBuyShare = _this.changeBuyShare.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TransactionBox, [{
     key: "changeBuyShare",
     value: function changeBuyShare(e) {
-      this.setState({
-        sharesToBuy: e.currentTarget.value
+      var returnValue = Number(Number(e.target.value) * this.props.sharesPrice).toLocaleString('en', {
+        style: 'currency',
+        currency: "USD"
       });
-      var estimatedBuy = this.states.sharesPrice !== undefined ? this.states.sharesPrice * this.states.sharesToBuy : 0;
+      this.setState({
+        shareToBuy: e.target.value,
+        sharesBuyingPrice: returnValue
+      });
     }
   }, {
     key: "render",
     value: function render() {
+      var addDecimals = this.props.currentUser.funds;
+      var funds = Number(addDecimals).toLocaleString('en', {
+        style: 'currency',
+        currency: "USD"
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Buy"
-      }, "Buy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Buy ", this.props.stockInfo.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Sell"
-      }, "Sell")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Sell ", this.props.stockInfo.ticker_symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         placeholder: "0",
-        min: "0",
         onChange: this.changeBuyShare,
         className: "Transaction-Number-Input"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.sharesPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.sharesPrice.toLocaleString('en', {
+        style: 'currency',
+        currency: "USD"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Estimated Cost "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sharesBuyingPrice))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button"
@@ -1441,7 +1495,7 @@ function (_React$Component) {
         className: "Transaction-Box-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Buying-Power"
-      }, "$", this.props.currentUser.funds.toFixed(2), " Buying Power"));
+      }, funds, " Buying Power"));
     }
   }]);
 
@@ -1469,7 +1523,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.id],
-    sharesPrice: state.stockCurrentPrice
+    sharesPrice: state.stockCurrentPrice,
+    stockInfo: state.stockInfo
   };
 };
 
@@ -1695,7 +1750,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: this.props.stock.id,
         className: "Watch-List-Items-Item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.stock.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, content)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.stock.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "$", content)));
     }
   }]);
 
@@ -2073,7 +2128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var stockFiveYearReducer = function stockFiveYearReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -3319,7 +3374,7 @@ function (_React$Component) {
         preload: "auto",
         id: "splashPhonemp4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-        src: "assets/splashPhone.mp4"
+        src: "/splashPhone.mp4"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/splashcontent-1.png",
         id: "splashPhone"
