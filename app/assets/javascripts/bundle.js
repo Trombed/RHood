@@ -1116,6 +1116,30 @@ function (_React$Component) {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.watchListInfo();
+        }).then(function (res) {
+          return _this3.props.currentPriceInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.setState({
+            price: _this3.props.currentPrice
+          });
+        }).then(function (res) {
+          return _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.setState({
+            chartData: _this3.props.price
+          });
+        }).then(function (res) {
+          return _this3.props.oneWeekStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.props.fiveYearStockInfo(_this3.props.info.ticker_symbol);
+        }).then(function (res) {
+          return _this3.oneYearData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneYearStats"])(_this3.props.fiveYearPrice);
+        }).then(function (res) {
+          return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this3.oneYearData);
+        }).then(function (res) {
+          return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this3.threeMonthData);
         });
       }
     }
