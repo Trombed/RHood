@@ -20,4 +20,13 @@ class Stock < ApplicationRecord
     has_many :users,
     through: :watch_lists,
     source: :user
+
+    has_many :transactions,
+    foreign_key: :stock_id,
+    class_name: :Transaction 
+
+    has_many :transactions_from_user,
+    through: :transactions,
+    source: :users 
+
 end

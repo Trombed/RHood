@@ -307,6 +307,81 @@ var oneWeekStockInfo = function oneWeekStockInfo(prices) {
 
 /***/ }),
 
+/***/ "./frontend/component/actions/transactions_action.js":
+/*!***********************************************************!*\
+  !*** ./frontend/component/actions/transactions_action.js ***!
+  \***********************************************************/
+/*! exports provided: RECEIVE_BUY_TRANSACTION, RECEIVE_SELL_TRANSACTION, RECEIVE_ALL_STOCK, RECEIVE_SINGLE_STOCK, buyTransaction, sellTransaction, allTransaction */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BUY_TRANSACTION", function() { return RECEIVE_BUY_TRANSACTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SELL_TRANSACTION", function() { return RECEIVE_SELL_TRANSACTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_STOCK", function() { return RECEIVE_ALL_STOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_STOCK", function() { return RECEIVE_SINGLE_STOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buyTransaction", function() { return buyTransaction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sellTransaction", function() { return sellTransaction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTransaction", function() { return allTransaction; });
+/* harmony import */ var _util_transaction_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/transaction_util */ "./frontend/component/util/transaction_util.js");
+
+var RECEIVE_BUY_TRANSACTION = 'RECEIVE_BUY_TRANSACTION';
+var RECEIVE_SELL_TRANSACTION = 'RECEIVE_SELL_TRANSACTION';
+var RECEIVE_ALL_STOCK = "RECEIVE_ALL_STOCK";
+var RECEIVE_SINGLE_STOCK = 'RECEIVE_SINGLE_STOCK';
+
+var receiveBuyTransaction = function receiveBuyTransaction(data) {
+  return {
+    type: RECEIVE_BUY_TRANSACTION,
+    data: data
+  };
+};
+
+var receiveSellTransaction = function receiveSellTransaction(data) {
+  return {
+    type: RECEIVE_Sell_TRANSACTION,
+    data: data
+  };
+};
+
+var receiveAllStock = function receiveAllStock(data) {
+  return {
+    type: RECEIVE_ALL_STOCK,
+    data: data
+  };
+};
+
+var receiveSingleStock = function receiveSingleStock(data) {
+  return {
+    type: RECEIVE_SINGLE_STOCK,
+    data: data
+  };
+};
+
+var buyTransaction = function buyTransaction(data) {
+  return function (dispatch) {
+    return Object(_util_transaction_util__WEBPACK_IMPORTED_MODULE_0__["buyStock"])(data).then(function (res) {
+      return dispatch(receiveBuyTransaction(res));
+    });
+  };
+};
+var sellTransaction = function sellTransaction(data) {
+  return function (dispatch) {
+    return Object(_util_transaction_util__WEBPACK_IMPORTED_MODULE_0__["sellStock"])(data).then(function (res) {
+      return dispatch(receiveSellTransaction(res));
+    });
+  };
+};
+var allTransaction = function allTransaction(data) {
+  return function (dispatch) {
+    return Object(_util_transaction_util__WEBPACK_IMPORTED_MODULE_0__["allStock"])(data).then(function (res) {
+      return dispatch(receiveAllStock(res));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/component/actions/watch_list_actions.js":
 /*!**********************************************************!*\
   !*** ./frontend/component/actions/watch_list_actions.js ***!
@@ -409,6 +484,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/home_container */ "./frontend/component/home/home_container.js");
 /* harmony import */ var _home_stock_page_stock_page_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/stock_page/stock_page_container */ "./frontend/component/home/stock_page/stock_page_container.js");
 /* harmony import */ var _home_stock_page_stock_main_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home/stock_page/stock_main_container */ "./frontend/component/home/stock_page/stock_main_container.js");
+/* harmony import */ var _component_home_portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/home/portfolio/portfolio_container */ "./frontend/component/home/portfolio/portfolio_container.js");
+
 
 
 
@@ -434,8 +511,13 @@ var App = function App() {
     path: "/home",
     component: _home_home_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
     path: "/",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/portfolio",
+    component: _component_home_portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_9__["default"]
   })));
 };
 
@@ -457,6 +539,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main_content_main_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main_content/main_content */ "./frontend/component/home/main_content/main_content.jsx");
 /* harmony import */ var _home_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_nav_bar_container */ "./frontend/component/home/home_nav_bar_container.js");
 /* harmony import */ var _watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./watch_list/watch_list_container */ "./frontend/component/home/watch_list/watch_list_container.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./portfolio/portfolio_container */ "./frontend/component/home/portfolio/portfolio_container.js");
+/* harmony import */ var _portfolio_portfolio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./portfolio/portfolio */ "./frontend/component/home/portfolio/portfolio.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -474,6 +559,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
 
 
 
@@ -559,6 +647,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _home_page_logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home_page_logo */ "./frontend/component/home/home_page_logo.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./portfolio/portfolio_container */ "./frontend/component/home/portfolio/portfolio_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -581,6 +670,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // import SearchResult from './home_nav_bar_search'
+
 
 
 
@@ -673,7 +763,9 @@ function (_React$Component) {
         className: "homepage-nav-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"
-      }, "Portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/portfolio"
+      }, "Portfolio")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-2",
@@ -826,6 +918,136 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/component/home/portfolio/portfolio.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/component/home/portfolio/portfolio.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Portfolio =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Portfolio, _React$Component);
+
+  function Portfolio(props) {
+    _classCallCheck(this, Portfolio);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Portfolio).call(this, props));
+  }
+
+  _createClass(Portfolio, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.allTransaction();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var transactions = this.props.portfolio.map(function (stock, idx) {
+        var total_price = stock.total_price / stock.shares;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          className: "Portfolio-Row",
+          key: idx
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }, stock.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }, stock.ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }, stock.shares), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }, total_price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box"
+        }));
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        className: "Portfolio-Row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Average Cost"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Current Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "Portfolio-Box"
+      }, "Gains/Loss")), transactions)));
+    }
+  }]);
+
+  return Portfolio;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Portfolio);
+
+/***/ }),
+
+/***/ "./frontend/component/home/portfolio/portfolio_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/component/home/portfolio/portfolio_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_transactions_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/transactions_action */ "./frontend/component/actions/transactions_action.js");
+/* harmony import */ var _portfolio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./portfolio */ "./frontend/component/home/portfolio/portfolio.jsx");
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  return {
+    errors: state.errors.session,
+    session: state.session,
+    portfolio: Object.values(state.portfolio)
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    allTransaction: function allTransaction() {
+      return dispatch(Object(_actions_transactions_action__WEBPACK_IMPORTED_MODULE_1__["allTransaction"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_portfolio__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx":
 /*!******************************************************************************!*\
   !*** ./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx ***!
@@ -903,6 +1125,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../watch_list/watch_list_container */ "./frontend/component/home/watch_list/watch_list_container.jsx");
 /* harmony import */ var _transaction_box_transaction_box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../transaction_box/transaction_box */ "./frontend/component/home/transaction_box/transaction_box.js");
 /* harmony import */ var _transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../transaction_box/transaction_box_container */ "./frontend/component/home/transaction_box/transaction_box_container.jsx");
+/* harmony import */ var _portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../portfolio/portfolio_container */ "./frontend/component/home/portfolio/portfolio_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -922,6 +1145,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
  // import MainContent from "./main_content/main_content";
+
 
 
 
@@ -956,8 +1180,13 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        exact: true,
         path: "/show/:id",
         component: _stock_page_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        exact: true,
+        path: "/portfolio",
+        component: _portfolio_portfolio_container__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Main-Util"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1072,6 +1301,7 @@ function (_React$Component) {
     _this.customToolTip = _this.customToolTip.bind(_assertThisInitialized(_this));
     _this.removeHighlight = _this.removeHighlight.bind(_assertThisInitialized(_this));
     _this.dataColor = _this.dataColor.bind(_assertThisInitialized(_this));
+    _this.setColor = _this.setColor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1106,6 +1336,18 @@ function (_React$Component) {
         return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.oneYearData);
       }).then(function (res) {
         return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
+      }).then(function (res) {
+        return _this2.oneDayColor = _this2.setColor(_this2.props.price);
+      }).then(function (res) {
+        return _this2.oneWeekColor = _this2.setColor(_this2.props.oneWeekPrice);
+      }).then(function (res) {
+        return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
+      }).then(function (res) {
+        return _this2.threeMonthColor = _this2.setColor(_this2.threeMonthData);
+      }).then(function (res) {
+        return _this2.oneYearColor = _this2.setColor(_this2.oneYearData);
+      }).then(function (res) {
+        return _this2.fiveYearColor = _this2.setColor(_this2.props.fiveYearPrice);
       });
     }
   }, {
@@ -1140,6 +1382,18 @@ function (_React$Component) {
           return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this3.oneYearData);
         }).then(function (res) {
           return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this3.threeMonthData);
+        }).then(function (res) {
+          return _this3.oneDayColor = _this3.setColor(_this3.props.price);
+        }).then(function (res) {
+          return _this3.oneWeekColor = _this3.setColor(_this3.props.oneWeekPrice);
+        }).then(function (res) {
+          return _this3.oneMonthColor = _this3.setColor(_this3.oneMonthData);
+        }).then(function (res) {
+          return _this3.threeMonthColor = _this3.setColor(_this3.threeMonthData);
+        }).then(function (res) {
+          return _this3.oneYearColor = _this3.setColor(_this3.oneYearData);
+        }).then(function (res) {
+          return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
         });
       }
     }
@@ -1151,10 +1405,16 @@ function (_React$Component) {
         price: e.activePayload[0].value.toLocaleString('en', {
           style: 'currency',
           currency: "USD"
-        }),
-        change: (e.activePayload[0].value - e.activePayload[0].payload.close).toFixed(2),
-        percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2)
+        }) // change: (e.activePayload[0].value - e.activePayload[0].payload.close).toFixed(2),
+        // percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2),
+
       });
+    }
+  }, {
+    key: "setColor",
+    value: function setColor(chart) {
+      var colorValue = Object.values(chart).length === 0 || chart.length === 0 || chart[0].close === undefined ? "yellow" : chart[chart.length - 1].close >= chart[0].close ? "#21ce99" : "#f45531";
+      return colorValue;
     }
   }, {
     key: "dataColor",
@@ -1165,24 +1425,20 @@ function (_React$Component) {
   }, {
     key: "removeHighlight",
     value: function removeHighlight() {
-      var nonActive = document.getElementsByClassName("Stock-Chart-Active");
       $(".Stock-Chart-Active").css({
         "color": "",
         "border-color": ""
       });
+      var nonActive = document.getElementsByClassName("Stock-Chart-Active");
       nonActive[0].classList.remove("Stock-Chart-Active");
     }
   }, {
     key: "handleChartOneDayData",
     value: function handleChartOneDayData() {
+      console.log(this.oneDayColor);
       this.removeHighlight();
       this.setState({
         chartData: this.props.price
-      });
-      $(".Stock-Button-1D").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
@@ -1192,11 +1448,6 @@ function (_React$Component) {
       this.setState({
         chartData: this.props.oneWeekPrice
       });
-      $(".Stock-Button-1W").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
-      });
     }
   }, {
     key: "handleChartOneMonthData",
@@ -1204,11 +1455,6 @@ function (_React$Component) {
       this.removeHighlight();
       this.setState({
         chartData: this.oneMonthData
-      });
-      $(".Stock-Button-1M").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
@@ -1218,23 +1464,14 @@ function (_React$Component) {
       this.setState({
         chartData: this.threeMonthData
       });
-      $(".Stock-Button-3M").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
-      });
     }
   }, {
     key: "handleChartOneYearData",
     value: function handleChartOneYearData() {
       this.removeHighlight();
+      console.log(this.oneYearColor);
       this.setState({
         chartData: this.oneYearData
-      });
-      $(".Stock-Button-1Y").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
@@ -1243,11 +1480,6 @@ function (_React$Component) {
       this.removeHighlight();
       this.setState({
         chartData: this.props.fiveYearPrice
-      });
-      $(".Stock-Button-5Y").addClass("Stock-Chart-Active");
-      $(".Stock-Chart-Active").css({
-        "color": "".concat(this.dataColor()),
-        "border-color": "".concat(this.dataColor())
       });
     }
   }, {
@@ -1459,6 +1691,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TransactionBox).call(this, props));
     _this.state = {
+      boxState: "BUY",
       shareToBuy: 0,
       sharesBuyingPrice: 0
     };
@@ -1479,21 +1712,67 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "changeTransaction",
+    value: function changeTransaction(transactionType) {
+      this.setState({
+        boxState: transactionType
+      });
+    }
+  }, {
+    key: "handleBuy",
+    value: function handleBuy() {
+      var data = {
+        stock_id: this.props.stockInfo.id,
+        shares: this.state.shareToBuy,
+        price: this.props.sharesPrice
+      };
+      this.props.buyTransaction(data);
+    }
+  }, {
+    key: "handleSell",
+    value: function handleSell() {
+      var data = {
+        stock_id: this.props.stockInfo.id,
+        shares: this.state.shareToBuy,
+        price: this.props.sharesPrice
+      };
+      this.props.sellTransaction(data);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var addDecimals = this.props.currentUser.funds;
       var funds = Number(addDecimals).toLocaleString('en', {
         style: 'currency',
         currency: "USD"
       });
+      var submitTransaction = this.state.boxState === "BUY" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Transaction-Box-Button-Input-Buy",
+        onClick: function onClick() {
+          return _this2.handleBuy();
+        }
+      }, "SUBMIT BUY") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Transaction-Box-Button-Input-Sell",
+        onClick: function onClick() {
+          return _this2.handleSell();
+        }
+      }, "SUBMIT SELL");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Transaction-Box-Header-Buy"
+        className: "Transaction-Box-Header-Buy",
+        onClick: function onClick() {
+          return _this2.changeTransaction("BUY");
+        }
       }, "Buy ", this.props.stockInfo.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Transaction-Box-Header-Sell"
+        className: "Transaction-Box-Header-Sell",
+        onClick: function onClick() {
+          return _this2.changeTransaction("SELL");
+        }
       }, "Sell ", this.props.stockInfo.ticker_symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1512,10 +1791,7 @@ function (_React$Component) {
         className: "Transaction-Box-Body-Row-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Estimated Cost "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sharesBuyingPrice))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Transaction-Box-Button-Input",
-        onClick: this.handleSubmit
-      }, "SUBMIT BUY")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, submitTransaction), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Buying-Power"
@@ -1541,6 +1817,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _transaction_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction_box */ "./frontend/component/home/transaction_box/transaction_box.js");
+/* harmony import */ var _actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/transactions_action */ "./frontend/component/actions/transactions_action.js");
+
 
 
 
@@ -1553,7 +1831,14 @@ var mSTP = function mSTP(state, ownProps) {
 };
 
 var mDTP = function mDTP(dispatch) {
-  return {};
+  return {
+    buyTransaction: function buyTransaction(stock) {
+      return dispatch(Object(_actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__["buyTransaction"])(stock));
+    },
+    sellTransaction: function sellTransaction(stock) {
+      return dispatch(Object(_actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__["sellTransaction"])(stock));
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_transaction_box__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -1980,6 +2265,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./stock_current_price_reducer */ "./frontend/component/reducers/stock_current_price_reducer.jsx");
 /* harmony import */ var _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./watch_list_reducer */ "./frontend/component/reducers/watch_list_reducer.js");
 /* harmony import */ var _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./watch_list_prices_reducer */ "./frontend/component/reducers/watch_list_prices_reducer.jsx");
+/* harmony import */ var _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./transaction_reducer */ "./frontend/component/reducers/transaction_reducer.js");
+
 
 
 
@@ -2005,7 +2292,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   stockFiveYearPrice: _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_9__["default"],
   stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_10__["default"],
   watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
-  watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"]
+  watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
+  portfolio: _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -2287,6 +2575,46 @@ var stockProfileReducer = function stockProfileReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (stockProfileReducer);
+
+/***/ }),
+
+/***/ "./frontend/component/reducers/transaction_reducer.js":
+/*!************************************************************!*\
+  !*** ./frontend/component/reducers/transaction_reducer.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/transactions_action */ "./frontend/component/actions/transactions_action.js");
+
+
+var transactionsReducer = function transactionsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_STOCK"]:
+      return action.data;
+
+    case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUY_TRANSACTION"]:
+      return action.data;
+
+    case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_STOCK"]:
+      return action.data;
+
+    case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SELL_TRANSACTION"]:
+      return action.data;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (transactionsReducer);
 
 /***/ }),
 
@@ -3800,6 +4128,64 @@ var oneMonthStats = function oneMonthStats(threeMonthData) {
   oneMonthsPrior = oneMonthsPrior.format("YYYY-MM-DD");
   return threeMonthData.filter(function (dates) {
     return dates.date >= oneMonthsPrior;
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/component/util/transaction_util.js":
+/*!*****************************************************!*\
+  !*** ./frontend/component/util/transaction_util.js ***!
+  \*****************************************************/
+/*! exports provided: buyStock, sellStock, allStock, singleStock */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buyStock", function() { return buyStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sellStock", function() { return sellStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allStock", function() { return allStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "singleStock", function() { return singleStock; });
+var buyStock = function buyStock(transaction) {
+  return $.ajax({
+    method: "POST",
+    url: "api/transactions",
+    data: {
+      transaction: transaction
+    },
+    error: function error(err) {
+      return console.log(err);
+    }
+  });
+};
+var sellStock = function sellStock(transaction) {
+  return $.ajax({
+    method: "DELETE",
+    url: "api/transactions/".concat(transaction.stock_id),
+    data: {
+      transaction: transaction
+    },
+    error: function error(err) {
+      return console.log(err);
+    }
+  });
+};
+var allStock = function allStock(data) {
+  return $.ajax({
+    method: "GET",
+    url: "api/transactions",
+    error: function error(err) {
+      return console.log(err);
+    }
+  });
+};
+var singleStock = function singleStock(data) {
+  return $.ajax({
+    method: "SHOW",
+    url: "api/transactions/".concat(data.stock_id),
+    error: function error(err) {
+      return console.log(err);
+    }
   });
 };
 

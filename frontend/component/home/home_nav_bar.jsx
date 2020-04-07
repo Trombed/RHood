@@ -2,6 +2,7 @@ import React from 'react'
 import HomePageLogo from './home_page_logo'
 // import SearchResult from './home_nav_bar_search'
 import { Link } from "react-router-dom"
+import PortfolioContainer from './portfolio/portfolio_container'
 
 
 class HomeNavBar extends React.Component {
@@ -76,7 +77,9 @@ class HomeNavBar extends React.Component {
             <div className="Nav-Bar-Filler"></div>
             <ul className="homepage-nav-list">   
                 <div className="homepage-nav-item-1">
+                    <Link to='/portfolio'>
                     Portfolio
+                    </Link>
                 </div>
                 <div className='homepage-nav-separator'></div>
                 <div className='homepage-nav-item-2' onClick={this.props.logout}>

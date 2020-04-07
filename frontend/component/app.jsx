@@ -7,6 +7,7 @@ import { AuthRoute } from "../component/util/route_util";
 import HomeContainer from './home/home_container';
 import StockPageContainer from './home/stock_page/stock_page_container';
 import StockMainContainer from './home/stock_page/stock_main_container';
+import PortfolioContainer from '../component/home/portfolio/portfolio_container'
 
 
 
@@ -20,7 +21,9 @@ const App = () => (
     <Route path='/login' component={LoginUserContainer} />
     <Route path='/signup' component={NewUserSessionContainer} /> 
     <AuthRoute path="/home" component={HomeContainer} />  
-    <Route path='/' component={SplashContainer} />
+    <Route exact path='/' component={SplashContainer} />
+    <Route exact path='/portfolio' component={ PortfolioContainer } />
+
     </Switch>
 
 

@@ -7,7 +7,7 @@ class TransactionBox extends React.Component {
         super(props)
 
         this.state = {
-
+            boxState: "BUY",
             shareToBuy: 0,
             sharesBuyingPrice: 0,
         }
@@ -23,21 +23,53 @@ class TransactionBox extends React.Component {
             shareToBuy: e.target.value,
             sharesBuyingPrice: returnValue
         })
-  
     }
+
+    changeTransaction(transactionType) {
+        this.setState({ boxState: transactionType})
+    }
+
+    handleBuy() {
+        const data = {
+            stock_id: this.props.stockInfo.id,
+            shares: this.state.shareToBuy,
+            price: this.props.sharesPrice
+        }
+        this.props.buyTransaction(data)
+    }
+
+    handleSell() {
+        const data = {
+            stock_id: this.props.stockInfo.id,
+            shares: this.state.shareToBuy,
+            price: this.props.sharesPrice
+        }
+        this.props.sellTransaction(data)
+    }
+
 
     render() {
        
         const addDecimals = this.props.currentUser.funds
         const funds = Number(addDecimals).toLocaleString('en', {style: 'currency', currency:"USD"})
+        const submitTransaction = (this.state.boxState === "BUY") ?  
+                (<div className='Transaction-Box-Button-Input-Buy'
+                onClick={() => this.handleBuy()}>
+                            SUBMIT BUY
+                </div> ) :
+                (<div className='Transaction-Box-Button-Input-Sell'
+                onClick={() => this.handleSell()}>
+                        SUBMIT SELL
+                </div> 
+                )
         
         return (
             <div className="Transaction-Box-Container">          
                    <div className='Transaction-Box-Header'> 
-                       <div className='Transaction-Box-Header-Buy'>
+                       <div className='Transaction-Box-Header-Buy' onClick={ () => this.changeTransaction("BUY")}>
                            Buy {this.props.stockInfo.ticker_symbol}
                        </div>
-                       <div className='Transaction-Box-Header-Sell'>
+                       <div className='Transaction-Box-Header-Sell' onClick={() => this.changeTransaction("SELL")}>
                             Sell {this.props.stockInfo.ticker_symbol}
                        </div>
                     </div>
@@ -59,9 +91,8 @@ class TransactionBox extends React.Component {
                         </div>
                     </div>
                     <div className="Transaction-Box-Button">
-                        <div className='Transaction-Box-Button-Input' onClick={this.handleSubmit}>
-                            SUBMIT BUY
-                        </div>
+                
+                        {submitTransaction}
                     </div>
                     <div className='Transaction-Box-Separator'></div>
                     <div className="Transaction-Box-Buying-Power">

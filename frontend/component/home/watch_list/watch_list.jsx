@@ -15,8 +15,6 @@ class WatchList extends React.Component {
     componentDidMount() {
         this.props.watchListInfo()
         .then( res => this.props.watchListCurPrices(this.props.stockSymGetter(this.props.watchList)))
-        
-    
     }
 
     handleCollapse() {

@@ -9,6 +9,7 @@ import WatchListButtonContainer from '../watch_list_button/watch_list_button_con
 import WatchListContainer from '../watch_list/watch_list_container';
 import TransactionBox from '../transaction_box/transaction_box';
 import TransactionBoxContainer from '../transaction_box/transaction_box_container';
+import PortfolioContainer from '../portfolio/portfolio_container';
 
 
 
@@ -29,9 +30,9 @@ class StockMain extends React.Component {
                 <HomeNavBarContainer />
 
                 <div className='Home-Body-Container'>
-                <Route path='/show/:id' component={StockPageContainer}>
-                </Route>
-            
+                <Route exact path='/show/:id' component={StockPageContainer} />
+                <Route exact path='/portfolio' component={PortfolioContainer} />
+          
 
                     <div className='Stock-Main-Util'> 
                 <TransactionBoxContainer />

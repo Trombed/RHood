@@ -30,6 +30,15 @@ class User < ApplicationRecord
     through: :watch_lists,
     source: :stock
 
+    has_many :transactions,
+    foreign_key: :user_id,
+    class_name: :Transaction
+
+    has_many :stock_transactions,
+    through: :transactions,
+    source: :stock
+
+
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
         user && user.is_password?(password) ? user : nil

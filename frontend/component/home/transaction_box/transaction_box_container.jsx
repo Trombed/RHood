@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import TransactionBox from "./transaction_box";
+import {buyTransaction, sellTransaction} from "../../actions/transactions_action"
 
 
 const mSTP = (state, ownProps) => ({
@@ -11,8 +12,8 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = dispatch => ({
-
-  
+  buyTransaction: (stock) => dispatch(buyTransaction(stock)),
+  sellTransaction: (stock) => dispatch(sellTransaction(stock))
 })
 
 
