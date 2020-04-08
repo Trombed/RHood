@@ -1,7 +1,6 @@
 .Portfolio-Table {
     width: 100%;
-
-    font-family: Arial, Helvetica, sans-serif;   
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .Portfolio-Table-Label {
@@ -11,10 +10,22 @@
 }
 
 .Portfolio-Box {
-    padding: 15px;
+    padding: 20px;
     align-items: left;
     border-bottom: 1px solid white;
 }
+
+.Portfolio-Box-Link {
+    padding: 20px;
+    align-items: left;
+    border-bottom: 1px solid white;
+}
+
+.Portfolio-Box-Link:hover {
+    color: #21ce99;
+    
+}
+
 
 .Portfolio-Container {
     padding-left: 20vw;
@@ -23,5 +34,6 @@
 
 .Portfolio-Buying {
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    padding-bottom: 20px;
 }

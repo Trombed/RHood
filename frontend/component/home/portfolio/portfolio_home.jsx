@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeNavBarContainer from "../home_nav_bar_container"
 import PortfolioContainer from './portfolio_container';
-
+import WatchListContainer from '../watch_list/watch_list_container';
 
 
 class PortfolioHome extends React.Component {
@@ -20,7 +20,7 @@ class PortfolioHome extends React.Component {
                 <div className='Home-Body-Container'>
                 
                 <PortfolioContainer />
-          
+                <WatchListContainer />
                 </div>  
             </div>
             

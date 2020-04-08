@@ -1,4 +1,7 @@
+
+
 import React from "react"
+import { Link  } from 'react-router-dom'
 
 
 class Portfolio extends React.Component {
@@ -42,16 +45,21 @@ class Portfolio extends React.Component {
 
             return (
                 <tr className="Portfolio-Row" key={idx}>
-                    <td className="Portfolio-Box">
+                    <td className="Portfolio-Box-Link">
+                    <Link to={`/show/${stock.stock_id}`}>
                         {stock.name}
+                    </Link> 
                     </td>
                     
-                    <td className="Portfolio-Box">
+                    <td className="Portfolio-Box-Link">
+                    <Link to={`/show/${stock.stock_id}`}>
                     {stock.ticker}
+                    </Link>
                     </td>
  
 
                     <td className="Portfolio-Box">
+                        
                         {stock.shares}
                     </td >
 
@@ -73,7 +81,7 @@ class Portfolio extends React.Component {
   
 
         return (
-            <div className="Portfolio-Container">
+            <div className="Main-Container">
             
                 <div className="Portfolio-Buying">
                     Current Buying Power: {this.props.currentUser[0].funds.toLocaleString('en', {style: 'currency', currency:"USD"}) }

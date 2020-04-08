@@ -940,6 +940,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -957,6 +958,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1020,10 +1022,14 @@ function (_React$Component) {
           className: "Portfolio-Row",
           key: idx
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-          className: "Portfolio-Box"
-        }, stock.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-          className: "Portfolio-Box"
-        }, stock.ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box-Link"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/show/".concat(stock.stock_id)
+        }, stock.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "Portfolio-Box-Link"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/show/".concat(stock.stock_id)
+        }, stock.ticker)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "Portfolio-Box"
         }, stock.shares), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "Portfolio-Box"
@@ -1044,7 +1050,7 @@ function (_React$Component) {
       });
       this.updatePrice();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Portfolio-Container"
+        className: "Main-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Portfolio-Buying"
       }, "Current Buying Power: ", this.props.currentUser[0].funds.toLocaleString('en', {
@@ -1133,6 +1139,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../home_nav_bar_container */ "./frontend/component/home/home_nav_bar_container.js");
 /* harmony import */ var _portfolio_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./portfolio_container */ "./frontend/component/home/portfolio/portfolio_container.js");
+/* harmony import */ var _watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../watch_list/watch_list_container */ "./frontend/component/home/watch_list/watch_list_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1150,6 +1157,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1176,7 +1184,7 @@ function (_React$Component) {
         className: "homepage-container-night"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 

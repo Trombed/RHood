@@ -46,7 +46,7 @@ class Api::TransactionsController < ApplicationController
         user = User.find(current_user.id)
         @transaction = user.transactions.find_by(stock_id: params[:id])
         
-        if @transaction.nil? 
+        if @transaction.nil? || params['transaction']['shares'].to_i <= 0
             render json: ["No Previous Transactions"], status: 422
         elsif @transaction.shares < params['transaction']['shares'].to_i
         
@@ -55,7 +55,7 @@ class Api::TransactionsController < ApplicationController
             cost = params["transaction"]["shares"].to_f * params["transaction"]["price"].to_f
             @transaction.shares -= params["transaction"]['shares'].to_i
             @transaction.total_price -= cost 
-            user.funds += cost 
+            user.funds += cost
             user.save!
             @transaction.save!
 
