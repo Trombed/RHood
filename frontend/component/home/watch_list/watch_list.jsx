@@ -40,7 +40,7 @@ class WatchList extends React.Component {
 
         stockList = this.props.watchList.map( (stock, idx) => (
             
-            <WatchListItemsContainer stock={stock}  idx={idx} otherProps={this.props} />
+            <WatchListItemsContainer stock={stock}  idx={idx} otherProps={this.props} key={idx} />
             
            )   )
 

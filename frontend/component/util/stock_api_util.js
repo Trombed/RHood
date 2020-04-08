@@ -33,6 +33,16 @@ export const oneWeekStockInfoUtil = (prices) => (
     })
 )
 
+export const fetchPortfolioPrices = (symbol) => {
+    console.log(symbol)
+    return (
+    $.ajax({
+        method: "GET",
+        url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
+    })
+    )
+}
+
 
 
 

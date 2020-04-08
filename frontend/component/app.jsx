@@ -1,13 +1,12 @@
     import React from 'react';
-import { Route,Link, Switch  } from 'react-router-dom';
+import { Route , Switch  } from 'react-router-dom';
 import LoginUserContainer from './session/login_session_container';
 import NewUserSessionContainer from './session/new_user_session_container';
 import SplashContainer from './splash/splash_container';
 import { AuthRoute } from "../component/util/route_util";
 import HomeContainer from './home/home_container';
-import StockPageContainer from './home/stock_page/stock_page_container';
 import StockMainContainer from './home/stock_page/stock_main_container';
-import PortfolioContainer from '../component/home/portfolio/portfolio_container'
+import PortfolioHome from '../component/home/portfolio/portfolio_home'
 
 
 
@@ -17,12 +16,14 @@ const App = () => (
 
 
     <Switch>
+    <AuthRoute exact path="/home" component={HomeContainer} />  
     <AuthRoute exact path='/show/:id' component={StockMainContainer} />
+    <AuthRoute exact path='/portfolio' component={PortfolioHome} />
+    <Route exact path='/' component={SplashContainer} />
+   
     <Route path='/login' component={LoginUserContainer} />
     <Route path='/signup' component={NewUserSessionContainer} /> 
-    <AuthRoute path="/home" component={HomeContainer} />  
-    <Route exact path='/' component={SplashContainer} />
-    <Route exact path='/portfolio' component={ PortfolioContainer } />
+    {/* <Route exact path='/portfolio' component={ PortfolioContainer } /> */}
 
     </Switch>
 

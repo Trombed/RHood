@@ -1,5 +1,5 @@
 import APISearchUtil from "../util/search_util";
-import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, oneMonthStockInfoUtil, threeMonthStockInfoUtil, receiveStockOneYear, fiveYearStockInfoUtil, oneYearStockInfoUtil, currentPriceUtil} from  '../util/stock_api_util'
+import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fiveYearStockInfoUtil, fetchPortfolioPrices, currentPriceUtil} from  '../util/stock_api_util'
 
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 
@@ -95,3 +95,15 @@ export const oneWeekStockInfo = prices => dispatch => (
 
 
 
+export const RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES'
+
+const receivePortfolioPrice = (prices) => ({
+    type: RECEIVE_PORTFOLIO_PRICES,
+    prices
+})
+
+
+export const currentPortfolioPrices = symbols => dispatch => (
+    fetchPortfolioPrices(symbols)
+        .then( (res) => dispatch(receivePortfolioPrice(res)))
+)

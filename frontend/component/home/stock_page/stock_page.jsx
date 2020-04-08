@@ -210,6 +210,7 @@ class StockPage extends React.Component {
               offset={-50}
               isAnimationActive={false}
               content={this.customToolTip}
+              wrapperStyle={{ top: -10 }}
               />
               <XAxis dataKey='date' hide={true} />
 

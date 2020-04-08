@@ -12,7 +12,7 @@ const receiveBuyTransaction = (data) => ({
 })
 
 const receiveSellTransaction = (data) => ({
-    type: RECEIVE_Sell_TRANSACTION,
+    type: RECEIVE_SELL_TRANSACTION,
     data
 })
 
