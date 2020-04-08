@@ -13,6 +13,7 @@ import watchListReducer from './watch_list_reducer'
 import watchListPriceReducer from "./watch_list_prices_reducer";
 import transactionsReducer from "./transaction_reducer";
 import portfolioPriceReducer from "./portfolio_price_reducer";
+import sharesReducer from "./stock_share_reducer";
 
 
 const rootReducer = combineReducers({
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   watchList: watchListReducer,
   watchListPrice: watchListPriceReducer,
   portfolio: transactionsReducer,
-  portfolioPrices: portfolioPriceReducer
+  portfolioPrices: portfolioPriceReducer,
+  stockShares: sharesReducer
 });
 
 export default rootReducer;

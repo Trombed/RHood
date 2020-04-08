@@ -16,7 +16,7 @@ class StockMain extends React.Component {
 
 
     render(){
-        this.stockId = this.props.match.params.id
+        const stockId = this.props.match.params.id
         return(
             <div className='homepage-container-night'>
 
@@ -28,8 +28,8 @@ class StockMain extends React.Component {
           
 
                     <div className='Stock-Main-Util'> 
-                <TransactionBoxContainer />
-                <WatchListButtonContainer stockId={this.stockId} />
+                <TransactionBoxContainer stockId={stockId}/>
+                <WatchListButtonContainer stockId={stockId} />
                     </div>
                 </div>  
             </div>

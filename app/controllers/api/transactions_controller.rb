@@ -7,8 +7,16 @@ class Api::TransactionsController < ApplicationController
 
 
       def show 
-        @stock = Transaction.find_by(params[:id])
-        render :show
+        @transaction = Transaction.find_by(stock_id: params[:id])
+        if @transaction.nil?
+          @transaction = {
+            "shares": 0,
+            "funds": current_user.funds
+          }
+          render json: @transaction
+        else  
+          render :show
+        end
       end
 
       

@@ -26,9 +26,8 @@
 }
 
 .Transaction-Box-Header-Buy:hover {
-    color: #21ce99;
+    color: #31ce99;
  
-    cursor: pointer;
 }
 
 .Transaction-Box-Header-Sell {
@@ -38,9 +37,7 @@
 }
 
 .Transaction-Box-Header-Sell:hover {
-    color: #f45531;
- 
- 
+    color: #f46531;
 }
 
 .Transaction-Box-Body {
@@ -81,8 +78,10 @@
     color: black;
     border-radius: 4px;
     cursor: pointer;
+}
 
-
+.Transaction-Box-Button-Input-Buy:hover {
+    box-shadow: 0px 0px 5px 1px #31ce99;    
 }
 
 .Transaction-Box-Button-Input-Sell {
@@ -94,8 +93,13 @@
     color: black;
     border-radius: 4px;
     cursor: pointer;
-
 }
+
+.Transaction-Box-Button-Input-Sell:hover {
+ box-shadow: 0px 0px 5px 1px #f46531;
+}
+
+
 
 .Transaction-Number-Input {
     display: flex;

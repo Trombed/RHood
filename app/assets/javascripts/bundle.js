@@ -173,48 +173,32 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_SEARCH, stock_search, RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, receiveFiveYearStock, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, RECEIVE_PORTFOLIO_PRICES, currentPortfolioPrices */
+/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, stock_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH", function() { return RECEIVE_SEARCH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stock_search", function() { return stock_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_PROFILE", function() { return RECEIVE_STOCK_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_PRICES", function() { return RECEIVE_STOCK_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFO", function() { return RECEIVE_STOCK_INFO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_WEEK", function() { return RECEIVE_STOCK_ONE_WEEK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_FIVE_YEAR", function() { return RECEIVE_STOCK_FIVE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PRICE", function() { return RECEIVE_CURRENT_PRICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFiveYearStock", function() { return receiveFiveYearStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH", function() { return RECEIVE_SEARCH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PORTFOLIO_PRICES", function() { return RECEIVE_PORTFOLIO_PRICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_SHARES", function() { return RECEIVE_STOCK_SHARES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stock_search", function() { return stock_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceInfo", function() { return currentPriceInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfo", function() { return fiveYearStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfo", function() { return companyInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfo", function() { return oneDayStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockFromDB", function() { return fetchStockFromDB; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfo", function() { return oneWeekStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PORTFOLIO_PRICES", function() { return RECEIVE_PORTFOLIO_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPortfolioPrices", function() { return currentPortfolioPrices; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentShares", function() { return currentShares; });
 /* harmony import */ var _util_search_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/search_util */ "./frontend/component/util/search_util.js");
 /* harmony import */ var _util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stock_api_util */ "./frontend/component/util/stock_api_util.js");
 
-
-var RECEIVE_SEARCH = 'RECEIVE_SEARCH';
-
-var receiveSearch = function receiveSearch(search) {
-  return {
-    type: RECEIVE_SEARCH,
-    search: search
-  };
-};
-
-var stock_search = function stock_search(search) {
-  return function (dispatch) {
-    return _util_search_util__WEBPACK_IMPORTED_MODULE_0__["default"].stock_search(search).then(function (result) {
-      return dispatch(receiveSearch(result));
-    });
-  };
-}; // Above code request ajax call backend server for nav bar search
 
 var RECEIVE_STOCK_PROFILE = 'RECEIVE_STOCK_PROFILE';
 var RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES';
@@ -222,6 +206,30 @@ var RECEIVE_STOCK_INFO = 'RECEIVE_STOCK_INFO';
 var RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK';
 var RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR';
 var RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE';
+var RECEIVE_SEARCH = 'RECEIVE_SEARCH';
+var RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES';
+var RECEIVE_STOCK_SHARES = 'RECEIVE_STOCK_SHARES';
+
+var receiveStockShares = function receiveStockShares(stockId) {
+  return {
+    type: RECEIVE_STOCK_SHARES,
+    stockId: stockId
+  };
+};
+
+var receivePortfolioPrice = function receivePortfolioPrice(prices) {
+  return {
+    type: RECEIVE_PORTFOLIO_PRICES,
+    prices: prices
+  };
+};
+
+var receiveSearch = function receiveSearch(search) {
+  return {
+    type: RECEIVE_SEARCH,
+    search: search
+  };
+};
 
 var receiveStockProfile = function receiveStockProfile(profile) {
   return {
@@ -262,6 +270,14 @@ var receiveFiveYearStock = function receiveFiveYearStock(fiveYearPrice) {
   return {
     type: RECEIVE_STOCK_FIVE_YEAR,
     fiveYearPrice: fiveYearPrice
+  };
+};
+
+var stock_search = function stock_search(search) {
+  return function (dispatch) {
+    return _util_search_util__WEBPACK_IMPORTED_MODULE_0__["default"].stock_search(search).then(function (result) {
+      return dispatch(receiveSearch(result));
+    });
   };
 };
 var currentPriceInfo = function currentPriceInfo(price) {
@@ -306,19 +322,17 @@ var oneWeekStockInfo = function oneWeekStockInfo(prices) {
     });
   };
 };
-var RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES';
-
-var receivePortfolioPrice = function receivePortfolioPrice(prices) {
-  return {
-    type: RECEIVE_PORTFOLIO_PRICES,
-    prices: prices
-  };
-};
-
 var currentPortfolioPrices = function currentPortfolioPrices(symbols) {
   return function (dispatch) {
     return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["fetchPortfolioPrices"])(symbols).then(function (res) {
       return dispatch(receivePortfolioPrice(res));
+    });
+  };
+};
+var currentShares = function currentShares(stockId) {
+  return function (dispatch) {
+    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["fetchShares"])(stockId).then(function (res) {
+      return dispatch(receiveStockShares(res));
     });
   };
 };
@@ -1250,7 +1264,7 @@ function (_React$Component) {
   _createClass(StockMain, [{
     key: "render",
     value: function render() {
-      this.stockId = this.props.match.params.id;
+      var stockId = this.props.match.params.id;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-container-night"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1261,8 +1275,10 @@ function (_React$Component) {
         component: _stock_page_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Main-Util"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        stockId: this.stockId
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        stockId: stockId
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        stockId: stockId
       }))));
     }
   }]);
@@ -1768,13 +1784,32 @@ function (_React$Component) {
     _this.state = {
       boxState: "BUY",
       shareToBuy: 0,
-      sharesBuyingPrice: 0
+      sharesBuyingPrice: 0,
+      currentlyOwned: 0,
+      funds: 0
     };
     _this.changeBuyShare = _this.changeBuyShare.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TransactionBox, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.updateStats();
+    }
+  }, {
+    key: "updateStats",
+    value: function updateStats() {
+      var _this2 = this;
+
+      this.props.currentShares(Number(this.props.stockId)).then(function (res) {
+        return _this2.setState({
+          funds: _this2.props.stockShares.funds,
+          currentlyOwned: _this2.props.stockShares.shares
+        });
+      });
+    }
+  }, {
     key: "changeBuyShare",
     value: function changeBuyShare(e) {
       var returnValue = Number(Number(e.target.value) * this.props.sharesPrice).toLocaleString('en', {
@@ -1801,22 +1836,17 @@ function (_React$Component) {
         shares: this.state.shareToBuy,
         price: this.props.sharesPrice
       };
-      this.props.buyTransaction(data);
+      this.props.buyTransaction(data).then(res = this.updateStats());
     }
   }, {
     key: "handleSell",
     value: function handleSell() {
-      var data = {
-        stock_id: this.props.stockInfo.id,
-        shares: this.state.shareToBuy,
-        price: this.props.sharesPrice
-      };
-      this.props.sellTransaction(data);
+      this.props.stockId;
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var addDecimals = this.props.currentUser.funds;
       var funds = Number(addDecimals).toLocaleString('en', {
@@ -1826,12 +1856,12 @@ function (_React$Component) {
       var submitTransaction = this.state.boxState === "BUY" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button-Input-Buy",
         onClick: function onClick() {
-          return _this2.handleBuy();
+          return _this3.handleBuy();
         }
       }, "SUBMIT BUY") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button-Input-Sell",
         onClick: function onClick() {
-          return _this2.handleSell();
+          return _this3.handleSell();
         }
       }, "SUBMIT SELL");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1841,12 +1871,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Buy",
         onClick: function onClick() {
-          return _this2.changeTransaction("BUY");
+          return _this3.changeTransaction("BUY");
         }
       }, "Buy ", this.props.stockInfo.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Sell",
         onClick: function onClick() {
-          return _this2.changeTransaction("SELL");
+          return _this3.changeTransaction("SELL");
         }
       }, "Sell ", this.props.stockInfo.ticker_symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body"
@@ -1856,7 +1886,8 @@ function (_React$Component) {
         type: "number",
         placeholder: "0",
         onChange: this.changeBuyShare,
-        className: "Transaction-Number-Input"
+        className: "Transaction-Number-Input",
+        min: "1"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.sharesPrice.toLocaleString('en', {
@@ -1870,7 +1901,12 @@ function (_React$Component) {
         className: "Transaction-Box-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Buying-Power"
-      }, funds, " Buying Power"));
+      }, this.state.funds.toLocaleString('en', {
+        style: 'currency',
+        currency: "USD"
+      }), " Buying Power"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Transaction-Box-Buying-Power"
+      }, this.state.currentlyOwned, " Shares Owned"));
     }
   }]);
 
@@ -1893,15 +1929,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _transaction_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction_box */ "./frontend/component/home/transaction_box/transaction_box.js");
 /* harmony import */ var _actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/transactions_action */ "./frontend/component/actions/transactions_action.js");
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/stock_action */ "./frontend/component/actions/stock_action.js");
 
 
 
 
-var mSTP = function mSTP(state, ownProps) {
+
+var mSTP = function mSTP(state) {
   return {
     currentUser: state.entities.users[state.session.id],
     sharesPrice: state.stockCurrentPrice,
-    stockInfo: state.stockInfo
+    stockInfo: state.stockInfo,
+    stockShares: state.stockShares
   };
 };
 
@@ -1912,6 +1951,9 @@ var mDTP = function mDTP(dispatch) {
     },
     sellTransaction: function sellTransaction(stock) {
       return dispatch(Object(_actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__["sellTransaction"])(stock));
+    },
+    currentShares: function currentShares(stockId) {
+      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_3__["currentShares"])(stockId));
     }
   };
 };
@@ -2374,6 +2416,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./watch_list_prices_reducer */ "./frontend/component/reducers/watch_list_prices_reducer.jsx");
 /* harmony import */ var _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./transaction_reducer */ "./frontend/component/reducers/transaction_reducer.js");
 /* harmony import */ var _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./portfolio_price_reducer */ "./frontend/component/reducers/portfolio_price_reducer.js");
+/* harmony import */ var _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./stock_share_reducer */ "./frontend/component/reducers/stock_share_reducer.js");
+
 
 
 
@@ -2403,7 +2447,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
   watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
   portfolio: _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__["default"],
-  portfolioPrices: _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__["default"]
+  portfolioPrices: _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__["default"],
+  stockShares: _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -2685,6 +2730,35 @@ var stockProfileReducer = function stockProfileReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (stockProfileReducer);
+
+/***/ }),
+
+/***/ "./frontend/component/reducers/stock_share_reducer.js":
+/*!************************************************************!*\
+  !*** ./frontend/component/reducers/stock_share_reducer.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+
+
+var sharesReducer = function sharesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_SHARES"]:
+      return action.stockId;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (sharesReducer);
 
 /***/ }),
 
@@ -4105,7 +4179,7 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice */
+/*! exports provided: companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4121,6 +4195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToWatchList", function() { return addToWatchList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFromWatchList", function() { return deleteFromWatchList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchListCurPrice", function() { return watchListCurPrice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchShares", function() { return fetchShares; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -4196,6 +4271,12 @@ var watchListCurPrice = function watchListCurPrice(watchListStr) {
   return $.ajax({
     method: "GET",
     url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(watchListStr)
+  });
+};
+var fetchShares = function fetchShares(stockId) {
+  return $.ajax({
+    method: "GET",
+    url: "api/transactions/".concat(stockId)
   });
 };
 

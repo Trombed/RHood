@@ -10,9 +10,24 @@ class TransactionBox extends React.Component {
             boxState: "BUY",
             shareToBuy: 0,
             sharesBuyingPrice: 0,
+            currentlyOwned: 0,
+            funds: 0
         }
         this.changeBuyShare = this.changeBuyShare.bind(this)
      
+    }
+
+    componentDidMount() {
+        this.updateStats()
+
+    }
+
+    updateStats() {
+        this.props.currentShares(Number(this.props.stockId))    
+        .then( res => this.setState({
+            funds: this.props.stockShares.funds,
+            currentlyOwned: this.props.stockShares.shares
+        }) )
     }
   
     
@@ -23,6 +38,7 @@ class TransactionBox extends React.Component {
             shareToBuy: e.target.value,
             sharesBuyingPrice: returnValue
         })
+
     }
 
     changeTransaction(transactionType) {
@@ -36,15 +52,11 @@ class TransactionBox extends React.Component {
             price: this.props.sharesPrice
         }
         this.props.buyTransaction(data)
+        .then( res = this.updateStats())
     }
 
     handleSell() {
-        const data = {
-            stock_id: this.props.stockInfo.id,
-            shares: this.state.shareToBuy,
-            price: this.props.sharesPrice
-        }
-        this.props.sellTransaction(data)
+        this.props.stockId
     }
 
 
@@ -63,6 +75,8 @@ class TransactionBox extends React.Component {
                 </div> 
                 )
         
+      
+
         return (
             <div className="Transaction-Box-Container">          
                    <div className='Transaction-Box-Header'> 
@@ -76,7 +90,7 @@ class TransactionBox extends React.Component {
                     <div className="Transaction-Box-Body">
                         <div className="Transaction-Box-Body-Row-1">
                         <div>Shares</div>
-                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" /></div>
+                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" min="1" /></div>
                         </div>
 
                         <div className="Transaction-Box-Body-Row-2">
@@ -96,7 +110,11 @@ class TransactionBox extends React.Component {
                     </div>
                     <div className='Transaction-Box-Separator'></div>
                     <div className="Transaction-Box-Buying-Power">
-                        {funds} Buying Power
+                        {this.state.funds.toLocaleString('en', {style: 'currency', currency:"USD"})} Buying Power
+                  
+                    </div>
+                    <div className="Transaction-Box-Buying-Power">
+                        {this.state.currentlyOwned} Shares Owned
                   
                     </div>
 

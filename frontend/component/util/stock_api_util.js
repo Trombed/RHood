@@ -8,7 +8,9 @@ export const  companyInfoUtil = (stockSymbol) => (
 
             url: `https://financialmodelingprep.com/api/v3/company/profile/${stockSymbol}`
         })
-    )
+)
+
+
 export const oneDayStockInfoUtil =  (prices) => (
 
         $.ajax({
@@ -42,15 +44,6 @@ export const fetchPortfolioPrices = (symbol) => {
     })
     )
 }
-
-
-
-
-
-
-
-
-
 
 
  export const fiveYearStockInfoUtil = (symbol) => {
@@ -101,5 +94,12 @@ export const watchListCurPrice = (watchListStr) => (
         method: "GET",
         url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
     })
-    
 )
+
+export const fetchShares = (stockId) => (
+    $.ajax({
+        method: "GET",
+        url: `api/transactions/${stockId}`
+    })
+)
+
