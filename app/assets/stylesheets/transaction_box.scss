@@ -11,6 +11,7 @@
 
 .Transaction-Box-Header {
     display: flex;
+    margin: 0px 10px 0px 10px;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
@@ -24,6 +25,25 @@
  
     cursor: pointer;
 }
+
+.Transaction-Box-Errors {
+    color: red;
+    text-align: center;
+    font-size: 20px;
+}
+
+.transaction-buy {
+    border-width: 0px 0px 2px 0px;
+    border-image-source: linear-gradient(to left, transparent 50%, #21ce99 50%);
+    border-image-slice: 1;
+}
+
+.transaction-sell {
+    border-width: 0px 0px 2px 0px;
+    border-image-source: linear-gradient(to right, transparent 50%, #f45531 50%);
+    border-image-slice: 1;
+}
+
 
 .Transaction-Box-Header-Buy:hover {
     color: #31ce99;

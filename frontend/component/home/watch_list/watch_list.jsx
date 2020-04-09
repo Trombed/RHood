@@ -17,22 +17,7 @@ class WatchList extends React.Component {
         .then( res => this.props.watchListCurPrices(this.props.stockSymGetter(this.props.watchList)))
     }
 
-    handleCollapse() {
 
-        var collapse = document.getElementsByClassName("collapse");
-
-        for (let i = 0; i < collapse.length; i++) {
-          collapse[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.children;
-            if (content.style.display === "block") {
-              content.style.display = "none";
-            } else {
-              content.style.display = "block";
-            }
-          });
-        }
-    }
 
  
     render(){
@@ -45,7 +30,7 @@ class WatchList extends React.Component {
            )   )
 
         return (
-            <div onClick={this.handleCollapse} className='Watch-List-Container collapse' onClick={this.handleCollapse}>
+            <div onClick={this.handleCollapse} className='Watch-List-Container' >
 
                 <div className="Watch-List-Content">
                 <div className='Watch-List-Title'>
@@ -57,8 +42,6 @@ class WatchList extends React.Component {
                     {stockList}
                     </div>
                 
-                <div className='Watch-List-End'>
-                </div>
                 </div>
             </div>
         )

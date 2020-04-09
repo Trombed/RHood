@@ -15,7 +15,6 @@ class WatchListItems extends React.Component {
             "0"
         ) :
         (
-            
             this.props.price[this.props.idx]
         )
 

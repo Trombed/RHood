@@ -36,6 +36,7 @@ class Api::TransactionsController < ApplicationController
             @transaction.total_price += cost
             user.save!
             @transaction.save!
+            render :show
         elsif @update.nil?
             @transaction = Transaction.new(transaction_params)
             @transaction.user_id = user.id
@@ -43,6 +44,7 @@ class Api::TransactionsController < ApplicationController
             user.funds -= cost 
             user.save!
             @transaction.save!
+            render :show
         else  
             render json: ["Purchase Failed"], status: 422
         end
@@ -66,8 +68,8 @@ class Api::TransactionsController < ApplicationController
             user.funds += cost
             user.save!
             @transaction.save!
-
             @transaction.destroy if @transaction.shares == 0
+            render :show
         end
       end
     

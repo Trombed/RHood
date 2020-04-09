@@ -1,4 +1,5 @@
 import React from 'react'
+import { $CombinedState } from 'redux'
 
 
 
@@ -11,7 +12,8 @@ class TransactionBox extends React.Component {
             shareToBuy: 0,
             sharesBuyingPrice: 0,
             currentlyOwned: 0,
-            funds: 0
+            funds: 0,
+            error: null
         }
         this.changeBuyShare = this.changeBuyShare.bind(this)
      
@@ -42,21 +44,68 @@ class TransactionBox extends React.Component {
     }
 
     changeTransaction(transactionType) {
-        this.setState({ boxState: transactionType})
+        this.setState({ boxState: transactionType}, () => {
+            this.changeBorder()
+        })
+        this.setState({ error: null})
     }
 
     handleBuy() {
-        const data = {
-            stock_id: this.props.stockInfo.id,
-            shares: this.state.shareToBuy,
-            price: this.props.sharesPrice
+   
+        if (this.state.shareToBuy <= 0 )  {
+            return this.setState({
+                error: "Minimum 1 share"
+            })
+        } else if ((this.state.shareToBuy * this.props.sharesPrice) > this.state.funds) {
+
+         
+            return this.setState({
+                error: "Insufficient funds"
+            })
+
         }
-        this.props.buyTransaction(data)
-        .then( res = this.updateStats())
+        else {
+            const data = {
+                stock_id: this.props.stockInfo.id,
+                shares: this.state.shareToBuy,
+                price: this.props.sharesPrice
+            }
+            this.props.buyTransaction(data)
+            .then( (res) => this.updateStats())
+            this.setState({ error: null})
+        }
     }
 
     handleSell() {
-        this.props.stockId
+        if  (this.state.currentlyOwned < this.state.shareToBuy || this.state.shareToBuy === 0) {
+            return this.setState({
+                error: "Insufficient shares"
+            })
+        }
+
+        else {
+            const data = {
+                stock_id: this.props.stockInfo.id,
+                shares: this.state.shareToBuy,
+                price: this.props.sharesPrice
+            }
+            this.props.sellTransaction(data)
+            .then( (res) => this.updateStats())
+            this.setState({ error: null})
+        }
+    }
+
+    changeBorder() {
+        switch (this.state.boxState) {
+            case "BUY":
+                    $(".Transaction-Box-Header").removeClass('transaction-sell')
+                    $(".Transaction-Box-Header").addClass('transaction-buy')
+                break;
+            case "SELL":
+                    $(".Transaction-Box-Header").removeClass("transaction-buy")
+                    $(".Transaction-Box-Header").addClass("transaction-sell")            
+                break;
+        }
     }
 
 
@@ -79,7 +128,7 @@ class TransactionBox extends React.Component {
 
         return (
             <div className="Transaction-Box-Container">          
-                   <div className='Transaction-Box-Header'> 
+                   <div className='Transaction-Box-Header transaction-buy'> 
                        <div className='Transaction-Box-Header-Buy' onClick={ () => this.changeTransaction("BUY")}>
                            Buy {this.props.stockInfo.ticker_symbol}
                        </div>
@@ -90,7 +139,7 @@ class TransactionBox extends React.Component {
                     <div className="Transaction-Box-Body">
                         <div className="Transaction-Box-Body-Row-1">
                         <div>Shares</div>
-                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" min="1" /></div>
+                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" min="0" /></div>
                         </div>
 
                         <div className="Transaction-Box-Body-Row-2">
@@ -108,6 +157,10 @@ class TransactionBox extends React.Component {
                 
                         {submitTransaction}
                     </div>
+                    <div className="Transaction-Box-Errors">
+                        {this.state.error}
+                    </div>
+
                     <div className='Transaction-Box-Separator'></div>
                     <div className="Transaction-Box-Buying-Power">
                         {this.state.funds.toLocaleString('en', {style: 'currency', currency:"USD"})} Buying Power

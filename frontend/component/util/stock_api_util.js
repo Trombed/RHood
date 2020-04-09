@@ -17,8 +17,6 @@ export const oneDayStockInfoUtil =  (prices) => (
             method: "GET",
             url: `https://financialmodelingprep.com/api/v3/historical-chart/1min/${prices}`
         })
-      
-    
     )
 
 export const fetchStockInfo = (id) => (

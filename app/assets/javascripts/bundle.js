@@ -343,7 +343,7 @@ var currentShares = function currentShares(stockId) {
 /*!***********************************************************!*\
   !*** ./frontend/component/actions/transactions_action.js ***!
   \***********************************************************/
-/*! exports provided: RECEIVE_BUY_TRANSACTION, RECEIVE_SELL_TRANSACTION, RECEIVE_ALL_STOCK, RECEIVE_SINGLE_STOCK, buyTransaction, sellTransaction, allTransaction */
+/*! exports provided: RECEIVE_BUY_TRANSACTION, RECEIVE_SELL_TRANSACTION, RECEIVE_ALL_STOCK, buyTransaction, sellTransaction, allTransaction */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -351,7 +351,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BUY_TRANSACTION", function() { return RECEIVE_BUY_TRANSACTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SELL_TRANSACTION", function() { return RECEIVE_SELL_TRANSACTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_STOCK", function() { return RECEIVE_ALL_STOCK; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_STOCK", function() { return RECEIVE_SINGLE_STOCK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buyTransaction", function() { return buyTransaction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sellTransaction", function() { return sellTransaction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTransaction", function() { return allTransaction; });
@@ -360,7 +359,6 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_BUY_TRANSACTION = 'RECEIVE_BUY_TRANSACTION';
 var RECEIVE_SELL_TRANSACTION = 'RECEIVE_SELL_TRANSACTION';
 var RECEIVE_ALL_STOCK = "RECEIVE_ALL_STOCK";
-var RECEIVE_SINGLE_STOCK = 'RECEIVE_SINGLE_STOCK';
 
 var receiveBuyTransaction = function receiveBuyTransaction(data) {
   return {
@@ -379,13 +377,6 @@ var receiveSellTransaction = function receiveSellTransaction(data) {
 var receiveAllStock = function receiveAllStock(data) {
   return {
     type: RECEIVE_ALL_STOCK,
-    data: data
-  };
-};
-
-var receiveSingleStock = function receiveSingleStock(data) {
-  return {
-    type: RECEIVE_SINGLE_STOCK,
     data: data
   };
 };
@@ -1750,6 +1741,7 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1770,6 +1762,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var TransactionBox =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1786,7 +1779,8 @@ function (_React$Component) {
       shareToBuy: 0,
       sharesBuyingPrice: 0,
       currentlyOwned: 0,
-      funds: 0
+      funds: 0,
+      error: null
     };
     _this.changeBuyShare = _this.changeBuyShare.bind(_assertThisInitialized(_this));
     return _this;
@@ -1824,29 +1818,86 @@ function (_React$Component) {
   }, {
     key: "changeTransaction",
     value: function changeTransaction(transactionType) {
+      var _this3 = this;
+
       this.setState({
         boxState: transactionType
+      }, function () {
+        _this3.changeBorder();
+      });
+      this.setState({
+        error: null
       });
     }
   }, {
     key: "handleBuy",
     value: function handleBuy() {
-      var data = {
-        stock_id: this.props.stockInfo.id,
-        shares: this.state.shareToBuy,
-        price: this.props.sharesPrice
-      };
-      this.props.buyTransaction(data).then(res = this.updateStats());
+      var _this4 = this;
+
+      if (this.state.shareToBuy <= 0) {
+        return this.setState({
+          error: "Minimum 1 share"
+        });
+      } else if (this.state.shareToBuy * this.props.sharesPrice > this.state.funds) {
+        return this.setState({
+          error: "Insufficient funds"
+        });
+      } else {
+        var data = {
+          stock_id: this.props.stockInfo.id,
+          shares: this.state.shareToBuy,
+          price: this.props.sharesPrice
+        };
+        this.props.buyTransaction(data).then(function (res) {
+          return _this4.updateStats();
+        });
+        this.setState({
+          error: null
+        });
+      }
     }
   }, {
     key: "handleSell",
     value: function handleSell() {
-      this.props.stockId;
+      var _this5 = this;
+
+      if (this.state.currentlyOwned < this.state.shareToBuy || this.state.shareToBuy === 0) {
+        return this.setState({
+          error: "Insufficient shares"
+        });
+      } else {
+        var data = {
+          stock_id: this.props.stockInfo.id,
+          shares: this.state.shareToBuy,
+          price: this.props.sharesPrice
+        };
+        this.props.sellTransaction(data).then(function (res) {
+          return _this5.updateStats();
+        });
+        this.setState({
+          error: null
+        });
+      }
+    }
+  }, {
+    key: "changeBorder",
+    value: function changeBorder() {
+      switch (this.state.boxState) {
+        case "BUY":
+          $(".Transaction-Box-Header").removeClass('transaction-sell');
+          $(".Transaction-Box-Header").addClass('transaction-buy');
+          break;
+
+        case "SELL":
+          $(".Transaction-Box-Header").removeClass("transaction-buy");
+          $(".Transaction-Box-Header").addClass("transaction-sell");
+          break;
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this6 = this;
 
       var addDecimals = this.props.currentUser.funds;
       var funds = Number(addDecimals).toLocaleString('en', {
@@ -1856,27 +1907,27 @@ function (_React$Component) {
       var submitTransaction = this.state.boxState === "BUY" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button-Input-Buy",
         onClick: function onClick() {
-          return _this3.handleBuy();
+          return _this6.handleBuy();
         }
       }, "SUBMIT BUY") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button-Input-Sell",
         onClick: function onClick() {
-          return _this3.handleSell();
+          return _this6.handleSell();
         }
       }, "SUBMIT SELL");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Transaction-Box-Header"
+        className: "Transaction-Box-Header transaction-buy"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Buy",
         onClick: function onClick() {
-          return _this3.changeTransaction("BUY");
+          return _this6.changeTransaction("BUY");
         }
       }, "Buy ", this.props.stockInfo.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Header-Sell",
         onClick: function onClick() {
-          return _this3.changeTransaction("SELL");
+          return _this6.changeTransaction("SELL");
         }
       }, "Sell ", this.props.stockInfo.ticker_symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body"
@@ -1887,7 +1938,7 @@ function (_React$Component) {
         placeholder: "0",
         onChange: this.changeBuyShare,
         className: "Transaction-Number-Input",
-        min: "1"
+        min: "0"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.sharesPrice.toLocaleString('en', {
@@ -1898,6 +1949,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Estimated Cost "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sharesBuyingPrice))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button"
       }, submitTransaction), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Transaction-Box-Errors"
+      }, this.state.error), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Buying-Power"
@@ -1977,8 +2030,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _watch_list_items_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./watch_list_items_container */ "./frontend/component/home/watch_list/watch_list_items_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2026,24 +2077,6 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "handleCollapse",
-    value: function handleCollapse() {
-      var collapse = document.getElementsByClassName("collapse");
-
-      for (var i = 0; i < collapse.length; i++) {
-        collapse[i].addEventListener("click", function () {
-          this.classList.toggle("active");
-          var content = this.children;
-
-          if (content.style.display === "block") {
-            content.style.display = "none";
-          } else {
-            content.style.display = "block";
-          }
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -2057,10 +2090,10 @@ function (_React$Component) {
           key: idx
         });
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.handleCollapse,
-        className: "Watch-List-Container collapse"
-      }, "onClick", this.handleCollapse), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Watch-List-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Title"
@@ -2068,9 +2101,7 @@ function (_React$Component) {
         className: "Watch-List-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Items-Container"
-      }, stockList), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Watch-List-End"
-      })));
+      }, stockList)));
     }
   }]);
 
@@ -2785,9 +2816,6 @@ var transactionsReducer = function transactionsReducer() {
       return action.data;
 
     case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUY_TRANSACTION"]:
-      return action.data;
-
-    case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_STOCK"]:
       return action.data;
 
     case _actions_transactions_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SELL_TRANSACTION"]:

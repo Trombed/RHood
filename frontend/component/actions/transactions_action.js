@@ -4,7 +4,7 @@ import { buyStock, allStock, sellStock } from "../util/transaction_util"
 export const RECEIVE_BUY_TRANSACTION = 'RECEIVE_BUY_TRANSACTION'
 export const RECEIVE_SELL_TRANSACTION = 'RECEIVE_SELL_TRANSACTION'
 export const RECEIVE_ALL_STOCK = "RECEIVE_ALL_STOCK"
-export const RECEIVE_SINGLE_STOCK = 'RECEIVE_SINGLE_STOCK'
+
 
 const receiveBuyTransaction = (data) => ({
     type: RECEIVE_BUY_TRANSACTION,
@@ -21,10 +21,6 @@ const receiveAllStock = (data) => ({
     data
 })
 
-const receiveSingleStock = (data) => ({
-    type: RECEIVE_SINGLE_STOCK,
-    data
-})
 
 export const buyTransaction = (data) => (dispatch) => (
     buyStock(data)
