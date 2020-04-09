@@ -20,6 +20,9 @@ class MainContent extends React.Component {
                     <img src="/home-splash.svg" />
                     
                 </div>
+                <div>
+                    
+                </div>
                 
             </div>
         

@@ -923,7 +923,7 @@ function (_React$Component) {
         className: "Main-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/home-splash.svg"
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
     }
   }]);
 
@@ -4230,7 +4230,6 @@ __webpack_require__.r(__webpack_exports__);
 var companyInfoUtil = function companyInfoUtil(stockSymbol) {
   return $.ajax({
     method: "GET",
-    // url: `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_32c4503949d84fb08474ad85f5ac3329`
     url: "https://financialmodelingprep.com/api/v3/company/profile/".concat(stockSymbol)
   });
 };

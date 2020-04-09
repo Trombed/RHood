@@ -25,6 +25,7 @@ gem 'activestorage'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 gem 'rails_12factor'
+gem "figaro"
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
