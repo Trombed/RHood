@@ -1,8 +1,7 @@
 import React from 'react'
 import { LineChart, Line, Tooltip, Legend, YAxis, XAxis } from 'recharts';
 import { oneYearStats, threeMonthStats, oneMonthStats } from '../../util/stock_util';
-
-
+import News from '../news/news';
 
 
 class StockPage extends React.Component {
@@ -36,6 +35,7 @@ class StockPage extends React.Component {
      
         this.props.fetchStockFromDB(this.id)
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
+          .then (res => this.props.getNews(this.props.info.name))
           .then( res => this.props.watchListInfo())
           .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
@@ -52,6 +52,7 @@ class StockPage extends React.Component {
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
           .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )
+          
 
     
     }
@@ -62,6 +63,7 @@ class StockPage extends React.Component {
       if(this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
+        .then (res => this.props.getNews(this.props.info.name))
           .then( res => this.props.watchListInfo())
           .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
@@ -194,6 +196,9 @@ class StockPage extends React.Component {
       
 
           this.id = Number(this.props.match.params.id)
+          const news = (this.props.news.length <= 0) ? null : this.props.news.map( (page, idx) => (
+            <News page={page} idx={idx} key={`${idx}`} />
+          ))
          
           const renderLineChart = ( 
             <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
@@ -295,7 +300,12 @@ class StockPage extends React.Component {
                             {this.props.company.industry}
                         </div>
                     </div>
-                                
+                <div className="Main-News-Header">
+                    News
+                </div>
+                <div className="Main-News-Container">
+                    {news}
+                </div> 
   
             </div>
             

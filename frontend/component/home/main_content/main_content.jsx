@@ -1,38 +1,17 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-
+import News from '../news/news'
 class MainContent extends React.Component {
     constructor(props) {
         super(props)
     }
 
 
-    render(){
-        const news = this.props.news.map( (page, idx) => {
+    render() 
+    {
+        const news = this.props.news.map( (page, idx) => (
+            <News page={page} idx={idx} key={`${idx}`} />
+        ))
 
-
-            return (
-        
-      
-            <div className="Main-News-Single-News" key={idx}>
-                <a href={`${page.url}`}>
-                <div className="Main-News-Single-Source">
-                   {page.source.name}
-                </div>
-                <div className="Main-News-Content-Container">
-                    <div className="Main-News-Subcontent">
-                        <div>{page.title}</div>
-                        <div>{page.description}</div>
-                    </div>
-                    <div className="Main-News-Content-Image-Container">
-                        <img src={`${page.urlToImage}`} alt={`${page.content}`} className="Main-News-Content-Image" /></div>
-                </div>
-                </a>
-            </div>
-            )
-        })
-
-        console.log(this.props)
         return (
             <div className='Main-Container'>
                 <div className='Main-Container-Title'>
@@ -41,13 +20,11 @@ class MainContent extends React.Component {
 
                 <div className="Main-Container-Chart-Area"> 
                     <img src="/home-splash.svg" />
-                    
                 </div>
 
 
-
                 <div className="Main-News-Header">
-                    News: 
+                    News
                 </div>
                 <div className="Main-News-Container">
                     {news}

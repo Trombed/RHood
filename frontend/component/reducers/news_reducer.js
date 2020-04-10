@@ -7,10 +7,9 @@ const newsReducer = (state = {}, action) => {
   let nextState = Object.assign({}, state)
   switch (action.type) {
     case RECEIVE_NEWS:
-        debugger
-        return action.news
+        return action.news.articles
     case RECEIVE_ALL_NEWS:
-        debugger
+   
         return action.news.articles
     default:
       return state 

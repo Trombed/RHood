@@ -22,13 +22,15 @@
     margin: 0 auto;
     justify-content: center;
     overflow: visible;
-    
+    background-color: black;
     
 }
 
 .Splash-Carousel-Content {
     display: flex;
     flex-direction: row;
+    background-color: black;
+
 }
 
 
@@ -41,6 +43,8 @@
     align-items: center;
 	opacity: 1;
     transition: opacity .2s ease-in;
+    background-color: black;
+
 }
 
 
@@ -52,10 +56,13 @@
     display: inline-block;
     vertical-align: top;
     padding-left: 5vw;
+    background-color: black;
     
 }
 
 .carosel-nav-items {
+    background-color: black;
+
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -80,21 +87,28 @@
 }
 
 .Splash-Filler {
+    background-color: black;
+
     width: 10vw;
 }
 
 .Splash-Carousel-Nav-Arrow {
+    background-color: black;
+
     display: flex;
     justify-content: flex-end;
 }
 
 .Splash-Carousel-Image {
+    background-color: black;
+
     display: flex;
     height: 70vh;
     
 }
 
 .Splash-Carousel-Slide-Text-Title {
+    background-color: black;
     font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 65px;
     font-style: normal;
@@ -108,6 +122,8 @@
 }
 
 .Splash-Carousel-Slide-Text-Description {
+    background-color: black;
+
     font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-style: normal;
