@@ -19,3 +19,42 @@
 .Main-Container-Chart-Area {
     object-fit: contain;
 }
+
+.Main-News-Header {
+    font-size: 30px;
+}
+
+.Main-News-Container {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+}
+
+.Main-News-Single-News {
+    display: flex;
+    flex-direction: column;
+}
+
+.Main-News-Single-Title {
+    font-size: 30px;
+}
+
+.Main-News-Content-Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.Main-News-Subcontent {
+    display: flex;
+    flex-direction: column;
+}
+
+.Main-News-Content-Image-Container {
+    height: 300px;
+    width: 300px;
+}
+
+.Main-News-Content-Image {
+    height: 300px;
+    width: 300px;
+}

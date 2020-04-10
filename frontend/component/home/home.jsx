@@ -7,22 +7,24 @@ import WatchListContainer from './watch_list/watch_list_container';
 
 class Home extends React.Component {
     constructor(props) {
-        super(props)
+        super(props)    
     }
 
     componentDidMount() {
-   
+        // this.props.getAllNews()
     }
 
+
     render() {
+
         return(
                  <div className='homepage-container-night'>
                 <HomeNavBarContainer />
                 <div className='Home-Body-Container'>
                 
-                <MainContent />
+                <MainContent  news={this.props.news} />
                 
-                <WatchListContainer />
+                {/* <WatchListContainer /> */}
                 </div>  
             </div>
             

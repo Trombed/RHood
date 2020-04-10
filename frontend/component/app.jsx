@@ -12,7 +12,7 @@ import PortfolioHome from '../component/home/portfolio/portfolio_home'
 
 
 const App = () => (
-    <div>
+    <div className="App">
 
 
     <Switch>

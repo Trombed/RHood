@@ -7,7 +7,6 @@ import PortfolioContainer from './portfolio/portfolio_container'
 
 class HomeNavBar extends React.Component {
     constructor(props) {
-        
         super(props)
         this.state = {name: ""}
         this.logout = this.props.logout.bind(this)

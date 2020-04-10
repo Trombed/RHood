@@ -12,6 +12,6 @@ export const fetchNews = (stockName) => (
 export const fetchAllNews = () => (
         $.ajax({
             method: "GET",
-            url: `https://financialmodelingprep.com/api/v3/company/profile/${stockSymbol}`
+            url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=20b75c0584fd4cbb9c58cc639ba881eb`
         })
 )

@@ -86,6 +86,55 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/component/actions/news_action.js":
+/*!***************************************************!*\
+  !*** ./frontend/component/actions/news_action.js ***!
+  \***************************************************/
+/*! exports provided: RECEIVE_NEWS, RECEIVE_ALL_NEWS, getNews, getAllNews */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_NEWS", function() { return RECEIVE_NEWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_NEWS", function() { return RECEIVE_ALL_NEWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNews", function() { return getNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNews", function() { return getAllNews; });
+/* harmony import */ var _util_news_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/news_api_util */ "./frontend/component/util/news_api_util.js");
+
+var RECEIVE_NEWS = 'RECEIVE_NEWS';
+var RECEIVE_ALL_NEWS = 'RECEIVE_ALL_NEWS';
+
+var receiveNews = function receiveNews(news) {
+  return {
+    type: RECEIVE_NEWS,
+    news: news
+  };
+};
+
+var receiveAllNews = function receiveAllNews(news) {
+  return {
+    type: RECEIVE_ALL_NEWS,
+    news: news
+  };
+};
+
+var getNews = function getNews(name) {
+  return function (dispatch) {
+    return Object(_util_news_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchNews"])(name).then(function (res) {
+      return dispatch(receiveNews(res));
+    });
+  };
+};
+var getAllNews = function getAllNews() {
+  return function (dispatch) {
+    return Object(_util_news_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllNews"])().then(function (res) {
+      return dispatch(receiveAllNews(res));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/component/actions/session_action.js":
 /*!******************************************************!*\
   !*** ./frontend/component/actions/session_action.js ***!
@@ -518,7 +567,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "App"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     exact: true,
     path: "/home",
     component: _home_home_container__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -597,7 +648,8 @@ function (_React$Component) {
 
   _createClass(Home, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {// this.props.getAllNews()
+    }
   }, {
     key: "render",
     value: function render() {
@@ -605,7 +657,9 @@ function (_React$Component) {
         className: "homepage-container-night"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        news: this.props.news
+      })));
     }
   }]);
 
@@ -628,13 +682,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ "./frontend/component/home/home.jsx");
+/* harmony import */ var _actions_news_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/news_action */ "./frontend/component/actions/news_action.js");
+
 
 
 
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    news: Object.values(state.news)
   };
 };
 
@@ -642,6 +699,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     logout: function logout() {
       return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_1__["logout"])());
+    },
+    getAllNews: function getAllNews() {
+      return dispatch(Object(_actions_news_action__WEBPACK_IMPORTED_MODULE_3__["getAllNews"])());
     }
   };
 };
@@ -881,6 +941,7 @@ var HomePageLogo = function HomePageLogo() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -901,6 +962,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var MainContent =
 /*#__PURE__*/
 function (_React$Component) {
@@ -915,6 +977,27 @@ function (_React$Component) {
   _createClass(MainContent, [{
     key: "render",
     value: function render() {
+      var news = this.props.news.map(function (page, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "Main-News-Single-News",
+          key: idx
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "".concat(page.url)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "Main-News-Single-Title"
+        }, page.source.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "Main-News-Content-Container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "Main-News-Subcontent"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, page.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, page.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "Main-News-Content-Image-Container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "".concat(page.urlToImage),
+          alt: "".concat(page.content),
+          className: "Main-News-Content-Image"
+        })))));
+      });
+      console.log(this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -923,7 +1006,27 @@ function (_React$Component) {
         className: "Main-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/home-splash.svg"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-Container-Chart-Area"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/home-splash.svg"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-Container-Chart-Area"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/home-splash.svg"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-Container-Chart-Area"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/home-splash.svg"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-Container-Chart-Area"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/home-splash.svg"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-News-Header"
+      }, "News:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Main-News-Container"
+      }, news));
     }
   }]);
 
@@ -1659,7 +1762,7 @@ function (_React$Component) {
         className: "Stock-Container-Description"
       }, this.props.company.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "test");
     }
   }]);
 
@@ -2392,6 +2495,42 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"]
 
 /***/ }),
 
+/***/ "./frontend/component/reducers/news_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/component/reducers/news_reducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_news_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/news_action */ "./frontend/component/actions/news_action.js");
+
+
+var newsReducer = function newsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_news_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NEWS"]:
+      debugger;
+      return action.news;
+
+    case _actions_news_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_NEWS"]:
+      debugger;
+      return action.news.articles;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (newsReducer);
+
+/***/ }),
+
 /***/ "./frontend/component/reducers/portfolio_price_reducer.js":
 /*!****************************************************************!*\
   !*** ./frontend/component/reducers/portfolio_price_reducer.js ***!
@@ -2448,6 +2587,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./transaction_reducer */ "./frontend/component/reducers/transaction_reducer.js");
 /* harmony import */ var _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./portfolio_price_reducer */ "./frontend/component/reducers/portfolio_price_reducer.js");
 /* harmony import */ var _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./stock_share_reducer */ "./frontend/component/reducers/stock_share_reducer.js");
+/* harmony import */ var _news_reducer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./news_reducer */ "./frontend/component/reducers/news_reducer.js");
+
 
 
 
@@ -2479,7 +2620,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
   portfolio: _transaction_reducer__WEBPACK_IMPORTED_MODULE_13__["default"],
   portfolioPrices: _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__["default"],
-  stockShares: _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__["default"]
+  stockShares: _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__["default"],
+  news: _news_reducer__WEBPACK_IMPORTED_MODULE_16__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -4063,6 +4205,33 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/component/util/news_api_util.js":
+/*!**************************************************!*\
+  !*** ./frontend/component/util/news_api_util.js ***!
+  \**************************************************/
+/*! exports provided: fetchNews, fetchAllNews */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchNews", function() { return fetchNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllNews", function() { return fetchAllNews; });
+//20b75c0584fd4cbb9c58cc639ba881eb key 
+var fetchNews = function fetchNews(stockName) {
+  return $.ajax({
+    method: "GET",
+    url: "https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=20b75c0584fd4cbb9c58cc639ba881eb"
+  });
+};
+var fetchAllNews = function fetchAllNews() {
+  return $.ajax({
+    method: "GET",
+    url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=20b75c0584fd4cbb9c58cc639ba881eb"
+  });
+};
 
 /***/ }),
 
