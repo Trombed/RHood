@@ -21,7 +21,9 @@
 }
 
 .Main-News-Header {
+    padding: 50px 0px;
     font-size: 30px;
+    border-bottom: 1px solid white;
 }
 
 .Main-News-Container {
@@ -33,15 +35,23 @@
 .Main-News-Single-News {
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid white;
+    overflow: hidden;
+    padding: 20px 5px 20px 5px;
+    
 }
 
-.Main-News-Single-Title {
-    font-size: 30px;
+.Main-News-Single-Source {
+    font-size: 16px;
+    font-weight: 700;
+
 }
 
 .Main-News-Content-Container {
     display: flex;
     flex-direction: row;
+    color: #79858b;
+    font-size: 20px;
 }
 
 .Main-News-Subcontent {
@@ -50,11 +60,13 @@
 }
 
 .Main-News-Content-Image-Container {
-    height: 300px;
+    height: 200px;
     width: 300px;
+    object-fit: cover;
 }
 
 .Main-News-Content-Image {
     height: 300px;
     width: 300px;
+ 
 }

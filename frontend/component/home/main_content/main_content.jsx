@@ -16,7 +16,7 @@ class MainContent extends React.Component {
       
             <div className="Main-News-Single-News" key={idx}>
                 <a href={`${page.url}`}>
-                <div className="Main-News-Single-Title">
+                <div className="Main-News-Single-Source">
                    {page.source.name}
                 </div>
                 <div className="Main-News-Content-Container">
@@ -45,24 +45,7 @@ class MainContent extends React.Component {
                 </div>
 
 
-{/*  */}
-      <div className="Main-Container-Chart-Area"> 
-                    <img src="/home-splash.svg" />
-                    
-                </div>
-                <div className="Main-Container-Chart-Area"> 
-                    <img src="/home-splash.svg" />
-                    
-                </div>           
-                <div className="Main-Container-Chart-Area"> 
-                    <img src="/home-splash.svg" />
-                    
-                </div>
-                <div className="Main-Container-Chart-Area"> 
-                    <img src="/home-splash.svg" />
-                    
-                </div>
-                {/*  */}
+
                 <div className="Main-News-Header">
                     News: 
                 </div>

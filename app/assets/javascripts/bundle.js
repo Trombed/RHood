@@ -648,7 +648,8 @@ function (_React$Component) {
 
   _createClass(Home, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// this.props.getAllNews()
+    value: function componentDidMount() {
+      this.props.getAllNews();
     }
   }, {
     key: "render",
@@ -842,8 +843,6 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/portfolio"
       }, "Portfolio")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "homepage-nav-separator"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-2",
         onClick: this.props.logout
       }, "Account")));
@@ -984,7 +983,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "".concat(page.url)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "Main-News-Single-Title"
+          className: "Main-News-Single-Source"
         }, page.source.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "Main-News-Content-Container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1003,22 +1002,6 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-Container-Title"
       }, "Welcome to RobinHood"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container-Chart-Area"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/home-splash.svg"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container-Chart-Area"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/home-splash.svg"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container-Chart-Area"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/home-splash.svg"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container-Chart-Area"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/home-splash.svg"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/home-splash.svg"
@@ -1762,7 +1745,7 @@ function (_React$Component) {
         className: "Stock-Container-Description"
       }, this.props.company.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "test");
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)));
     }
   }]);
 

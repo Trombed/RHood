@@ -80,7 +80,7 @@ class HomeNavBar extends React.Component {
                     Portfolio
                     </Link>
                 </div>
-                <div className='homepage-nav-separator'></div>
+                
                 <div className='homepage-nav-item-2' onClick={this.props.logout}>
                     Account
                 </div>
