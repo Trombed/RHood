@@ -10,7 +10,7 @@ import { getNews } from "../../actions/news_action";
 
 const mSTP = (state, ownProps) => ({
     company: state.stockProfile,
-    price: state.stockPrice,
+    oneDayPrice: state.stockPrice,
     info: state.stockInfo,
     oneWeekPrice: state.stockOneWeekPrice,
     fiveYearPrice: state.stockFiveYearPrice,

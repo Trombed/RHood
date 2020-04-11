@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineChart, Line, Tooltip, Legend, YAxis, XAxis } from 'recharts';
+import { LineChart, Line, Tooltip, YAxis, XAxis } from 'recharts';
 import { oneYearStats, threeMonthStats, oneMonthStats } from '../../util/stock_util';
 import News from '../news/news';
 
@@ -11,8 +11,7 @@ class StockPage extends React.Component {
             price: 0,
             change: 0,
             percentageChange: 0,
-            chartData: this.props.price
-
+            chartData: this.props.oneDayPrice
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.handleChartOneDayData = this.handleChartOneDayData.bind(this)
@@ -40,26 +39,22 @@ class StockPage extends React.Component {
           .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
           .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          .then(res => this.setState({ chartData: this.props.price}))
+          .then(res => this.setState({ chartData: this.props.oneDayPrice}))
           .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
           .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
           .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
           .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
           .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
-          .then( res => this.oneDayColor = this.setColor(this.props.price) )
+          .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
           .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekPrice) )
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
-          .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )
-          
-
-    
+          .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )    
     }
 
 
     componentDidUpdate(prevProp, prevState) {
-
       if(this.props.match.params.id !== prevProp.match.params.id) {
         this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
@@ -68,20 +63,18 @@ class StockPage extends React.Component {
           .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
           .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
-          .then(res => this.setState({ chartData: this.props.price}))
+          .then(res => this.setState({ chartData: this.props.oneDayPrice}))
           .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
           .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
           .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
           .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
           .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
-          .then( res => this.oneDayColor = this.setColor(this.props.price) )
+          .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
           .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekPrice) )
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
           .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )
-         
-  
 
       }
     }
@@ -90,8 +83,6 @@ class StockPage extends React.Component {
       if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
       this.setState({ 
         price: e.activePayload[0].value.toLocaleString('en', {style: 'currency', currency:"USD"}),
-        // change: (e.activePayload[0].value - e.activePayload[0].payload.close).toFixed(2),
-        // percentageChange: ((e.activePayload[0].payload.open - e.activePayload[0].payload.close) / 100).toFixed(2),
       })
     }
 
@@ -104,72 +95,106 @@ class StockPage extends React.Component {
 
     dataColor() {
       let colorValue = ( (Object.values(this.state.chartData).length === 0 ) || (this.state.chartData.length === 0) || (this.state.chartData[0].close === undefined )) ? "yellow" :
-      (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531"
-
-      return colorValue
- 
-
+      (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531";
+      return colorValue;
     }
 
 
     removeHighlight() {
-      $(".Stock-Chart-Active").css({"color": "", "border-color": ""})
-     let nonActive = document.getElementsByClassName("Stock-Chart-Active")
-     nonActive[0].classList.remove("Stock-Chart-Active")
+     $(".Stock-Chart-Active").css(
+      {
+        "color": "white",
+        "border-color": "black"
+      })
+      $(".Stock-Chart-Active").removeClass("Stock-Chart-Active")
+
     }
 
     handleChartOneDayData() {
-      console.log(this.oneDayColor)
-      this.removeHighlight()
-      
       this.setState({ 
-        chartData: this.props.price
+        chartData: this.props.oneDayPrice
+      }, () => {
+        this.removeHighlight();
+        $(".Stock-Button-1D").addClass(`Stock-Chart-Active`);
+        $(".Stock-Chart-Active").css(
+          {
+            "color": `${this.oneDayColor}`,
+            "border-color": `${this.oneDayColor}`
+          })
       })
+
  
     }
    
     handleChartOneWeekData() {
-      this.removeHighlight()
-
       this.setState({ 
         chartData: this.props.oneWeekPrice
+      }, () => {
+        this.removeHighlight();
+        $(".Stock-Button-1W ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Chart-Active").css(
+          {
+            "color": `${this.oneWeekColor}`,
+            "border-color": `${this.oneWeekColor}`
+          })
       })
 
     }
 
   
     handleChartOneMonthData() {
-      this.removeHighlight()
       this.setState({ 
         chartData: this.oneMonthData
-      })
-
-
+      },  () => {
+          this.removeHighlight();
+          $(".Stock-Button-1M ").addClass(`Stock-Chart-Active`);
+          $(".Stock-Chart-Active").css(
+            {
+              "color": `${this.oneMonthColor}`,
+              "border-color": `${this.oneMonthColor}`
+            })
+        })
     }
 
     handleChartThreeMonthData() {
-    
-      this.removeHighlight()
       this.setState({ 
         chartData: this.threeMonthData
+      }, () => {
+        this.removeHighlight();
+        $(".Stock-Button-3M ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Chart-Active").css(
+          {
+            "color": `${this.threeMonthColor}`,
+            "border-color": `${this.threeMonthColor}`
+          })
       })
-
-
     }
 
     handleChartOneYearData() {
-      this.removeHighlight()
-      console.log(this.oneYearColor)
-
       this.setState({ 
         chartData: this.oneYearData
+      },  () => {
+        this.removeHighlight();
+        $(".Stock-Button-1Y ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Chart-Active").css(
+          {
+            "color": `${this.oneYearColor}`,
+            "border-color": `${this.oneYearColor}`
+          })
       })
     }
 
     handleChartFiveYearData() {
-      this.removeHighlight()
       this.setState({ 
         chartData: this.props.fiveYearPrice
+      },  () => {
+        this.removeHighlight();
+        $(".Stock-Button-5Y ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Chart-Active").css(
+          {
+            "color": `${this.fiveYearColor}`,
+            "border-color": `${this.fiveYearColor}`
+          })
       })
 
 
@@ -259,9 +284,11 @@ class StockPage extends React.Component {
                 <div className="Stock-Container-Chart-Navigation">
                     <div className="Stock-Container-Chart-Time">
                         <button className="Stock-Button-1D Stock-Chart-Active" onClick={this.handleChartOneDayData} >1D</button>
-                        <button className="Stock-Button-1W" onClick={this.handleChartOneWeekData} >1W</button>
-                        <button className="Stock-Button-1M" onClick={this.handleChartOneMonthData} >1M</button>
-                        <button className="Stock-Button-3M" onClick={this.handleChartThreeMonthData} >3M</button>
+                        <button className="Stock-Button-1W Chart-Color-Active" onClick={this.handleChartOneWeekData} >1W</button>
+                        <button className="Stock-Button-1M 
+                        Chart-Color-Active" onClick={this.handleChartOneMonthData} >1M</button>
+                        <button className="Stock-Button-3M
+                        Chart-Color-Active" onClick={this.handleChartThreeMonthData} >3M</button>
                         <button className="Stock-Button-1Y" onClick={this.handleChartOneYearData} >1Y</button>
                         <button className="Stock-Button-5Y" onClick={this.handleChartFiveYearData} >5Y</button>
                     </div>

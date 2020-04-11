@@ -2,7 +2,7 @@ import { RECEIVE_NEWS, RECEIVE_ALL_NEWS } from "../actions/news_action"
 
 
 
-const newsReducer = (state = {}, action) => {
+const newsReducer = (state = [], action) => {
   Object.freeze(state) 
   let nextState = Object.assign({}, state)
   switch (action.type) {

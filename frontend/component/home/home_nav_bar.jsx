@@ -82,7 +82,7 @@ class HomeNavBar extends React.Component {
                 </div>
                 
                 <div className='homepage-nav-item-2' onClick={this.props.logout}>
-                    Account
+                    Logout
                 </div>
             </ul>
             

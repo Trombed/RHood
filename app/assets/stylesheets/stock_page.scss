@@ -147,6 +147,7 @@
 
 [class^="Stock-Button"]:hover {
     color: #21ce99;
+    cursor: pointer;
 }
 
 .Stock-Label-Date {
@@ -173,29 +174,4 @@
     margin-bottom: -1px;
 }
 
-.Stock-Chart-1-Day {
-    color: #21ce99;
-}
-
-.Stock-Chart-1-Week {
-    color: #f45531;
-}
-
-
-.Stock-Chart-1-Month {
-    color: #f45531;
-}
-
-
-.Stock-Chart-3-Month {
-    color: #21ce99;
-}
-
-.Stock-Chart-1-Year {
-    color: #21ce99;
-}
-
-.Stock-Chart-5-Year {
-    color: #f45531;
-}
 
