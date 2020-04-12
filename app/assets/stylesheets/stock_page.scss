@@ -143,12 +143,13 @@
     margin: 0px 12px;
     padding: 0px 0px 12px;
     outline: none;
-}
-
-[class^="Stock-Button"]:hover {
-    color: #21ce99;
     cursor: pointer;
 }
+
+// [class^="Stock-Button"]:hover {
+//     color: #21ce99;
+//     cursor: pointer;
+// }
 
 .Stock-Label-Date {
     display: flex;

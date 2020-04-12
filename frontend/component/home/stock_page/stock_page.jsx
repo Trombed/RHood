@@ -50,7 +50,8 @@ class StockPage extends React.Component {
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
-          .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )    
+          .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
+          .then( res => this.handleChartOneDayData) 
     }
 
 
@@ -75,6 +76,7 @@ class StockPage extends React.Component {
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
           .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )
+          .then( res => this.handleChartOneDayData())
 
       }
     }
@@ -106,6 +108,8 @@ class StockPage extends React.Component {
         "color": "white",
         "border-color": "black"
       })
+      $(".Stock-Chart-Active").hover( () =>  
+        $(".Stock-Chart-Active").css("color", "green"))
       $(".Stock-Chart-Active").removeClass("Stock-Chart-Active")
 
     }
@@ -115,7 +119,7 @@ class StockPage extends React.Component {
         chartData: this.props.oneDayPrice
       }, () => {
         this.removeHighlight();
-        $(".Stock-Button-1D").addClass(`Stock-Chart-Active`);
+        $(".Stock-Button-oneDay").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.oneDayColor}`,
@@ -131,7 +135,7 @@ class StockPage extends React.Component {
         chartData: this.props.oneWeekPrice
       }, () => {
         this.removeHighlight();
-        $(".Stock-Button-1W ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Button-oneWeek ").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.oneWeekColor}`,
@@ -147,7 +151,7 @@ class StockPage extends React.Component {
         chartData: this.oneMonthData
       },  () => {
           this.removeHighlight();
-          $(".Stock-Button-1M ").addClass(`Stock-Chart-Active`);
+          $(".Stock-Button-oneMonth ").addClass(`Stock-Chart-Active`);
           $(".Stock-Chart-Active").css(
             {
               "color": `${this.oneMonthColor}`,
@@ -161,7 +165,7 @@ class StockPage extends React.Component {
         chartData: this.threeMonthData
       }, () => {
         this.removeHighlight();
-        $(".Stock-Button-3M ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Button-threeMonth ").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.threeMonthColor}`,
@@ -175,7 +179,7 @@ class StockPage extends React.Component {
         chartData: this.oneYearData
       },  () => {
         this.removeHighlight();
-        $(".Stock-Button-1Y ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Button-oneYear ").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.oneYearColor}`,
@@ -189,7 +193,7 @@ class StockPage extends React.Component {
         chartData: this.props.fiveYearPrice
       },  () => {
         this.removeHighlight();
-        $(".Stock-Button-5Y ").addClass(`Stock-Chart-Active`);
+        $(".Stock-Button-fiveYear ").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.fiveYearColor}`,
@@ -283,17 +287,15 @@ class StockPage extends React.Component {
 
                 <div className="Stock-Container-Chart-Navigation">
                     <div className="Stock-Container-Chart-Time">
-                        <button className="Stock-Button-1D Stock-Chart-Active" onClick={this.handleChartOneDayData} >1D</button>
-                        <button className="Stock-Button-1W Chart-Color-Active" onClick={this.handleChartOneWeekData} >1W</button>
-                        <button className="Stock-Button-1M 
-                        Chart-Color-Active" onClick={this.handleChartOneMonthData} >1M</button>
-                        <button className="Stock-Button-3M
-                        Chart-Color-Active" onClick={this.handleChartThreeMonthData} >3M</button>
-                        <button className="Stock-Button-1Y" onClick={this.handleChartOneYearData} >1Y</button>
-                        <button className="Stock-Button-5Y" onClick={this.handleChartFiveYearData} >5Y</button>
+                        <button className="Stock-Button-oneDay Stock-Chart-Active" onClick={this.handleChartOneDayData} >1D</button>
+                        <button className="Stock-Button-oneWeek" onClick={this.handleChartOneWeekData} >1W</button>
+                        <button className="Stock-Button-oneMonth" onClick={this.handleChartOneMonthData} >1M</button>
+                        <button className="Stock-Button-threeMonth" onClick={this.handleChartThreeMonthData} >3M</button>
+                        <button className="Stock-Button-oneYear" onClick={this.handleChartOneYearData} >1Y</button>
+                        <button className="Stock-Button-fiveYear" onClick={this.handleChartFiveYearData} >5Y</button>
                     </div>
                     <div className="Stock-Container-Chart-Expand">
-                        Expand []
+                       
                     </div>
                 </div>
                     <div className="Stock-Container-About">

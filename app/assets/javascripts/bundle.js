@@ -1583,6 +1583,8 @@ function (_React$Component) {
         return _this2.oneYearColor = _this2.setColor(_this2.oneYearData);
       }).then(function (res) {
         return _this2.fiveYearColor = _this2.setColor(_this2.props.fiveYearPrice);
+      }).then(function (res) {
+        return _this2.handleChartOneDayData;
       });
     }
   }, {
@@ -1631,6 +1633,8 @@ function (_React$Component) {
           return _this3.oneYearColor = _this3.setColor(_this3.oneYearData);
         }).then(function (res) {
           return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
+        }).then(function (res) {
+          return _this3.handleChartOneDayData();
         });
       }
     }
@@ -1664,6 +1668,9 @@ function (_React$Component) {
         "color": "white",
         "border-color": "black"
       });
+      $(".Stock-Chart-Active").hover(function () {
+        return $(".Stock-Chart-Active").css("color", "green");
+      });
       $(".Stock-Chart-Active").removeClass("Stock-Chart-Active");
     }
   }, {
@@ -1676,7 +1683,7 @@ function (_React$Component) {
       }, function () {
         _this4.removeHighlight();
 
-        $(".Stock-Button-1D").addClass("Stock-Chart-Active");
+        $(".Stock-Button-oneDay").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this4.oneDayColor),
           "border-color": "".concat(_this4.oneDayColor)
@@ -1693,7 +1700,7 @@ function (_React$Component) {
       }, function () {
         _this5.removeHighlight();
 
-        $(".Stock-Button-1W ").addClass("Stock-Chart-Active");
+        $(".Stock-Button-oneWeek ").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this5.oneWeekColor),
           "border-color": "".concat(_this5.oneWeekColor)
@@ -1710,7 +1717,7 @@ function (_React$Component) {
       }, function () {
         _this6.removeHighlight();
 
-        $(".Stock-Button-1M ").addClass("Stock-Chart-Active");
+        $(".Stock-Button-oneMonth ").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this6.oneMonthColor),
           "border-color": "".concat(_this6.oneMonthColor)
@@ -1727,7 +1734,7 @@ function (_React$Component) {
       }, function () {
         _this7.removeHighlight();
 
-        $(".Stock-Button-3M ").addClass("Stock-Chart-Active");
+        $(".Stock-Button-threeMonth ").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this7.threeMonthColor),
           "border-color": "".concat(_this7.threeMonthColor)
@@ -1744,7 +1751,7 @@ function (_React$Component) {
       }, function () {
         _this8.removeHighlight();
 
-        $(".Stock-Button-1Y ").addClass("Stock-Chart-Active");
+        $(".Stock-Button-oneYear ").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this8.oneYearColor),
           "border-color": "".concat(_this8.oneYearColor)
@@ -1761,7 +1768,7 @@ function (_React$Component) {
       }, function () {
         _this9.removeHighlight();
 
-        $(".Stock-Button-5Y ").addClass("Stock-Chart-Active");
+        $(".Stock-Button-fiveYear ").addClass("Stock-Chart-Active");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this9.fiveYearColor),
           "border-color": "".concat(_this9.fiveYearColor)
@@ -1848,26 +1855,26 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Time"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1D Stock-Chart-Active",
+        className: "Stock-Button-oneDay Stock-Chart-Active",
         onClick: this.handleChartOneDayData
       }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1W Chart-Color-Active",
+        className: "Stock-Button-oneWeek",
         onClick: this.handleChartOneWeekData
       }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1M  Chart-Color-Active",
+        className: "Stock-Button-oneMonth",
         onClick: this.handleChartOneMonthData
       }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-3M Chart-Color-Active",
+        className: "Stock-Button-threeMonth",
         onClick: this.handleChartThreeMonthData
       }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-1Y",
+        className: "Stock-Button-oneYear",
         onClick: this.handleChartOneYearData
       }, "1Y"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-5Y",
+        className: "Stock-Button-fiveYear",
         onClick: this.handleChartFiveYearData
       }, "5Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Expand"
-      }, "Expand []")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-About"
       }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Description"
