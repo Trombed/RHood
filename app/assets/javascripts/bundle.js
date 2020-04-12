@@ -1668,9 +1668,7 @@ function (_React$Component) {
         "color": "white",
         "border-color": "black"
       });
-      $(".Stock-Chart-Active").hover(function () {
-        return $(".Stock-Chart-Active").css("color", "green");
-      });
+      $(".Stock-Chart-Active").addClass("Stock-Label");
       $(".Stock-Chart-Active").removeClass("Stock-Chart-Active");
     }
   }, {
@@ -1718,6 +1716,7 @@ function (_React$Component) {
         _this6.removeHighlight();
 
         $(".Stock-Button-oneMonth ").addClass("Stock-Chart-Active");
+        $(".Stock-Chart-Active").addClass("Stock-Label");
         $(".Stock-Chart-Active").css({
           "color": "".concat(_this6.oneMonthColor),
           "border-color": "".concat(_this6.oneMonthColor)
@@ -1855,10 +1854,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Time"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneDay Stock-Chart-Active",
+        className: "Stock-Button-oneDay Stock-Chart-Active Stock-Label",
         onClick: this.handleChartOneDayData
       }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneWeek",
+        className: "Stock-Button-oneWeek Stock-Label",
         onClick: this.handleChartOneWeekData
       }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "Stock-Button-oneMonth",

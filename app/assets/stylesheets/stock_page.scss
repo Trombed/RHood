@@ -146,10 +146,10 @@
     cursor: pointer;
 }
 
-// [class^="Stock-Button"]:hover {
-//     color: #21ce99;
-//     cursor: pointer;
-// }
+[class^="Stock-Button"]:hover {
+    color: #21ce99 !important;
+    cursor: pointer;
+}
 
 .Stock-Label-Date {
     display: flex;
@@ -175,4 +175,6 @@
     margin-bottom: -1px;
 }
 
-
+.Stock-Label:hover {
+    color: blue;
+}

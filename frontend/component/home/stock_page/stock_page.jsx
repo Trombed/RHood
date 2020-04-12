@@ -103,31 +103,29 @@ class StockPage extends React.Component {
 
 
     removeHighlight() {
-     $(".Stock-Chart-Active").css(
-      {
-        "color": "white",
-        "border-color": "black"
-      })
-      $(".Stock-Chart-Active").hover( () =>  
-        $(".Stock-Chart-Active").css("color", "green"))
+      $(".Stock-Chart-Active").css(
+        {
+          "color": "white",
+          "border-color": "black"
+        })
+        $(".Stock-Chart-Active").addClass("Stock-Label")
       $(".Stock-Chart-Active").removeClass("Stock-Chart-Active")
-
     }
 
     handleChartOneDayData() {
       this.setState({ 
         chartData: this.props.oneDayPrice
       }, () => {
-        this.removeHighlight();
+        this.removeHighlight()
         $(".Stock-Button-oneDay").addClass(`Stock-Chart-Active`);
+
         $(".Stock-Chart-Active").css(
           {
             "color": `${this.oneDayColor}`,
             "border-color": `${this.oneDayColor}`
           })
       })
-
- 
+      
     }
    
     handleChartOneWeekData() {
@@ -135,6 +133,7 @@ class StockPage extends React.Component {
         chartData: this.props.oneWeekPrice
       }, () => {
         this.removeHighlight();
+        
         $(".Stock-Button-oneWeek ").addClass(`Stock-Chart-Active`);
         $(".Stock-Chart-Active").css(
           {
@@ -152,6 +151,7 @@ class StockPage extends React.Component {
       },  () => {
           this.removeHighlight();
           $(".Stock-Button-oneMonth ").addClass(`Stock-Chart-Active`);
+          $(".Stock-Chart-Active").addClass("Stock-Label")
           $(".Stock-Chart-Active").css(
             {
               "color": `${this.oneMonthColor}`,
@@ -287,8 +287,8 @@ class StockPage extends React.Component {
 
                 <div className="Stock-Container-Chart-Navigation">
                     <div className="Stock-Container-Chart-Time">
-                        <button className="Stock-Button-oneDay Stock-Chart-Active" onClick={this.handleChartOneDayData} >1D</button>
-                        <button className="Stock-Button-oneWeek" onClick={this.handleChartOneWeekData} >1W</button>
+                        <button className="Stock-Button-oneDay Stock-Chart-Active Stock-Label" onClick={this.handleChartOneDayData} >1D</button>
+                        <button className="Stock-Button-oneWeek Stock-Label" onClick={this.handleChartOneWeekData} >1W</button>
                         <button className="Stock-Button-oneMonth" onClick={this.handleChartOneMonthData} >1M</button>
                         <button className="Stock-Button-threeMonth" onClick={this.handleChartThreeMonthData} >3M</button>
                         <button className="Stock-Button-oneYear" onClick={this.handleChartOneYearData} >1Y</button>
