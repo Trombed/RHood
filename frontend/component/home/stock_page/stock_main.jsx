@@ -29,7 +29,7 @@ class StockMain extends React.Component {
 
                     <div className='Stock-Main-Util'> 
                 <TransactionBoxContainer stockId={stockId}/>
-                <WatchListButtonContainer stockId={stockId} />
+                {/* <WatchListButtonContainer stockId={stockId} /> */}
                     </div>
                
                 </div> 

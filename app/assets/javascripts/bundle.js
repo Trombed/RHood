@@ -765,7 +765,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeNavBar).call(this, props));
     _this.state = {
-      name: ""
+      name: null
     };
     _this.logout = _this.props.logout.bind(_assertThisInitialized(_this));
     _this.stock_search = _this.props.stock_search.bind(_assertThisInitialized(_this));
@@ -1425,8 +1425,6 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Main-Util"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        stockId: stockId
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         stockId: stockId
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_splash_footer__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
