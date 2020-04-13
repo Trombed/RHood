@@ -1,5 +1,5 @@
 .Portfolio-Table {
-    width: 100%;
+
     
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -31,6 +31,7 @@
 .Portfolio-Container {
     padding-left: 20vw;
     padding-top: 2vh;
+    min-height: 72vh;
 }
 
 .Portfolio-Buying {
@@ -38,3 +39,4 @@
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     padding-bottom: 20px;
 }
+

@@ -7,7 +7,7 @@
 
 .homepage-container-day {
     background-color: #1b1b1b;
-    opacity: 84.7%;
+    // opacity: 84.7%;
     color: black;
     height: 9vh;
 
@@ -140,7 +140,7 @@
 }
 
 i.fas {
-    opacity: 50%;
+    // opacity: 50%;
 }
 
 
@@ -193,6 +193,7 @@ i.fas {
     flex-direction: row;
     height: auto;
     padding-bottom: 20px;
+    min-height: 100%;
     // overflow-x: hidden;
 }
 

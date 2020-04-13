@@ -81,7 +81,7 @@ class Portfolio extends React.Component {
   
 
         return (
-            <div className="Main-Container">
+            <div className="Portfolio-Container">
             
                 <div className="Portfolio-Buying">
                     Current Buying Power: {this.props.currentUser[0].funds.toLocaleString('en', {style: 'currency', currency:"USD"}) }

@@ -1,10 +1,10 @@
 import React from 'react'
-
 import HomeNavBarContainer from "../home_nav_bar_container"
 import StockPageContainer from './stock_page_container';
 import { Route, Switch } from 'react-router-dom'
 import WatchListButtonContainer from '../watch_list_button/watch_list_button_container';
 import TransactionBoxContainer from '../transaction_box/transaction_box_container';
+import SplashFooter from '../../splash/splash_footer';
 
 
 
@@ -31,7 +31,9 @@ class StockMain extends React.Component {
                 <TransactionBoxContainer stockId={stockId}/>
                 <WatchListButtonContainer stockId={stockId} />
                     </div>
-                </div>  
+               
+                </div> 
+                <SplashFooter /> 
             </div>
             
             )
