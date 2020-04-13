@@ -23,6 +23,7 @@
     box-shadow: 0px 1vh 20px 2px black;
     transition-timing-function: 0.2 ease-in;
     width: 23vw;
+
 }
 
 .Search-Bar-Result-List:hover {
@@ -37,6 +38,7 @@
     padding-bottom: 1vw;
     text-overflow: ellipsis;
     overflow: hidden;
+    z-index: 100;
     
 }
 

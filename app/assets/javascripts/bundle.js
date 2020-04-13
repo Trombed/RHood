@@ -4360,19 +4360,18 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchNews", function() { return fetchNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllNews", function() { return fetchAllNews; });
-//20b75c0584fd4cbb9c58cc639ba881eb key 
 var fetchNews = function fetchNews(stockName) {
   var name = stockName.split(" ");
   console.log(name);
   return $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/everything?q=".concat(name[0], "&apiKey=20b75c0584fd4cbb9c58cc639ba881eb")
+    url: "https://newsapi.org/v2/everything?q=".concat(name[0], "&apiKey=").concat(window.newsAPIKey)
   });
 };
 var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=20b75c0584fd4cbb9c58cc639ba881eb"
+    url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
   });
 };
 
