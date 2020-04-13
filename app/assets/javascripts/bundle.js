@@ -2013,7 +2013,7 @@ function (_React$Component) {
       shareToBuy: 0,
       sharesBuyingPrice: 0,
       currentlyOwned: 0,
-      funds: 0,
+      funds: _this.props.currentUser.funds,
       error: null
     };
     _this.changeBuyShare = _this.changeBuyShare.bind(_assertThisInitialized(_this));

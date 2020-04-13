@@ -12,7 +12,7 @@ class TransactionBox extends React.Component {
             shareToBuy: 0,
             sharesBuyingPrice: 0,
             currentlyOwned: 0,
-            funds: 0,
+            funds: this.props.currentUser.funds,
             error: null
         }
         this.changeBuyShare = this.changeBuyShare.bind(this)
