@@ -21,7 +21,7 @@ class PortfolioHome extends React.Component {
                 <div className='Home-Body-Container'>
                 
                 <PortfolioContainer />
-                <WatchListContainer />
+                {/* <WatchListContainer /> */}
                 </div>  
                 <SplashFooter />
             </div>

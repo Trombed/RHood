@@ -1345,7 +1345,7 @@ function (_React$Component) {
         className: "homepage-container-night"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Home-Body-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_splash_footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_splash_footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
   }]);
 
