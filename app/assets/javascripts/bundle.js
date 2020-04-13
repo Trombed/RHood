@@ -660,7 +660,7 @@ function (_React$Component) {
         className: "Home-Body-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_content_main_content__WEBPACK_IMPORTED_MODULE_1__["default"], {
         news: this.props.news
-      })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_watch_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 
@@ -836,7 +836,7 @@ function (_React$Component) {
         className: "Search-Bar-Result-List"
       }, results)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Nav-Bar-Filler"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "homepage-nav-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"
@@ -845,7 +845,7 @@ function (_React$Component) {
       }, "Portfolio")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-2",
         onClick: this.props.logout
-      }, "Logout")));
+      }, "Logout"))));
     }
   }]);
 

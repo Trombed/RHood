@@ -74,6 +74,7 @@ class HomeNavBar extends React.Component {
             
             </div>
             <div className="Nav-Bar-Filler"></div>
+            <div>
             <ul className="homepage-nav-list">   
                 <div className="homepage-nav-item-1">
                     <Link to='/portfolio'>
@@ -85,6 +86,7 @@ class HomeNavBar extends React.Component {
                     Logout
                 </div>
             </ul>
+            </div>
             
             
         </div>

@@ -24,7 +24,7 @@ class Home extends React.Component {
                 
                 <MainContent  news={this.props.news} />
                 
-                {/* <WatchListContainer /> */}
+                <WatchListContainer />
                 </div>  
             </div>
             

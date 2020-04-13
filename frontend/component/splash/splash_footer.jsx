@@ -6,7 +6,7 @@ const SplashFooter = () => {
     return (
         <div className="Footer-Container">
             <div className="Footer-Items">
-        
+                
             </div>
         </div>
     )
