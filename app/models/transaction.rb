@@ -24,7 +24,4 @@ class Transaction < ApplicationRecord
     class_name: :Stock
 
 
-    def change 
-        
-    end
 end
