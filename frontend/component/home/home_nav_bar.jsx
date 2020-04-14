@@ -8,7 +8,7 @@ import PortfolioContainer from './portfolio/portfolio_container'
 class HomeNavBar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {name: null}
+        this.state = {name: ""}
         this.logout = this.props.logout.bind(this)
         this.stock_search = this.props.stock_search.bind(this)
         this.handleClick = this.handleClick.bind(this)
@@ -64,7 +64,7 @@ class HomeNavBar extends React.Component {
 
                 <div className="Search-Bar-Container ">
                     <div className="homepage-nav-placeholder">
-                    <input type="text" onChange={this.autoSearch("name")} className='homepage-nav-search-bar' placeholder="Search" 
+                    <input type="text" onChange={ this.autoSearch("name")} className='homepage-nav-search-bar' placeholder="Search" 
                     value={this.state.name} />
                         <div className="Search-Bar-Result-List">
                         {results}

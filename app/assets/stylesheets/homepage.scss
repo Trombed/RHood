@@ -30,7 +30,7 @@
     left: 0;
     height: 8vh;
     background-color: #1b1b1b;
-
+    z-index: 10;
 }
 
 
@@ -117,6 +117,7 @@
 
 .homepage-nav-search-bar:focus + div {
     display: block;
+    z-index: 100;
 }
 
 
@@ -141,7 +142,7 @@
 }
 
 i.fas {
-    opacity: 50%;
+    opacity: 100%;
 }
 
 

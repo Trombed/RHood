@@ -279,7 +279,7 @@ class StockPage extends React.Component {
                 </div>
 
                 <div className="Stock-Container-Chart-Area"> 
-                  <div className="Chart-Container chart-content">
+                  <div className="Chart-Container">
                     {renderLineChart}
                 
                   </div>
