@@ -17,7 +17,7 @@
     align-items: center;
     padding: 1vh;
     font-weight: 700;
-    border-bottom: 1px solid black;
+    border-bottom: var(--portfolio-border);
 }
 
 .Transaction-Box-Header-Buy {
@@ -78,7 +78,7 @@
 }
 
 .Transaction-Box-Body-Row-3 {
-    border-top: 1px solid black;
+    border-top: var(--portfolio-border);
 }
 
 .Transaction-Box-Button {
@@ -91,11 +91,10 @@
 
 .Transaction-Box-Button-Input-Buy {
     display: flex;
-    color: black;
     font-size: 11px;
     padding: 1.5vh 3vw;
     background-color: #21ce99;
-    color: black;
+    color: var(--color);
     border-radius: 4px;
     cursor: pointer;
 }
@@ -124,7 +123,7 @@
 .Transaction-Number-Input {
     display: flex;
     justify-content: flex-end;
-    background-color: #1b1b1d;
+    background-color: var(--bg-color);
     color: white !important;
     border: none;
     text-align: right;

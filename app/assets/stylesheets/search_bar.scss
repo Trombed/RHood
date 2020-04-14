@@ -8,7 +8,8 @@
 
 .Search-Bar-Result-List {
     display: none;
-    background-color: #171718;
+    // background-color: #171718;
+    background-color: var(--bg-color);
     position: absolute;
     list-style: none;
     font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;

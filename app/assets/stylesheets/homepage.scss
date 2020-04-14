@@ -1,10 +1,8 @@
 .homepage-container-night {
     // background-color: #1b1b1d;
     // color: white;
-    * {
         background: var(--bg-color);
         color: var(--color);
-        }
     height: 9vh;
     box-sizing: border-box;
 }
@@ -81,7 +79,7 @@
     box-sizing: border-box;
     position: absolute;
     padding-right: 0px;
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 
@@ -89,7 +87,7 @@
     box-sizing: border-box;
     justify-content: flex-start;
     padding-left: 3vw;
-    background-color: #1b1b1d;
+    background-color: var(--bg-color);
     border-radius: 4px; 
     border: 1px solid #0e0d0d;
     height: 35px; 
@@ -150,7 +148,6 @@
 i.fas {
     opacity: 100%;
 }
-
 
 
 

@@ -12,10 +12,19 @@
   --color: white;
   --bg-color: #1b1b1b;
   --icon-color: white;
+  --portfolio-border: 1px solid white;
+  --news-border: 1px solid black;
+  --news-title: white;
+  --news-hover: #0e0d0d;
 }
 
 [data-theme="light"] {
   --color: black;
+  --icon-color: black;
   --bg-color: white;
-  --icon-color: white;
+  --portfolio-border: 1px solid #1b1b1b;
+  --news-border: 1px solid #cbcbcd;
+  --news-title: black;
+  --news-hover: grey;
+
 }

@@ -792,10 +792,14 @@ function (_React$Component) {
   }, {
     key: "changeTheme",
     value: function changeTheme() {
-      var ele = document.documentElement.sfgetAttribute;
+      var ele = document.getElementsByTagName("html")[0].getAttribute("data-theme");
       console.log(ele);
-      debugger;
-      document.documentElement.setAttribute("data-theme", "dark");
+
+      if (ele === "light") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
     }
   }, {
     key: "render",
@@ -1683,7 +1687,7 @@ function (_React$Component) {
     key: "removeHighlight",
     value: function removeHighlight() {
       $(".Stock-Chart-Active").css({
-        "color": "white",
+        "color": "var(--color)",
         "border-color": "black"
       });
       $(".Stock-Chart-Active").addClass("Stock-Label");

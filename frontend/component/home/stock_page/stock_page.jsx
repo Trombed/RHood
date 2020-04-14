@@ -105,7 +105,7 @@ class StockPage extends React.Component {
     removeHighlight() {
       $(".Stock-Chart-Active").css(
         {
-          "color": "white",
+          "color": "var(--color)",
           "border-color": "black"
         })
         $(".Stock-Chart-Active").addClass("Stock-Label")

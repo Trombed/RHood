@@ -23,7 +23,7 @@
 .Main-News-Header {
     padding: 50px 0px;
     font-size: 30px;
-    border-bottom: 1px solid black;
+    border-bottom: var(--news-border);
 }
 
 .Main-News-Container {
@@ -36,13 +36,13 @@
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid black;
-    overflow: hidden;
+    // overflow: hidden;
     padding-bottom: 20px;
-    background-color: #1b1b1b;
+    background-color: inherit;
 }
 
 .Main-News-Single-News:hover {
-    background-color: #0e0d0d;
+    background-color: var(--news-hover) !important;
 }
 
 .Main-News-Single-Source {
@@ -70,7 +70,7 @@
 
 .Main-News-Title {
     font-size: 18px;
-    color: white;
+    color: var(--news-title);
     padding-bottom: 10px;
 }
 

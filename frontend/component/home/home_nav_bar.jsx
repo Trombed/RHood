@@ -27,10 +27,13 @@ class HomeNavBar extends React.Component {
     }
 
     changeTheme() {
-        var ele = document.documentElement.sfgetAttribute
+        var ele = document.getElementsByTagName("html")[0].getAttribute("data-theme")
         console.log(ele)
-        debugger
-        document.documentElement.setAttribute("data-theme", "dark")
+        if (ele === "light") {                      document.documentElement.setAttribute("data-theme", "dark")
+        }
+        else {
+            document.documentElement.setAttribute("data-theme", "light")
+        }
         
     }
 
