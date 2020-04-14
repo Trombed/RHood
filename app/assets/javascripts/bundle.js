@@ -790,6 +790,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "changeTheme",
+    value: function changeTheme() {
+      var ele = document.documentElement.sfgetAttribute;
+      console.log(ele);
+      debugger;
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -841,6 +849,10 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "homepage-nav-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this3.changeTheme();
+        }
+      }, "CHANGE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/portfolio"

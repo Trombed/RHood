@@ -1,0 +1,21 @@
+:root {
+  --bg-color: white;
+  --color: black;
+  --icon-color: black;
+}
+
+.component {
+  background-color: var(--color-bg);
+}
+
+[data-theme="dark"] {
+  --color: white;
+  --bg-color: #1b1b1b;
+  --icon-color: white;
+}
+
+[data-theme="light"] {
+  --color: black;
+  --bg-color: white;
+  --icon-color: white;
+}

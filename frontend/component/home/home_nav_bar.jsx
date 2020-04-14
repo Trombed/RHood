@@ -26,6 +26,14 @@ class HomeNavBar extends React.Component {
         
     }
 
+    changeTheme() {
+        var ele = document.documentElement.sfgetAttribute
+        console.log(ele)
+        debugger
+        document.documentElement.setAttribute("data-theme", "dark")
+        
+    }
+
     
     render() {
         let results;
@@ -75,7 +83,12 @@ class HomeNavBar extends React.Component {
             </div>
             <div className="Nav-Bar-Filler"></div>
             <div>
-            <ul className="homepage-nav-list">   
+            <ul className="homepage-nav-list"> 
+        {/*  */}
+ <div onClick={() => this.changeTheme()}>
+     CHANGE
+</div> 
+{/*  */}
                 <div className="homepage-nav-item-1">
                     <Link to='/portfolio'>
                     Portfolio
