@@ -222,7 +222,6 @@ class StockPage extends React.Component {
   
 
     render() {
-      
 
           this.id = Number(this.props.match.params.id)
           const news = (this.props.news.length <= 0) ? null : this.props.news.map( (page, idx) => (
