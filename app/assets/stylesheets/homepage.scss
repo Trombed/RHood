@@ -1,6 +1,5 @@
 .homepage-container-night {
-    // background-color: #1b1b1d;
-    // color: white;
+
         background: var(--bg-color);
         color: var(--color);
     height: 9vh;
@@ -13,17 +12,14 @@
 
 .homepage-nav-bar {
     box-sizing: border-box;
-
     display: flex;
     position: fixed;
     flex-direction: row; 
     align-items: center; 
     justify-content: space-between;
     width: 100%;
-    * {
     background: var(--bg-color);
     color: var(--color);
-    }
     // overflow: scroll;
     top: 0;
     left: 0;
@@ -55,7 +51,7 @@
     font-weight: 700;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: rgb(255, 255, 255);
+    color: var(--color);
     text-decoration: unset;
     z-index: 100;
 }
@@ -66,7 +62,7 @@
 
 .homepage-nav-search-bar-block {
     box-sizing: border-box;
-    background-color:#1b1b1b;
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: row; 
     align-items: center;
@@ -132,11 +128,7 @@
 
 .magnifying-icon-night {
     float: left;
-    // fill: black; 
-    * {
-
         fill: var(--icon-color);
-    }
 
 }
 
@@ -155,10 +147,8 @@ i.fas {
     align-items: flex-start;
     padding-left: 3vw;
     padding-right: 1vw; 
-    * {
-
         fill: var(--icon-color);
-    }
+
 }
 
 .Home-SVG-Logo:hover {
@@ -202,6 +192,7 @@ i.fas {
     padding-bottom: 20px;
     min-height: 100%;
     // overflow-x: hidden;
+    background-color: var(--bg-color);
 
 }
 

@@ -16,6 +16,7 @@
   --news-border: 1px solid black;
   --news-title: white;
   --news-hover: #0e0d0d;
+  --transaction-border: 1px solid black;
 }
 
 [data-theme="light"] {
@@ -25,6 +26,6 @@
   --portfolio-border: 1px solid #1b1b1b;
   --news-border: 1px solid #cbcbcd;
   --news-title: black;
-  --news-hover: grey;
-
+  --news-hover: red;
+  --transaction-border: #ededed;
 }

@@ -5,7 +5,8 @@
     font-weight: 500;
     line-height: 22px;
     letter-spacing: normal;
-    color: rgb(255, 255, 255);
+    color: var(--color);
+    background-color: var(--bg-color);
     text-decoration: unset;
     list-style: none;
     cursor: pointer;
@@ -22,6 +23,6 @@
 
 .Watch-List-Items-Item:hover {
     color: #21ce99;
-    background-color: #0e0d0d;
+    background-color: var(--bg-color);
     cursor: pointer;
 }

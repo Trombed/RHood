@@ -765,7 +765,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeNavBar).call(this, props));
     _this.state = {
-      name: ""
+      name: "",
+      mode: "light"
     };
     _this.logout = _this.props.logout.bind(_assertThisInitialized(_this));
     _this.stock_search = _this.props.stock_search.bind(_assertThisInitialized(_this));
@@ -797,8 +798,14 @@ function (_React$Component) {
 
       if (ele === "light") {
         document.documentElement.setAttribute("data-theme", "dark");
+        this.setState({
+          mode: "dark"
+        });
       } else {
         document.documentElement.setAttribute("data-theme", "light");
+        this.setState({
+          mode: "light"
+        });
       }
     }
   }, {
@@ -824,6 +831,11 @@ function (_React$Component) {
         });
       }
 
+      var themeMode = this.state.mode === "dark" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-moon"
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-sun"
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -856,7 +868,7 @@ function (_React$Component) {
         onClick: function onClick() {
           return _this3.changeTheme();
         }
-      }, "CHANGE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, themeMode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/portfolio"
