@@ -832,9 +832,11 @@ function (_React$Component) {
       }
 
       var themeMode = this.state.mode === "dark" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-moon"
+        className: "fas fa-moon",
+        id: "fa-moon"
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-sun"
+        className: "fas fa-sun",
+        id: "fa-sun"
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-bar"
@@ -865,6 +867,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "homepage-nav-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "homepage-nav-mode",
         onClick: function onClick() {
           return _this3.changeTheme();
         }

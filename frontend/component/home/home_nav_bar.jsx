@@ -62,8 +62,8 @@ class HomeNavBar extends React.Component {
         })}
 
         const themeMode = (this.state.mode === "dark") ? 
-        (<i class="fas fa-moon"></i> ):
-        (<i class="fas fa-sun"></i>);
+        (<i className="fas fa-moon" id="fa-moon"></i> ):
+        (<i className="fas fa-sun" id="fa-sun"></i>);
 
         
             
@@ -97,11 +97,11 @@ class HomeNavBar extends React.Component {
             <div className="Nav-Bar-Filler"></div>
             <div>
             <ul className="homepage-nav-list"> 
-        {/*  */}
- <div onClick={() => this.changeTheme()}>
-     {themeMode}
-</div> 
-{/*  */}
+
+                <div className='homepage-nav-mode' onClick={() => this.changeTheme()}>
+                    {themeMode}
+                </div> 
+
                 <div className="homepage-nav-item-1">
                     <Link to='/portfolio'>
                     Portfolio
