@@ -1679,12 +1679,18 @@ function (_React$Component) {
     key: "clickHandler",
     value: function clickHandler(e) {
       if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
+      var curr = this.props.currentPrice;
+      var close = e.activePayload[0].payload.close;
       this.setState({
         price: e.activePayload[0].value.toLocaleString('en', {
           style: 'currency',
           currency: "USD"
-        })
+        }),
+        change: (close - curr).toFixed(2),
+        percentageChange: Math.round((e.activePayload[0].payload.open - e.activePayload[0].payload.close) * 100) / 100
       });
+      console.log(curr);
+      console.log(Number(close));
     }
   }, {
     key: "setColor",
@@ -1815,7 +1821,9 @@ function (_React$Component) {
     key: "handleResetPrice",
     value: function handleResetPrice() {
       this.setState({
-        price: this.props.currentPrice
+        price: this.props.currentPrice,
+        change: 0,
+        percentageChange: 0
       });
     }
   }, {

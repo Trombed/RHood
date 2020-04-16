@@ -83,10 +83,16 @@ class StockPage extends React.Component {
 
     clickHandler(e) {  
       if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
+      const curr = this.props.currentPrice;
+      const close = e.activePayload[0].payload.close
       this.setState({ 
         price: e.activePayload[0].value.toLocaleString('en', {style: 'currency', currency:"USD"}),
+        change: ((close - curr).toFixed(2)),
+        percentageChange: Math.round((e.activePayload[0].payload.open - e.activePayload[0].payload.close) * 100 ) / 100
       })
-    }
+      console.log(curr)
+      console.log(Number(close))
+    } 
 
     setColor(chart) {
       let colorValue = ( (Object.values(chart).length === 0 ) || (chart.length === 0) || (chart[0].close === undefined )) ? "yellow" :
@@ -207,7 +213,9 @@ class StockPage extends React.Component {
    
     handleResetPrice() {
       this.setState({
-        price: this.props.currentPrice
+        price: this.props.currentPrice,
+        change: 0,
+        percentageChange: 0
       })
     }
 
