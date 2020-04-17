@@ -1,7 +1,6 @@
 
 export const fetchNews = (stockName) => {
     var name = stockName.split(" ")
-    console.log(name)
     return (
         $.ajax({
             method: "GET",
