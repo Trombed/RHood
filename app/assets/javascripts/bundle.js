@@ -1689,8 +1689,6 @@ function (_React$Component) {
         change: (close - curr).toFixed(2),
         percentageChange: Math.round((e.activePayload[0].payload.open - e.activePayload[0].payload.close) * 100) / 100
       });
-      console.log(curr);
-      console.log(Number(close));
     }
   }, {
     key: "setColor",
