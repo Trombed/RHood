@@ -106,7 +106,7 @@
 }
 
 .homepage-nav-search-bar:focus {
-    color: white;
+    color: var(--color);
     
 }
 
@@ -117,7 +117,7 @@
 
 
 .homepage-nav-placeholder input[type="text"]:hover::placeholder {
-    color: white;
+    color: var(--color);
 }
 
 

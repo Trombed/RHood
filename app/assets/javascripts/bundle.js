@@ -1671,7 +1671,7 @@ function (_React$Component) {
         }).then(function (res) {
           return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
         }).then(function (res) {
-          return _this3.handleChartOneDayData();
+          return _this3.handleChartOneDayData;
         });
       }
     }
