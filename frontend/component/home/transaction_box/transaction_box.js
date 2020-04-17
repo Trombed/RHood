@@ -51,18 +51,14 @@ class TransactionBox extends React.Component {
     }
 
     handleBuy() {
-   
         if (this.state.shareToBuy <= 0 )  {
             return this.setState({
                 error: "Minimum 1 share"
             })
         } else if ((this.state.shareToBuy * this.props.sharesPrice) > this.state.funds) {
-
-         
             return this.setState({
                 error: "Insufficient funds"
             })
-
         }
         else {
             const data = {
@@ -73,8 +69,8 @@ class TransactionBox extends React.Component {
             this.props.buyTransaction(data)
             .then( (res) => this.updateStats())
             this.setState({ error: null})
-        }
-    }
+        };
+    };
 
     handleSell() {
         if  (this.state.currentlyOwned < this.state.shareToBuy || this.state.shareToBuy === 0) {
@@ -82,7 +78,6 @@ class TransactionBox extends React.Component {
                 error: "Insufficient shares"
             })
         }
-
         else {
             const data = {
                 stock_id: this.props.stockInfo.id,

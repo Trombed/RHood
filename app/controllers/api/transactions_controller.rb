@@ -5,7 +5,6 @@ class Api::TransactionsController < ApplicationController
       end
     
 
-
       def show 
         @transaction = Transaction.find_by(stock_id: params[:id])
         if @transaction.nil?

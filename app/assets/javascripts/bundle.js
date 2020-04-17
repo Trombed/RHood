@@ -2129,6 +2129,8 @@ function (_React$Component) {
           error: null
         });
       }
+
+      ;
     }
   }, {
     key: "handleSell",
