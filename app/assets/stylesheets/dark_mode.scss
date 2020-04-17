@@ -19,6 +19,7 @@
   --transaction-border: 1px solid black;
   --chart-border: 1px solid black;
   --single-news-border: 1px solid black;
+  --transaction-input: white !important;
 }
 
 [data-theme="light"] {
@@ -32,5 +33,6 @@
   --transaction-border: #ededed;
   --chart-border: 1px solid#cbcbcd;
   --single-news-border: none;
+  --transaction-input: black !important;
 
 }
