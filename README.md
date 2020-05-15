@@ -54,6 +54,7 @@ Also by comparing the current price value with the chart's opening price point, 
 Users has the ability to buy and sell shares.
 Before the transaction is sent to the backend, it checks from the state if the current user has enough funds on their account before creating a new transaction.
 This approach will be lessen the stress from the server. Once transaction is made the user's transactions and funds are update and sent back to frontend as a new state.
+
 ![Transaction](/app/assets/images/transaction.gif)
 ```
     handleBuy() {
