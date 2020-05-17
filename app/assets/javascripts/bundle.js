@@ -1679,8 +1679,9 @@ function (_React$Component) {
   }, {
     key: "clickHandler",
     value: function clickHandler(e) {
-      if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
+      if (e === undefined || e.activePayload === undefined || e.activePayload === null || e.activePayload[0].value === undefined) return;
       var curr = this.props.currentPrice;
+      if (e.activePayload === undefined) return;
       var close = e.activePayload[0].payload.close;
       this.setState({
         price: e.activePayload[0].value.toLocaleString('en', {
@@ -4384,7 +4385,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3__["logger"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

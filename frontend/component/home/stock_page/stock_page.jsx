@@ -82,8 +82,9 @@ class StockPage extends React.Component {
     }
 
     clickHandler(e) {  
-      if (e.activePayload[0].value === undefined || e.activePayload[0].value === undefined || e === undefined) return null;
+      if (e === undefined || e.activePayload === undefined  || e.activePayload === null || e.activePayload[0].value === undefined )  return;
       const curr = this.props.currentPrice;
+      if (e.activePayload === undefined) return;
       const close = e.activePayload[0].payload.close
       this.setState({ 
         price: e.activePayload[0].value.toLocaleString('en', {style: 'currency', currency:"USD"}),
