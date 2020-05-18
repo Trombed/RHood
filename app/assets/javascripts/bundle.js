@@ -222,7 +222,7 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, stock_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
+/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, DELETE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, stock_search, delete_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -234,9 +234,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_FIVE_YEAR", function() { return RECEIVE_STOCK_FIVE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PRICE", function() { return RECEIVE_CURRENT_PRICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH", function() { return RECEIVE_SEARCH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_SEARCH", function() { return DELETE_SEARCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PORTFOLIO_PRICES", function() { return RECEIVE_PORTFOLIO_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_SHARES", function() { return RECEIVE_STOCK_SHARES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stock_search", function() { return stock_search; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delete_search", function() { return delete_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceInfo", function() { return currentPriceInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfo", function() { return fiveYearStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfo", function() { return companyInfo; });
@@ -256,6 +258,7 @@ var RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK';
 var RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR';
 var RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE';
 var RECEIVE_SEARCH = 'RECEIVE_SEARCH';
+var DELETE_SEARCH = "DELETE_SEARCH";
 var RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES';
 var RECEIVE_STOCK_SHARES = 'RECEIVE_STOCK_SHARES';
 
@@ -277,6 +280,12 @@ var receiveSearch = function receiveSearch(search) {
   return {
     type: RECEIVE_SEARCH,
     search: search
+  };
+};
+
+var deleteSearch = function deleteSearch() {
+  return {
+    type: DELETE_SEARCH
   };
 };
 
@@ -327,6 +336,11 @@ var stock_search = function stock_search(search) {
     return _util_search_util__WEBPACK_IMPORTED_MODULE_0__["default"].stock_search(search).then(function (result) {
       return dispatch(receiveSearch(result));
     });
+  };
+};
+var delete_search = function delete_search() {
+  return function (dispatch) {
+    return dispatch(deleteSearch());
   };
 };
 var currentPriceInfo = function currentPriceInfo(price) {
@@ -766,11 +780,14 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeNavBar).call(this, props));
     _this.state = {
       name: "",
-      mode: "light"
+      mode: "light",
+      cursor: 0
     };
     _this.logout = _this.props.logout.bind(_assertThisInitialized(_this));
     _this.stock_search = _this.props.stock_search.bind(_assertThisInitialized(_this));
+    _this.delete_search = _this.props.delete_search.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -780,7 +797,19 @@ function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value)), _this2.stock_search(_this2.state.name);
+        if (e.currentTarget.value === "") {
+          _this2.setState({
+            name: ''
+          });
+
+          e.currentTarget.value = "";
+
+          _this2.delete_search();
+        } else {
+          _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+
+          _this2.stock_search(_this2.state.name);
+        }
       };
     }
   }, {
@@ -810,6 +839,38 @@ function (_React$Component) {
       ;
     }
   }, {
+    key: "handleKeyDown",
+    value: function handleKeyDown(e) {
+      var cursor = this.state.cursor;
+
+      if (this.props.search.length > 0) {
+        if (e.keyCode === 38 && cursor > 0) {
+          this.setState(function (prevState) {
+            return {
+              cursor: prevState.cursor - 1
+            };
+          });
+        } else if (e.keyCode === 40 && cursor < this.props.search.length - 1) {
+          this.setState(function (prevState) {
+            return {
+              cursor: prevState.cursor + 1
+            };
+          });
+        } else if (e.keyCode === 13) {
+          var targetURL = document.getElementsByClassName("Search-Bar-Result-List-Items-Active")[0].id;
+          window.location.replace("#/show/".concat(targetURL));
+          this.handleClick;
+        }
+      }
+    }
+  }, {
+    key: "handleMouseEnter",
+    value: function handleMouseEnter(idx) {
+      this.setState({
+        cursor: idx
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -817,10 +878,14 @@ function (_React$Component) {
       var results;
 
       if (this.props.search.length > 0 && this.state.name != "") {
-        results = this.props.search.map(function (result) {
+        results = this.props.search.map(function (result, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: result.id,
-            className: "Search-Bar-Result-List-Items",
+            className: _this3.state.cursor === idx ? 'Search-Bar-Result-List-Items-Active' : 'Search-Bar-Result-List-Items',
+            id: result.id,
+            onMouseEnter: function onMouseEnter(e) {
+              return _this3.handleMouseEnter(idx);
+            },
             onClick: _this3.handleClick
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/show/".concat(result.id)
@@ -860,7 +925,8 @@ function (_React$Component) {
         onChange: this.autoSearch("name"),
         className: "homepage-nav-search-bar",
         placeholder: "Search",
-        value: this.state.name
+        value: this.state.name,
+        onKeyDown: this.handleKeyDown
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Search-Bar-Result-List"
       }, results)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -918,6 +984,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     stock_search: function stock_search(search) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_2__["stock_search"])(search));
+    },
+    delete_search: function delete_search() {
+      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_2__["delete_search"])());
     },
     logout: function logout() {
       return dispatch(Object(_actions_session_action__WEBPACK_IMPORTED_MODULE_3__["logout"])());
@@ -2819,6 +2888,9 @@ var searchReducer = function searchReducer() {
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SEARCH"]:
       return action.search;
+
+    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["DELETE_SEARCH"]:
+      return [];
 
     default:
       return state;

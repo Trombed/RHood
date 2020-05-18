@@ -42,8 +42,17 @@
     padding-top: 1vh;
     padding-bottom: 1vw;
     text-overflow: ellipsis;
+}
 
-
+.Search-Bar-Result-List-Items-Active {
+   
+    display: flex;
+    flex-direction: row;
+    padding-top: 1vh;
+    padding-bottom: 1vw;
+    text-overflow: ellipsis;
+    background-color: #21ce99;
+    color: white;
 }
 
 .Search-Bar-Result-List-Items:hover {

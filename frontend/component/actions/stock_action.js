@@ -8,6 +8,7 @@ export const RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK'
 export const RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR'
 export const RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE'
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
+export const DELETE_SEARCH = "DELETE_SEARCH"
 export const RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES'
 export const RECEIVE_STOCK_SHARES = 'RECEIVE_STOCK_SHARES'
 
@@ -24,6 +25,10 @@ const receivePortfolioPrice = (prices) => ({
 const receiveSearch = (search) => ({
     type: RECEIVE_SEARCH,
     search
+})
+
+const deleteSearch = () => ({
+    type: DELETE_SEARCH
 })
 
 
@@ -64,6 +69,11 @@ export const stock_search = (search) => (dispatch) => (
     APISearchUtil.stock_search(search)
         .then( (result) => dispatch(receiveSearch(result)))
 )
+ 
+export const delete_search = () => dispatch => (
+        dispatch(deleteSearch())
+)
+
 
 
 export const currentPriceInfo = price => dispatch => (
