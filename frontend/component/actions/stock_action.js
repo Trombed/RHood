@@ -11,6 +11,8 @@ export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 export const DELETE_SEARCH = "DELETE_SEARCH"
 export const RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES'
 export const RECEIVE_STOCK_SHARES = 'RECEIVE_STOCK_SHARES'
+export const RECEIVE_ONE_DAY_PRICES = 'RECEIVE_ONE_DAY_PRICES'
+
 
 const receiveStockShares = (stockId) => ({
     type: RECEIVE_STOCK_SHARES,
@@ -38,9 +40,11 @@ const receiveStockProfile = (profile) => ({
 })
 
 const receiveStockPrices = (prices) => ({
-    type: RECEIVE_STOCK_PRICES,
+    // type: RECEIVE_STOCK_PRICES,
+    type: RECEIVE_ONE_DAY_PRICES,
     prices
 })
+
 
 const receiveStockInfo = (info) => ({
     type: RECEIVE_STOCK_INFO,

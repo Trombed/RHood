@@ -32,7 +32,7 @@ export const oneWeekStockInfoUtil = (prices) => (
 )
 
 export const fetchPortfolioPrices = (symbol) => {
-    console.log(symbol)
+ 
     return (
     $.ajax({
         method: "GET",

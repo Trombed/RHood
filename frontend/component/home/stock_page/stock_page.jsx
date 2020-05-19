@@ -1,6 +1,6 @@
 import React from 'react'
 import { LineChart, Line, Tooltip, YAxis, XAxis } from 'recharts';
-import { oneYearStats, threeMonthStats, oneMonthStats } from '../../util/stock_util';
+import { oneYearStats, threeMonthStats, oneMonthStats, oneDayData } from '../../util/stock_util';
 import News from '../news/news';
 
 
@@ -221,7 +221,7 @@ class StockPage extends React.Component {
 
     customToolTip(e) {
       return (
-        <div>{e.label}</div>
+        <div className="Stock-Tool-Tip" >{e.label}</div>
       )
     }
 
@@ -243,8 +243,8 @@ class StockPage extends React.Component {
               <Line type="monotone" dataKey="close" stroke={
                  ( (Object.values(this.state.chartData).length === 0 ) || (this.state.chartData.length === 0) || (this.state.chartData[0].close === undefined )) ? "yellow" :
                    (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531"
-              } strokeWidth={2} dot={false} />
-              <YAxis type="number" domain={['dataMin', 'dataMax']} axisLine={false} hide={true} /> 
+              } strokeWidth={1.5} dot={false} />
+              <YAxis type="number" domain={['dataMin'-5, 'dataMax'+5]} axisLine={false} hide={true} /> 
               <Tooltip  
               position={{ y: 0 }} 
               offset={-50}

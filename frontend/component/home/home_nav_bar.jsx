@@ -23,13 +23,18 @@ class HomeNavBar extends React.Component {
     autoSearch(field) {
 
             return (e) => {
+             
                 if (e.currentTarget.value === "") {
-                    this.setState({name: ''})
-                    e.currentTarget.value = ""
+                    this.setState({name: ""}, () => { 
                     this.delete_search()
+                    })
                 } else  {
-                    this.setState({ [field]: e.currentTarget.value })
-                    this.stock_search(this.state.name)  
+                    this.setState(
+                        { [field]: e.currentTarget.value }, 
+                        () => this.stock_search(this.state.name.toUpperCase())   
+                    )
+                   
+         
                 } 
             }
         
@@ -81,8 +86,10 @@ class HomeNavBar extends React.Component {
     render() {
         let results;
         if ((this.props.search.length > 0 ) 
-            && (this.state.name != "")) {
+            || (this.state.name !== "")) {
+                console.log(this.props.search)
                 results = this.props.search.map( (result, idx) => {
+
             return (
                 <li key={result.id} 
                 className={this.state.cursor === idx ? 'Search-Bar-Result-List-Items-Active' : 'Search-Bar-Result-List-Items'}
@@ -97,7 +104,9 @@ class HomeNavBar extends React.Component {
                     </Link>         
                 </li>
             )
-        })}
+        })} else {
+            null;
+        }
 
         const themeMode = (this.state.mode === "dark") ? 
         (<i className="fas fa-moon" id="fa-moon"></i> ):

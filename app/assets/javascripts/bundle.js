@@ -222,7 +222,7 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, DELETE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, stock_search, delete_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
+/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, DELETE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, RECEIVE_ONE_DAY_PRICES, stock_search, delete_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -237,6 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_SEARCH", function() { return DELETE_SEARCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PORTFOLIO_PRICES", function() { return RECEIVE_PORTFOLIO_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_SHARES", function() { return RECEIVE_STOCK_SHARES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ONE_DAY_PRICES", function() { return RECEIVE_ONE_DAY_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stock_search", function() { return stock_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delete_search", function() { return delete_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceInfo", function() { return currentPriceInfo; });
@@ -261,6 +262,7 @@ var RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 var DELETE_SEARCH = "DELETE_SEARCH";
 var RECEIVE_PORTFOLIO_PRICES = 'RECEIVE_PORTFOLIO_PRICES';
 var RECEIVE_STOCK_SHARES = 'RECEIVE_STOCK_SHARES';
+var RECEIVE_ONE_DAY_PRICES = 'RECEIVE_ONE_DAY_PRICES';
 
 var receiveStockShares = function receiveStockShares(stockId) {
   return {
@@ -298,7 +300,8 @@ var receiveStockProfile = function receiveStockProfile(profile) {
 
 var receiveStockPrices = function receiveStockPrices(prices) {
   return {
-    type: RECEIVE_STOCK_PRICES,
+    // type: RECEIVE_STOCK_PRICES,
+    type: RECEIVE_ONE_DAY_PRICES,
     prices: prices
   };
 };
@@ -799,16 +802,14 @@ function (_React$Component) {
       return function (e) {
         if (e.currentTarget.value === "") {
           _this2.setState({
-            name: ''
+            name: ""
+          }, function () {
+            _this2.delete_search();
           });
-
-          e.currentTarget.value = "";
-
-          _this2.delete_search();
         } else {
-          _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-
-          _this2.stock_search(_this2.state.name);
+          _this2.setState(_defineProperty({}, field, e.currentTarget.value), function () {
+            return _this2.stock_search(_this2.state.name.toUpperCase());
+          });
         }
       };
     }
@@ -877,7 +878,8 @@ function (_React$Component) {
 
       var results;
 
-      if (this.props.search.length > 0 && this.state.name != "") {
+      if (this.props.search.length > 0 || this.state.name !== "") {
+        console.log(this.props.search);
         results = this.props.search.map(function (result, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: result.id,
@@ -895,6 +897,8 @@ function (_React$Component) {
             className: "Search-Bar-Result-List-Items-Name"
           }, result.name)));
         });
+      } else {
+        null;
       }
 
       var themeMode = this.state.mode === "dark" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1898,7 +1902,9 @@ function (_React$Component) {
   }, {
     key: "customToolTip",
     value: function customToolTip(e) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, e.label);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Stock-Tool-Tip"
+      }, e.label);
     }
   }, {
     key: "render",
@@ -1921,11 +1927,11 @@ function (_React$Component) {
         type: "monotone",
         dataKey: "close",
         stroke: Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? "yellow" : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? "#21ce99" : "#f45531",
-        strokeWidth: 2,
+        strokeWidth: 1.5,
         dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         type: "number",
-        domain: ['dataMin', 'dataMax'],
+        domain: ['dataMin' - 5, 'dataMax' + 5],
         axisLine: false,
         hide: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
@@ -3068,6 +3074,9 @@ var stockInfoReducer = function stockInfoReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var StockOneWeekPriceReducer = function StockOneWeekPriceReducer() {
@@ -3077,8 +3086,14 @@ var StockOneWeekPriceReducer = function StockOneWeekPriceReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_ONE_WEEK"]:
-      var reverseArr = action.oneWeekPrice.reverse();
-      return reverseArr;
+      var fiveDayData = action.oneWeekPrice.reverse();
+      var fiveDayPrior = moment__WEBPACK_IMPORTED_MODULE_1___default()();
+      fiveDayPrior.subtract(5, "day");
+      fiveDayPrior = fiveDayPrior.format("YYYY-MM-DD");
+      var result = fiveDayData.filter(function (dates) {
+        return dates.date >= fiveDayPrior;
+      });
+      return result;
 
     default:
       return state;
@@ -3099,6 +3114,9 @@ var StockOneWeekPriceReducer = function StockOneWeekPriceReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var stockPriceReducer = function stockPriceReducer() {
@@ -3110,6 +3128,16 @@ var stockPriceReducer = function stockPriceReducer() {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_PRICES"]:
       var reverseArr = action.prices.reverse();
       return reverseArr;
+
+    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_DAY_PRICES"]:
+      var oneDayData = action.prices.reverse();
+      var oneDayPrior = moment__WEBPACK_IMPORTED_MODULE_1___default()();
+      oneDayPrior.subtract(1, "day");
+      oneDayPrior = oneDayPrior.format("YYYY-MM-DD");
+      var result = oneDayData.filter(function (dates) {
+        return dates.date >= oneDayPrior;
+      });
+      return result;
 
     default:
       return state;
@@ -4457,7 +4485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3__["logger"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -4677,7 +4705,6 @@ var oneWeekStockInfoUtil = function oneWeekStockInfoUtil(prices) {
   });
 };
 var fetchPortfolioPrices = function fetchPortfolioPrices(symbol) {
-  console.log(symbol);
   return $.ajax({
     method: "GET",
     url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(symbol)

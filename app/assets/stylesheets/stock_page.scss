@@ -167,3 +167,8 @@
     border-bottom: 1px solid #f45531;
     margin-bottom: -1px;
 }
+
+.Stock-Tool-Tip {
+    z-index: 100;
+    background-color: var(--bg-color)
+}
