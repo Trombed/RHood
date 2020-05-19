@@ -38,6 +38,10 @@ class User < ApplicationRecord
     through: :transactions,
     source: :stock
 
+    has_many :portfolio,
+    foreign_key: :user_id,
+    class_name: :Portfolio
+
 
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
@@ -61,6 +65,34 @@ class User < ApplicationRecord
     
       def ensure_session_token
         self.session_token ||= SecureRandom.urlsafe_base64(16)
+      end
+
+      def update_portfolio 
+        return false if self.transactions.empty?
+        new_valuation = 0
+        stock_to_find = []
+        shares = {}
+        shares.default = 0
+        self.transactions.each do |transaction|
+          shares[transaction.stock.ticker_symbol] += transaction.shares
+          stock_to_find.push(transaction.stock.ticker_symbol)
+        end 
+
+        if stock_to_find.length < 2
+          url = `https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}`
+          security = JSON.parse(open(url).read)
+          new_valuation = security['price'] * shares[stock_to_find[0]] 
+        else 
+          stock_to_find.join!(",")
+          url = `https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find}`
+          security = JSON.parse(open(url).read)
+          security.["companiesPriceList"].each do |company|
+            new_valuation += shares[company.symbol] *  company.price
+          end
+
+        end
+
+        return new_valuation + self.funds
       end
     
 
