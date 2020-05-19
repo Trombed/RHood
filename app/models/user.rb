@@ -12,8 +12,7 @@
 #  updated_at      :datetime         not null
 #
 require 'open-uri'
-require 'byebug'
-require 'pry'
+
 
 class User < ApplicationRecord
 
