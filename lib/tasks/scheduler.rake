@@ -9,7 +9,7 @@
         next if today.weekend?
         next if today.bank_holiday?
 
-        users = Users.all 
+        users = User.all 
         users.each do |user| 
             new_valuation = user.update_portfolio
             Portfolio.create({

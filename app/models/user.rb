@@ -72,7 +72,7 @@ class User < ApplicationRecord
 
 
       def update_portfolio 
-        return false if self.transactions.empty?
+        return self.funds if self.transactions.empty?
         new_valuation = 0
         stock_to_find = []
         shares = {}
