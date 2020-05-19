@@ -11,6 +11,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
+require 'open-uri'
+require 'byebug'
+require 'pry'
 
 class User < ApplicationRecord
 
@@ -67,6 +70,7 @@ class User < ApplicationRecord
         self.session_token ||= SecureRandom.urlsafe_base64(16)
       end
 
+
       def update_portfolio 
         return false if self.transactions.empty?
         new_valuation = 0
@@ -79,15 +83,18 @@ class User < ApplicationRecord
         end 
 
         if stock_to_find.length < 2
-          url = `https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}`
+          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}"
+
           security = JSON.parse(open(url).read)
           new_valuation = security['price'] * shares[stock_to_find[0]] 
         else 
-          stock_to_find.join!(",")
-          url = `https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find}`
+          list = stock_to_find.uniq.join(",")
+          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{list}"
+ 
           security = JSON.parse(open(url).read)
-          security.["companiesPriceList"].each do |company|
-            new_valuation += shares[company.symbol] *  company.price
+          security["companiesPriceList"].each do |company|
+          
+            new_valuation += shares[company['symbol']] *  company['price']
           end
 
         end

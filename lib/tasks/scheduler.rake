@@ -1,4 +1,3 @@
-namespace :scheduler do 
 
     task :caculate_gains => :environment do 
         require 'date'
@@ -21,10 +20,3 @@ namespace :scheduler do
         puts "done."
 
     end
-
-
-
-
-
-
-end
