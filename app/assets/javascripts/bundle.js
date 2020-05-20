@@ -842,8 +842,12 @@ function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick(e) {
+      var _this3 = this;
+
       this.setState({
         name: ''
+      }, function () {
+        return _this3.delete_search();
       });
     }
   }, {
@@ -886,7 +890,7 @@ function (_React$Component) {
         } else if (e.keyCode === 13) {
           var targetURL = document.getElementsByClassName("Search-Bar-Result-List-Items-Active")[0].id;
           window.location.replace("#/show/".concat(targetURL));
-          this.handleClick;
+          this.handleClick();
         }
       }
     }
@@ -900,7 +904,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var results;
 
@@ -909,12 +913,12 @@ function (_React$Component) {
         results = this.props.search.map(function (result, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: result.id,
-            className: _this3.state.cursor === idx ? 'Search-Bar-Result-List-Items-Active' : 'Search-Bar-Result-List-Items',
+            className: _this4.state.cursor === idx ? 'Search-Bar-Result-List-Items-Active' : 'Search-Bar-Result-List-Items',
             id: result.id,
             onMouseEnter: function onMouseEnter(e) {
-              return _this3.handleMouseEnter(idx);
+              return _this4.handleMouseEnter(idx);
             },
-            onClick: _this3.handleClick
+            onClick: _this4.handleClick
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/show/".concat(result.id)
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -966,7 +970,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-mode",
         onClick: function onClick() {
-          return _this3.changeTheme();
+          return _this4.changeTheme();
         }
       }, themeMode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "homepage-nav-item-1"

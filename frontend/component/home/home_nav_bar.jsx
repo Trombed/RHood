@@ -41,7 +41,7 @@ class HomeNavBar extends React.Component {
     }
 
     handleClick(e) {
-        this.setState({ name: ''})
+        this.setState({ name: ''}, () => this.delete_search())
         
     }
 
@@ -72,7 +72,7 @@ class HomeNavBar extends React.Component {
               } else if (e.keyCode === 13) {
                 let targetURL = document.getElementsByClassName("Search-Bar-Result-List-Items-Active")[0].id
                  window.location.replace(`#/show/${targetURL}`)
-                 this.handleClick
+                 this.handleClick();
               }
         }
     }
