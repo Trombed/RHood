@@ -82,7 +82,7 @@ class User < ApplicationRecord
         end 
 
         if stock_to_find.length < 2
-          debugger
+
           url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
           puts url
 
