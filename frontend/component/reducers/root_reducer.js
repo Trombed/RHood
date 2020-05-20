@@ -15,6 +15,7 @@ import transactionsReducer from "./transaction_reducer";
 import portfolioPriceReducer from "./portfolio_price_reducer";
 import sharesReducer from "./stock_share_reducer";
 import newsReducer from "./news_reducer";
+import valuationReducer from "./valuation_reducer";
 
 
 const rootReducer = combineReducers({
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
   portfolio: transactionsReducer,
   portfolioPrices: portfolioPriceReducer,
   stockShares: sharesReducer,
-  news: newsReducer
+  news: newsReducer,
+  valuation: valuationReducer
 });
 
 export default rootReducer;

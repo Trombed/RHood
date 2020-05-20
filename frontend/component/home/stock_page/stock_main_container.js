@@ -7,11 +7,12 @@ const mSTP = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
   info: ownProps,
   stockCurPrice: state.stockCurrentPrice
+
 })
 
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout())  
-  
+  logout: () => dispatch(logout())
+ 
 })
 
 

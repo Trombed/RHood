@@ -3,7 +3,7 @@ import MainContent from "./main_content/main_content";
 import HomeNavBarContainer from "./home_nav_bar_container"
 import WatchListContainer from './watch_list/watch_list_container';
 import SplashFooter from '../splash/splash_footer';
-
+import MainContentContainer from "./main_content/main_container"
 
 
 class Home extends React.Component {
@@ -11,9 +11,10 @@ class Home extends React.Component {
         super(props)    
     }
 
-    componentDidMount() {
-        this.props.getAllNews()
-    }
+    // componentDidMount() {
+    //     this.props.getAllNews()
+    //     this.props.getValuation()
+    // }
 
 
     render() {
@@ -23,7 +24,8 @@ class Home extends React.Component {
                 <HomeNavBarContainer />
                 <div className='Home-Body-Container'>
                 
-                <MainContent  news={this.props.news} />
+                {/* <MainContent  news={this.props.news} /> */}
+                <MainContentContainer />
                 
                 <WatchListContainer />
                 </div>  

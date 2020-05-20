@@ -1,5 +1,5 @@
 
-    task :caculate_gains => :environment do 
+    task :calculate_gains => :environment do 
         require 'date'
         require 'us_bank_holidays'
     
@@ -12,6 +12,9 @@
         users = User.all 
         users.each do |user| 
             new_valuation = user.update_portfolio
+            if user.portfolio.length > 10 
+                user.portfolio[0].delete
+            end
             Portfolio.create({
                 user_id: user.id,
                 valuation: new_valuation

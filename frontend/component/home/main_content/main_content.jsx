@@ -1,16 +1,28 @@
 import React from 'react'
 import News from '../news/news'
+import PortfolioChart from './portfolio_chart'
+
 class MainContent extends React.Component {
     constructor(props) {
         super(props)
+    
     }
 
+    componentDidMount() {
+        this.props.getAllNews();
+        this.props.getValuation();
+    }
 
     render() 
     {
-        const news = this.props.news.map( (page, idx) => (
+        const chart = (this.props.valuation.length <= 0) ? 
+        <img src="/home-splash.svg" /> :  <PortfolioChart data={this.props.valuation} />
+ 
+
+        const news = (this.props.news.length <= 0 ) ? null : 
+        this.props.news.map( (page, idx) => (
             <News page={page} idx={idx} key={`${idx}`} />
-        ))
+        ));
 
         return (
             <div className='Main-Container'>
@@ -19,7 +31,7 @@ class MainContent extends React.Component {
                 </div>
 
                 <div className="Main-Container-Chart-Area"> 
-                    <img src="/home-splash.svg" />
+                    {chart}
                 </div>
 
 

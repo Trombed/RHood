@@ -1,5 +1,12 @@
 import moment from "moment"
 
+export const userValuation = () => (
+    $.ajax({
+        method: 'GET',
+        url: "/api/portfolios",
+    })
+)
+
 
 export const  companyInfoUtil = (stockSymbol) => (
         $.ajax({
