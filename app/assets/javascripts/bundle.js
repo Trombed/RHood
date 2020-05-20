@@ -557,7 +557,8 @@ var removeWatchItem = function removeWatchItem(stockId) {
 
 var watchListCurPrices = function watchListCurPrices(watchList) {
   return function (dispatch) {
-    Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_0__["watchListCurPrice"])(watchList).then(function (res) {
+    if (watchList.length === 0) return;
+    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_0__["watchListCurPrice"])(watchList).then(function (res) {
       return dispatch(receiveWatchPrices(res));
     });
   };
@@ -1169,10 +1170,8 @@ function (_React$Component) {
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-Container-Title"
-      }, "Welcome to RobinHood"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Stock-Container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Welcome to RobinHood"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-Container-Chart-Area"
       }, chart), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Header"
@@ -1906,6 +1905,8 @@ function (_React$Component) {
         return _this2.fiveYearColor = _this2.setColor(_this2.props.fiveYearPrice);
       }).then(function (res) {
         return _this2.handleChartOneDayData;
+      }).then(function (res) {
+        return _this2.activeColor();
       });
     }
   }, {
@@ -1956,6 +1957,8 @@ function (_React$Component) {
           return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
         }).then(function (res) {
           return _this3.handleChartOneDayData;
+        }).then(function (res) {
+          return _this3.activeColor();
         });
       }
     }
@@ -1980,6 +1983,14 @@ function (_React$Component) {
     value: function setColor(chart) {
       var colorValue = Object.values(chart).length === 0 || chart.length === 0 || chart[0].close === undefined ? "yellow" : chart[chart.length - 1].close >= chart[0].close ? "#21ce99" : "#f45531";
       return colorValue;
+    }
+  }, {
+    key: "activeColor",
+    value: function activeColor() {
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.oneDayColor),
+        "border-color": "".concat(this.oneDayColor)
+      });
     }
   }, {
     key: "dataColor",
@@ -3046,6 +3057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./stock_share_reducer */ "./frontend/component/reducers/stock_share_reducer.js");
 /* harmony import */ var _news_reducer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./news_reducer */ "./frontend/component/reducers/news_reducer.js");
 /* harmony import */ var _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./valuation_reducer */ "./frontend/component/reducers/valuation_reducer.js");
+/* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
 
 
 
@@ -3064,7 +3076,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+ // const rootReducer = combineReducers({
+//   entities: entitiesReducer,
+//   session: sessionReducer,
+//   errors: errorsReducer,
+//   search: searchReducer,
+//   stockProfile: stockProfileReducer,
+//   stockPrice: stockPriceReducer,
+//   stockInfo: stockInfoReducer,
+//   stockOneWeekPrice: StockOneWeekPriceReducer,
+//   stockFiveYearPrice: stockFiveYearReducer,
+//   stockCurrentPrice: stockCurrentPriceReducer,
+//   watchList: watchListReducer,
+//   watchListPrice: watchListPriceReducer,
+//   portfolio: transactionsReducer,
+//   portfolioPrices: portfolioPriceReducer,
+//   stockShares: sharesReducer,
+//   news: newsReducer,
+//   valuation: valuationReducer
+// });
+// export default rootReducer;
+
+var appReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_3__["sessionReducer"],
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3083,6 +3116,15 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   news: _news_reducer__WEBPACK_IMPORTED_MODULE_16__["default"],
   valuation: _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__["default"]
 });
+
+var rootReducer = function rootReducer(state, action) {
+  if (action.type === _actions_session_action__WEBPACK_IMPORTED_MODULE_18__["LOGOUT_CURRENT_USER"]) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
 /***/ }),
@@ -3177,9 +3219,8 @@ var sessionReducer = function sessionReducer() {
       return {
         id: action.user.id
       };
-
-    case _actions_session_action__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
-      return _nullSession;
+    // case LOGOUT_CURRENT_USER:
+    //   return _nullSession
 
     default:
       return state;
@@ -4717,10 +4758,10 @@ var SplashFooter = function SplashFooter() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/component/reducers/root_reducer.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/component/reducers/root_reducer.js");
 
 
 
@@ -4728,7 +4769,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3__["logger"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2__["logger"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -4997,6 +5038,7 @@ var deleteFromWatchList = function deleteFromWatchList(watchListId) {
   });
 };
 var watchListCurPrice = function watchListCurPrice(watchListStr) {
+  if (watchListStr.length === 0) return null;
   return $.ajax({
     method: "GET",
     url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(watchListStr)

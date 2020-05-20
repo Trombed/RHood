@@ -92,12 +92,15 @@ export const fetchPortfolioPrices = (symbol) => {
     })
 )
 
-export const watchListCurPrice = (watchListStr) => (
-    $.ajax({
-        method: "GET",
-        url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
-    })
-)
+export const watchListCurPrice = (watchListStr) => {
+    if (watchListStr.length === 0) return null;
+    return (
+        $.ajax({
+            method: "GET",
+            url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
+        })
+    )
+}
 
 export const fetchShares = (stockId) => (
     $.ajax({

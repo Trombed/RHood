@@ -25,8 +25,8 @@ class MainContent extends React.Component {
         ));
 
         return (
-            <div className='Main-Container'>
-                <div className='Main-Container-Title'>
+            <div className='Stock-Container'>
+                <div>
                 Welcome to RobinHood
                 </div>
 

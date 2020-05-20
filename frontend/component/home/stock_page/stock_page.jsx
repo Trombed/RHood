@@ -25,6 +25,7 @@ class StockPage extends React.Component {
         this.removeHighlight = this.removeHighlight.bind(this)
         this.dataColor = this.dataColor.bind(this)
         this.setColor = this.setColor.bind(this)
+        
        
     }
 
@@ -51,8 +52,12 @@ class StockPage extends React.Component {
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
           .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
-          .then( res => this.handleChartOneDayData) 
+          .then( res => this.handleChartOneDayData)
+          .then( res => this.activeColor())
     }
+
+
+   
 
 
     componentDidUpdate(prevProp, prevState) {
@@ -76,7 +81,8 @@ class StockPage extends React.Component {
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
         .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
         .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
-        .then( res => this.handleChartOneDayData) 
+        .then( res => this.handleChartOneDayData)
+        .then ( res => this.activeColor())
 
       }
     }
@@ -97,6 +103,15 @@ class StockPage extends React.Component {
       let colorValue = ( (Object.values(chart).length === 0 ) || (chart.length === 0) || (chart[0].close === undefined )) ? "yellow" :
       (chart[chart.length-1].close >= chart[0].close ) ? "#21ce99" : "#f45531"
       return colorValue
+    }
+
+    activeColor() {
+  
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.oneDayColor}`,
+          "border-color": `${this.oneDayColor}`
+        })
     }
 
 

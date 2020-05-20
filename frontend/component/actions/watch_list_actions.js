@@ -27,15 +27,20 @@ const removeWatchItem = (stockId) => ({
 })
 
 export const watchListCurPrices = watchList => dispatch => {
+    if (watchList.length === 0) return 
+    return (
     watchListCurPrice(watchList)
         .then( (res) => dispatch(receiveWatchPrices(res)))
-    
+    )
 }
 
-export const watchListInfo = watchList => dispatch => (
+export const watchListInfo = watchList => dispatch => {
+  
+    return (
     fetchWatchList(watchList)
         .then( (res) => dispatch(receiveWatchList(res)))
-)
+    )
+}
 
 export const addStockToWatchList = stock => dispatch => (
     addToWatchList(stock)

@@ -1,7 +1,13 @@
 class Api::WatchListsController < ApplicationController
     # before_action :require_login
     def index 
-        @watch_lists = current_user.stocks
+       
+        if current_user.stocks.empty? 
+            @watch_lists = []
+        else 
+            @watch_lists = current_user.stocks
+        end 
+       
         render :index
 
     end
