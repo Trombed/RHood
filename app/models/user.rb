@@ -82,15 +82,19 @@ class User < ApplicationRecord
         end 
 
         if stock_to_find.length < 2
-          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}"
+          debugger
+          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
+          puts url
 
           security = JSON.parse(open(url).read)
+          puts security
           new_valuation = security['price'] * shares[stock_to_find[0]] 
         else 
           list = stock_to_find.uniq.join(",")
-          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{list}"
- 
+          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{list}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
           security = JSON.parse(open(url).read)
+          puts url
+          puts security
           security["companiesPriceList"].each do |company|
           
             new_valuation += shares[company['symbol']] *  company['price']
