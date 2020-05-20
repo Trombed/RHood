@@ -13,7 +13,5 @@ Rails.application.routes.draw do
   
 
   root to: "static_pages#root"
-  RHood::Application.routes.draw do
-    get "*any", via: :all, to: "errors#not_found"
-  end
+
 end
