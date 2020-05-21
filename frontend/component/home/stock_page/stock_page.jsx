@@ -11,7 +11,8 @@ class StockPage extends React.Component {
             price: 0,
             change: 0,
             percentageChange: 0,
-            chartData: this.props.oneDayPrice
+            chartData: this.props.oneDayPrice,
+            fiveYearLoaded: false
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.handleChartOneDayData = this.handleChartOneDayData.bind(this)
@@ -56,7 +57,7 @@ class StockPage extends React.Component {
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) )
-          .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
+          // .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
           .then( res => this.handleChartOneDayData)
           .then( res => this.activeColor())
     }
@@ -111,7 +112,7 @@ class StockPage extends React.Component {
       if (chart === undefined) return;
       let colorValue = ( (Object.values(chart).length === 0 ) || (chart.length === 0) || (chart[0].close === undefined )) ? "yellow" :
       (chart[chart.length-1].close >= chart[0].close ) ? "#21ce99" : "#f45531"
-      debugger
+    
       return colorValue
     }
 
@@ -128,7 +129,7 @@ class StockPage extends React.Component {
     dataColor() {
       let colorValue = ( (Object.values(this.state.chartData).length === 0 ) || (this.state.chartData.length === 0) || (this.state.chartData[0].close === undefined )) ? "yellow" :
       (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531";
-      debugger
+
       return colorValue;
     }
 
@@ -220,6 +221,20 @@ class StockPage extends React.Component {
     }
 
     handleChartFiveYearData() {
+      if (!this.state.fiveYearLoaded) {
+        this.setState({ fiveYearLoaded: true}) 
+
+        this.props.fiveYearStockInfo(this.props.info.ticker_symbol)
+        .then( res => this.renderFiveYear() )
+        .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice))
+        
+      } else {
+        
+        this.renderFiveYear()
+      }
+    }
+
+    renderFiveYear() {
       this.setState({ 
         chartData: this.props.fiveYearPrice
       },  () => {

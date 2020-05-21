@@ -37,12 +37,12 @@ export const fetchStockInfo = (id) => (
     })
 )
 
-// export const oneWeekStockInfoUtil = (prices) => (
-//     $.ajax({
-//         method: "GET",
-//         url: `https://financialmodelingprep.com/api/v3/historical-chart/1hour/${prices}`
-//     })
-// )
+export const oneWeekStockInfoUtil = (prices) => (
+    $.ajax({
+        method: "GET",
+        url: `https://financialmodelingprep.com/api/v3/historical-chart/1hour/${prices}`
+    })
+)
 
 export const fetchPortfolioPrices = (symbol) => {
  
@@ -63,17 +63,24 @@ export const fetchPortfolioPrices = (symbol) => {
          })
      )
  }
- export const fiveYearStockInfoUtil = (symbol) => {
-    let fiveYearPrior = moment();
-    let dateNow = moment();
-    fiveYearPrior.subtract(5, 'year');
-    return (
-     $.ajax({
-         method: 'GET',
-         url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${fiveYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
-     })
-    )
- }
+//  export const fiveYearStockInfoUtil = (symbol) => {
+//     let fiveYearPrior = moment();
+//     let dateNow = moment();
+//     fiveYearPrior.subtract(5, 'year');
+//     return (
+//      $.ajax({
+//          method: 'GET',
+//          url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${fiveYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
+//      })
+//     )
+ 
+export const fiveYearStockInfoUtil = (symbol) => {
+return (
+    $.ajax({
+        method: 'GET',
+        url: `https://sandbox.iexapis.com/stable/stock/${symbol}/chart/5y?token=Tsk_35cbedacf888463990377ea0abb4756d`
+    })
+)}
 
 
  export const currentPriceUtil = (symbol) =>  (
