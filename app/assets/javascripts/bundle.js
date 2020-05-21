@@ -5110,13 +5110,13 @@ var fetchPortfolioPrices = function fetchPortfolioPrices(symbol) {
   return $.ajax({
     method: "GET",
     // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
-    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(symbol, "&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d")
+    url: "https://cloud.iexapis.com/stable/stock/market/batch?symbols=".concat(symbol, "&types=quote&token=").concat(window.iexAPIKey)
   });
 };
 var oneYearStockInfoUtil = function oneYearStockInfoUtil(symbol) {
   return $.ajax({
     method: "GET",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(symbol, "/chart/1y?token=Tsk_35cbedacf888463990377ea0abb4756d")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/chart/1y?token=").concat(window.iexAPIKey)
   });
 }; //  export const fiveYearStockInfoUtil = (symbol) => {
 //     let fiveYearPrior = moment();
@@ -5132,7 +5132,7 @@ var oneYearStockInfoUtil = function oneYearStockInfoUtil(symbol) {
 var fiveYearStockInfoUtil = function fiveYearStockInfoUtil(symbol) {
   return $.ajax({
     method: 'GET',
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(symbol, "/chart/5y?token=Tsk_35cbedacf888463990377ea0abb4756d")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/chart/5y?token=").concat(window.iexAPIKey)
   });
 };
 var currentPriceUtil = function currentPriceUtil(symbol) {
@@ -5168,7 +5168,7 @@ var watchListCurPrice = function watchListCurPrice(watchListStr) {
   return $.ajax({
     method: "GET",
     // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
-    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(watchListStr, "&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d")
+    url: "https://cloud.iexapis.com/stable/stock/market/batch?symbols=".concat(watchListStr, "&types=quote&token=").concat(window.iexAPIKey)
   });
 };
 var fetchShares = function fetchShares(stockId) {

@@ -50,7 +50,7 @@ export const fetchPortfolioPrices = (symbol) => {
     $.ajax({
         method: "GET",
         // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
-        url: `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbol}&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d`
+        url: `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbol}&types=quote&token=${window.iexAPIKey}`
     })
     )
 }
@@ -59,7 +59,7 @@ export const fetchPortfolioPrices = (symbol) => {
      return (
          $.ajax({
              method: "GET",
-             url: `https://sandbox.iexapis.com/stable/stock/${symbol}/chart/1y?token=Tsk_35cbedacf888463990377ea0abb4756d`
+             url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/1y?token=${window.iexAPIKey}`
          })
      )
  }
@@ -78,7 +78,7 @@ export const fiveYearStockInfoUtil = (symbol) => {
 return (
     $.ajax({
         method: 'GET',
-        url: `https://sandbox.iexapis.com/stable/stock/${symbol}/chart/5y?token=Tsk_35cbedacf888463990377ea0abb4756d`
+        url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/5y?token=${window.iexAPIKey}`
     })
 )}
 
@@ -121,7 +121,7 @@ export const watchListCurPrice = (watchListStr) => {
             method: "GET",
             // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
 
-            url: `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${watchListStr}&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d`
+            url: `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${watchListStr}&types=quote&token=${window.iexAPIKey}`
         })
     )
 }
