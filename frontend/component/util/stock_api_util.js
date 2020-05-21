@@ -73,6 +73,7 @@ export const fetchPortfolioPrices = (symbol) => {
          url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${fiveYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
      })
     )
+ }
  
 // export const fiveYearStockInfoUtil = (symbol) => {
 // return (

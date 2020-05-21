@@ -5052,10 +5052,131 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, oneYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
-/***/ (function(module, exports) {
+/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/ericho/Project/RHood/frontend/component/util/stock_api_util.js: 'import' and 'export' may only appear at the top level (86:1)\n\n\u001b[0m \u001b[90m 84 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 85 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 86 | \u001b[39m \u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m currentPriceUtil \u001b[33m=\u001b[39m (symbol) \u001b[33m=>\u001b[39m  (\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 87 | \u001b[39m     $\u001b[33m.\u001b[39majax({\u001b[0m\n\u001b[0m \u001b[90m 88 | \u001b[39m         method\u001b[33m:\u001b[39m \u001b[32m'GET'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 89 | \u001b[39m        \u001b[90m//  url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`\u001b[39m\u001b[0m\n    at Object.raise (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:7017:17)\n    at Object.parseStatementContent (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10781:18)\n    at Object.parseStatement (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10690:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11264:25)\n    at Object.parseBlockBody (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11251:10)\n    at Object.parseBlock (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11235:10)\n    at Object.parseFunctionBody (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10252:24)\n    at Object.parseArrowExpression (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10209:10)\n    at Object.parseParenAndDistinguishExpression (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9838:12)\n    at Object.parseExprAtom (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9594:21)\n    at Object.parseExprAtom (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:4120:20)\n    at Object.parseExprSubscripts (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9259:23)\n    at Object.parseMaybeUnary (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9239:21)\n    at Object.parseExprOps (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9109:23)\n    at Object.parseMaybeConditional (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9082:23)\n    at Object.parseMaybeAssign (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:9037:21)\n    at Object.parseVar (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11339:26)\n    at Object.parseVarStatement (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11158:10)\n    at Object.parseStatementContent (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10757:21)\n    at Object.parseStatement (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10690:17)\n    at Object.parseExportDeclaration (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11873:17)\n    at Object.maybeParseExportDeclaration (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11829:31)\n    at Object.parseExport (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11759:29)\n    at Object.parseStatementContent (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10794:27)\n    at Object.parseStatement (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10690:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11264:25)\n    at Object.parseBlockBody (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:11251:10)\n    at Object.parseTopLevel (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:10621:10)\n    at Object.parse (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:12222:10)\n    at parse (/Users/ericho/Project/RHood/node_modules/@babel/parser/lib/index.js:12273:38)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userValuation", function() { return userValuation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfoUtil", function() { return companyInfoUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfoUtil", function() { return oneDayStockInfoUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfoUtil", function() { return oneWeekStockInfoUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPortfolioPrices", function() { return fetchPortfolioPrices; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfoUtil", function() { return oneYearStockInfoUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfoUtil", function() { return fiveYearStockInfoUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceUtil", function() { return currentPriceUtil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchList", function() { return fetchWatchList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToWatchList", function() { return addToWatchList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFromWatchList", function() { return deleteFromWatchList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchListCurPrice", function() { return watchListCurPrice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchShares", function() { return fetchShares; });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+
+var userValuation = function userValuation() {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/portfolios"
+  });
+};
+var companyInfoUtil = function companyInfoUtil(stockSymbol) {
+  return $.ajax({
+    method: "GET",
+    url: "https://cloud.iexapis.com/stable/stock/".concat(stockSymbol, "/company?token=").concat(window.iexAPIKey)
+  });
+};
+var oneDayStockInfoUtil = function oneDayStockInfoUtil(symbol) {
+  return $.ajax({
+    method: "GET",
+    // url: `https://financialmodelingprep.com/api/v3/historical-chart/1min/${prices}`
+    // url: `https://sandbox.iexapis.com/stable/stock/${symbol}/intraday-prices/?token=Tsk_35cbedacf888463990377ea0abb4756d`
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/intraday-prices/?token=").concat(window.iexAPIKey)
+  });
+};
+var fetchStockInfo = function fetchStockInfo(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/stocks/".concat(id)
+  });
+};
+var oneWeekStockInfoUtil = function oneWeekStockInfoUtil(prices) {
+  return $.ajax({
+    method: "GET",
+    url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat(prices)
+  });
+};
+var fetchPortfolioPrices = function fetchPortfolioPrices(symbol) {
+  return $.ajax({
+    method: "GET",
+    // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
+    url: "https://cloud.iexapis.com/stable/stock/market/batch?symbols=".concat(symbol, "&types=quote&token=").concat(window.iexAPIKey)
+  });
+};
+var oneYearStockInfoUtil = function oneYearStockInfoUtil(symbol) {
+  return $.ajax({
+    method: "GET",
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/chart/1y?token=").concat(window.iexAPIKey)
+  });
+};
+var fiveYearStockInfoUtil = function fiveYearStockInfoUtil(symbol) {
+  var fiveYearPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  var dateNow = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  fiveYearPrior.subtract(5, 'year');
+  return $.ajax({
+    method: 'GET',
+    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat(symbol, "?from=").concat(fiveYearPrior.format("YYYY-MM-DD"), "&to=").concat(dateNow.format("YYYY-MM-DD"))
+  });
+}; // export const fiveYearStockInfoUtil = (symbol) => {
+// return (
+//     $.ajax({
+//         method: 'GET',
+//         url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/5y?token=${window.iexAPIKey}`
+//     })
+// )}
+
+var currentPriceUtil = function currentPriceUtil(symbol) {
+  return $.ajax({
+    method: 'GET',
+    //  url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/price?token=").concat(window.iexAPIKey)
+  });
+};
+var fetchWatchList = function fetchWatchList() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/watch_lists"
+  });
+};
+var addToWatchList = function addToWatchList(stock) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/watch_lists",
+    data: {
+      stock: stock
+    }
+  });
+};
+var deleteFromWatchList = function deleteFromWatchList(watchListId) {
+  return $.ajax({
+    method: "DELETE",
+    url: "api/watch_lists/".concat(watchListId)
+  });
+};
+var watchListCurPrice = function watchListCurPrice(watchListStr) {
+  if (watchListStr.length === 0) return null;
+  return $.ajax({
+    method: "GET",
+    // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
+    url: "https://cloud.iexapis.com/stable/stock/market/batch?symbols=".concat(watchListStr, "&types=quote&token=").concat(window.iexAPIKey)
+  });
+};
+var fetchShares = function fetchShares(stockId) {
+  return $.ajax({
+    method: "GET",
+    url: "api/transactions/".concat(stockId)
+  });
+};
 
 /***/ }),
 
