@@ -6,8 +6,8 @@ const stockProfileReducer = (state = {}, action) => {
  
     switch (action.type) {
     case RECEIVE_STOCK_PROFILE:
-
-        return action.profile.profile
+ 
+        return action.profile
     default:
       return state 
   }

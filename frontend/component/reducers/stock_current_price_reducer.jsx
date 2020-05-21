@@ -7,6 +7,7 @@ const stockCurrentPriceReducer = (state = 0, action) => {
  
     switch (action.type) {
     case RECEIVE_CURRENT_PRICE:
+        debugger
         return action.currentPrice.price
     default:
       return state 

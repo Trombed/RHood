@@ -24,7 +24,10 @@ export const threeMonthStats = (oneYearData) => {
     let threeMonthsPrior = moment()
     threeMonthsPrior.subtract(3,"month")
     threeMonthsPrior = threeMonthsPrior.format("YYYY-MM-DD")
-    return oneYearData.filter( (dates) => dates.date >= threeMonthsPrior)
+    
+    let threeMonthData = oneYearData.filter( (dates) => dates.date >= threeMonthsPrior)
+
+    return threeMonthData;
 }
 
 
@@ -33,4 +36,14 @@ export const oneMonthStats = (threeMonthData) => {
     oneMonthsPrior.subtract(1,"month")
     oneMonthsPrior = oneMonthsPrior.format("YYYY-MM-DD")
     return threeMonthData.filter( (dates) => dates.date >= oneMonthsPrior)
+}
+
+
+export const oneWeekStats = (oneMonthData) => {
+    let oneWeekPrior = moment()
+    oneWeekPrior.subtract(1,"week")
+    oneWeekPrior = oneWeekPrior.format("YYYY-MM-DD")
+    let oneWeek = oneMonthData.filter( (dates) => dates.date >= oneWeekPrior)
+    debugger
+    return oneWeek
 }

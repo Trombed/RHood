@@ -7,8 +7,13 @@ const watchListPriceReducer = (state = {}, action) => {
     let nextState = Object.assign({}, state)
     switch (action.type) {
       case RECEIVE_WATCH_PRICES:
-      
-          let priceArr = action.watchList.companiesPriceList.map(el => el.price.toFixed(2))
+          let priceArr = []
+          for (let key in action.watchList) {
+            priceArr.push(action.watchList[key].quote.latestPrice.toFixed(2))
+          }
+          // latestPrice.toFixed(2)
+          // let priceArr = action.watchList.companiesPriceList.map(el => el.price.toFixed(2))
+          debugger
         return priceArr
       default:
         return state;

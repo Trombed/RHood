@@ -1,6 +1,6 @@
 import React from 'react'
 import { LineChart, Line, Tooltip, YAxis, XAxis } from 'recharts';
-import { oneYearStats, threeMonthStats, oneMonthStats, oneDayData } from '../../util/stock_util';
+import { oneYearStats, threeMonthStats, oneMonthStats, oneWeekStats, oneDayData } from '../../util/stock_util';
 import News from '../news/news';
 
 
@@ -37,17 +37,20 @@ class StockPage extends React.Component {
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
           .then (res => this.props.getNews(this.props.info.name))
           .then( res => this.props.watchListInfo())
-          .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ price: this.props.currentPrice}))
           .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ chartData: this.props.oneDayPrice}))
-          .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
-          .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
-          .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
-          .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
+          .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
+          .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
+          // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
+          // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
+          // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+          .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
           .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+          .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
           .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
-          .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekPrice) )
+          .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekData) )
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
           .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
@@ -66,20 +69,21 @@ class StockPage extends React.Component {
         .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
         .then (res => this.props.getNews(this.props.info.name))
         .then( res => this.props.watchListInfo())
-        .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-        .then(res => this.setState({ price: this.props.currentPrice}))
+        // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
         .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
         .then(res => this.setState({ chartData: this.props.oneDayPrice}))
-        .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
-        .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
-        .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
-        .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
-        .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+        .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
+        .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
+        // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
+        // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
+        // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+        // .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
+        // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
         .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
-        .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekPrice) )
+        .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
         .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-        .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
+        .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) )
         .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
         .then( res => this.handleChartOneDayData)
         .then ( res => this.activeColor())
@@ -100,8 +104,10 @@ class StockPage extends React.Component {
     } 
 
     setColor(chart) {
+      if (chart === undefined) return;
       let colorValue = ( (Object.values(chart).length === 0 ) || (chart.length === 0) || (chart[0].close === undefined )) ? "yellow" :
       (chart[chart.length-1].close >= chart[0].close ) ? "#21ce99" : "#f45531"
+      debugger
       return colorValue
     }
 
@@ -150,7 +156,7 @@ class StockPage extends React.Component {
    
     handleChartOneWeekData() {
       this.setState({ 
-        chartData: this.props.oneWeekPrice
+        chartData: this.oneWeekData
       }, () => {
         this.removeHighlight();
         
@@ -196,7 +202,7 @@ class StockPage extends React.Component {
 
     handleChartOneYearData() {
       this.setState({ 
-        chartData: this.oneYearData
+        chartData: this.props.oneYearPrice
       },  () => {
         this.removeHighlight();
         $(".Stock-Button-oneYear ").addClass(`Stock-Chart-Active`);
@@ -329,7 +335,7 @@ class StockPage extends React.Component {
                         <div>
                             CEO
                             <br/>
-                            {this.props.company.ceo}
+                            {this.props.company.CEO}
                         </div>
 
                         <div>

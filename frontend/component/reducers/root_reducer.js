@@ -16,8 +16,8 @@ import portfolioPriceReducer from "./portfolio_price_reducer";
 import sharesReducer from "./stock_share_reducer";
 import newsReducer from "./news_reducer";
 import valuationReducer from "./valuation_reducer";
-
 import {LOGOUT_CURRENT_USER } from '../actions/session_action'
+import stockOneYearReducer from "./stock_one_year_reducer";
 
 
 // const rootReducer = combineReducers({
@@ -53,6 +53,7 @@ const appReducer = combineReducers({
   stockInfo: stockInfoReducer,
   stockOneWeekPrice: StockOneWeekPriceReducer,
   stockFiveYearPrice: stockFiveYearReducer,
+  stockOneYearPrice: stockOneYearReducer,
   stockCurrentPrice: stockCurrentPriceReducer,
   watchList: watchListReducer,
   watchListPrice: watchListPriceReducer,

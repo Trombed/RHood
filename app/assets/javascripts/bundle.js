@@ -222,7 +222,7 @@ var clearError = function clearError() {
 /*!****************************************************!*\
   !*** ./frontend/component/actions/stock_action.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, DELETE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, RECEIVE_ONE_DAY_PRICES, stock_search, delete_search, currentPriceInfo, fiveYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
+/*! exports provided: RECEIVE_STOCK_PROFILE, RECEIVE_STOCK_PRICES, RECEIVE_STOCK_INFO, RECEIVE_STOCK_ONE_WEEK, RECEIVE_STOCK_ONE_YEAR, RECEIVE_STOCK_FIVE_YEAR, RECEIVE_CURRENT_PRICE, RECEIVE_SEARCH, DELETE_SEARCH, RECEIVE_PORTFOLIO_PRICES, RECEIVE_STOCK_SHARES, RECEIVE_ONE_DAY_PRICES, stock_search, delete_search, currentPriceInfo, fiveYearStockInfo, oneYearStockInfo, companyInfo, oneDayStockInfo, fetchStockFromDB, oneWeekStockInfo, currentPortfolioPrices, currentShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -231,6 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_PRICES", function() { return RECEIVE_STOCK_PRICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFO", function() { return RECEIVE_STOCK_INFO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_WEEK", function() { return RECEIVE_STOCK_ONE_WEEK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_ONE_YEAR", function() { return RECEIVE_STOCK_ONE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_FIVE_YEAR", function() { return RECEIVE_STOCK_FIVE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PRICE", function() { return RECEIVE_CURRENT_PRICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH", function() { return RECEIVE_SEARCH; });
@@ -242,6 +243,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delete_search", function() { return delete_search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceInfo", function() { return currentPriceInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfo", function() { return fiveYearStockInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfo", function() { return oneYearStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfo", function() { return companyInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfo", function() { return oneDayStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockFromDB", function() { return fetchStockFromDB; });
@@ -256,6 +258,7 @@ var RECEIVE_STOCK_PROFILE = 'RECEIVE_STOCK_PROFILE';
 var RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES';
 var RECEIVE_STOCK_INFO = 'RECEIVE_STOCK_INFO';
 var RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK';
+var RECEIVE_STOCK_ONE_YEAR = 'RECEIVE_STOCK_ONE_YEAR';
 var RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR';
 var RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE';
 var RECEIVE_SEARCH = 'RECEIVE_SEARCH';
@@ -327,6 +330,13 @@ var receiveCurrentPrice = function receiveCurrentPrice(currentPrice) {
   };
 };
 
+var receiveOneYearStock = function receiveOneYearStock(oneYearPrice) {
+  return {
+    type: RECEIVE_STOCK_ONE_YEAR,
+    oneYearPrice: oneYearPrice
+  };
+};
+
 var receiveFiveYearStock = function receiveFiveYearStock(fiveYearPrice) {
   return {
     type: RECEIVE_STOCK_FIVE_YEAR,
@@ -357,6 +367,13 @@ var fiveYearStockInfo = function fiveYearStockInfo(prices) {
   return function (dispatch) {
     return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["fiveYearStockInfoUtil"])(prices).then(function (res) {
       return dispatch(receiveFiveYearStock(res));
+    });
+  };
+};
+var oneYearStockInfo = function oneYearStockInfo(prices) {
+  return function (dispatch) {
+    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["oneYearStockInfoUtil"])(prices).then(function (res) {
+      return dispatch(receiveOneYearStock(res));
     });
   };
 };
@@ -1873,9 +1890,8 @@ function (_React$Component) {
         return _this2.props.getNews(_this2.props.info.name);
       }).then(function (res) {
         return _this2.props.watchListInfo();
-      }).then(function (res) {
-        return _this2.props.currentPriceInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
+      }) // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+      .then(function (res) {
         return _this2.setState({
           price: _this2.props.currentPrice
         });
@@ -1886,19 +1902,24 @@ function (_React$Component) {
           chartData: _this2.props.oneDayPrice
         });
       }).then(function (res) {
-        return _this2.props.oneWeekStockInfo(_this2.props.info.ticker_symbol);
+        return _this2.setState({
+          price: _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close
+        });
       }).then(function (res) {
-        return _this2.props.fiveYearStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.oneYearData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneYearStats"])(_this2.props.fiveYearPrice);
-      }).then(function (res) {
-        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.oneYearData);
+        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
+      }) // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
+      // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
+      // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+      .then(function (res) {
+        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.props.oneYearPrice);
       }).then(function (res) {
         return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
       }).then(function (res) {
+        return _this2.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this2.oneMonthData);
+      }).then(function (res) {
         return _this2.oneDayColor = _this2.setColor(_this2.props.oneDayPrice);
       }).then(function (res) {
-        return _this2.oneWeekColor = _this2.setColor(_this2.props.oneWeekPrice);
+        return _this2.oneWeekColor = _this2.setColor(_this2.props.oneWeekData);
       }).then(function (res) {
         return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
       }).then(function (res) {
@@ -1925,38 +1946,34 @@ function (_React$Component) {
           return _this3.props.getNews(_this3.props.info.name);
         }).then(function (res) {
           return _this3.props.watchListInfo();
-        }).then(function (res) {
-          return _this3.props.currentPriceInfo(_this3.props.info.ticker_symbol);
-        }).then(function (res) {
-          return _this3.setState({
-            price: _this3.props.currentPrice
-          });
-        }).then(function (res) {
+        }) // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+        .then(function (res) {
           return _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
           return _this3.setState({
             chartData: _this3.props.oneDayPrice
           });
         }).then(function (res) {
-          return _this3.props.oneWeekStockInfo(_this3.props.info.ticker_symbol);
+          return _this3.setState({
+            price: _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close
+          });
         }).then(function (res) {
-          return _this3.props.fiveYearStockInfo(_this3.props.info.ticker_symbol);
-        }).then(function (res) {
-          return _this3.oneYearData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneYearStats"])(_this3.props.fiveYearPrice);
-        }).then(function (res) {
-          return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this3.oneYearData);
-        }).then(function (res) {
-          return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this3.threeMonthData);
-        }).then(function (res) {
+          return _this3.props.oneYearStockInfo(_this3.props.info.ticker_symbol);
+        }) // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
+        // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
+        // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+        // .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
+        // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+        .then(function (res) {
           return _this3.oneDayColor = _this3.setColor(_this3.props.oneDayPrice);
         }).then(function (res) {
-          return _this3.oneWeekColor = _this3.setColor(_this3.props.oneWeekPrice);
+          return _this3.oneWeekColor = _this3.setColor(_this3.oneWeekData);
         }).then(function (res) {
           return _this3.oneMonthColor = _this3.setColor(_this3.oneMonthData);
         }).then(function (res) {
           return _this3.threeMonthColor = _this3.setColor(_this3.threeMonthData);
         }).then(function (res) {
-          return _this3.oneYearColor = _this3.setColor(_this3.oneYearData);
+          return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
         }).then(function (res) {
           return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
         }).then(function (res) {
@@ -1985,7 +2002,9 @@ function (_React$Component) {
   }, {
     key: "setColor",
     value: function setColor(chart) {
+      if (chart === undefined) return;
       var colorValue = Object.values(chart).length === 0 || chart.length === 0 || chart[0].close === undefined ? "yellow" : chart[chart.length - 1].close >= chart[0].close ? "#21ce99" : "#f45531";
+      debugger;
       return colorValue;
     }
   }, {
@@ -2035,7 +2054,7 @@ function (_React$Component) {
       var _this5 = this;
 
       this.setState({
-        chartData: this.props.oneWeekPrice
+        chartData: this.oneWeekData
       }, function () {
         _this5.removeHighlight();
 
@@ -2087,7 +2106,7 @@ function (_React$Component) {
       var _this8 = this;
 
       this.setState({
-        chartData: this.oneYearData
+        chartData: this.props.oneYearPrice
       }, function () {
         _this8.removeHighlight();
 
@@ -2224,7 +2243,7 @@ function (_React$Component) {
         className: "Stock-Container-Description"
       }, this.props.company.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Header"
       }, "News"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Container"
@@ -2265,6 +2284,7 @@ var mSTP = function mSTP(state, ownProps) {
     oneDayPrice: state.stockPrice,
     info: state.stockInfo,
     oneWeekPrice: state.stockOneWeekPrice,
+    oneYearPrice: state.stockOneYearPrice,
     fiveYearPrice: state.stockFiveYearPrice,
     currentPrice: state.stockCurrentPrice,
     watchList: state.watchList,
@@ -2285,6 +2305,9 @@ var mDTP = function mDTP(dispatch) {
     },
     oneWeekStockInfo: function oneWeekStockInfo(prices) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["oneWeekStockInfo"])(prices));
+    },
+    oneYearStockInfo: function oneYearStockInfo(prices) {
+      return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["oneYearStockInfo"])(prices));
     },
     fiveYearStockInfo: function fiveYearStockInfo(prices) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_1__["fiveYearStockInfo"])(prices));
@@ -3023,7 +3046,19 @@ var portfolioPriceReducer = function portfolioPriceReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PORTFOLIO_PRICES"]:
-      return action.prices;
+      var priceHash = {
+        'companiesPriceList': []
+      };
+
+      for (var key in action.prices) {
+        priceHash['companiesPriceList'].push({
+          "symbol": key,
+          "price": action.prices[key].quote.latestPrice
+        });
+      }
+
+      return priceHash;
+    // return action.prices
 
     default:
       return state;
@@ -3062,6 +3097,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _news_reducer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./news_reducer */ "./frontend/component/reducers/news_reducer.js");
 /* harmony import */ var _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./valuation_reducer */ "./frontend/component/reducers/valuation_reducer.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
+/* harmony import */ var _stock_one_year_reducer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./stock_one_year_reducer */ "./frontend/component/reducers/stock_one_year_reducer.jsx");
+
 
 
 
@@ -3111,6 +3148,7 @@ var appReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   stockInfo: _stock_info_reducer__WEBPACK_IMPORTED_MODULE_7__["default"],
   stockOneWeekPrice: _stock_one_week_reducer__WEBPACK_IMPORTED_MODULE_8__["default"],
   stockFiveYearPrice: _stock_five_year_reducer__WEBPACK_IMPORTED_MODULE_9__["default"],
+  stockOneYearPrice: _stock_one_year_reducer__WEBPACK_IMPORTED_MODULE_19__["default"],
   stockCurrentPrice: _stock_current_price_reducer__WEBPACK_IMPORTED_MODULE_10__["default"],
   watchList: _watch_list_reducer__WEBPACK_IMPORTED_MODULE_11__["default"],
   watchListPrice: _watch_list_prices_reducer__WEBPACK_IMPORTED_MODULE_12__["default"],
@@ -3252,6 +3290,7 @@ var stockCurrentPriceReducer = function stockCurrentPriceReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_PRICE"]:
+      debugger;
       return action.currentPrice.price;
 
     default:
@@ -3362,6 +3401,37 @@ var StockOneWeekPriceReducer = function StockOneWeekPriceReducer() {
 
 /***/ }),
 
+/***/ "./frontend/component/reducers/stock_one_year_reducer.jsx":
+/*!****************************************************************!*\
+  !*** ./frontend/component/reducers/stock_one_year_reducer.jsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+
+
+var stockOneYearReducer = function stockOneYearReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_ONE_YEAR"]:
+      debugger;
+      return action.oneYearPrice;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (stockOneYearReducer);
+
+/***/ }),
+
 /***/ "./frontend/component/reducers/stock_price_reducer.jsx":
 /*!*************************************************************!*\
   !*** ./frontend/component/reducers/stock_price_reducer.jsx ***!
@@ -3388,14 +3458,22 @@ var stockPriceReducer = function stockPriceReducer() {
       return reverseArr;
 
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_DAY_PRICES"]:
-      var oneDayData = action.prices.reverse();
-      var oneDayPrior = moment__WEBPACK_IMPORTED_MODULE_1___default()();
-      oneDayPrior.subtract(1, "day");
-      oneDayPrior = oneDayPrior.format("YYYY-MM-DD");
-      var result = oneDayData.filter(function (dates) {
-        return dates.date >= oneDayPrior;
+      action.prices.forEach(function (el, idx) {
+        if (el['open'] === null) {
+          action.prices[idx].open = action.prices[idx - 1].open;
+        }
+
+        if (el['close'] === null) {
+          action.prices[idx].close = action.prices[idx - 1].close;
+        }
       });
-      return result;
+      return action.prices;
+    // const oneDayData = action.prices.reverse()
+    // let oneDayPrior = moment()
+    // oneDayPrior.subtract(1,"day")
+    // oneDayPrior = oneDayPrior.format("YYYY-MM-DD")
+    // let result = oneDayData.filter( (dates) => dates.date >= oneDayPrior) 
+    // return result
 
     default:
       return state;
@@ -3425,7 +3503,7 @@ var stockProfileReducer = function stockProfileReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_PROFILE"]:
-      return action.profile.profile;
+      return action.profile;
 
     default:
       return state;
@@ -3584,9 +3662,15 @@ var watchListPriceReducer = function watchListPriceReducer() {
 
   switch (action.type) {
     case _actions_watch_list_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCH_PRICES"]:
-      var priceArr = action.watchList.companiesPriceList.map(function (el) {
-        return el.price.toFixed(2);
-      });
+      var priceArr = [];
+
+      for (var key in action.watchList) {
+        priceArr.push(action.watchList[key].quote.latestPrice.toFixed(2));
+      } // latestPrice.toFixed(2)
+      // let priceArr = action.watchList.companiesPriceList.map(el => el.price.toFixed(2))
+
+
+      debugger;
       return priceArr;
 
     default:
@@ -4948,7 +5032,7 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
+/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4959,6 +5043,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfoUtil", function() { return oneWeekStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPortfolioPrices", function() { return fetchPortfolioPrices; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfoUtil", function() { return oneYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfoUtil", function() { return fiveYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentPriceUtil", function() { return currentPriceUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchList", function() { return fetchWatchList; });
@@ -4978,13 +5063,15 @@ var userValuation = function userValuation() {
 var companyInfoUtil = function companyInfoUtil(stockSymbol) {
   return $.ajax({
     method: "GET",
-    url: "https://financialmodelingprep.com/api/v3/company/profile/".concat(stockSymbol)
+    url: "https://cloud.iexapis.com/stable/stock/".concat(stockSymbol, "/company?token=").concat(window.iexAPIKey)
   });
 };
-var oneDayStockInfoUtil = function oneDayStockInfoUtil(prices) {
+var oneDayStockInfoUtil = function oneDayStockInfoUtil(symbol) {
   return $.ajax({
     method: "GET",
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/1min/".concat(prices)
+    // url: `https://financialmodelingprep.com/api/v3/historical-chart/1min/${prices}`
+    // url: `https://sandbox.iexapis.com/stable/stock/${symbol}/intraday-prices/?token=Tsk_35cbedacf888463990377ea0abb4756d`
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/intraday-prices/?token=").concat(window.iexAPIKey)
   });
 };
 var fetchStockInfo = function fetchStockInfo(id) {
@@ -5002,7 +5089,14 @@ var oneWeekStockInfoUtil = function oneWeekStockInfoUtil(prices) {
 var fetchPortfolioPrices = function fetchPortfolioPrices(symbol) {
   return $.ajax({
     method: "GET",
-    url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(symbol)
+    // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
+    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(symbol, "&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d")
+  });
+};
+var oneYearStockInfoUtil = function oneYearStockInfoUtil(symbol) {
+  return $.ajax({
+    method: "GET",
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(symbol, "/chart/1y?token=Tsk_35cbedacf888463990377ea0abb4756d")
   });
 };
 var fiveYearStockInfoUtil = function fiveYearStockInfoUtil(symbol) {
@@ -5017,7 +5111,8 @@ var fiveYearStockInfoUtil = function fiveYearStockInfoUtil(symbol) {
 var currentPriceUtil = function currentPriceUtil(symbol) {
   return $.ajax({
     method: 'GET',
-    url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(symbol)
+    //  url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`
+    url: "https://cloud.iexapis.com/stable/stock/".concat(symbol, "/price?token=").concat(window.iexAPIKey)
   });
 };
 var fetchWatchList = function fetchWatchList() {
@@ -5045,7 +5140,8 @@ var watchListCurPrice = function watchListCurPrice(watchListStr) {
   if (watchListStr.length === 0) return null;
   return $.ajax({
     method: "GET",
-    url: "https://financialmodelingprep.com/api/v3/stock/real-time-price/".concat(watchListStr)
+    // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
+    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(watchListStr, "&types=quote&token=Tsk_35cbedacf888463990377ea0abb4756d")
   });
 };
 var fetchShares = function fetchShares(stockId) {
@@ -5061,7 +5157,7 @@ var fetchShares = function fetchShares(stockId) {
 /*!***********************************************!*\
   !*** ./frontend/component/util/stock_util.js ***!
   \***********************************************/
-/*! exports provided: stockSymGetter, oneYearStats, threeMonthStats, oneMonthStats */
+/*! exports provided: stockSymGetter, oneYearStats, threeMonthStats, oneMonthStats, oneWeekStats */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5070,6 +5166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStats", function() { return oneYearStats; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threeMonthStats", function() { return threeMonthStats; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneMonthStats", function() { return oneMonthStats; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStats", function() { return oneWeekStats; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -5092,9 +5189,10 @@ var threeMonthStats = function threeMonthStats(oneYearData) {
   var threeMonthsPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
   threeMonthsPrior.subtract(3, "month");
   threeMonthsPrior = threeMonthsPrior.format("YYYY-MM-DD");
-  return oneYearData.filter(function (dates) {
+  var threeMonthData = oneYearData.filter(function (dates) {
     return dates.date >= threeMonthsPrior;
   });
+  return threeMonthData;
 };
 var oneMonthStats = function oneMonthStats(threeMonthData) {
   var oneMonthsPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
@@ -5103,6 +5201,16 @@ var oneMonthStats = function oneMonthStats(threeMonthData) {
   return threeMonthData.filter(function (dates) {
     return dates.date >= oneMonthsPrior;
   });
+};
+var oneWeekStats = function oneWeekStats(oneMonthData) {
+  var oneWeekPrior = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+  oneWeekPrior.subtract(1, "week");
+  oneWeekPrior = oneWeekPrior.format("YYYY-MM-DD");
+  var oneWeek = oneMonthData.filter(function (dates) {
+    return dates.date >= oneWeekPrior;
+  });
+  debugger;
+  return oneWeek;
 };
 
 /***/ }),

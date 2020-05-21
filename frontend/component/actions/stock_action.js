@@ -1,10 +1,11 @@
 import APISearchUtil from "../util/search_util";
-import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fiveYearStockInfoUtil, fetchPortfolioPrices, currentPriceUtil, fetchShares} from  '../util/stock_api_util'
+import {companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fiveYearStockInfoUtil, fetchPortfolioPrices, currentPriceUtil, fetchShares, oneYearStockInfoUtil} from  '../util/stock_api_util'
 
 export const RECEIVE_STOCK_PROFILE = 'RECEIVE_STOCK_PROFILE'
 export const RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES'
 export const RECEIVE_STOCK_INFO = 'RECEIVE_STOCK_INFO'
 export const RECEIVE_STOCK_ONE_WEEK = 'RECEIVE_STOCK_ONE_WEEK'
+export const RECEIVE_STOCK_ONE_YEAR = 'RECEIVE_STOCK_ONE_YEAR'
 export const RECEIVE_STOCK_FIVE_YEAR = 'RECEIVE_STOCK_FIVE_YEAR'
 export const RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE'
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
@@ -62,6 +63,10 @@ const receiveCurrentPrice = (currentPrice) => ({
     currentPrice
 })
 
+const receiveOneYearStock = (oneYearPrice) => ({
+    type: RECEIVE_STOCK_ONE_YEAR,
+    oneYearPrice
+})
 
 const receiveFiveYearStock = (fiveYearPrice) => ({
     type: RECEIVE_STOCK_FIVE_YEAR,
@@ -90,6 +95,11 @@ export const currentPriceInfo = price => dispatch => (
 export const fiveYearStockInfo = prices => dispatch => (
     fiveYearStockInfoUtil(prices)
         .then( (res) => dispatch(receiveFiveYearStock(res)))
+)
+
+export const oneYearStockInfo = prices => dispatch => (
+    oneYearStockInfoUtil(prices)
+        .then( (res) => dispatch(receiveOneYearStock(res)))
 )
 
 
