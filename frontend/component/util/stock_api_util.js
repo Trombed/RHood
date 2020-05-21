@@ -37,12 +37,12 @@ export const fetchStockInfo = (id) => (
     })
 )
 
-export const oneWeekStockInfoUtil = (prices) => (
-    $.ajax({
-        method: "GET",
-        url: `https://financialmodelingprep.com/api/v3/historical-chart/1hour/${prices}`
-    })
-)
+// export const oneWeekStockInfoUtil = (prices) => (
+//     $.ajax({
+//         method: "GET",
+//         url: `https://financialmodelingprep.com/api/v3/historical-chart/1hour/${prices}`
+//     })
+// )
 
 export const fetchPortfolioPrices = (symbol) => {
  

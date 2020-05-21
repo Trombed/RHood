@@ -44,6 +44,6 @@ export const oneWeekStats = (oneMonthData) => {
     oneWeekPrior.subtract(1,"week")
     oneWeekPrior = oneWeekPrior.format("YYYY-MM-DD")
     let oneWeek = oneMonthData.filter( (dates) => dates.date >= oneWeekPrior)
-    debugger
+
     return oneWeek
 }

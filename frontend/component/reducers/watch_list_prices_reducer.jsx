@@ -13,7 +13,6 @@ const watchListPriceReducer = (state = {}, action) => {
           }
           // latestPrice.toFixed(2)
           // let priceArr = action.watchList.companiesPriceList.map(el => el.price.toFixed(2))
-          debugger
         return priceArr
       default:
         return state;

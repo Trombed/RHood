@@ -85,9 +85,13 @@ export const delete_search = () => dispatch => (
 
 
 
+// export const currentPriceInfo = price => dispatch => (
+//     currentPriceUtil(price)
+//     .then( (res) => dispatch(receiveCurrentPrice(res)))
+// )
+
 export const currentPriceInfo = price => dispatch => (
-    currentPriceUtil(price)
-    .then( (res) => dispatch(receiveCurrentPrice(res)))
+    dispatch(receiveCurrentPrice(price))
 )
 
 

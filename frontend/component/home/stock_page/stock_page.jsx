@@ -42,6 +42,8 @@ class StockPage extends React.Component {
           .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ chartData: this.props.oneDayPrice}))
           .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
+          .then( res => this.currentPrice = this.props.oneDayPrice[this.props.oneDayPrice.length-1].close)
+          .then( res => this.props.currentPriceInfo(this.currentPrice))
           .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
           // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
           // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
@@ -50,10 +52,10 @@ class StockPage extends React.Component {
           .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
           .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
           .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
-          .then( res => this.oneWeekColor = this.setColor(this.props.oneWeekData) )
+          .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
           .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
           .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-          .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
+          .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) )
           .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
           .then( res => this.handleChartOneDayData)
           .then( res => this.activeColor())
@@ -72,7 +74,9 @@ class StockPage extends React.Component {
         // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
         .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
         .then(res => this.setState({ chartData: this.props.oneDayPrice}))
+
         .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
+       
         .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
@@ -83,7 +87,7 @@ class StockPage extends React.Component {
         .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
         .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-        .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) )
+        .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
         .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
         .then( res => this.handleChartOneDayData)
         .then ( res => this.activeColor())
@@ -124,6 +128,7 @@ class StockPage extends React.Component {
     dataColor() {
       let colorValue = ( (Object.values(this.state.chartData).length === 0 ) || (this.state.chartData.length === 0) || (this.state.chartData[0].close === undefined )) ? "yellow" :
       (this.state.chartData[this.state.chartData.length-1].close >= this.state.chartData[0].close ) ? "#21ce99" : "#f45531";
+      debugger
       return colorValue;
     }
 
@@ -233,7 +238,7 @@ class StockPage extends React.Component {
    
     handleResetPrice() {
       this.setState({
-        price: this.props.currentPrice,
+        price: this.currentPrice,
         change: 0,
         percentageChange: 0
       })

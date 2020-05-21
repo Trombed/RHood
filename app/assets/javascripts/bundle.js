@@ -355,12 +355,14 @@ var delete_search = function delete_search() {
   return function (dispatch) {
     return dispatch(deleteSearch());
   };
-};
+}; // export const currentPriceInfo = price => dispatch => (
+//     currentPriceUtil(price)
+//     .then( (res) => dispatch(receiveCurrentPrice(res)))
+// )
+
 var currentPriceInfo = function currentPriceInfo(price) {
   return function (dispatch) {
-    return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["currentPriceUtil"])(price).then(function (res) {
-      return dispatch(receiveCurrentPrice(res));
-    });
+    return dispatch(receiveCurrentPrice(price));
   };
 };
 var fiveYearStockInfo = function fiveYearStockInfo(prices) {
@@ -1906,6 +1908,10 @@ function (_React$Component) {
           price: _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close
         });
       }).then(function (res) {
+        return _this2.currentPrice = _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close;
+      }).then(function (res) {
+        return _this2.props.currentPriceInfo(_this2.currentPrice);
+      }).then(function (res) {
         return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
       }) // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
       // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
@@ -1919,13 +1925,13 @@ function (_React$Component) {
       }).then(function (res) {
         return _this2.oneDayColor = _this2.setColor(_this2.props.oneDayPrice);
       }).then(function (res) {
-        return _this2.oneWeekColor = _this2.setColor(_this2.props.oneWeekData);
+        return _this2.oneWeekColor = _this2.setColor(_this2.oneWeekData);
       }).then(function (res) {
         return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
       }).then(function (res) {
         return _this2.threeMonthColor = _this2.setColor(_this2.threeMonthData);
       }).then(function (res) {
-        return _this2.oneYearColor = _this2.setColor(_this2.oneYearData);
+        return _this2.oneYearColor = _this2.setColor(_this2.props.oneYearPrice);
       }).then(function (res) {
         return _this2.fiveYearColor = _this2.setColor(_this2.props.fiveYearPrice);
       }).then(function (res) {
@@ -1973,7 +1979,7 @@ function (_React$Component) {
         }).then(function (res) {
           return _this3.threeMonthColor = _this3.setColor(_this3.threeMonthData);
         }).then(function (res) {
-          return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
+          return _this3.oneYearColor = _this3.setColor(_this3.oneYearData);
         }).then(function (res) {
           return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
         }).then(function (res) {
@@ -2019,6 +2025,7 @@ function (_React$Component) {
     key: "dataColor",
     value: function dataColor() {
       var colorValue = Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? "yellow" : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? "#21ce99" : "#f45531";
+      debugger;
       return colorValue;
     }
   }, {
@@ -2138,7 +2145,7 @@ function (_React$Component) {
     key: "handleResetPrice",
     value: function handleResetPrice() {
       this.setState({
-        price: this.props.currentPrice,
+        price: this.currentPrice,
         change: 0,
         percentageChange: 0
       });
@@ -3291,7 +3298,7 @@ var stockCurrentPriceReducer = function stockCurrentPriceReducer() {
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_PRICE"]:
       debugger;
-      return action.currentPrice.price;
+      return action.currentPrice;
 
     default:
       return state;
@@ -3420,7 +3427,6 @@ var stockOneYearReducer = function stockOneYearReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_ONE_YEAR"]:
-      debugger;
       return action.oneYearPrice;
 
     default:
@@ -3670,7 +3676,6 @@ var watchListPriceReducer = function watchListPriceReducer() {
       // let priceArr = action.watchList.companiesPriceList.map(el => el.price.toFixed(2))
 
 
-      debugger;
       return priceArr;
 
     default:
@@ -5032,7 +5037,7 @@ var APIUtil = {
 /*!***************************************************!*\
   !*** ./frontend/component/util/stock_api_util.js ***!
   \***************************************************/
-/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, oneWeekStockInfoUtil, fetchPortfolioPrices, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
+/*! exports provided: userValuation, companyInfoUtil, oneDayStockInfoUtil, fetchStockInfo, fetchPortfolioPrices, oneYearStockInfoUtil, fiveYearStockInfoUtil, currentPriceUtil, fetchWatchList, addToWatchList, deleteFromWatchList, watchListCurPrice, fetchShares */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5041,7 +5046,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "companyInfoUtil", function() { return companyInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneDayStockInfoUtil", function() { return oneDayStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneWeekStockInfoUtil", function() { return oneWeekStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPortfolioPrices", function() { return fetchPortfolioPrices; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oneYearStockInfoUtil", function() { return oneYearStockInfoUtil; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fiveYearStockInfoUtil", function() { return fiveYearStockInfoUtil; });
@@ -5079,13 +5083,13 @@ var fetchStockInfo = function fetchStockInfo(id) {
     method: 'GET',
     url: "/api/stocks/".concat(id)
   });
-};
-var oneWeekStockInfoUtil = function oneWeekStockInfoUtil(prices) {
-  return $.ajax({
-    method: "GET",
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat(prices)
-  });
-};
+}; // export const oneWeekStockInfoUtil = (prices) => (
+//     $.ajax({
+//         method: "GET",
+//         url: `https://financialmodelingprep.com/api/v3/historical-chart/1hour/${prices}`
+//     })
+// )
+
 var fetchPortfolioPrices = function fetchPortfolioPrices(symbol) {
   return $.ajax({
     method: "GET",
@@ -5209,7 +5213,6 @@ var oneWeekStats = function oneWeekStats(oneMonthData) {
   var oneWeek = oneMonthData.filter(function (dates) {
     return dates.date >= oneWeekPrior;
   });
-  debugger;
   return oneWeek;
 };
 

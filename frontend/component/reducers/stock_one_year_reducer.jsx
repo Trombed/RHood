@@ -7,7 +7,7 @@ const stockOneYearReducer = (state = [], action) => {
  
     switch (action.type) {
     case RECEIVE_STOCK_ONE_YEAR:
-        debugger
+   
         return action.oneYearPrice
     default:
       return state 
