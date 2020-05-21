@@ -3343,7 +3343,7 @@ var stockFiveYearReducer = function stockFiveYearReducer() {
 
   switch (action.type) {
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_FIVE_YEAR"]:
-      return action.fiveYearPrice;
+      return action.fiveYearPrice.historical;
 
     default:
       return state;
