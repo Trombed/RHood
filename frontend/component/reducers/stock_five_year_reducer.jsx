@@ -7,6 +7,7 @@ const stockFiveYearReducer = (state = [], action) => {
  
     switch (action.type) {
     case RECEIVE_STOCK_FIVE_YEAR:
+ 
         return action.fiveYearPrice.historical
     default:
       return state 

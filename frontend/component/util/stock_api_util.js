@@ -57,6 +57,7 @@ export const fetchPortfolioPrices = (symbol) => {
 
  export const oneYearStockInfoUtil = (symbol) => {
      return (
+     
          $.ajax({
              method: "GET",
              url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/1y?token=${window.iexAPIKey}`
@@ -70,10 +71,24 @@ export const fetchPortfolioPrices = (symbol) => {
     return (
      $.ajax({
          method: 'GET',
-         url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${fiveYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}`
+         url: `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?from=${fiveYearPrior.format("YYYY-MM-DD")}&to=${dateNow.format("YYYY-MM-DD")}&apikey=${window.finAPIKey}`
      })
     )
  }
+// export const fiveYearStockInfoUtil = (symbol) => {
+//             let fiveYearPrior = moment();
+      
+//             fiveYearPrior.subtract(5, 'year');
+         
+//             return (
+//              $.ajax({
+//                  method: 'GET',
+//                  url: `https://api.worldtradingdata.com/api/v1/history?symbol=${symbol}&date_from=${fiveYearPrior.format("YYYY-MM-DD")}&sort=oldest&api_token=${window.wtdAPIKey}`
+         
+//              })
+//             )
+// }
+     
  
 // export const fiveYearStockInfoUtil = (symbol) => {
 // return (
