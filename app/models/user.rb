@@ -70,39 +70,28 @@ class User < ApplicationRecord
       end
 
 
-      def update_portfolio 
+      def stocks_to_find 
+        return false if self.transactions.empty?
+        stocks = []
+        self.transactions.each do |transaction| 
+          stocks.push(transaction.stock.ticker_symbol)
+        end
+        return stocks
+      end
+
+      def update_portfolio(security)
         return self.funds if self.transactions.empty?
         new_valuation = 0
-        stock_to_find = []
-        shares = {}
-        shares.default = 0
-        self.transactions.each do |transaction|
-          shares[transaction.stock.ticker_symbol] += transaction.shares
-          stock_to_find.push(transaction.stock.ticker_symbol)
-        end 
-
-        if stock_to_find.length < 2
-
-          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{stock_to_find[0]}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
-          puts url
-
-          security = JSON.parse(open(url).read)
-         
-          new_valuation = security['price'] * shares[stock_to_find[0]] 
-        else 
-          list = stock_to_find.uniq.join(",")
-          url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{list}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
-          security = JSON.parse(open(url).read)
-
-          security["companiesPriceList"].each do |company|
-          
-            new_valuation += shares[company['symbol']] *  company['price']
+        self.transactions.each do |transaction| 
+          security['companiesPriceList'].each do |stock|
+            if stock['symbol'] == transaction.stock.ticker_symbol 
+              new_valuation += transaction.shares * stock['price']
+            end
           end
-
         end
-
         return new_valuation + self.funds
       end
+ 
     
 
 end

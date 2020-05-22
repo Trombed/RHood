@@ -2720,7 +2720,7 @@ function (_React$Component) {
         className: "Watch-List-Content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Title"
-      }, "Stocks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Followed Stocks:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Items-Container"

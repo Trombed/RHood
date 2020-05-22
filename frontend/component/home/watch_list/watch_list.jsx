@@ -34,7 +34,7 @@ class WatchList extends React.Component {
 
                 <div className="Watch-List-Content">
                 <div className='Watch-List-Title'>
-                    Stocks
+                    Followed Stocks: 
                 </div>
                 <div className="Watch-List-Separator">
                 </div>
