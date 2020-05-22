@@ -3480,14 +3480,31 @@ var stockPriceReducer = function stockPriceReducer() {
 
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_DAY_PRICES"]:
       action.prices.forEach(function (el, idx) {
-        if (el['open'] === null) {
-          action.prices[idx].open = action.prices[idx - 1].open;
+        if (el.open === null) {
+          if (idx === action.prices.length - 1) {
+            action.prices[idx].open = action.prices[idx - 1].open;
+            if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open;
+          } else {
+            var next = idx + 1;
+
+            while (action.prices[next].open === null) {
+              next += 1;
+            }
+
+            action.prices[idx].open = action.prices[next].open;
+          }
         }
 
-        if (el['close'] === null) {
-          action.prices[idx].close = action.prices[idx - 1].close;
-        }
-      });
+        if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open;
+      }); // action.prices.forEach ( (el, idx) => {
+      //     if (el['open'] === null) {
+      //         action.prices[idx].open = action.prices[idx-1].open
+      //     } 
+      //     if (el['close'] === null) {
+      //         action.prices[idx].close = action.prices[idx-1].close
+      //     }
+      // })
+
       return action.prices;
     // const oneDayData = action.prices.reverse()
     // let oneDayPrior = moment()
@@ -4877,7 +4894,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2__["logger"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

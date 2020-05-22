@@ -10,16 +10,33 @@ const stockPriceReducer = (state = {}, action) => {
         const reverseArr = action.prices.reverse()
         return reverseArr
     case RECEIVE_ONE_DAY_PRICES:
-
-        action.prices.forEach ( (el, idx) => {
-            if (el['open'] === null) {
-                action.prices[idx].open = action.prices[idx-1].open
-            } 
-            if (el['close'] === null) {
-                action.prices[idx].close = action.prices[idx-1].close
+        action.prices.forEach( (el, idx) => {
+        if (el.open === null) {
+            if (idx === action.prices.length-1) {
+                    action.prices[idx].open = action.prices[idx-1].open
+                    if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open
+                }
+                else {
+                    let next = idx+1
+                    while( action.prices[next].open === null) {
+                        next += 1
+                    } 
+                    action.prices[idx].open = action.prices[next].open
+                }
             }
-            
+            if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open
+
         })
+
+        // action.prices.forEach ( (el, idx) => {
+        //     if (el['open'] === null) {
+        //         action.prices[idx].open = action.prices[idx-1].open
+        //     } 
+        //     if (el['close'] === null) {
+        //         action.prices[idx].close = action.prices[idx-1].close
+        //     }
+            
+        // })
  
         return action.prices
         // const oneDayData = action.prices.reverse()
