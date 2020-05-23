@@ -15,10 +15,18 @@ class PortfolioChart extends React.Component {
 
     customToolTip(e) {
         if (e.label === undefined) return 
+        
         else {
-            let label = e.label.split("T")[0]
+         
+            let info = e.label.split("T")
+            let dateNow = info[0]
+            let timeNow = info[1].split(".")[0]
             return (
-            <div className="Stock-Tool-Tip" >{label}</div>
+            <div className="Stock-Tool-Tip" >
+            {dateNow}
+            <br/>
+            {timeNow}
+            </div>
             )
         }
       }

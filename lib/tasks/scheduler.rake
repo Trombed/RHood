@@ -47,7 +47,7 @@ task :calculate_gains => :environment do
             valuation: new_valuation
         })
     end
-
+    #two loops to take snapshots
     puts "done."
 end 
 

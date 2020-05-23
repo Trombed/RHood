@@ -1269,10 +1269,12 @@ function (_React$Component) {
     key: "customToolTip",
     value: function customToolTip(e) {
       if (e.label === undefined) return;else {
-        var label = e.label.split("T")[0];
+        var info = e.label.split("T");
+        var dateNow = info[0];
+        var timeNow = info[1].split(".")[0];
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "Stock-Tool-Tip"
-        }, label);
+        }, dateNow, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), timeNow);
       }
     }
   }, {
