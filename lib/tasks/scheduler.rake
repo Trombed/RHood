@@ -48,6 +48,7 @@ task :calculate_gains => :environment do
         })
     end
     #two loops to take snapshots
+    # test new function
     puts "done."
 end 
 
