@@ -131,7 +131,7 @@ export const fetchPortfolioPrices = (symbol) => {
 )
 
 export const watchListCurPrice = (watchListStr) => {
-    if (watchListStr.length === 0) return null;
+    // if (watchListStr.length === 0) return;
     return (
         $.ajax({
             method: "GET",

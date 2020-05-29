@@ -5193,7 +5193,7 @@ var deleteFromWatchList = function deleteFromWatchList(watchListId) {
   });
 };
 var watchListCurPrice = function watchListCurPrice(watchListStr) {
-  if (watchListStr.length === 0) return null;
+  // if (watchListStr.length === 0) return;
   return $.ajax({
     method: "GET",
     // url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${watchListStr}`
