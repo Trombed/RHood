@@ -1415,6 +1415,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "".concat(page.urlToImage),
         alt: "".concat(page.content),
+        onError: function onError(e) {
+          e.target.onerror = null;
+          e.target.src = '/news-image.jpeg';
+        },
         className: "Main-News-Content-Image"
       })))));
     }

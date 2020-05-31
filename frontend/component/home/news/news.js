@@ -1,6 +1,8 @@
 import React from 'react'
 
 class News extends React.Component {
+
+
     render() {
         const {page, idx} = this.props
     
@@ -17,7 +19,10 @@ class News extends React.Component {
                         <div className="Main-News-Desc">{page.description}</div>
                     </div>
                     <div className="Main-News-Content-Image-Container">
-                        <img src={`${page.urlToImage}`} alt={`${page.content}`} className="Main-News-Content-Image" /></div>
+                        <img src={`${page.urlToImage}`} alt={`${page.content}`} onError={ (e) => {
+                            e.target.onerror = null
+                            e.target.src = '/news-image.jpeg'
+                        } } className="Main-News-Content-Image" /></div>
                 </div>
                 </a>
             </div>
