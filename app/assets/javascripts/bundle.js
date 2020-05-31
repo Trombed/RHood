@@ -4928,7 +4928,7 @@ var fetchNews = function fetchNews(stockName) {
 var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
-    url: "https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
+    url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
   });
 };
 
