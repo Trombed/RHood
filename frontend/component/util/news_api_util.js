@@ -4,7 +4,7 @@ export const fetchNews = (stockName) => {
     return (
         $.ajax({
             method: "GET",
-            url: `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=${name[0]}&apiKey=${window.newsAPIKey}`,
+            url: `http://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=${name[0]}&apiKey=${window.newsAPIKey}`,
               
         })
     )
@@ -16,6 +16,6 @@ export const fetchNews = (stockName) => {
 export const fetchAllNews = () => (
         $.ajax({
             method: "GET",
-            url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
+            url: `http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
         })
 )

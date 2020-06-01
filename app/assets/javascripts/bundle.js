@@ -4922,13 +4922,13 @@ var fetchNews = function fetchNews(stockName) {
   var name = stockName.split(" ");
   return $.ajax({
     method: "GET",
-    url: "https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=".concat(name[0], "&apiKey=").concat(window.newsAPIKey)
+    url: "http://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=".concat(name[0], "&apiKey=").concat(window.newsAPIKey)
   });
 };
 var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
-    url: "https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
+    url: "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
   });
 };
 
