@@ -16,6 +16,6 @@ export const fetchNews = (stockName) => {
 export const fetchAllNews = () => (
         $.ajax({
             method: "GET",
-            url: `http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
+            url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
         })
 )
