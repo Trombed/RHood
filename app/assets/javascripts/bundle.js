@@ -128,7 +128,8 @@ var getNews = function getNews(name) {
 var getAllNews = function getAllNews() {
   return function (dispatch) {
     return Object(_util_news_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllNews"])().then(function (res) {
-      return dispatch(receiveAllNews(res));
+      console.log(res);
+      dispatch(receiveAllNews(res));
     });
   };
 };
@@ -4922,13 +4923,15 @@ var fetchNews = function fetchNews(stockName) {
   var name = stockName.split(" ");
   return $.ajax({
     method: "GET",
-    url: "http://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=".concat(name[0], "&apiKey=").concat(window.newsAPIKey)
+    // url: `http://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=${name[0]}&apiKey=${window.newsAPIKey}`,
+    url: "/api/news/".concat(name[0])
   });
 };
 var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=".concat(window.newsAPIKey)
+    // url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
+    url: "/api/news/"
   });
 };
 

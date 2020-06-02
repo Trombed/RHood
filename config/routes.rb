@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index, :create, :show, :destroy]
     resources :stocks, only: [:show, :index] 
     resources :portfolios, only: [:index]
+    resources :news, only: [:index, :show]
   end 
   
 

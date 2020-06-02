@@ -20,5 +20,7 @@ export const getNews = (name) => (dispatch) => (
 
 export const getAllNews = () => (dispatch) => (
     fetchAllNews()
-        .then( (res) => dispatch(receiveAllNews(res)))
+        .then( (res) =>  {
+            console.log(res)
+            dispatch(receiveAllNews(res)) })
 )
