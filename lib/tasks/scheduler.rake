@@ -13,7 +13,7 @@ task :calculate_gains => :environment do
 
     ENV['TZ'] = 'America/New_York'
     now = Time.now 
-    # next if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+    next if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
 
     # users = User.all 
     # users.each do |user| 
