@@ -56,6 +56,7 @@ class PortfolioChart extends React.Component {
                         <div className='Stock-Container-Header'>
                          
                             <div className="Stock-Container-Company-Price">
+                                Portfolio Value
                             <br/>
                             {this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})}
                             

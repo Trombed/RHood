@@ -1302,7 +1302,7 @@ function (_React$Component) {
         className: "Stock-Container-Header"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "Stock-Container-Company-Price"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.price.toLocaleString('en', {
+      }, "Portfolio Value", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.price.toLocaleString('en', {
         style: 'currency',
         currency: "USD"
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
