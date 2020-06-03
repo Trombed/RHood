@@ -13,19 +13,8 @@ task :calculate_gains => :environment do
 
     ENV['TZ'] = 'America/New_York'
     now = Time.now 
-    next if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+    return "stock not open" if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
 
-    # users = User.all 
-    # users.each do |user| 
-    #     new_valuation = user.update_portfolio
-    #     if user.portfolio.length > 400
-    #         user.portfolio[0].delete
-    #     end
-    #     Portfolio.create({
-    #         user_id: user.id,
-    #         valuation: new_valuation
-    #     })
-    # end 
     stock_to_find = []
     users = User.all 
     users.each do |user|
@@ -47,8 +36,7 @@ task :calculate_gains => :environment do
             valuation: new_valuation
         })
     end
-    #two loops to take snapshots
-    # test new function
+
     puts "done."
 end 
 
