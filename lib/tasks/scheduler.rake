@@ -39,6 +39,8 @@ task :calculate_gains => :environment do
     end
 
     puts 'done'
+
+    #update to portfolio
 end 
 
 
