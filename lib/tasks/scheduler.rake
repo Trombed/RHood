@@ -39,7 +39,8 @@ task :calculate_gains => :environment do
     end
 
     puts 'done'
-
+    # portfolio snapshot will skip weekend and holidays
+    
     #update to portfolio
 end 
 
