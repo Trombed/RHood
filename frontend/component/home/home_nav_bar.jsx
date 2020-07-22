@@ -87,7 +87,7 @@ class HomeNavBar extends React.Component {
         let results;
         if ((this.props.search.length > 0 ) 
             || (this.state.name !== "")) {
-                console.log(this.props.search)
+    
                 results = this.props.search.map( (result, idx) => {
 
             return (

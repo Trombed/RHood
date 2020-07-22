@@ -8,12 +8,12 @@ task :calculate_gains => :environment do
     puts "Adding day's portfolio snapshots..."
 
     today = Date.today
-    exit if today.weekend?
-    exit if today.bank_holiday?
+    # exit if today.weekend?
+    # exit if today.bank_holiday?
 
     ENV['TZ'] = 'America/New_York'
     now = Time.now 
-    exit if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+    # exit if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
     puts now.hour
     stock_to_find = []
     users = User.all 
@@ -21,12 +21,12 @@ task :calculate_gains => :environment do
         stock_to_find.push(user.stocks_to_find)  if (user.stocks_to_find)
     end
 
-  
+    
     symbols = stock_to_find.flatten.uniq.join(",")
     url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
     security = JSON.parse(open(url).read)
     puts security
-
+    debugger
     users.each do |user|
         new_valuation = user.update_portfolio(security)
         if user.portfolio.length > 400
