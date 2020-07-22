@@ -7,7 +7,7 @@ class Api::NewsController < ApplicationController
 
         @news = JSON.parse(open(url).read)
    
-        render json: @news
+        render json: @news, status: 200
         
     end
 
@@ -17,6 +17,6 @@ class Api::NewsController < ApplicationController
 
         @news = JSON.parse(open(url).read)
   
-        render json: @news
+        render json: @news, status: 200
     end 
 end

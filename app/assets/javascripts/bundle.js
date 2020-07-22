@@ -128,7 +128,6 @@ var getNews = function getNews(name) {
 var getAllNews = function getAllNews() {
   return function (dispatch) {
     return Object(_util_news_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllNews"])().then(function (res) {
-      console.log(res);
       dispatch(receiveAllNews(res));
     });
   };
@@ -929,7 +928,6 @@ function (_React$Component) {
       var results;
 
       if (this.props.search.length > 0 || this.state.name !== "") {
-        console.log(this.props.search);
         results = this.props.search.map(function (result, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: result.id,
@@ -4931,7 +4929,7 @@ var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
     // url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
-    url: "/api/news/"
+    url: "/api/news/test"
   });
 };
 

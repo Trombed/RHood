@@ -17,6 +17,6 @@ export const fetchAllNews = () => (
         $.ajax({
             method: "GET",
             // url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
-            url: `/api/news/`
+            url: `/api/news/test`
         })
 )
