@@ -2260,10 +2260,7 @@ function (_React$Component) {
       }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "Stock-Button-oneYear",
         onClick: this.handleChartOneYearData
-      }, "1Y"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-fiveYear",
-        onClick: this.handleChartFiveYearData
-      }, "5Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "1Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Expand"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-About"
@@ -3512,7 +3509,6 @@ var stockPriceReducer = function stockPriceReducer() {
       //     }
       // })
 
-      debugger;
       return action.prices;
     // const oneDayData = action.prices.reverse()
     // let oneDayPrior = moment()

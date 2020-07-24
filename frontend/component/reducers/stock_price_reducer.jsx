@@ -40,7 +40,7 @@ const stockPriceReducer = (state = {}, action) => {
         //     }
             
         // })
-        debugger
+
         return action.prices
         // const oneDayData = action.prices.reverse()
         // let oneDayPrior = moment()

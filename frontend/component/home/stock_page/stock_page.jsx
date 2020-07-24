@@ -339,7 +339,7 @@ class StockPage extends React.Component {
                         <button className="Stock-Button-oneMonth" onClick={this.handleChartOneMonthData} >1M</button>
                         <button className="Stock-Button-threeMonth" onClick={this.handleChartThreeMonthData} >3M</button>
                         <button className="Stock-Button-oneYear" onClick={this.handleChartOneYearData} >1Y</button>
-                        <button className="Stock-Button-fiveYear" onClick={this.handleChartFiveYearData} >5Y</button>
+                        {/* <button className="Stock-Button-fiveYear" onClick={this.handleChartFiveYearData} >5Y</button> */}
                     </div>
                     <div className="Stock-Container-Chart-Expand">
                        
