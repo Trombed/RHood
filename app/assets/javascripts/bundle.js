@@ -3484,24 +3484,26 @@ var stockPriceReducer = function stockPriceReducer() {
       return reverseArr;
 
     case _actions_stock_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_DAY_PRICES"]:
-      action.prices.forEach(function (el, idx) {
-        if (el.open === null) {
-          if (idx === action.prices.length - 1) {
-            action.prices[idx].open = action.prices[idx - 1].open;
-            if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open;
-          } else {
-            var next = idx + 1;
-
-            while (action.prices[next].open === null) {
-              next += 1;
-            }
-
-            action.prices[idx].open = action.prices[next].open;
-          }
-        }
-
-        if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open;
-      }); // action.prices.forEach ( (el, idx) => {
+      action.prices = action.prices.filter(function (el) {
+        return el.open !== null;
+      }); // action.prices.forEach( (el, idx) => {
+      // if (el.open === null) {
+      //     if (idx === action.prices.length-1) {
+      //             action.prices[idx].open = action.prices[idx-1].open
+      //             if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open
+      //         }
+      //         else {
+      //             let next = idx+1
+      //             while( action.prices[next].open === null || next >= action.prices.length || action.prices[next] !== undefined) {
+      //                 next += 1;
+      //             } 
+      //             action.prices[idx].open = action.prices[next].open
+      //         }
+      //     }
+      //     if (action.prices[idx].close === null) action.prices[idx].close = action.prices[idx].open
+      // })
+      // access.prices.forEach( el => console.log(el.open))
+      // action.prices.forEach ( (el, idx) => {
       //     if (el['open'] === null) {
       //         action.prices[idx].open = action.prices[idx-1].open
       //     } 
@@ -3510,6 +3512,7 @@ var stockPriceReducer = function stockPriceReducer() {
       //     }
       // })
 
+      debugger;
       return action.prices;
     // const oneDayData = action.prices.reverse()
     // let oneDayPrior = moment()
