@@ -26,7 +26,6 @@ task :calculate_gains => :environment do
     url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
     security = JSON.parse(open(url).read)
     puts security
-    debugger
     users.each do |user|
         new_valuation = user.update_portfolio(security)
         if user.portfolio.length > 400

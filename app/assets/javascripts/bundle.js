@@ -375,7 +375,9 @@ var fiveYearStockInfo = function fiveYearStockInfo(prices) {
 var oneYearStockInfo = function oneYearStockInfo(prices) {
   return function (dispatch) {
     return Object(_util_stock_api_util__WEBPACK_IMPORTED_MODULE_1__["oneYearStockInfoUtil"])(prices).then(function (res) {
-      return dispatch(receiveOneYearStock(res));
+      dispatch(receiveOneYearStock(res));
+    }, function (error) {
+      return console.log(error);
     });
   };
 };
@@ -2181,6 +2183,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state);
       this.id = Number(this.props.match.params.id);
       var news = this.props.news.length <= 0 ? null : this.props.news.map(function (page, idx) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_news__WEBPACK_IMPORTED_MODULE_3__["default"], {

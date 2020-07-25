@@ -103,7 +103,11 @@ export const fiveYearStockInfo = prices => dispatch => (
 
 export const oneYearStockInfo = prices => dispatch => (
     oneYearStockInfoUtil(prices)
-        .then( (res) => dispatch(receiveOneYearStock(res)))
+        .then( (res) => {
+            dispatch(receiveOneYearStock(res))
+        }, error => console.log(error)
+        )
+
 )
 
 
