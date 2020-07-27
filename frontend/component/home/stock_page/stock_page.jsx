@@ -92,7 +92,7 @@ class StockPage extends React.Component {
         .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
         .then( res => this.handleChartOneDayData)
         .then ( res => this.activeColor())
-
+        .then( this.handleChartOneDayData())
       }
     }
 

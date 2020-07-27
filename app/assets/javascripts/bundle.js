@@ -1993,7 +1993,7 @@ function (_React$Component) {
           return _this3.handleChartOneDayData;
         }).then(function (res) {
           return _this3.activeColor();
-        });
+        }).then(this.handleChartOneDayData());
       }
     }
   }, {
