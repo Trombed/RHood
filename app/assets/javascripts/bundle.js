@@ -2181,6 +2181,18 @@ function (_React$Component) {
       }, e.label);
     }
   }, {
+    key: "text",
+    value: function text() {
+      if (this.state.price === undefined) {
+        return "$0.00";
+      } else {
+        return this.state.price.toLocaleString('en', {
+          style: 'currency',
+          currency: "USD"
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       this.id = Number(this.props.match.params.id);
@@ -2232,10 +2244,7 @@ function (_React$Component) {
         className: "Stock-Container-Company-Name"
       }, this.props.company.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Price"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.state.price.toLocaleString('en', {
-        style: 'currency',
-        currency: "USD"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.text()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
       }, this.state.change, " (", this.state.percentageChange, "%)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"

@@ -266,7 +266,13 @@ class StockPage extends React.Component {
       )
     }
 
-    
+    text() {
+      if (this.state.price === undefined) {
+        return "$0.00"
+      } else {
+        return this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})
+      }
+    }
   
 
     render() {
@@ -312,8 +318,8 @@ class StockPage extends React.Component {
                         </div>
                         <div className="Stock-Container-Company-Price">
                           <br/>
-                          {this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})}
-                        
+                          {/* {this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})} */}
+                          {this.text()}
                         </div>
                         <div className='Stock-Container-Company-Changes'>
                         {this.state.change} ({this.state.percentageChange}%)
