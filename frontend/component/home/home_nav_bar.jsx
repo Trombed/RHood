@@ -71,6 +71,7 @@ class HomeNavBar extends React.Component {
                 }))
               } else if (e.keyCode === 13) {
                 let targetURL = document.getElementsByClassName("Search-Bar-Result-List-Items-Active")[0].id
+                if (targetURL === undefined) return;
                  window.location.replace(`#/show/${targetURL}`)
                  this.handleClick();
               }

@@ -910,6 +910,7 @@ function (_React$Component) {
           });
         } else if (e.keyCode === 13) {
           var targetURL = document.getElementsByClassName("Search-Bar-Result-List-Items-Active")[0].id;
+          if (targetURL === undefined) return;
           window.location.replace("#/show/".concat(targetURL));
           this.handleClick();
         }
