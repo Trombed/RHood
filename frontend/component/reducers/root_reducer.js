@@ -18,7 +18,7 @@ import newsReducer from "./news_reducer";
 import valuationReducer from "./valuation_reducer";
 import {LOGOUT_CURRENT_USER } from '../actions/session_action'
 import stockOneYearReducer from "./stock_one_year_reducer";
-
+import modalReducer from "./modal_reducer";
 
 // const rootReducer = combineReducers({
 //   entities: entitiesReducer,
@@ -61,7 +61,8 @@ const appReducer = combineReducers({
   portfolioPrices: portfolioPriceReducer,
   stockShares: sharesReducer,
   news: newsReducer,
-  valuation: valuationReducer
+  valuation: valuationReducer,
+  modal: modalReducer
 });
 
 const rootReducer = (state, action) => {

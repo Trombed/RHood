@@ -1,0 +1,76 @@
+.Modal-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "DIN Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    overflow: hidden;
+    
+}
+
+.Modal-Body {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    height: 30vh;
+    width: 25vw;
+    background-color: white;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Modal-Top {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Modal-Success {
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 4vh;
+}
+
+.Modal-Success-Message {
+    font-weight: 700;
+}
+
+.Modal-Button-Buy {
+    display: flex;
+    font-size: 11px;
+    padding: 1.5vh 3vw;
+    background-color: #21ce99;
+    color: var(--color);
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.Modal-Button-Buy:hover {
+    box-shadow: 0px 0px 5px 1px #31ce99;   
+}
+
+.Modal-Button-Sell {
+    display: flex;
+    font-size: 11px;
+    padding: 1.5vh 3vw;
+    background-color: #f45531;
+    color: var(--color);
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.Modal-Button-Sell:hover {
+    box-shadow: 0px 0px 5px 1px #f46531;
+}

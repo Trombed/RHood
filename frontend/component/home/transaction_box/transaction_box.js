@@ -13,7 +13,9 @@ class TransactionBox extends React.Component {
             sharesBuyingPrice: 0,
             currentlyOwned: 0,
             funds: this.props.currentUser.funds,
-            error: null
+            error: null,
+            sharesCurrentPrice: 0,
+            symbol: null
         }
         this.changeBuyShare = this.changeBuyShare.bind(this)
      
@@ -21,7 +23,21 @@ class TransactionBox extends React.Component {
 
     componentDidMount() {
         this.updateStats()
+        this.setState({
+            sharesCurrentPrice: this.props.sharesPrice
+        })
+     
+    }
 
+    componentDidUpdate(prevProp, prevState) {
+        if (prevProp.stockId !== this.props.stockId) {
+            this.updateStats();
+            this.setState({
+                sharesToBuy: 0,
+                sharesBuyingPrice: 0
+            })
+
+        }
     }
 
     updateStats() {
@@ -67,7 +83,11 @@ class TransactionBox extends React.Component {
                 price: this.props.sharesPrice
             }
             this.props.buyTransaction(data)
-            .then( (res) => this.updateStats())
+            .then( (res) => {
+                this.updateStats()
+                this.setState({ symbol: this.props.stockInfo.ticker_symbol})
+                this.props.openModal(this.state)
+            })  
             this.setState({ error: null})
         };
     };
@@ -85,7 +105,11 @@ class TransactionBox extends React.Component {
                 price: this.props.sharesPrice
             }
             this.props.sellTransaction(data)
-            .then( (res) => this.updateStats())
+            .then( (res) => {
+                this.updateStats()
+                this.setState({ symbol: this.props.stockInfo.ticker_symbol})
+                this.props.openModal(this.state)
+            })
             this.setState({ error: null})
         }
     }
@@ -100,6 +124,14 @@ class TransactionBox extends React.Component {
                     $(".Transaction-Box-Header").removeClass("transaction-buy")
                     $(".Transaction-Box-Header").addClass("transaction-sell")            
                 break;
+        }
+    }
+
+    updateSharePrice() {
+        if (this.props.sharesPrice === undefined) {
+            return "ERROR"
+        } else {
+            return this.props.sharesPrice.toLocaleString('en', {style: 'currency', currency:"USD"})
         }
     }
 
@@ -139,7 +171,7 @@ class TransactionBox extends React.Component {
 
                         <div className="Transaction-Box-Body-Row-2">
                         <div>Market Price</div>
-                        <div>{this.props.sharesPrice.toLocaleString('en', {style: 'currency', currency:"USD"})}</div>
+                        <div>{this.props.currentPrice}</div>
                         </div>
                         
                         <div className="Transaction-Box-Body-Row-3">

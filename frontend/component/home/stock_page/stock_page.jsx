@@ -9,8 +9,8 @@ class StockPage extends React.Component {
         super(props)
         this.state = {
             price: 0,
-            change: 0,
-            percentageChange: 0,
+            change: "$0.00",
+            percentageChange: "",
             chartData: this.props.oneDayPrice,
             fiveYearLoaded: false
         }
@@ -38,26 +38,25 @@ class StockPage extends React.Component {
           .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
           .then (res => this.props.getNews(this.props.info.name))
           .then( res => this.props.watchListInfo())
-          // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+
           .then(res => this.setState({ price: this.props.currentPrice}))
           .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
           .then(res => this.setState({ chartData: this.props.oneDayPrice}))
           .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
           .then( res => this.currentPrice = this.props.oneDayPrice[this.props.oneDayPrice.length-1].close)
           .then( res => this.props.currentPriceInfo(this.currentPrice))
-          .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
-          // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
-          .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
-          .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
-          .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
+          // .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
+
+
+
+          // .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
+          // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+          // .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
+          // .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
+          // .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
+          // .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
+          // .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
           .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
-          .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
-          .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
-          .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-          .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) )
-          // .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
           .then( res => this.handleChartOneDayData)
           .then( res => this.activeColor())
     }
@@ -73,26 +72,26 @@ class StockPage extends React.Component {
         .then (res => this.props.getNews(this.props.info.name))
         .then( res => this.props.watchListInfo())
         // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
+        .then(res => this.setState({ price: this.props.currentPrice}))
         .then(res => this.props.oneDayStockInfo(this.props.info.ticker_symbol))
         .then(res => this.setState({ chartData: this.props.oneDayPrice}))
-
         .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
-       
+        .then( res => this.currentPrice = this.props.oneDayPrice[this.props.oneDayPrice.length-1].close)
+        .then( res => this.props.currentPriceInfo(this.currentPrice))
         .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
-        // .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
-        // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+        .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
+        .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+        .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
         .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
         .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
         .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-        .then( res => this.oneYearColor = this.setColor(this.oneYearData) )
-        .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
+        .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
         .then( res => this.handleChartOneDayData)
-        .then ( res => this.activeColor())
-        .then( this.handleChartOneDayData())
+        .then( res => this.activeColor())
       }
     }
 
@@ -101,10 +100,17 @@ class StockPage extends React.Component {
       const curr = this.props.currentPrice;
       if (e.activePayload === undefined) return;
       const close = e.activePayload[0].payload.close
+      let sign = "";
+      let cur = close - curr
+      if (close - curr > 0) sign = "+"
+      if (close - curr < 0) sign = "-"
+      cur = Math.abs(cur).toFixed(2)
+      let answer = sign + "$" + cur;
+      let change = sign + ((cur / curr) * 100).toFixed(2)
       this.setState({ 
         price: e.activePayload[0].value.toLocaleString('en', {style: 'currency', currency:"USD"}),
-        change: ((close - curr).toFixed(2)),
-        percentageChange: Math.round((e.activePayload[0].payload.open - e.activePayload[0].payload.close) * 100 ) / 100
+        change: answer,
+        percentageChange: change
       })
     } 
 
@@ -145,6 +151,7 @@ class StockPage extends React.Component {
     }
 
     handleChartOneDayData() {
+      this.hideGraphError();
       this.setState({ 
         chartData: this.props.oneDayPrice
       }, () => {
@@ -161,63 +168,108 @@ class StockPage extends React.Component {
     }
    
     handleChartOneWeekData() {
+   
+      if (this.oneWeekData === undefined) {
+        this.removeOneWeek()
+        return this.showGraphError()
+      } 
+      this.hideGraphError()
+
       this.setState({ 
         chartData: this.oneWeekData
       }, () => {
-        this.removeHighlight();
-        
-        $(".Stock-Button-oneWeek ").addClass(`Stock-Chart-Active`);
-        $(".Stock-Chart-Active").css(
-          {
-            "color": `${this.oneWeekColor}`,
-            "border-color": `${this.oneWeekColor}`
-          })
+        this.removeOneWeek()        
       })
+    }
 
+    removeOneWeek() {
+      this.removeHighlight();
+        
+      $(".Stock-Button-oneWeek ").addClass(`Stock-Chart-Active`);
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.oneWeekColor}`,
+          "border-color": `${this.oneWeekColor}`
+        })
     }
 
   
     handleChartOneMonthData() {
+      if (this.oneWeekData === undefined) {
+        this.removeOneMonth()
+        return this.showGraphError()
+      } 
+      this.hideGraphError()
+
       this.setState({ 
         chartData: this.oneMonthData
       },  () => {
-          this.removeHighlight();
-          $(".Stock-Button-oneMonth ").addClass(`Stock-Chart-Active`);
-          $(".Stock-Chart-Active").addClass("Stock-Label")
-          $(".Stock-Chart-Active").css(
-            {
-              "color": `${this.oneMonthColor}`,
-              "border-color": `${this.oneMonthColor}`
-            })
+        this.removeOneMonth()
         })
     }
 
+    removeOneMonth() {
+      this.removeHighlight();
+      $(".Stock-Button-oneMonth ").addClass(`Stock-Chart-Active`);
+      $(".Stock-Chart-Active").addClass("Stock-Label")
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.oneMonthColor}`,
+          "border-color": `${this.oneMonthColor}`
+        })
+    }
+
+    
+
     handleChartThreeMonthData() {
+      if (this.oneWeekData === undefined) {
+        this.removeThreeMonth()
+        return this.showGraphError()
+      } 
+      this.hideGraphError()
+
       this.setState({ 
         chartData: this.threeMonthData
       }, () => {
-        this.removeHighlight();
-        $(".Stock-Button-threeMonth ").addClass(`Stock-Chart-Active`);
-        $(".Stock-Chart-Active").css(
-          {
-            "color": `${this.threeMonthColor}`,
-            "border-color": `${this.threeMonthColor}`
-          })
+          this.removeThreeMonth()
       })
     }
 
+    removeThreeMonth() {
+      this.removeHighlight();
+      $(".Stock-Button-threeMonth ").addClass(`Stock-Chart-Active`);
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.threeMonthColor}`,
+          "border-color": `${this.threeMonthColor}`
+        })
+    }
+
     handleChartOneYearData() {
+      if (this.oneWeekData === undefined) {
+        this.removeOneYear()
+
+        return this.showGraphError()
+      } 
+      this.hideGraphError()
+
       this.setState({ 
         chartData: this.props.oneYearPrice
       },  () => {
-        this.removeHighlight();
-        $(".Stock-Button-oneYear ").addClass(`Stock-Chart-Active`);
-        $(".Stock-Chart-Active").css(
-          {
-            "color": `${this.oneYearColor}`,
-            "border-color": `${this.oneYearColor}`
-          })
+        this.removeOneYear()
       })
+  
+    }
+
+    removeOneYear() {
+      this.removeHighlight();
+      $(".Stock-Button-oneYear ").addClass(`Stock-Chart-Active`);
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.oneYearColor}`,
+          "border-color": `${this.oneYearColor}`
+        })
+  
     }
 
     handleChartFiveYearData() {
@@ -254,15 +306,33 @@ class StockPage extends React.Component {
     handleResetPrice() {
       this.setState({
         price: this.currentPrice,
-        change: 0,
-        percentageChange: 0
+        change: "$0.00",
+        percentageChange: ""
       })
+    }
+
+    percentage() {
+      if (this.state.percentageChange === "")  {
+        return;
+      }
+      else {
+        return "(" + this.state.percentageChange + "%" + ")"
+      }
     }
 
 
     customToolTip(e) {
+     
+      if (e.label === undefined) return;
+      let time = (e.payload.length === 0) ? "" : e.payload[0].payload.label;
+
+  
       return (
-        <div className="Stock-Tool-Tip" >{e.label}</div>
+        <div className="Stock-Tool-Tip" >
+        {e.label}
+        <br/>
+        {time}
+        </div>
       )
     }
 
@@ -273,6 +343,22 @@ class StockPage extends React.Component {
         return this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})
       }
     }
+
+    showGraphError() {
+      let errorDiv = document.getElementsByClassName("Stock-Container-Chart-Error")[0]
+      errorDiv.style.display = "block";
+      this.setState({ 
+        chartData: 0
+      })
+    }
+
+    hideGraphError() {
+    
+      let errorDiv = document.getElementsByClassName("Stock-Container-Chart-Error")[0]
+      errorDiv.style.display = "none"
+    }
+
+
   
 
     render() {
@@ -283,7 +369,9 @@ class StockPage extends React.Component {
           ))
          
           const renderLineChart = ( 
-            <LineChart width={600} height={250} data={this.state.chartData}  onMouseLeave={this.handleResetPrice}
+            <LineChart width={600} height={250} data={
+              this.state.chartData
+            }  onMouseLeave={this.handleResetPrice}
 
              onMouseMove={this.clickHandler}>
                
@@ -318,12 +406,11 @@ class StockPage extends React.Component {
                         </div>
                         <div className="Stock-Container-Company-Price">
                           <br/>
-                          {/* {this.state.price.toLocaleString('en', {style: 'currency', currency:"USD"})} */}
                           {this.text()}
                         </div>
                         <div className='Stock-Container-Company-Changes'>
-                        {this.state.change} ({this.state.percentageChange}%)
-                        
+                        {this.state.change} 
+                        {this.percentage()}
                         </div>
                     </div>
                     <div className="Stock-Label-Date">
@@ -333,8 +420,11 @@ class StockPage extends React.Component {
 
                 <div className="Stock-Container-Chart-Area"> 
                   <div className="Chart-Container">
+                    <div className="Stock-Container-Chart-Error">
+                        Graph Not Avaiable
+                    </div>
                     {renderLineChart}
-                
+                  
                   </div>
                 </div>
 

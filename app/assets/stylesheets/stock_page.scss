@@ -53,6 +53,12 @@
     max-width:  600px;
 }
 
+.Stock-Container-Chart-Error {
+    display: none;
+    position: absolute;
+    
+}
+
 .Stock-Container-Chart-Navigation {
     display: flex;
     flex-direction: row;
@@ -170,5 +176,6 @@
 
 .Stock-Tool-Tip {
     z-index: 100;
-    background-color: var(--bg-color)
+    // background-color: var(--bg-color)
+    background-color: rgba(255, 255, 255, 0.0);
 }

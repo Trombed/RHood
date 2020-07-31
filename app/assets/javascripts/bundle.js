@@ -86,6 +86,35 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/component/actions/modal_action.js":
+/*!****************************************************!*\
+  !*** ./frontend/component/actions/modal_action.js ***!
+  \****************************************************/
+/*! exports provided: OPEN_MODAL, CLOSE_MODAL, openModal, closeModal */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OPEN_MODAL", function() { return OPEN_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLOSE_MODAL", function() { return CLOSE_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openModal", function() { return openModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeModal", function() { return closeModal; });
+var OPEN_MODAL = 'OPEN_MODAL';
+var CLOSE_MODAL = 'CLOSE_MODAL';
+var openModal = function openModal(info) {
+  return {
+    type: OPEN_MODAL,
+    info: info
+  };
+};
+var closeModal = function closeModal() {
+  return {
+    type: CLOSE_MODAL
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/component/actions/news_action.js":
 /*!***************************************************!*\
   !*** ./frontend/component/actions/news_action.js ***!
@@ -627,6 +656,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/home_container */ "./frontend/component/home/home_container.js");
 /* harmony import */ var _home_stock_page_stock_main_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/stock_page/stock_main_container */ "./frontend/component/home/stock_page/stock_main_container.js");
 /* harmony import */ var _component_home_portfolio_portfolio_home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/home/portfolio/portfolio_home */ "./frontend/component/home/portfolio/portfolio_home.jsx");
+/* harmony import */ var _home_modal_confirmation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home/modal/confirmation */ "./frontend/component/home/modal/confirmation.jsx");
+
 
 
 
@@ -640,7 +671,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_modal_confirmation__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     exact: true,
     path: "/home",
     component: _home_home_container__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -1349,6 +1380,105 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/component/home/modal/confirmation.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/component/home/modal/confirmation.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_modal_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_action */ "./frontend/component/actions/modal_action.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+
+function Confirmation(_ref) {
+  var modal = _ref.modal,
+      closeModal = _ref.closeModal;
+
+  if (!modal) {
+    window.onscroll = function () {};
+
+    return null;
+  }
+
+  var share = modal.shareToBuy === "1" ? "share" : "shares";
+
+  window.onscroll = function () {
+    window.scrollTo(0, 0);
+  };
+
+  if (modal.boxState === "BUY") {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Body",
+      onClick: function onClick(e) {
+        return e.stopPropagation();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Top"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Success"
+    }, "SUCCESS:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Success-Message"
+    }, "You BOUGHT ", modal.shareToBuy, " ", share, " of ", modal.symbol, " for ", modal.sharesBuyingPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Button-Buy",
+      onClick: function onClick(e) {
+        return closeModal();
+      }
+    }, "CLOSE")));
+  } else if (modal.boxState === "SELL") {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Container",
+      onClick: function onClick(e) {
+        return closeModal();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Body",
+      onClick: function onClick(e) {
+        return e.stopPropagation();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Top"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Success"
+    }, "SUCCESS:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Success-Message"
+    }, "You SOLD ", modal.shareToBuy, " ", share, " of ", modal.symbol, " for ", modal.sharesBuyingPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Modal-Button-Sell",
+      onClick: function onClick(e) {
+        return closeModal();
+      }
+    }, "CLOSE")));
+  } else {
+    return null;
+  }
+}
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    modal: state.modal
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    closeModal: function closeModal() {
+      return dispatch(Object(_actions_modal_action__WEBPACK_IMPORTED_MODULE_1__["closeModal"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Confirmation));
+
+/***/ }),
+
 /***/ "./frontend/component/home/news/news.js":
 /*!**********************************************!*\
   !*** ./frontend/component/home/news/news.js ***!
@@ -1770,7 +1900,8 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Main-Util"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transaction_box_transaction_box_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        stockId: stockId
+        stockId: stockId,
+        curPrice: this.props.stockCurPrice
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_button_watch_list_button_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         stockId: stockId
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_splash_footer__WEBPACK_IMPORTED_MODULE_6__["default"], null));
@@ -1870,8 +2001,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(StockPage).call(this, props));
     _this.state = {
       price: 0,
-      change: 0,
-      percentageChange: 0,
+      change: "$0.00",
+      percentageChange: "",
       chartData: _this.props.oneDayPrice,
       fiveYearLoaded: false
     };
@@ -1901,8 +2032,7 @@ function (_React$Component) {
         return _this2.props.getNews(_this2.props.info.name);
       }).then(function (res) {
         return _this2.props.watchListInfo();
-      }) // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
-      .then(function (res) {
+      }).then(function (res) {
         return _this2.setState({
           price: _this2.props.currentPrice
         });
@@ -1920,29 +2050,17 @@ function (_React$Component) {
         return _this2.currentPrice = _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close;
       }).then(function (res) {
         return _this2.props.currentPriceInfo(_this2.currentPrice);
-      }).then(function (res) {
-        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
-      }) // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
-      // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
-      // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
+      }) // .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
+      // .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
+      // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+      // .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
+      // .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
+      // .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
+      // .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
+      // .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
       .then(function (res) {
-        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.props.oneYearPrice);
-      }).then(function (res) {
-        return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
-      }).then(function (res) {
-        return _this2.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this2.oneMonthData);
-      }).then(function (res) {
         return _this2.oneDayColor = _this2.setColor(_this2.props.oneDayPrice);
       }).then(function (res) {
-        return _this2.oneWeekColor = _this2.setColor(_this2.oneWeekData);
-      }).then(function (res) {
-        return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
-      }).then(function (res) {
-        return _this2.threeMonthColor = _this2.setColor(_this2.threeMonthData);
-      }).then(function (res) {
-        return _this2.oneYearColor = _this2.setColor(_this2.props.oneYearPrice);
-      }) // .then( res => this.fiveYearColor = this.setColor(this.props.fiveYearPrice) )   
-      .then(function (res) {
         return _this2.handleChartOneDayData;
       }).then(function (res) {
         return _this2.activeColor();
@@ -1962,6 +2080,10 @@ function (_React$Component) {
           return _this3.props.watchListInfo();
         }) // .then( res => this.props.currentPriceInfo(this.props.info.ticker_symbol))
         .then(function (res) {
+          return _this3.setState({
+            price: _this3.props.currentPrice
+          });
+        }).then(function (res) {
           return _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
           return _this3.setState({
@@ -1972,13 +2094,21 @@ function (_React$Component) {
             price: _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close
           });
         }).then(function (res) {
+          return _this3.currentPrice = _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close;
+        }).then(function (res) {
+          return _this3.props.currentPriceInfo(_this3.currentPrice);
+        }).then(function (res) {
           return _this3.props.oneYearStockInfo(_this3.props.info.ticker_symbol);
         }) // .then(res => this.props.oneWeekStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.props.fiveYearStockInfo(this.props.info.ticker_symbol))
         // .then(res => this.oneYearData = oneYearStats(this.props.fiveYearPrice))
-        // .then(res => this.threeMonthData = threeMonthStats(this.oneYearData))
-        // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
         .then(function (res) {
+          return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this3.props.oneYearPrice);
+        }).then(function (res) {
+          return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this3.threeMonthData);
+        }).then(function (res) {
+          return _this3.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this3.oneMonthData);
+        }).then(function (res) {
           return _this3.oneDayColor = _this3.setColor(_this3.props.oneDayPrice);
         }).then(function (res) {
           return _this3.oneWeekColor = _this3.setColor(_this3.oneWeekData);
@@ -1987,14 +2117,12 @@ function (_React$Component) {
         }).then(function (res) {
           return _this3.threeMonthColor = _this3.setColor(_this3.threeMonthData);
         }).then(function (res) {
-          return _this3.oneYearColor = _this3.setColor(_this3.oneYearData);
-        }).then(function (res) {
-          return _this3.fiveYearColor = _this3.setColor(_this3.props.fiveYearPrice);
+          return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
         }).then(function (res) {
           return _this3.handleChartOneDayData;
         }).then(function (res) {
           return _this3.activeColor();
-        }).then(this.handleChartOneDayData());
+        });
       }
     }
   }, {
@@ -2004,13 +2132,20 @@ function (_React$Component) {
       var curr = this.props.currentPrice;
       if (e.activePayload === undefined) return;
       var close = e.activePayload[0].payload.close;
+      var sign = "";
+      var cur = close - curr;
+      if (close - curr > 0) sign = "+";
+      if (close - curr < 0) sign = "-";
+      cur = Math.abs(cur).toFixed(2);
+      var answer = sign + "$" + cur;
+      var change = sign + (cur / curr * 100).toFixed(2);
       this.setState({
         price: e.activePayload[0].value.toLocaleString('en', {
           style: 'currency',
           currency: "USD"
         }),
-        change: (close - curr).toFixed(2),
-        percentageChange: Math.round((e.activePayload[0].payload.open - e.activePayload[0].payload.close) * 100) / 100
+        change: answer,
+        percentageChange: change
       });
     }
   }, {
@@ -2049,6 +2184,7 @@ function (_React$Component) {
     value: function handleChartOneDayData() {
       var _this4 = this;
 
+      this.hideGraphError();
       this.setState({
         chartData: this.props.oneDayPrice
       }, function () {
@@ -2066,16 +2202,26 @@ function (_React$Component) {
     value: function handleChartOneWeekData() {
       var _this5 = this;
 
+      if (this.oneWeekData === undefined) {
+        this.removeOneWeek();
+        return this.showGraphError();
+      }
+
+      this.hideGraphError();
       this.setState({
         chartData: this.oneWeekData
       }, function () {
-        _this5.removeHighlight();
-
-        $(".Stock-Button-oneWeek ").addClass("Stock-Chart-Active");
-        $(".Stock-Chart-Active").css({
-          "color": "".concat(_this5.oneWeekColor),
-          "border-color": "".concat(_this5.oneWeekColor)
-        });
+        _this5.removeOneWeek();
+      });
+    }
+  }, {
+    key: "removeOneWeek",
+    value: function removeOneWeek() {
+      this.removeHighlight();
+      $(".Stock-Button-oneWeek ").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.oneWeekColor),
+        "border-color": "".concat(this.oneWeekColor)
       });
     }
   }, {
@@ -2083,17 +2229,27 @@ function (_React$Component) {
     value: function handleChartOneMonthData() {
       var _this6 = this;
 
+      if (this.oneWeekData === undefined) {
+        this.removeOneMonth();
+        return this.showGraphError();
+      }
+
+      this.hideGraphError();
       this.setState({
         chartData: this.oneMonthData
       }, function () {
-        _this6.removeHighlight();
-
-        $(".Stock-Button-oneMonth ").addClass("Stock-Chart-Active");
-        $(".Stock-Chart-Active").addClass("Stock-Label");
-        $(".Stock-Chart-Active").css({
-          "color": "".concat(_this6.oneMonthColor),
-          "border-color": "".concat(_this6.oneMonthColor)
-        });
+        _this6.removeOneMonth();
+      });
+    }
+  }, {
+    key: "removeOneMonth",
+    value: function removeOneMonth() {
+      this.removeHighlight();
+      $(".Stock-Button-oneMonth ").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").addClass("Stock-Label");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.oneMonthColor),
+        "border-color": "".concat(this.oneMonthColor)
       });
     }
   }, {
@@ -2101,16 +2257,26 @@ function (_React$Component) {
     value: function handleChartThreeMonthData() {
       var _this7 = this;
 
+      if (this.oneWeekData === undefined) {
+        this.removeThreeMonth();
+        return this.showGraphError();
+      }
+
+      this.hideGraphError();
       this.setState({
         chartData: this.threeMonthData
       }, function () {
-        _this7.removeHighlight();
-
-        $(".Stock-Button-threeMonth ").addClass("Stock-Chart-Active");
-        $(".Stock-Chart-Active").css({
-          "color": "".concat(_this7.threeMonthColor),
-          "border-color": "".concat(_this7.threeMonthColor)
-        });
+        _this7.removeThreeMonth();
+      });
+    }
+  }, {
+    key: "removeThreeMonth",
+    value: function removeThreeMonth() {
+      this.removeHighlight();
+      $(".Stock-Button-threeMonth ").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.threeMonthColor),
+        "border-color": "".concat(this.threeMonthColor)
       });
     }
   }, {
@@ -2118,16 +2284,26 @@ function (_React$Component) {
     value: function handleChartOneYearData() {
       var _this8 = this;
 
+      if (this.oneWeekData === undefined) {
+        this.removeOneYear();
+        return this.showGraphError();
+      }
+
+      this.hideGraphError();
       this.setState({
         chartData: this.props.oneYearPrice
       }, function () {
-        _this8.removeHighlight();
-
-        $(".Stock-Button-oneYear ").addClass("Stock-Chart-Active");
-        $(".Stock-Chart-Active").css({
-          "color": "".concat(_this8.oneYearColor),
-          "border-color": "".concat(_this8.oneYearColor)
-        });
+        _this8.removeOneYear();
+      });
+    }
+  }, {
+    key: "removeOneYear",
+    value: function removeOneYear() {
+      this.removeHighlight();
+      $(".Stock-Button-oneYear ").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.oneYearColor),
+        "border-color": "".concat(this.oneYearColor)
       });
     }
   }, {
@@ -2170,16 +2346,27 @@ function (_React$Component) {
     value: function handleResetPrice() {
       this.setState({
         price: this.currentPrice,
-        change: 0,
-        percentageChange: 0
+        change: "$0.00",
+        percentageChange: ""
       });
+    }
+  }, {
+    key: "percentage",
+    value: function percentage() {
+      if (this.state.percentageChange === "") {
+        return;
+      } else {
+        return "(" + this.state.percentageChange + "%" + ")";
+      }
     }
   }, {
     key: "customToolTip",
     value: function customToolTip(e) {
+      if (e.label === undefined) return;
+      var time = e.payload.length === 0 ? "" : e.payload[0].payload.label;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Tool-Tip"
-      }, e.label);
+      }, e.label, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), time);
     }
   }, {
     key: "text",
@@ -2192,6 +2379,21 @@ function (_React$Component) {
           currency: "USD"
         });
       }
+    }
+  }, {
+    key: "showGraphError",
+    value: function showGraphError() {
+      var errorDiv = document.getElementsByClassName("Stock-Container-Chart-Error")[0];
+      errorDiv.style.display = "block";
+      this.setState({
+        chartData: 0
+      });
+    }
+  }, {
+    key: "hideGraphError",
+    value: function hideGraphError() {
+      var errorDiv = document.getElementsByClassName("Stock-Container-Chart-Error")[0];
+      errorDiv.style.display = "none";
     }
   }, {
     key: "render",
@@ -2247,13 +2449,15 @@ function (_React$Component) {
         className: "Stock-Container-Company-Price"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.text()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
-      }, this.state.change, " (", this.state.percentageChange, "%)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.change, this.percentage())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Chart-Container"
-      }, renderLineChart)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Stock-Container-Chart-Error"
+      }, "Graph Not Avaiable"), renderLineChart)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Navigation"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Time"
@@ -2415,7 +2619,9 @@ function (_React$Component) {
       sharesBuyingPrice: 0,
       currentlyOwned: 0,
       funds: _this.props.currentUser.funds,
-      error: null
+      error: null,
+      sharesCurrentPrice: 0,
+      symbol: null
     };
     _this.changeBuyShare = _this.changeBuyShare.bind(_assertThisInitialized(_this));
     return _this;
@@ -2425,6 +2631,20 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.updateStats();
+      this.setState({
+        sharesCurrentPrice: this.props.sharesPrice
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProp, prevState) {
+      if (prevProp.stockId !== this.props.stockId) {
+        this.updateStats();
+        this.setState({
+          sharesToBuy: 0,
+          sharesBuyingPrice: 0
+        });
+      }
     }
   }, {
     key: "updateStats",
@@ -2484,7 +2704,13 @@ function (_React$Component) {
           price: this.props.sharesPrice
         };
         this.props.buyTransaction(data).then(function (res) {
-          return _this4.updateStats();
+          _this4.updateStats();
+
+          _this4.setState({
+            symbol: _this4.props.stockInfo.ticker_symbol
+          });
+
+          _this4.props.openModal(_this4.state);
         });
         this.setState({
           error: null
@@ -2509,7 +2735,13 @@ function (_React$Component) {
           price: this.props.sharesPrice
         };
         this.props.sellTransaction(data).then(function (res) {
-          return _this5.updateStats();
+          _this5.updateStats();
+
+          _this5.setState({
+            symbol: _this5.props.stockInfo.ticker_symbol
+          });
+
+          _this5.props.openModal(_this5.state);
         });
         this.setState({
           error: null
@@ -2529,6 +2761,18 @@ function (_React$Component) {
           $(".Transaction-Box-Header").removeClass("transaction-buy");
           $(".Transaction-Box-Header").addClass("transaction-sell");
           break;
+      }
+    }
+  }, {
+    key: "updateSharePrice",
+    value: function updateSharePrice() {
+      if (this.props.sharesPrice === undefined) {
+        return "ERROR";
+      } else {
+        return this.props.sharesPrice.toLocaleString('en', {
+          style: 'currency',
+          currency: "USD"
+        });
       }
     }
   }, {
@@ -2578,10 +2822,7 @@ function (_React$Component) {
         min: "0"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.sharesPrice.toLocaleString('en', {
-        style: 'currency',
-        currency: "USD"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.currentPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Estimated Cost "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sharesBuyingPrice))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button"
@@ -2620,17 +2861,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _transaction_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction_box */ "./frontend/component/home/transaction_box/transaction_box.js");
 /* harmony import */ var _actions_transactions_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/transactions_action */ "./frontend/component/actions/transactions_action.js");
 /* harmony import */ var _actions_stock_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/stock_action */ "./frontend/component/actions/stock_action.js");
+/* harmony import */ var _actions_modal_action__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_action */ "./frontend/component/actions/modal_action.js");
 
 
 
 
 
-var mSTP = function mSTP(state) {
+
+var mSTP = function mSTP(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.id],
     sharesPrice: state.stockCurrentPrice,
     stockInfo: state.stockInfo,
-    stockShares: state.stockShares
+    stockShares: state.stockShares,
+    currentPrice: state.stockCurrentPrice
   };
 };
 
@@ -2644,6 +2888,9 @@ var mDTP = function mDTP(dispatch) {
     },
     currentShares: function currentShares(stockId) {
       return dispatch(Object(_actions_stock_action__WEBPACK_IMPORTED_MODULE_3__["currentShares"])(stockId));
+    },
+    openModal: function openModal(info) {
+      return dispatch(Object(_actions_modal_action__WEBPACK_IMPORTED_MODULE_4__["openModal"])(info));
     }
   };
 };
@@ -3029,6 +3276,38 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"]
 
 /***/ }),
 
+/***/ "./frontend/component/reducers/modal_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/component/reducers/modal_reducer.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_modal_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/modal_action */ "./frontend/component/actions/modal_action.js");
+
+
+var modalReducer = function modalReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_modal_action__WEBPACK_IMPORTED_MODULE_0__["OPEN_MODAL"]:
+      return action.info;
+
+    case _actions_modal_action__WEBPACK_IMPORTED_MODULE_0__["CLOSE_MODAL"]:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (modalReducer);
+
+/***/ }),
+
 /***/ "./frontend/component/reducers/news_reducer.js":
 /*!*****************************************************!*\
   !*** ./frontend/component/reducers/news_reducer.js ***!
@@ -3135,6 +3414,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./valuation_reducer */ "./frontend/component/reducers/valuation_reducer.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/component/actions/session_action.js");
 /* harmony import */ var _stock_one_year_reducer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./stock_one_year_reducer */ "./frontend/component/reducers/stock_one_year_reducer.jsx");
+/* harmony import */ var _modal_reducer__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modal_reducer */ "./frontend/component/reducers/modal_reducer.js");
+
 
 
 
@@ -3193,7 +3474,8 @@ var appReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   portfolioPrices: _portfolio_price_reducer__WEBPACK_IMPORTED_MODULE_14__["default"],
   stockShares: _stock_share_reducer__WEBPACK_IMPORTED_MODULE_15__["default"],
   news: _news_reducer__WEBPACK_IMPORTED_MODULE_16__["default"],
-  valuation: _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__["default"]
+  valuation: _valuation_reducer__WEBPACK_IMPORTED_MODULE_17__["default"],
+  modal: _modal_reducer__WEBPACK_IMPORTED_MODULE_20__["default"]
 });
 
 var rootReducer = function rootReducer(state, action) {
