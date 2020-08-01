@@ -173,7 +173,7 @@ class TransactionBox extends React.Component {
 
                         <div className="Transaction-Box-Body-Row-2">
                         <div>Market Price</div>
-                        <div>{this.props.currentPrice}</div>
+                        <div>${this.props.currentPrice.toFixed(2)}</div>
                         </div>
                         
                         <div className="Transaction-Box-Body-Row-3">

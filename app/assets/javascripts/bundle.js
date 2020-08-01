@@ -2085,7 +2085,8 @@ function (_React$Component) {
       if (this.props.match.params.id !== prevProp.match.params.id) {
         this.setState({
           loaded: false
-        }).then(this.props.fetchStockFromDB(this.id)).then(function (res) {
+        });
+        this.props.fetchStockFromDB(this.id).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
           return _this3.props.getNews(_this3.props.info.name);
@@ -2132,7 +2133,9 @@ function (_React$Component) {
         }).then(function (res) {
           return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
         }).then(function (res) {
-          _this3.handleChartOneDayData;
+          _this3.removeOneDay();
+
+          _this3.handleChartOneDayData();
         }).then(this.setState({
           loaded: true
         }));
@@ -2202,13 +2205,17 @@ function (_React$Component) {
       this.setState({
         chartData: this.props.oneDayPrice
       }, function () {
-        _this4.removeHighlight();
-
-        $(".Stock-Button-oneDay").addClass("Stock-Chart-Active");
-        $(".Stock-Chart-Active").css({
-          "color": "".concat(_this4.oneDayColor),
-          "border-color": "".concat(_this4.oneDayColor)
-        });
+        _this4.removeOneDay();
+      });
+    }
+  }, {
+    key: "removeOneDay",
+    value: function removeOneDay() {
+      this.removeHighlight();
+      $(".Stock-Button-oneDay").addClass("Stock-Chart-Active");
+      $(".Stock-Chart-Active").css({
+        "color": "".concat(this.oneDayColor),
+        "border-color": "".concat(this.oneDayColor)
       });
     }
   }, {
@@ -2859,7 +2866,7 @@ function (_React$Component) {
         value: this.state.shareToBuy
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.currentPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "$", this.props.currentPrice.toFixed(2))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Estimated Cost "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.sharesBuyingPrice))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Button"

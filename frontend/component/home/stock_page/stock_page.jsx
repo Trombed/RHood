@@ -70,7 +70,7 @@ class StockPage extends React.Component {
     componentDidUpdate(prevProp, prevState) {
       if(this.props.match.params.id !== prevProp.match.params.id) {
         this.setState({loaded: false})
-        .then(this.props.fetchStockFromDB(this.id))
+        this.props.fetchStockFromDB(this.id)
         .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
         .then (res => this.props.getNews(this.props.info.name))
         .then( res => this.props.watchListInfo())
@@ -94,7 +94,8 @@ class StockPage extends React.Component {
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
         .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
         .then( res => { 
-          this.handleChartOneDayData })
+          this.removeOneDay()
+          this.handleChartOneDayData() })
         .then( this.setState({loaded: true}))
         
       }
@@ -161,16 +162,20 @@ class StockPage extends React.Component {
       this.setState({ 
         chartData: this.props.oneDayPrice
       }, () => {
-        this.removeHighlight()
-        $(".Stock-Button-oneDay").addClass(`Stock-Chart-Active`);
-
-        $(".Stock-Chart-Active").css(
-          {
-            "color": `${this.oneDayColor}`,
-            "border-color": `${this.oneDayColor}`
-          })
+        this.removeOneDay()
       })
       
+    }
+
+    removeOneDay() {
+      this.removeHighlight()
+      $(".Stock-Button-oneDay").addClass(`Stock-Chart-Active`);
+
+      $(".Stock-Chart-Active").css(
+        {
+          "color": `${this.oneDayColor}`,
+          "border-color": `${this.oneDayColor}`
+        })
     }
    
     handleChartOneWeekData() {

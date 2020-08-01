@@ -119,6 +119,11 @@
  box-shadow: 0px 0px 5px 1px #f46531;
 }
 
+input:not(:placeholder-shown) {
+    color: var(--transaction-input);
+  }
+  
+
 
 
 .Transaction-Number-Input {
@@ -131,6 +136,9 @@
     width: 100px;
     font-size: 20px;
 }
+
+
+
 .Transaction-Box-Button-Input:hover {
     background-color: #1ae9aa;
 }
