@@ -9,10 +9,11 @@ class StockPage extends React.Component {
         super(props)
         this.state = {
             price: 0,
-            change: "$0.00",
+            change: "",
             percentageChange: "",
             chartData: this.props.oneDayPrice,
-            fiveYearLoaded: false
+            fiveYearLoaded: false,
+            loaded: false
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.handleChartOneDayData = this.handleChartOneDayData.bind(this)
@@ -45,20 +46,21 @@ class StockPage extends React.Component {
           .then(res => this.setState({ price: this.props.oneDayPrice[this.props.oneDayPrice.length-1].close}))
           .then( res => this.currentPrice = this.props.oneDayPrice[this.props.oneDayPrice.length-1].close)
           .then( res => this.props.currentPriceInfo(this.currentPrice))
-          // .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
+          .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
 
 
 
-          // .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
-          // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
-          // .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
-          // .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
-          // .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-          // .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
-          // .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
+          .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
+          .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
+          .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
+          .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
+          .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
+          .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
+          .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
           .then( res => this.oneDayColor = this.setColor(this.props.oneDayPrice) )
           .then( res => this.handleChartOneDayData)
           .then( res => this.activeColor())
+          .then( this.setState({loaded: true}))
     }
 
 
@@ -67,7 +69,8 @@ class StockPage extends React.Component {
 
     componentDidUpdate(prevProp, prevState) {
       if(this.props.match.params.id !== prevProp.match.params.id) {
-        this.props.fetchStockFromDB(this.id)
+        this.setState({loaded: false})
+        .then(this.props.fetchStockFromDB(this.id))
         .then(res => this.props.companyInfo(this.props.info.ticker_symbol))
         .then (res => this.props.getNews(this.props.info.name))
         .then( res => this.props.watchListInfo())
@@ -90,8 +93,10 @@ class StockPage extends React.Component {
         .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
         .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
         .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
-        .then( res => this.handleChartOneDayData)
-        .then( res => this.activeColor())
+        .then( res => { 
+          this.handleChartOneDayData })
+        .then( this.setState({loaded: true}))
+        
       }
     }
 
@@ -151,6 +156,7 @@ class StockPage extends React.Component {
     }
 
     handleChartOneDayData() {
+      this.isLoaded()
       this.hideGraphError();
       this.setState({ 
         chartData: this.props.oneDayPrice
@@ -168,7 +174,8 @@ class StockPage extends React.Component {
     }
    
     handleChartOneWeekData() {
-   
+      this.isLoaded()
+      
       if (this.oneWeekData === undefined) {
         this.removeOneWeek()
         return this.showGraphError()
@@ -195,6 +202,8 @@ class StockPage extends React.Component {
 
   
     handleChartOneMonthData() {
+      this.isLoaded()
+
       if (this.oneWeekData === undefined) {
         this.removeOneMonth()
         return this.showGraphError()
@@ -219,9 +228,13 @@ class StockPage extends React.Component {
         })
     }
 
-    
+    isLoaded() {
+      if (!this.state.loaded) return;
+    }    
 
     handleChartThreeMonthData() {
+      this.isLoaded()
+
       if (this.oneWeekData === undefined) {
         this.removeThreeMonth()
         return this.showGraphError()
@@ -246,6 +259,8 @@ class StockPage extends React.Component {
     }
 
     handleChartOneYearData() {
+      this.isLoaded()
+
       if (this.oneWeekData === undefined) {
         this.removeOneYear()
 
@@ -306,7 +321,7 @@ class StockPage extends React.Component {
     handleResetPrice() {
       this.setState({
         price: this.currentPrice,
-        change: "$0.00",
+        change: "",
         percentageChange: ""
       })
     }
@@ -320,6 +335,14 @@ class StockPage extends React.Component {
       }
     }
 
+    activePrice() {
+      if (this.state.change === "") {
+        return `$0.00`
+      } else {
+        return this.state.change
+      }
+    }
+
 
     customToolTip(e) {
      
@@ -329,9 +352,7 @@ class StockPage extends React.Component {
   
       return (
         <div className="Stock-Tool-Tip" >
-        {e.label}
-        <br/>
-        {time}
+        {e.label} {time}
         </div>
       )
     }
@@ -385,7 +406,7 @@ class StockPage extends React.Component {
               offset={-50}
               isAnimationActive={false}
               content={this.customToolTip}
-              wrapperStyle={{ top: -10 }}
+              wrapperStyle={{ top: -20 }}
               />
               <XAxis dataKey='date' hide={true} />
 
@@ -409,7 +430,7 @@ class StockPage extends React.Component {
                           {this.text()}
                         </div>
                         <div className='Stock-Container-Company-Changes'>
-                        {this.state.change} 
+                        {this.activePrice()} 
                         {this.percentage()}
                         </div>
                     </div>

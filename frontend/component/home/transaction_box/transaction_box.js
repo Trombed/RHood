@@ -33,7 +33,7 @@ class TransactionBox extends React.Component {
         if (prevProp.stockId !== this.props.stockId) {
             this.updateStats();
             this.setState({
-                sharesToBuy: 0,
+                shareToBuy: 0,
                 sharesBuyingPrice: 0
             })
 
@@ -166,7 +166,9 @@ class TransactionBox extends React.Component {
                     <div className="Transaction-Box-Body">
                         <div className="Transaction-Box-Body-Row-1">
                         <div>Shares</div>
-                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" min="0" /></div>
+                        <div><input type='number' placeholder="0" onChange={ this.changeBuyShare} className="Transaction-Number-Input" min="0" 
+                        value={this.state.shareToBuy}
+                        /></div>
                         </div>
 
                         <div className="Transaction-Box-Body-Row-2">

@@ -2001,10 +2001,11 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(StockPage).call(this, props));
     _this.state = {
       price: 0,
-      change: "$0.00",
+      change: "",
       percentageChange: "",
       chartData: _this.props.oneDayPrice,
-      fiveYearLoaded: false
+      fiveYearLoaded: false,
+      loaded: false
     };
     _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this));
     _this.handleChartOneDayData = _this.handleChartOneDayData.bind(_assertThisInitialized(_this));
@@ -2050,21 +2051,31 @@ function (_React$Component) {
         return _this2.currentPrice = _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close;
       }).then(function (res) {
         return _this2.props.currentPriceInfo(_this2.currentPrice);
-      }) // .then(res => this.props.oneYearStockInfo(this.props.info.ticker_symbol))
-      // .then(res => this.threeMonthData = threeMonthStats(this.props.oneYearPrice))
-      // .then( res => this.oneMonthData = oneMonthStats(this.threeMonthData))
-      // .then( res => this.oneWeekData = oneWeekStats(this.oneMonthData))
-      // .then( res => this.oneWeekColor = this.setColor(this.oneWeekData) )
-      // .then( res => this.threeMonthColor = this.setColor(this.threeMonthData) )
-      // .then( res => this.oneMonthColor = this.setColor(this.oneMonthData) )
-      // .then( res => this.oneYearColor = this.setColor(this.props.oneYearPrice) ) 
-      .then(function (res) {
+      }).then(function (res) {
+        return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
+      }).then(function (res) {
+        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.props.oneYearPrice);
+      }).then(function (res) {
+        return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
+      }).then(function (res) {
+        return _this2.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this2.oneMonthData);
+      }).then(function (res) {
+        return _this2.oneWeekColor = _this2.setColor(_this2.oneWeekData);
+      }).then(function (res) {
+        return _this2.threeMonthColor = _this2.setColor(_this2.threeMonthData);
+      }).then(function (res) {
+        return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
+      }).then(function (res) {
+        return _this2.oneYearColor = _this2.setColor(_this2.props.oneYearPrice);
+      }).then(function (res) {
         return _this2.oneDayColor = _this2.setColor(_this2.props.oneDayPrice);
       }).then(function (res) {
         return _this2.handleChartOneDayData;
       }).then(function (res) {
         return _this2.activeColor();
-      });
+      }).then(this.setState({
+        loaded: true
+      }));
     }
   }, {
     key: "componentDidUpdate",
@@ -2072,7 +2083,9 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.props.match.params.id !== prevProp.match.params.id) {
-        this.props.fetchStockFromDB(this.id).then(function (res) {
+        this.setState({
+          loaded: false
+        }).then(this.props.fetchStockFromDB(this.id)).then(function (res) {
           return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
           return _this3.props.getNews(_this3.props.info.name);
@@ -2119,10 +2132,10 @@ function (_React$Component) {
         }).then(function (res) {
           return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
         }).then(function (res) {
-          return _this3.handleChartOneDayData;
-        }).then(function (res) {
-          return _this3.activeColor();
-        });
+          _this3.handleChartOneDayData;
+        }).then(this.setState({
+          loaded: true
+        }));
       }
     }
   }, {
@@ -2184,6 +2197,7 @@ function (_React$Component) {
     value: function handleChartOneDayData() {
       var _this4 = this;
 
+      this.isLoaded();
       this.hideGraphError();
       this.setState({
         chartData: this.props.oneDayPrice
@@ -2201,6 +2215,8 @@ function (_React$Component) {
     key: "handleChartOneWeekData",
     value: function handleChartOneWeekData() {
       var _this5 = this;
+
+      this.isLoaded();
 
       if (this.oneWeekData === undefined) {
         this.removeOneWeek();
@@ -2229,6 +2245,8 @@ function (_React$Component) {
     value: function handleChartOneMonthData() {
       var _this6 = this;
 
+      this.isLoaded();
+
       if (this.oneWeekData === undefined) {
         this.removeOneMonth();
         return this.showGraphError();
@@ -2253,9 +2271,16 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "isLoaded",
+    value: function isLoaded() {
+      if (!this.state.loaded) return;
+    }
+  }, {
     key: "handleChartThreeMonthData",
     value: function handleChartThreeMonthData() {
       var _this7 = this;
+
+      this.isLoaded();
 
       if (this.oneWeekData === undefined) {
         this.removeThreeMonth();
@@ -2283,6 +2308,8 @@ function (_React$Component) {
     key: "handleChartOneYearData",
     value: function handleChartOneYearData() {
       var _this8 = this;
+
+      this.isLoaded();
 
       if (this.oneWeekData === undefined) {
         this.removeOneYear();
@@ -2346,7 +2373,7 @@ function (_React$Component) {
     value: function handleResetPrice() {
       this.setState({
         price: this.currentPrice,
-        change: "$0.00",
+        change: "",
         percentageChange: ""
       });
     }
@@ -2360,13 +2387,22 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "activePrice",
+    value: function activePrice() {
+      if (this.state.change === "") {
+        return "$0.00";
+      } else {
+        return this.state.change;
+      }
+    }
+  }, {
     key: "customToolTip",
     value: function customToolTip(e) {
       if (e.label === undefined) return;
       var time = e.payload.length === 0 ? "" : e.payload[0].payload.label;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Tool-Tip"
-      }, e.label, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), time);
+      }, e.label, " ", time);
     }
   }, {
     key: "text",
@@ -2431,7 +2467,7 @@ function (_React$Component) {
         isAnimationActive: false,
         content: this.customToolTip,
         wrapperStyle: {
-          top: -10
+          top: -20
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
         dataKey: "date",
@@ -2449,7 +2485,7 @@ function (_React$Component) {
         className: "Stock-Container-Company-Price"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.text()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Company-Changes"
-      }, this.state.change, this.percentage())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.activePrice(), this.percentage())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Label-Date"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
@@ -2641,7 +2677,7 @@ function (_React$Component) {
       if (prevProp.stockId !== this.props.stockId) {
         this.updateStats();
         this.setState({
-          sharesToBuy: 0,
+          shareToBuy: 0,
           sharesBuyingPrice: 0
         });
       }
@@ -2819,7 +2855,8 @@ function (_React$Component) {
         placeholder: "0",
         onChange: this.changeBuyShare,
         className: "Transaction-Number-Input",
-        min: "0"
+        min: "0",
+        value: this.state.shareToBuy
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Transaction-Box-Body-Row-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Market Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.currentPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
