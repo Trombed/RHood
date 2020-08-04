@@ -19,7 +19,7 @@ class WatchList extends React.Component {
 
     emptyList() {
         return (
-            <div>
+            <div className="Watch-List-Empty">
                 No stocks followed:
             </div>
         )

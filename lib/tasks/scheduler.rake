@@ -20,23 +20,40 @@ namespace :scheduler do
 
         ENV['TZ'] = 'America/New_York'
         now = Time.now 
+        puts (now.hour < 9 && now.min < 30) 
+        puts (now.hour >= 16 && now.min > 30)
         if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
-            puts "MARKET CLOSED"
-            exit
+    
+        puts "MARKET CLOSED"
+        exit
+    
         end
         
-        puts now.hour
+     
+ 
         stock_to_find = []
         users = User.all 
         users.each do |user|
-            stock_to_find.push(user.stocks_to_find)  if (user.stocks_to_find)
+      
+             if (user.stocks_to_find)
+                puts user.stocks_to_find
+
+                stock_to_find.push(user.stocks_to_find) 
+             end
         end
 
         
         symbols = stock_to_find.flatten.uniq.join(",")
-        url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.finapi[:api_key]}"
+
+        puts symbols
+
+        
+        url = "https://cloud.iexapis.com/stable/stock/market/batch?symbols=#{symbols}&types=quote&token=#{Rails.application.credentials.iexapi[:api_key]}"
+
         security = JSON.parse(open(url).read)
-        puts security
+        
+
+        
         users.each do |user|
             new_valuation = user.update_portfolio(security)
             if user.portfolio.length > 400
@@ -52,19 +69,5 @@ namespace :scheduler do
 
     end
 
-    task :test => :environment do 
-        require 'date'
-        require 'time'
-        require 'us_bank_holidays'
-        ENV['TZ'] = 'America/New_York'
-        now = Time.now
-        today = Date.today 
-        puts today.weekend?
-        puts today.bank_holiday?
-        puts now
-        puts now.hour
-    end
-end 
 
-
-
+end

@@ -79,19 +79,22 @@ class User < ApplicationRecord
         return stocks
       end
 
+  
+
       def update_portfolio(security)
+        puts "test"
         return self.funds if self.transactions.empty?
         new_valuation = 0
         self.transactions.each do |transaction| 
-          security['companiesPriceList'].each do |stock|
-            if stock['symbol'] == transaction.stock.ticker_symbol 
-              new_valuation += transaction.shares * stock['price']
+  
+            if security[transaction.stock.ticker_symbol] 
+              
+              new_valuation += transaction.shares * security[transaction.stock.ticker_symbol]['quote']['close']
             end
-          end
+        
         end
         return new_valuation + self.funds
       end
  
-    
 
 end

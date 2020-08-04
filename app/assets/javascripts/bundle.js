@@ -3007,7 +3007,9 @@ function (_React$Component) {
   }, {
     key: "emptyList",
     value: function emptyList() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No stocks followed:");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Watch-List-Empty"
+      }, "No stocks followed:");
     }
   }, {
     key: "render",
