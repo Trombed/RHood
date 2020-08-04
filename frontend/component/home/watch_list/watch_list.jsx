@@ -17,7 +17,13 @@ class WatchList extends React.Component {
         .then( res => this.props.watchListCurPrices(this.props.stockSymGetter(this.props.watchList)))
     }
 
-
+    emptyList() {
+        return (
+            <div>
+                No stocks followed:
+            </div>
+        )
+    }
 
  
     render(){
@@ -29,6 +35,8 @@ class WatchList extends React.Component {
             
            )   )
 
+        let showList = stockList.length > 0 ? stockList : this.emptyList();
+
         return (
             <div onClick={this.handleCollapse} className='Watch-List-Container' >
 
@@ -39,7 +47,8 @@ class WatchList extends React.Component {
                 <div className="Watch-List-Separator">
                 </div>
                     <div className='Watch-List-Items-Container'>
-                    {stockList}
+                    {/* {stockList} */}
+                    {showList}
                     </div>
                 
                 </div>

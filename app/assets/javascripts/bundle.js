@@ -3005,6 +3005,11 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "emptyList",
+    value: function emptyList() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No stocks followed:");
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -3018,6 +3023,7 @@ function (_React$Component) {
           key: idx
         });
       });
+      var showList = stockList.length > 0 ? stockList : this.emptyList();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.handleCollapse,
         className: "Watch-List-Container"
@@ -3029,7 +3035,7 @@ function (_React$Component) {
         className: "Watch-List-Separator"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Watch-List-Items-Container"
-      }, stockList)));
+      }, showList)));
     }
   }]);
 

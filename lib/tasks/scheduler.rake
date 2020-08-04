@@ -8,12 +8,23 @@ namespace :scheduler do
         puts "Adding day's portfolio snapshots..."
 
         today = Date.today
-        exit if today.weekend?
-        exit if today.bank_holiday?
+        if today.weekend?
+            puts "WEEKEND"
+            exit
+        end
+
+        if today.bank_holiday?
+            puts "BANK HOLIDAY"
+            exit
+        end
 
         ENV['TZ'] = 'America/New_York'
         now = Time.now 
-        exit if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+        if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+            puts "MARKET CLOSED"
+            exit
+        end
+        
         puts now.hour
         stock_to_find = []
         users = User.all 
