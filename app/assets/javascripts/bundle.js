@@ -2406,7 +2406,17 @@ function (_React$Component) {
     key: "customToolTip",
     value: function customToolTip(e) {
       if (e.label === undefined) return;
-      var time = e.payload.length === 0 ? "" : e.payload[0].payload.label;
+      var time;
+
+      if (e.payload.length === 0) {
+        time = "";
+      } else if (e.payload[0].payload.label.includes(",")) {
+        time = e.payload[0].payload.label.split(",")[0];
+      } else {
+        time = e.payload[0].payload.label;
+      } // let time = (e.payload.length === 0) ? "" : e.payload[0].payload.label;
+
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Tool-Tip"
       }, e.label, " ", time);

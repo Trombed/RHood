@@ -86,10 +86,20 @@ class User < ApplicationRecord
         return self.funds if self.transactions.empty?
         new_valuation = 0
         self.transactions.each do |transaction| 
-  
+          
             if security[transaction.stock.ticker_symbol] 
-              
-              new_valuation += transaction.shares * security[transaction.stock.ticker_symbol]['quote']['close']
+              amount = 0
+                if security[transaction.stock.ticker_symbol]['quote']['close']
+                  amount = security[transaction.stock.ticker_symbol]['quote']['close']
+                elsif security[transaction.stock.ticker_symbol]['quote']['latestPrice']
+                  amount = security[transaction.stock.ticker_symbol]['quote']['latestPrice']
+                elsif security[transaction.stock.ticker_symbol]['quote']['iexRealtimePrice']
+                  amount = security[transaction.stock.ticker_symbol]['quote']['iexRealtimePrice']
+                else 
+                  amount = 0
+                  puts "NO PRICE FOUND"
+                end
+              new_valuation += transaction.shares * amount
             end
         
         end
