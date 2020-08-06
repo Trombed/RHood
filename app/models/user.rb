@@ -82,7 +82,6 @@ class User < ApplicationRecord
   
 
       def update_portfolio(security)
-        puts "test"
         return self.funds if self.transactions.empty?
         new_valuation = 0
         self.transactions.each do |transaction| 
