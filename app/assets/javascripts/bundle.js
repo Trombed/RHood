@@ -1527,6 +1527,7 @@ function (_React$Component) {
       var _this$props = this.props,
           page = _this$props.page,
           idx = _this$props.idx;
+      var newsImage = page.urlToImage === null ? '/news-image.jpeg' : page.urlToImage;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Single-News"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1545,12 +1546,8 @@ function (_React$Component) {
       }, page.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Content-Image-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "".concat(page.urlToImage),
+        src: newsImage,
         alt: "".concat(page.content),
-        onError: function onError(e) {
-          e.target.onerror = null;
-          e.target.src = '/news-image.jpeg';
-        },
         className: "Main-News-Content-Image"
       })))));
     }
@@ -2964,8 +2961,7 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _watch_list_items__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watch_list_items */ "./frontend/component/home/watch_list/watch_list_items.jsx");
-/* harmony import */ var _watch_list_items_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./watch_list_items_container */ "./frontend/component/home/watch_list/watch_list_items_container.jsx");
+/* harmony import */ var _watch_list_items_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watch_list_items_container */ "./frontend/component/home/watch_list/watch_list_items_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2983,7 +2979,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -3028,7 +3023,7 @@ function (_React$Component) {
 
       var stockList;
       stockList = this.props.watchList.map(function (stock, idx) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watch_list_items_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           stock: stock,
           idx: idx,
           otherProps: _this3.props,
@@ -3097,7 +3092,7 @@ var mDTP = function mDTP(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_watch_list__WEBPACK_IMPORTED_MODULE_1__["default"])); // watchPrices: stockSymGetter(Object.values(state.watchList)).join(","),
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_watch_list__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -5284,7 +5279,7 @@ var fetchAllNews = function fetchAllNews() {
   return $.ajax({
     method: "GET",
     // url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsAPIKey}`
-    url: "/api/news/test"
+    url: "/api/news/"
   });
 };
 

@@ -5,7 +5,6 @@ import { Link  } from 'react-router-dom'
 class WatchListItems extends React.Component {
     constructor(props) {
         super(props)
-    
     }
 
     render(){
@@ -17,8 +16,6 @@ class WatchListItems extends React.Component {
         (
             this.props.price[this.props.idx]
         )
-
-
       
         return (
             <Link to={`/show/${this.props.stock.id}`}>

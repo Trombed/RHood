@@ -1,5 +1,4 @@
 import React from 'react' 
-import WatchListItems from './watch_list_items'
 import WatchListItemsContainer from './watch_list_items_container'
 
 class WatchList extends React.Component {
@@ -47,7 +46,7 @@ class WatchList extends React.Component {
                 <div className="Watch-List-Separator">
                 </div>
                     <div className='Watch-List-Items-Container'>
-                    {/* {stockList} */}
+              
                     {showList}
                     </div>
                 

@@ -21,4 +21,3 @@ export default connect(
   mDTP
 )(WatchList)
 
-// watchPrices: stockSymGetter(Object.values(state.watchList)).join(","),
