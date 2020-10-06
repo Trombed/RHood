@@ -23,12 +23,12 @@ namespace :scheduler do
         puts now
         puts (now.hour < 9 && now.min < 30) 
         puts (now.hour >= 16 && now.min > 30)
-        if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+        # if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
         
-            puts "MARKET CLOSED"
-            exit
+        #     puts "MARKET CLOSED"
+        #     exit
     
-        end
+        # end
         
      
  
@@ -57,9 +57,11 @@ namespace :scheduler do
         
         users.each do |user|
             new_valuation = user.update_portfolio(security)
+            
             if user.portfolio.length > 400
-                puts user.portfolio.length[0]
-                puts user.portfolio.length[user.portfolio.length-1]
+
+                puts user.portfolio.length
+                puts user.portfolio[0]
                 user.portfolio[0].delete
             end
             Portfolio.create({
