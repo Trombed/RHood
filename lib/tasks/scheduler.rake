@@ -23,12 +23,12 @@ namespace :scheduler do
         puts now
         puts (now.hour < 9 && now.min < 30) 
         puts (now.hour >= 16 && now.min > 30)
-        # if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
+        if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
         
-        #     puts "MARKET CLOSED"
-        #     exit
+            puts "MARKET CLOSED"
+            exit
     
-        # end
+        end
         
      
  
