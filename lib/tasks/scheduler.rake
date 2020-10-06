@@ -64,10 +64,11 @@ namespace :scheduler do
                 puts user.portfolio[0]
                 user.portfolio[0].delete
             end
-            Portfolio.create({
+            new_valuation = Portfolio.create({
                 user_id: user.id,
                 valuation: new_valuation
             })
+            puts new_valuation
         end
 
         puts 'done'
