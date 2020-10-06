@@ -58,7 +58,8 @@ namespace :scheduler do
         users.each do |user|
             new_valuation = user.update_portfolio(security)
             if user.portfolio.length > 400
-                puts user.portfolio.length
+                puts user.portfolio.length[0]
+                puts user.portfolio.length[user.portfolio.length-1]
                 user.portfolio[0].delete
             end
             Portfolio.create({
