@@ -60,9 +60,9 @@ namespace :scheduler do
             
             if user.portfolio.length > 400
 
-                puts user.portfolio.length
-                puts user.portfolio[0]
-                user.portfolio[0].delete
+                user.portfolio.order(:created_at).first.delete
+                
+           
             end
             new_valuation = Portfolio.create({
                 user_id: user.id,
