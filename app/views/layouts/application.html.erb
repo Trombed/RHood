@@ -8,7 +8,9 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous" SameSite="None">
-    <meta name="description" property="og:description" content="/screenshot.png">
+    <meta name="description" property="og:description" content="Full Stack Clone of Robinhood">
+    <meta name="image" property="og:image" content="/screenshot.png">
+
     <script type="text/javascript">
         window.newsAPIKey = "<%= Rails.application.credentials.newapi[:api_key] %>"
         window.finAPIKey =  "<%= Rails.application.credentials.finapi[:api_key] %>"
