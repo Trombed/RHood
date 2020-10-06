@@ -69,6 +69,7 @@ namespace :scheduler do
                 valuation: new_valuation
             })
             puts new_valuation
+         
         end
 
         puts 'done'
