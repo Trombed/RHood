@@ -1,16 +1,16 @@
 import {connect} from 'react-redux';
-import Confirmation from "./confirmation"
-import { closeModal } from "../../actions/modal_action";
+import Confirmation from './confirmation';
+import {closeModal} from '../../actions/modal_action';
 
 const mSTP = (state) => ({
-    confirm: state.modal
-})
+  confirm: state.modal,
+});
 
-const mDTP = dispatch => ({
-    closeModal: () => dispatch(closeModal())
-})
+const mDTP = (dispatch) => ({
+  closeModal: () => dispatch(closeModal()),
+});
 
 export default connect(
     mSTP,
-    mDTP
-)(Confirmation)
+    mDTP,
+)(Confirmation);

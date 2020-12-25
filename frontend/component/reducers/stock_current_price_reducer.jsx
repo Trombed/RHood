@@ -1,17 +1,16 @@
-import { RECEIVE_CURRENT_PRICE} from '../actions/stock_action'
+import {RECEIVE_CURRENT_PRICE} from '../actions/stock_action';
 
 
 const stockCurrentPriceReducer = (state = 0, action) => {
+  Object.freeze(state);
 
-    Object.freeze(state) 
- 
-    switch (action.type) {
+  switch (action.type) {
     case RECEIVE_CURRENT_PRICE:
 
-        return action.currentPrice
+      return action.currentPrice;
     default:
-      return state 
+      return state;
   }
-}
+};
 
-export default stockCurrentPriceReducer
+export default stockCurrentPriceReducer;

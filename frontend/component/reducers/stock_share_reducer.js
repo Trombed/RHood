@@ -1,14 +1,14 @@
-import { RECEIVE_STOCK_SHARES } from '../actions/stock_action'
+import {RECEIVE_STOCK_SHARES} from '../actions/stock_action';
 
 
 const sharesReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_STOCK_SHARES:
-      return action.stockId
+      return action.stockId;
 
     default:
-         return state 
+      return state;
   }
-}
+};
 
-export default sharesReducer
+export default sharesReducer;
