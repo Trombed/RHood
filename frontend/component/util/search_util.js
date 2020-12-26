@@ -1,14 +1,13 @@
 const APISearchUtil = {
-    stock_search: (stock) => (
-       
+  stock_search: (stock) => (
     $.ajax({
-        method: 'GET',
-        url: "/api/stocks",
-        data: {
-            stock
-        }})
-    )}
+      method: 'GET',
+      url: '/api/stocks',
+      data: {
+        stock,
+      }})
+  )};
 
 
-export default APISearchUtil
+export default APISearchUtil;
 

@@ -74,7 +74,6 @@
     font-weight: 400;
     letter-spacing: 0.25px;
     line-height: 19px;
-
 }
 
 .Stock-Container-Chart-Expand {
@@ -168,10 +167,22 @@
     align-items: center;
 }
 
-.Stock-Chart-Active {
-    color: #f45531;
-    border-bottom: 1px solid #f45531;
-    margin-bottom: -1px;
+.Stock-Button-Error {
+  color: var(--color);
+  border-bottom: 1px solid var(--color);
+  margin-bottom: -1px;
+}
+
+.Stock-Button-Positive {
+  color: #21ce99;
+  border-bottom: 1px solid #21ce99;
+  margin-bottom: -1px;
+}
+
+.Stock-Button-Negative {
+  color: #f45531;
+  border-bottom: 1px solid #f45531;
+  margin-bottom: -1px;
 }
 
 .Stock-Tool-Tip {

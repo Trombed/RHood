@@ -1,16 +1,15 @@
-import { RECEIVE_STOCK_ONE_YEAR} from '../actions/stock_action'
+import {RECEIVE_STOCK_ONE_YEAR} from '../actions/stock_action';
 
 
 const stockOneYearReducer = (state = [], action) => {
+  Object.freeze(state);
 
-    Object.freeze(state) 
- 
-    switch (action.type) {
+  switch (action.type) {
     case RECEIVE_STOCK_ONE_YEAR:
-        return action.oneYearPrice
+      return action.oneYearPrice;
     default:
-      return state 
+      return state;
   }
-}
+};
 
-export default stockOneYearReducer
+export default stockOneYearReducer;

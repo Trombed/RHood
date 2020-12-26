@@ -1,11 +1,9 @@
-import moment from 'moment'
+import moment from 'moment';
 
 const fiveYear = () => {
-    let fiveYearPrior = moment()
- 
+  const fiveYearPrior = moment();
+};
 
-}
+export default fiveYear;
 
-export default fiveYear
-
-fiveYear()
+fiveYear();

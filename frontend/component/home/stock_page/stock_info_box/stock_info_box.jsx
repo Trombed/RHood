@@ -1,23 +1,47 @@
-import React from 'react'
+import React from 'react';
 
-class StockInfoBox extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+const StockInfoBox = (props) => {
+  const {
+    ceo,
+    description,
+    ticker_symbol,
+    sector,
+    industry} = props;
+  return (
+    <div>
+      <div className="Stock-Container-About">
+      About
+      </div>
+      <div className="Stock-Container-Description">
+        {description}
+      </div>
+      <div className="Stock-Container-Company-Info">
+        <div>
+        CEO
+          <br/>
+          {ceo}
+        </div>
 
-    render() {
-        
+        <div>
+        Symbol
+          <br/>
+          {ticker_symbol}
+        </div>
 
-        return (
-            <div className="Stock-Info-Box-Container">
-                    Stock Info
-                    <br/>
-                    BUY SELL
-                    
-            </div>
-        )
-    }
-    
-}
+        <div>
+        Sector
+          <br/>
+          {sector}
+        </div>
 
-export default StockInfoBox
+        <div>
+        Industry
+          <br/>
+          {industry}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default StockInfoBox;
