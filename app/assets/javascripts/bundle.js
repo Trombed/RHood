@@ -831,7 +831,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
- // import SearchResult from './home_nav_bar_search'
 
 
 
@@ -1818,6 +1817,237 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/component/home/stock_page/chart/chart.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/component/home/stock_page/chart/chart.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+
+
+
+var Chart = function Chart(props) {
+  var chartData = props.chartData,
+      handleResetPrice = props.handleResetPrice,
+      clickHandler = props.clickHandler;
+
+  var customToolTip = function customToolTip(e) {
+    if (e.label === undefined) return;
+    var time;
+
+    if (e.payload.length === 0) {
+      time = '';
+    } else if (e.payload[0].payload.label.includes(',')) {
+      time = e.payload[0].payload.label.split(',')[0];
+    } else {
+      time = e.payload[0].payload.label;
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "Stock-Tool-Tip"
+    }, e.label, " ", time);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
+    width: 600,
+    height: 250,
+    data: chartData,
+    onMouseLeave: handleResetPrice,
+    onMouseMove: clickHandler
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+    type: "monotone",
+    dataKey: "close",
+    stroke: Object.values(chartData).length === 0 || chartData.length === 0 || chartData[0].close === undefined ? 'yellow' : chartData[chartData.length - 1].close >= chartData[0].close ? '#21ce99' : '#f45531',
+    strokeWidth: 1.5,
+    dot: false
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
+    type: "number",
+    domain: ['dataMin' - 5, 'dataMax' + 5],
+    axisLine: false,
+    hide: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    position: {
+      y: 0
+    },
+    offset: -50,
+    isAnimationActive: false,
+    content: customToolTip,
+    wrapperStyle: {
+      top: -20
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
+    dataKey: "date",
+    hide: true
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Chart);
+
+/***/ }),
+
+/***/ "./frontend/component/home/stock_page/chart_navigation/chart_navigation.jsx":
+/*!**********************************************************************************!*\
+  !*** ./frontend/component/home/stock_page/chart_navigation/chart_navigation.jsx ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ChartNavigation = function ChartNavigation(props) {
+  var handleChart = props.handleChart,
+      color1 = props.color1,
+      color2 = props.color2,
+      color3 = props.color3,
+      color4 = props.color4,
+      color5 = props.color5,
+      activeTab = props.activeTab;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Chart-Navigation"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Chart-Time"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "Stock-Button Stock-Data-1   ".concat(activeTab === 1 ? color1 : "", " "),
+    id: "Stock-Data-1",
+    onClick: function onClick() {
+      return handleChart(1);
+    }
+  }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "Stock-Button Stock-Data-2   ".concat(activeTab === 2 ? color2 : "", " "),
+    id: "Stock-Data-2",
+    onClick: function onClick() {
+      return handleChart(2);
+    }
+  }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "Stock-Button Stock-Data-3   ".concat(activeTab === 3 ? color3 : "", " "),
+    id: "Stock-Data-3",
+    onClick: function onClick() {
+      return handleChart(3);
+    }
+  }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "Stock-Button Stock-Data-4   ".concat(activeTab === 4 ? color4 : "", " "),
+    id: "Stock-Data-4",
+    onClick: function onClick() {
+      return handleChart(4);
+    }
+  }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "Stock-Button Stock-Data-5   ".concat(activeTab === 5 ? color5 : "", " "),
+    id: "Stock-Data-5",
+    onClick: function onClick() {
+      return handleChart(5);
+    }
+  }, "1Y")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ChartNavigation);
+
+/***/ }),
+
+/***/ "./frontend/component/home/stock_page/stock_header/stock_header.jsx":
+/*!**************************************************************************!*\
+  !*** ./frontend/component/home/stock_page/stock_header/stock_header.jsx ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var StockHeader = function StockHeader(props) {
+  var companyName = props.companyName,
+      price = props.price,
+      change = props.change,
+      percentageChange = props.percentageChange;
+
+  var text = function text() {
+    if (price === undefined) {
+      return '$0.00';
+    } else {
+      return price.toLocaleString('en', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+  };
+
+  var activePrice = function activePrice() {
+    if (change === '') {
+      return "$0.00";
+    } else {
+      return change;
+    }
+  };
+
+  var percentage = function percentage() {
+    if (percentageChange === '') {
+      return;
+    } else {
+      return '(' + percentageChange + '%' + ')';
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Company-Name"
+  }, companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Company-Price"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), text()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Company-Changes"
+  }, activePrice(), percentage())));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StockHeader);
+
+/***/ }),
+
+/***/ "./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx":
+/*!******************************************************************************!*\
+  !*** ./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var StockInfoBox = function StockInfoBox(props) {
+  var ceo = props.ceo,
+      description = props.description,
+      ticker_symbol = props.ticker_symbol,
+      sector = props.sector,
+      industry = props.industry;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-About"
+  }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Description"
+  }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Stock-Container-Company-Info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), ceo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), industry)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StockInfoBox);
+
+/***/ }),
+
 /***/ "./frontend/component/home/stock_page/stock_main.jsx":
 /*!***********************************************************!*\
   !*** ./frontend/component/home/stock_page/stock_main.jsx ***!
@@ -1938,6 +2168,39 @@ var mDTP = function mDTP(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/component/home/stock_page/stock_news/stock_news.jsx":
+/*!**********************************************************************!*\
+  !*** ./frontend/component/home/stock_page/stock_news/stock_news.jsx ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _news_news__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../news/news */ "./frontend/component/home/news/news.js");
+
+
+
+var StockNews = function StockNews(_ref) {
+  var data = _ref.data;
+  var news = data.length <= 0 ? null : data.map(function (page, idx) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_news__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      page: page,
+      idx: idx,
+      key: "".concat(idx)
+    });
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Main-News-Container"
+  }, news);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StockNews);
+
+/***/ }),
+
 /***/ "./frontend/component/home/stock_page/stock_page.jsx":
 /*!***********************************************************!*\
   !*** ./frontend/component/home/stock_page/stock_page.jsx ***!
@@ -1949,9 +2212,12 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
-/* harmony import */ var _util_stock_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/stock_util */ "./frontend/component/util/stock_util.js");
-/* harmony import */ var _news_news__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../news/news */ "./frontend/component/home/news/news.js");
+/* harmony import */ var _stock_info_box_stock_info_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stock_info_box/stock_info_box */ "./frontend/component/home/stock_page/stock_info_box/stock_info_box.jsx");
+/* harmony import */ var _chart_navigation_chart_navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chart_navigation/chart_navigation */ "./frontend/component/home/stock_page/chart_navigation/chart_navigation.jsx");
+/* harmony import */ var _chart_chart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chart/chart */ "./frontend/component/home/stock_page/chart/chart.jsx");
+/* harmony import */ var _stock_news_stock_news__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stock_news/stock_news */ "./frontend/component/home/stock_page/stock_news/stock_news.jsx");
+/* harmony import */ var _stock_header_stock_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stock_header/stock_header */ "./frontend/component/home/stock_page/stock_header/stock_header.jsx");
+/* harmony import */ var _util_stock_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../util/stock_util */ "./frontend/component/util/stock_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1975,6 +2241,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
 var StockPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1991,20 +2260,13 @@ function (_React$Component) {
       change: '',
       percentageChange: '',
       chartData: _this.props.oneDayPrice,
-      fiveYearLoaded: false,
-      loaded: false
+      loaded: false,
+      activeColor: 'black',
+      activeTab: 1
     };
     _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_this));
-    _this.handleChartOneDayData = _this.handleChartOneDayData.bind(_assertThisInitialized(_this));
-    _this.handleChartOneWeekData = _this.handleChartOneWeekData.bind(_assertThisInitialized(_this));
-    _this.handleChartOneMonthData = _this.handleChartOneMonthData.bind(_assertThisInitialized(_this));
-    _this.handleChartThreeMonthData = _this.handleChartThreeMonthData.bind(_assertThisInitialized(_this));
-    _this.handleChartOneYearData = _this.handleChartOneYearData.bind(_assertThisInitialized(_this));
-    _this.handleChartFiveYearData = _this.handleChartFiveYearData.bind(_assertThisInitialized(_this));
     _this.handleResetPrice = _this.handleResetPrice.bind(_assertThisInitialized(_this));
-    _this.customToolTip = _this.customToolTip.bind(_assertThisInitialized(_this));
-    _this.removeHighlight = _this.removeHighlight.bind(_assertThisInitialized(_this));
-    _this.dataColor = _this.dataColor.bind(_assertThisInitialized(_this));
+    _this.confirmData = _this.confirmData.bind(_assertThisInitialized(_this));
     _this.setColor = _this.setColor.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2015,54 +2277,40 @@ function (_React$Component) {
       var _this2 = this;
 
       this.props.fetchStockFromDB(this.id).then(function (res) {
-        return _this2.props.companyInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.props.getNews(_this2.props.info.name);
-      }).then(function (res) {
-        return _this2.props.watchListInfo();
-      }).then(function (res) {
-        return _this2.setState({
-          price: _this2.props.currentPrice
-        });
-      }).then(function (res) {
-        return _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
-      }).then(function (res) {
-        return _this2.setState({
-          chartData: _this2.props.oneDayPrice
-        });
-      }).then(function (res) {
-        return _this2.setState({
-          price: _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close
-        });
-      }).then(function (res) {
-        return _this2.currentPrice = _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close;
-      }).then(function (res) {
-        return _this2.props.currentPriceInfo(_this2.currentPrice);
-      }).then(function (res) {
+        _this2.props.companyInfo(_this2.props.info.ticker_symbol);
+
+        _this2.props.getNews(_this2.props.info.name);
+
+        _this2.props.oneDayStockInfo(_this2.props.info.ticker_symbol);
+
         return _this2.props.oneYearStockInfo(_this2.props.info.ticker_symbol);
       }).then(function (res) {
-        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this2.props.oneYearPrice);
+        return _this2.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["threeMonthStats"])(_this2.props.oneYearPrice);
       }).then(function (res) {
-        return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this2.threeMonthData);
+        return _this2.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["oneMonthStats"])(_this2.threeMonthData);
       }).then(function (res) {
-        return _this2.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this2.oneMonthData);
+        return _this2.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["oneWeekStats"])(_this2.oneMonthData);
       }).then(function (res) {
-        return _this2.oneWeekColor = _this2.setColor(_this2.oneWeekData);
-      }).then(function (res) {
-        return _this2.threeMonthColor = _this2.setColor(_this2.threeMonthData);
-      }).then(function (res) {
-        return _this2.oneMonthColor = _this2.setColor(_this2.oneMonthData);
-      }).then(function (res) {
-        return _this2.oneYearColor = _this2.setColor(_this2.props.oneYearPrice);
-      }).then(function (res) {
-        return _this2.oneDayColor = _this2.setColor(_this2.props.oneDayPrice);
-      }).then(function (res) {
-        return _this2.handleChartOneDayData;
-      }).then(function (res) {
-        return _this2.activeColor();
-      }).then(this.setState({
-        loaded: true
-      }));
+        return _this2.setState({
+          loaded: true,
+          price: _this2.props.oneDayPrice[_this2.props.oneDayPrice.length - 1].close,
+          chartData: _this2.props.oneDayPrice,
+          color1: _this2.setColor(_this2.props.oneDayPrice),
+          color2: _this2.setColor(_this2.oneWeekData),
+          color3: _this2.setColor(_this2.oneMonthData),
+          color4: _this2.setColor(_this2.threeMonthData),
+          color5: _this2.setColor(_this2.props.oneYearPrice)
+        }, function () {
+          _this2.currentPrice = _this2.state.price;
+          debugger;
+
+          _this2.props.currentPriceInfo(_this2.state.price);
+
+          _this2.props.watchListInfo();
+
+          _this2.handleChart(1);
+        });
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -2074,54 +2322,40 @@ function (_React$Component) {
           loaded: false
         });
         this.props.fetchStockFromDB(this.id).then(function (res) {
-          return _this3.props.companyInfo(_this3.props.info.ticker_symbol);
-        }).then(function (res) {
-          return _this3.props.getNews(_this3.props.info.name);
-        }).then(function (res) {
-          return _this3.props.watchListInfo();
-        }).then(function (res) {
-          return _this3.setState({
-            price: _this3.props.currentPrice
-          });
-        }).then(function (res) {
-          return _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
-        }).then(function (res) {
-          return _this3.setState({
-            chartData: _this3.props.oneDayPrice
-          });
-        }).then(function (res) {
-          return _this3.setState({
-            price: _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close
-          });
-        }).then(function (res) {
-          return _this3.currentPrice = _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close;
-        }).then(function (res) {
-          return _this3.props.currentPriceInfo(_this3.currentPrice);
-        }).then(function (res) {
+          _this3.props.companyInfo(_this3.props.info.ticker_symbol);
+
+          _this3.props.getNews(_this3.props.info.name);
+
+          _this3.props.oneDayStockInfo(_this3.props.info.ticker_symbol);
+
           return _this3.props.oneYearStockInfo(_this3.props.info.ticker_symbol);
         }).then(function (res) {
-          return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["threeMonthStats"])(_this3.props.oneYearPrice);
+          return _this3.threeMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["threeMonthStats"])(_this3.props.oneYearPrice);
         }).then(function (res) {
-          return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneMonthStats"])(_this3.threeMonthData);
+          return _this3.oneMonthData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["oneMonthStats"])(_this3.threeMonthData);
         }).then(function (res) {
-          return _this3.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_2__["oneWeekStats"])(_this3.oneMonthData);
+          return _this3.oneWeekData = Object(_util_stock_util__WEBPACK_IMPORTED_MODULE_6__["oneWeekStats"])(_this3.oneMonthData);
         }).then(function (res) {
-          return _this3.oneDayColor = _this3.setColor(_this3.props.oneDayPrice);
-        }).then(function (res) {
-          return _this3.oneWeekColor = _this3.setColor(_this3.oneWeekData);
-        }).then(function (res) {
-          return _this3.oneMonthColor = _this3.setColor(_this3.oneMonthData);
-        }).then(function (res) {
-          return _this3.threeMonthColor = _this3.setColor(_this3.threeMonthData);
-        }).then(function (res) {
-          return _this3.oneYearColor = _this3.setColor(_this3.props.oneYearPrice);
-        }).then(function (res) {
-          _this3.removeOneDay();
+          return _this3.setState({
+            loaded: true,
+            price: _this3.props.oneDayPrice[_this3.props.oneDayPrice.length - 1].close,
+            chartData: _this3.props.oneDayPrice,
+            color1: _this3.setColor(_this3.props.oneDayPrice),
+            color2: _this3.setColor(_this3.oneWeekData),
+            color3: _this3.setColor(_this3.oneMonthData),
+            color4: _this3.setColor(_this3.threeMonthData),
+            color5: _this3.setColor(_this3.props.oneYearPrice)
+          }, function () {
+            _this3.currentPrice = _this3.state.price;
+            debugger;
 
-          _this3.handleChartOneDayData();
-        }).then(this.setState({
-          loaded: true
-        }));
+            _this3.props.currentPriceInfo(_this3.state.price);
+
+            _this3.props.watchListInfo();
+
+            _this3.handleChart(1);
+          });
+        });
       }
     }
   }, {
@@ -2132,12 +2366,10 @@ function (_React$Component) {
       }
 
       var curr = this.props.currentPrice;
-      if (e.activePayload === undefined) return;
       var close = e.activePayload[0].payload.close;
       var sign = '';
       var cur = close - curr;
-      if (close - curr > 0) sign = '+';
-      if (close - curr < 0) sign = '-';
+      if (close - curr > 0) sign = '+';else if (close - curr < 0) sign = '-';
       cur = Math.abs(cur).toFixed(2);
       var answer = sign + '$' + cur;
       var change = sign + (cur / curr * 100).toFixed(2);
@@ -2153,212 +2385,121 @@ function (_React$Component) {
   }, {
     key: "setColor",
     value: function setColor(chart) {
-      if (chart === undefined) return;
-      var colorValue = Object.values(chart).length === 0 || chart.length === 0 || chart[0].close === undefined ? 'yellow' : chart[chart.length - 1].close >= chart[0].close ? '#21ce99' : '#f45531';
-      return colorValue;
+      var buttonClass = 'Stock-Button-Error';
+
+      if (chart === undefined || Object.keys(chart).length === 0) {
+        return buttonClass;
+      }
+
+      if (chart[chart.length - 1].close >= chart[0].close) {
+        return 'Stock-Button-Positive';
+      } else if (chart[chart.length - 1].close < chart[0].close) {
+        return 'Stock-Button-Negative';
+      }
+
+      return buttonClass;
     }
   }, {
-    key: "activeColor",
-    value: function activeColor() {
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.oneDayColor),
-        'border-color': "".concat(this.oneDayColor)
-      });
-    }
-  }, {
-    key: "dataColor",
-    value: function dataColor() {
-      var colorValue = Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? 'yellow' : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? '#21ce99' : '#f45531';
-      return colorValue;
-    }
-  }, {
-    key: "removeHighlight",
-    value: function removeHighlight() {
-      $('.Stock-Chart-Active').css({
-        'color': 'var(--color)',
-        'border-color': 'black'
-      });
-      $('.Stock-Chart-Active').addClass('Stock-Label');
-      $('.Stock-Chart-Active').removeClass('Stock-Chart-Active');
-    }
-  }, {
-    key: "handleChartOneDayData",
-    value: function handleChartOneDayData() {
+    key: "handleChart",
+    value: function handleChart(num) {
       var _this4 = this;
 
       this.isLoaded();
-      this.hideGraphError();
-      this.setState({
-        chartData: this.props.oneDayPrice
-      }, function () {
-        _this4.removeOneDay();
-      });
-    }
-  }, {
-    key: "removeOneDay",
-    value: function removeOneDay() {
-      this.removeHighlight();
-      $('.Stock-Button-oneDay').addClass("Stock-Chart-Active");
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.oneDayColor),
-        'border-color': "".concat(this.oneDayColor)
-      });
-    }
-  }, {
-    key: "handleChartOneWeekData",
-    value: function handleChartOneWeekData() {
-      var _this5 = this;
+      if (!this.confirmData(num)) return;
 
-      this.isLoaded();
+      switch (num) {
+        case 1:
+          // one day
+          this.setState({
+            chartData: this.props.oneDayPrice
+          }, function () {
+            return _this4.addActive(num);
+          });
+          break;
 
-      if (this.oneWeekData === undefined) {
-        this.removeOneWeek();
-        return this.showGraphError();
-      }
+        case 2:
+          // one week
+          this.setState({
+            chartData: this.oneWeekData
+          }, function () {
+            return _this4.addActive(num);
+          });
+          break;
 
-      this.hideGraphError();
-      this.setState({
-        chartData: this.oneWeekData
-      }, function () {
-        _this5.removeOneWeek();
-      });
-    }
-  }, {
-    key: "removeOneWeek",
-    value: function removeOneWeek() {
-      this.removeHighlight();
-      $('.Stock-Button-oneWeek ').addClass("Stock-Chart-Active");
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.oneWeekColor),
-        'border-color': "".concat(this.oneWeekColor)
-      });
-    }
-  }, {
-    key: "handleChartOneMonthData",
-    value: function handleChartOneMonthData() {
-      var _this6 = this;
+        case 3:
+          // one month
+          this.setState({
+            chartData: this.oneMonthData
+          }, function () {
+            return _this4.addActive(num);
+          });
+          break;
 
-      this.isLoaded();
+        case 4:
+          // three month
+          this.setState({
+            chartData: this.threeMonthData
+          }, function () {
+            return _this4.addActive(num);
+          });
+          break;
 
-      if (this.oneWeekData === undefined) {
-        this.removeOneMonth();
-        return this.showGraphError();
-      }
+        case 5:
+          // one year
+          this.setState({
+            chartData: this.props.oneYearPrice
+          }, function () {
+            return _this4.addActive(num);
+          });
+          break;
 
-      this.hideGraphError();
-      this.setState({
-        chartData: this.oneMonthData
-      }, function () {
-        _this6.removeOneMonth();
-      });
-    }
-  }, {
-    key: "removeOneMonth",
-    value: function removeOneMonth() {
-      this.removeHighlight();
-      $('.Stock-Button-oneMonth ').addClass("Stock-Chart-Active");
-      $('.Stock-Chart-Active').addClass('Stock-Label');
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.oneMonthColor),
-        'border-color': "".concat(this.oneMonthColor)
-      });
-    }
-  }, {
-    key: "isLoaded",
-    value: function isLoaded() {
-      if (!this.state.loaded) return;
-    }
-  }, {
-    key: "handleChartThreeMonthData",
-    value: function handleChartThreeMonthData() {
-      var _this7 = this;
-
-      this.isLoaded();
-
-      if (this.oneWeekData === undefined) {
-        this.removeThreeMonth();
-        return this.showGraphError();
-      }
-
-      this.hideGraphError();
-      this.setState({
-        chartData: this.threeMonthData
-      }, function () {
-        _this7.removeThreeMonth();
-      });
-    }
-  }, {
-    key: "removeThreeMonth",
-    value: function removeThreeMonth() {
-      this.removeHighlight();
-      $('.Stock-Button-threeMonth ').addClass("Stock-Chart-Active");
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.threeMonthColor),
-        'border-color': "".concat(this.threeMonthColor)
-      });
-    }
-  }, {
-    key: "handleChartOneYearData",
-    value: function handleChartOneYearData() {
-      var _this8 = this;
-
-      this.isLoaded();
-
-      if (this.oneWeekData === undefined) {
-        this.removeOneYear();
-        return this.showGraphError();
-      }
-
-      this.hideGraphError();
-      this.setState({
-        chartData: this.props.oneYearPrice
-      }, function () {
-        _this8.removeOneYear();
-      });
-    }
-  }, {
-    key: "removeOneYear",
-    value: function removeOneYear() {
-      this.removeHighlight();
-      $('.Stock-Button-oneYear ').addClass("Stock-Chart-Active");
-      $('.Stock-Chart-Active').css({
-        'color': "".concat(this.oneYearColor),
-        'border-color': "".concat(this.oneYearColor)
-      });
-    }
-  }, {
-    key: "handleChartFiveYearData",
-    value: function handleChartFiveYearData() {
-      var _this9 = this;
-
-      if (!this.state.fiveYearLoaded) {
-        this.setState({
-          fiveYearLoaded: true
-        });
-        this.props.fiveYearStockInfo(this.props.info.ticker_symbol).then(function (res) {
-          return _this9.renderFiveYear();
-        }).then(function (res) {
-          return _this9.fiveYearColor = _this9.setColor(_this9.props.fiveYearPrice);
-        });
-      } else {
-        this.renderFiveYear();
+        default:
+          break;
       }
     }
   }, {
-    key: "renderFiveYear",
-    value: function renderFiveYear() {
-      var _this10 = this;
+    key: "confirmData",
+    value: function confirmData(num) {
+      this.hideGraphError();
 
+      switch (num) {
+        case 1:
+          if (this.props.oneDayPrice === undefined) this.renderGraphError();
+          break;
+
+        case 2:
+          if (this.oneWeekData === undefined) this.renderGraphError();
+          break;
+
+        case 3:
+          if (this.oneMonthData === undefined) this.renderGraphError();
+          break;
+
+        case 4:
+          if (this.threeMonthData === undefined) this.renderGraphError();
+          break;
+
+        case 5:
+          if (this.props.oneYearPrice === undefined) this.renderGraphError();
+          break;
+
+        default:
+          break;
+      }
+
+      return true;
+    }
+  }, {
+    key: "renderGraphError",
+    value: function renderGraphError() {
+      this.showGraphError();
+      return false;
+    }
+  }, {
+    key: "addActive",
+    value: function addActive(num) {
       this.setState({
-        chartData: this.props.fiveYearPrice
-      }, function () {
-        _this10.removeHighlight();
-
-        $('.Stock-Button-fiveYear ').addClass("Stock-Chart-Active");
-        $('.Stock-Chart-Active').css({
-          'color': "".concat(_this10.fiveYearColor),
-          'border-color': "".concat(_this10.fiveYearColor)
-        });
+        activeTab: num
       });
     }
   }, {
@@ -2369,54 +2510,6 @@ function (_React$Component) {
         change: '',
         percentageChange: ''
       });
-    }
-  }, {
-    key: "percentage",
-    value: function percentage() {
-      if (this.state.percentageChange === '') {
-        return;
-      } else {
-        return '(' + this.state.percentageChange + '%' + ')';
-      }
-    }
-  }, {
-    key: "activePrice",
-    value: function activePrice() {
-      if (this.state.change === '') {
-        return "$0.00";
-      } else {
-        return this.state.change;
-      }
-    }
-  }, {
-    key: "customToolTip",
-    value: function customToolTip(e) {
-      if (e.label === undefined) return;
-      var time;
-
-      if (e.payload.length === 0) {
-        time = '';
-      } else if (e.payload[0].payload.label.includes(',')) {
-        time = e.payload[0].payload.label.split(',')[0];
-      } else {
-        time = e.payload[0].payload.label;
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Tool-Tip"
-      }, e.label, " ", time);
-    }
-  }, {
-    key: "text",
-    value: function text() {
-      if (this.state.price === undefined) {
-        return '$0.00';
-      } else {
-        return this.state.price.toLocaleString('en', {
-          style: 'currency',
-          currency: 'USD'
-        });
-      }
     }
   }, {
     key: "showGraphError",
@@ -2434,99 +2527,50 @@ function (_React$Component) {
       errorDiv.style.display = 'none';
     }
   }, {
+    key: "isLoaded",
+    value: function isLoaded() {
+      if (!this.state.loaded) return;
+    }
+  }, {
     key: "render",
     value: function render() {
       this.id = Number(this.props.match.params.id);
-      var news = this.props.news.length <= 0 ? null : this.props.news.map(function (page, idx) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_news__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          page: page,
-          idx: idx,
-          key: "".concat(idx)
-        });
-      });
-      var renderLineChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 600,
-        height: 250,
-        data: this.state.chartData,
-        onMouseLeave: this.handleResetPrice,
-        onMouseMove: this.clickHandler
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
-        type: "monotone",
-        dataKey: "close",
-        stroke: Object.values(this.state.chartData).length === 0 || this.state.chartData.length === 0 || this.state.chartData[0].close === undefined ? 'yellow' : this.state.chartData[this.state.chartData.length - 1].close >= this.state.chartData[0].close ? '#21ce99' : '#f45531',
-        strokeWidth: 1.5,
-        dot: false
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
-        type: "number",
-        domain: ['dataMin' - 5, 'dataMax' + 5],
-        axisLine: false,
-        hide: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
-        position: {
-          y: 0
-        },
-        offset: -50,
-        isAnimationActive: false,
-        content: this.customToolTip,
-        wrapperStyle: {
-          top: -20
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
-        dataKey: "date",
-        hide: true
-      }));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Company-Name"
-      }, this.props.company.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Company-Price"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.text()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Company-Changes"
-      }, this.activePrice(), this.percentage())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Label-Date"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_header_stock_header__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        companyName: this.props.company.companyName,
+        price: this.state.price,
+        change: this.state.change,
+        percentageChange: this.state.percentageChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Area"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Chart-Container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Stock-Container-Chart-Error"
-      }, "Graph Not Avaiable"), renderLineChart)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Chart-Navigation"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Chart-Time"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneDay Stock-Chart-Active Stock-Label",
-        onClick: this.handleChartOneDayData
-      }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneWeek Stock-Label",
-        onClick: this.handleChartOneWeekData
-      }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneMonth",
-        onClick: this.handleChartOneMonthData
-      }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-threeMonth",
-        onClick: this.handleChartThreeMonthData
-      }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "Stock-Button-oneYear",
-        onClick: this.handleChartOneYearData
-      }, "1Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Chart-Expand"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-About"
-      }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Description"
-      }, this.props.company.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Stock-Container-Company-Info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "CEO", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Symbol", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.info.ticker_symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Sector", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Industry", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.company.industry)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Graph Not Avaiable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        chartData: this.state.chartData,
+        handleResetPrice: this.handleResetPrice,
+        clickHandler: this.clickHandler
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_navigation_chart_navigation__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        handleChart: this.handleChart.bind(this),
+        color1: this.state.color1,
+        color2: this.state.color2,
+        color3: this.state.color3,
+        color4: this.state.color4,
+        color5: this.state.color5,
+        activeTab: this.state.activeTab
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_info_box_stock_info_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        description: this.props.company.description,
+        ceo: this.props.company.CEO,
+        ticker_symbol: this.props.info.ticker_symbol,
+        sector: this.props.company.sector,
+        industry: this.props.company.industry
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Main-News-Header"
-      }, "News"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Main-News-Container"
-      }, news));
+      }, "News"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_news_stock_news__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        data: this.props.news
+      }));
     }
   }]);
 

@@ -7,7 +7,6 @@ import {currentShares} from '../../actions/stock_action';
 import {openModal} from '../../actions/modal_action';
 
 const mSTP = ( state, ownProps) => ({
-
   currentUser: state.entities.users[state.session.id],
   sharesPrice: state.stockCurrentPrice,
   stockInfo: state.stockInfo,

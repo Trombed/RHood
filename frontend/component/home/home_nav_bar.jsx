@@ -1,8 +1,6 @@
 import React from 'react';
 import HomePageLogo from './home_page_logo';
-// import SearchResult from './home_nav_bar_search'
 import {Link} from 'react-router-dom';
-
 
 class HomeNavBar extends React.Component {
   constructor(props) {

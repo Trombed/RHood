@@ -28,7 +28,9 @@ class StockMain extends React.Component {
               stockId={stockId}
               curPrice={this.props.stockCurPrice}
             />
-            <WatchListButtonContainer stockId={stockId} />
+            <WatchListButtonContainer 
+              stockId={stockId} 
+            />
           </div>
 
         </div>

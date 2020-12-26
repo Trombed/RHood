@@ -19,11 +19,10 @@ class WatchListItems extends React.Component {
       <Link to={`/show/${this.props.stock.id}`}>
         <li key={this.props.stock.id} className="Watch-List-Items-Item">
           <div>
-
             {this.props.stock.ticker_symbol}
           </div>
           <div>
-                ${content}
+            ${content}
           </div>
         </li>
       </Link>

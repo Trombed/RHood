@@ -15,7 +15,7 @@ class WatchListButton extends React.Component {
               onClick={ () =>
                 this.props.removeStockfromWatchList(this.props.stockId)}
             >
-            Delete from Watch List
+              Delete from Watch List
             </div>):
             (
             <div
@@ -23,7 +23,7 @@ class WatchListButton extends React.Component {
               onClick={ () =>
                 this.props.addStockToWatchList(Number(this.props.stockId))}
             >
-            Add to Watch List
+              Add to Watch List
             </div>);
 
 
